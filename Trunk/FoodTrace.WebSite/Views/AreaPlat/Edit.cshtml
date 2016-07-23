@@ -1,0 +1,25 @@
+﻿@model FoodTrace.Model.AreaPlatModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Edit", "AreaPlat", FormMethod.Post))
+{
+    @Html.HiddenFor(m => Model.AreaID)
+    @Html.HiddenFor(m => Model.ModifyTime)
+    <table>
+        <tr>
+            <td>平台代码</td>
+            <td>@Html.TextBoxFor(m => Model.AreaCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>平台名称</td>
+            <td>@Html.TextBoxFor(m => Model.AreaName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>备注</td>
+            <td>@Html.TextBoxFor(m => Model.Remark, new { @class = "easyui-textbox"})</td>
+        </tr>
+    </table>
+}
+

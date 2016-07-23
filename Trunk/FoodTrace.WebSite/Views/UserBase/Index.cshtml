@@ -1,0 +1,75 @@
+﻿
+@model List<FoodTrace.Model.UserBaseModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tag"></div>
+<div class="find">
+    区域名称：<input type="text" class="input">
+   <br><br>
+    <input type="button" value="新增" class="button" onclick="window.location.href='/UserBase/Create';">
+    <div class="button_right">
+        <input type="button" value="查询" class="button">
+        <input type="button" value="重置" class="button">
+    </div>
+    <div class="clearbox"></div>
+</div>
+<div id="table">
+    <div class="table_title">
+        区域查询
+    </div>
+    <div style="overflow:auto;height:360px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>操作</th>
+                    <th>登录账号</th>
+                    <th>登录密码</th>
+                    <th>用户姓名</th>
+                    <th>部门名称</th>
+                    <th>公司名称</th>
+                    <th>平台代码</th>
+                    <th>登录状态</th>
+                    <th>用户类型</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var userBaseModel in Model)
+            {
+                    <tr class="tr1">
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", "UserBase", new { id= userBaseModel.UserID },null)
+                        </td>
+                        <td>@userBaseModel.UserCode</td>
+                        <td>@userBaseModel.Password</td>
+                        <td>@userBaseModel.UserName</td>
+                        <td>@userBaseModel.Dept.DeptName</td>
+                        <td>@userBaseModel.Company.CompanyName</td>
+                        <td>@userBaseModel.AreaCode</td>
+                        <td>@userBaseModel.Status</td>
+                        <td>@userBaseModel.UserType</td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="buttom">
+        <div class="buttom_left de">
+            <img src="~/Images/first.png" alt="">
+            <img src="~/Images/pre.png" alt="">
+            <img src="~/Images/next.png" alt="">
+            <img src="~/Images/last.png" alt="">
+        </div>
+
+        <div class="buttom_left"><img src="~/Images/go.png" alt="">　第 <input type="text" value="1" class="page">页/共5页</div>
+        <div class="buttom_left">每页<select name="" id=""><option value="10">10</option></select>条</div>
+        <div class="buttom_left word">
+            <img src="~/Images/word.png" alt="">
+            <img src="~/Images/excel.png" alt="">
+        </div>
+        <div class="buttom_right">显示10条/共50条</div>
+    </div>
+</div>
+

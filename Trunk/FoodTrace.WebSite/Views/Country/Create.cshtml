@@ -1,0 +1,28 @@
+﻿
+@model FoodTrace.Model.CountryModel
+ @{
+                                               ViewBag.Title = "Create";
+                                               Layout = null;
+                                               var cityList = ViewBag.CityList as List<SelectListItem>
+    ;
+    }
+
+
+    <h2>区县添加</h2>
+    @using (Html.BeginForm("Create", "Country", FormMethod.Post))
+    {
+
+    <div>
+        <label for="name">区县代码:</label>
+        @Html.TextBoxFor(m => Model.CountryCode,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+    </div>
+    <div>
+        <label for="name">区县名称:</label>
+        @Html.TextBoxFor(m => Model.CountryName,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+    </div>
+    <div>
+        <label for="name">城市名称:</label>
+        @Html.DropDownListFor((m => Model.CityID),cityList,new {@class="easyui-validatebox easyui-combobox",data_options="required:true"})
+    </div>
+
+    }

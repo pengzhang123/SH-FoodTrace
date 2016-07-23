@@ -1,0 +1,28 @@
+﻿@model FoodTrace.Model.ProductTypeModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<h2>产品类型添加</h2>
+@using (Html.BeginForm("Create", "ProductType", FormMethod.Post))
+{
+
+    <div>
+        <label for="name">产品分类代号:</label>
+        @Html.TextBoxFor(m => Model.ProductTypeEN, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">备注:</label>
+        @Html.TextAreaFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    @*<div>
+        <label for="name">是否锁定:</label>
+        @Html.CheckBoxFor(m => Model.IsLocked.Value, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">是否显示:</label>
+        @Html.CheckBoxFor(m => Model.IsShow.Value, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>*@
+}
+

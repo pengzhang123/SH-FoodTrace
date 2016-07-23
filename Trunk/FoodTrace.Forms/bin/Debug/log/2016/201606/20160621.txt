@@ -1,0 +1,34 @@
+
+ 
+记录时间：2016-06-21 12:36:50,603 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-06-21 12:36:50,655 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-06-21 14:23:45,697 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-06-21 14:23:45,982 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 

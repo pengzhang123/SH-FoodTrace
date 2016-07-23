@@ -1,0 +1,54 @@
+﻿@{
+    Layout=null;
+}
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 食品溯源平台管理</title>
+    @Styles.Render("~/Content/FoodTraceStyle.css")
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body style="height:100%;">
+
+    <div style="background:url(/Images/LoginBG.png);width:90%;height:100%;margin:0 auto;">
+
+        <div style="position:absolute;left:70%;top:70%;width:200px;">
+
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="UserName" name="UserName" placeholder="用户名" value="" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input id="Password" name="Password" type="password" placeholder="密码" value="" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" id="loginBtn" style="background:url(/Images/LoginBTN.png) no-repeat;border:0px;width:80px;height:30px;" value="登录" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            $('#loginBtn').click(function () {
+                $.post('/LogUserLogin/Login', { UserName: $('#UserName').val(), Password: $('#Password').val() }, function (json) {
+                    if (json.success) {
+                        window.location.href = "/Home/BackGroundIndex";
+                    } else {
+                        alert(json.msg);
+                    }
+                }, 'json');
+            });
+        });
+    </script>
+</body>
+</html>

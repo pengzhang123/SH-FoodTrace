@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFE84133-3F01-440C-84F6-B41B9C035606}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoodTrace.IService</RootNamespace>
+    <AssemblyName>FoodTrace.IService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BreedMng\IBreedAreaService.cs" />
+    <Compile Include="BreedMng\IBreedBaseService.cs" />
+    <Compile Include="BreedMng\IBreedBatchDetailService.cs" />
+    <Compile Include="BreedMng\IBreedBatchService.cs" />
+    <Compile Include="BreedMng\IBreedDrugPicService.cs" />
+    <Compile Include="BreedMng\IBreedDrugService.cs" />
+    <Compile Include="BreedMng\IBreedDrugVideoService.cs" />
+    <Compile Include="BreedMng\IBreedHealthPicService.cs" />
+    <Compile Include="BreedMng\IBreedHealthService.cs" />
+    <Compile Include="BreedMng\IBreedHealthVideoService.cs" />
+    <Compile Include="BreedMng\IBreedHomeService.cs" />
+    <Compile Include="BreedMng\IBreedLogService.cs" />
+    <Compile Include="BreedMng\IBreedMaterialPicService.cs" />
+    <Compile Include="BreedMng\IBreedMaterialService.cs" />
+    <Compile Include="BreedMng\IBreedMaterialVideoService.cs" />
+    <Compile Include="BreedMng\ICultivationBaseService.cs" />
+    <Compile Include="BreedMng\IVarietyBaseService.cs" />
+    <Compile Include="IUserRoleService.cs" />
+    <Compile Include="SystemBase\ITidService.cs" />
+    <Compile Include="SystemBase\IUserDetailService.cs" />
+    <Compile Include="KillMng\IKillBatchDetailService.cs" />
+    <Compile Include="KillMng\IKillBatchService.cs" />
+    <Compile Include="KillMng\IKillCullService.cs" />
+    <Compile Include="KillMng\IKillDrugService.cs" />
+    <Compile Include="PlansMng\ILandBlockService.cs" />
+    <Compile Include="PlansMng\IPlansBatchService.cs" />
+    <Compile Include="PlansMng\IPlansDrugService.cs" />
+    <Compile Include="PlansMng\IPlansFertService.cs" />
+    <Compile Include="PlansMng\ISeedBaseService.cs" />
+    <Compile Include="ProcessMng\IProcessBaseService.cs" />
+    <Compile Include="ProcessMng\IProcessBatchService.cs" />
+    <Compile Include="ProcessMng\IProcessBatchDetailService.cs" />
+    <Compile Include="ProcessMng\IProcessProductService.cs" />
+    <Compile Include="ProcessMng\IShadowBaseService.cs" />
+    <Compile Include="ProcessMng\IShadowProcessService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaleMng\IWareHouseBaseService.cs" />
+    <Compile Include="SaleMng\IWareHouseDetailService.cs" />
+    <Compile Include="SaleMng\IWareHouseStockService.cs" />
+    <Compile Include="SaleMng\ISaleBaseService.cs" />
+    <Compile Include="SystemBase\IAreaPlatService.cs" />
+    <Compile Include="SystemBase\IAreaService.cs" />
+    <Compile Include="SystemBase\ICityService.cs" />
+    <Compile Include="SystemBase\ICompanyService.cs" />
+    <Compile Include="SystemBase\ICountryService.cs" />
+    <Compile Include="SystemBase\IDeptService.cs" />
+    <Compile Include="SystemBase\ILandBaseService.cs" />
+    <Compile Include="SystemBase\IMenuService.cs" />
+    <Compile Include="SystemBase\ICodeObjectService.cs" />
+    <Compile Include="SystemBase\ICodeMaxService.cs" />
+    <Compile Include="SystemBase\ICodeOrderService.cs" />
+    <Compile Include="SystemBase\IProductBaseService.cs" />
+    <Compile Include="SystemBase\IProductSpecService.cs" />
+    <Compile Include="SystemBase\IProductTypeService.cs" />
+    <Compile Include="SystemBase\IProvinceService.cs" />
+    <Compile Include="SystemBase\IRoleService.cs" />
+    <Compile Include="SystemBase\IUserBaseService.cs" />
+    <Compile Include="SystemBase\IUserLoginService.cs" />
+    <Compile Include="TrunMng\ITrunApplyDetailService.cs" />
+    <Compile Include="TrunMng\ITrunApplyService.cs" />
+    <Compile Include="TrunMng\ITrunDriverService.cs" />
+    <Compile Include="TrunMng\ITrunTemperatrueService.cs" />
+    <Compile Include="TrunMng\ITrunVehicleService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FoodTrace.Model\FoodTrace.Model.csproj">
+      <Project>{d863d790-3aa4-4a37-a722-0572e692e47d}</Project>
+      <Name>FoodTrace.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

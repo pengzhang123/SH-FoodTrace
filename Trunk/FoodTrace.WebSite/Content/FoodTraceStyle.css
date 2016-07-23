@@ -1,0 +1,63 @@
+html, body{width: 100%; margin: 0; padding:0;font-family: "Microsoft YaHei"; background-color:#eee; min-width: 320px; font-size: 12px; overflow-x:hidden;}
+input{outline:none;}
+a, a:link, a:hover, a:visited{
+	text-decoration: none;
+	color: #000;
+}
+
+ul li{list-style: none; float: left; margin:0; padding: 0;}
+#head{width: 100%; height: 104px; background-repeat: no-repeat; margin: 0;}
+.title_bg{width: 100%; height: 104px; position: absolute; top: 0; z-index: 0;}
+.headleft{width: 408px; height: 58px; position: absolute; top: 20px; left: 5%; z-index: 9;}
+.headright{ float: right; height: 50px; position: absolute; top:20px; right:5%;  z-index: 9;}
+.headicon{float: right; width: 25px; height: 25px; margin-right: 10px;}
+.wel{margin-top: .4rem; font-size: 1rem;}
+.username{color: rgb(87,138,218);}
+.logout{color: rgb(187,2,3);}
+
+#navi{margin: 0; padding: 0; font-size: 1.2rem; color: #fff; font-weight: 900; }
+#navi ul{background-image: url(../images/navi_bg.png); background-repeat: repeat-x; width: 100%; height: 34px; margin: 0; padding: 0;}
+#navi ul li{height: 30px; margin: 2px 0; padding: 0 5px; line-height: 30px; color: #fff; text-align: center; color: #fff; width: 81px;}
+.navi_first{ border-right: 0px solid #aaa; margin-left: 15% !important; border-left: 0px solid #aaa;}
+#navi .on{background-image: url(../images/tag_bg.png); background-repeat: no-repeat; width: 81px; height: 30px; text-align: center; color: #f00; margin: 2px 0; padding: 0;}
+#navi a, #navi a:link, #navi a:hover, #navi a:visited{
+	text-decoration: none;
+	color: #fff;
+}
+#navi .on a{color: rgb(89,119,182);}
+
+#con{background-color: #fff;}
+#menu{width: 14.5%; float: left; height: 100%; background-color: #fff; margin: 0; padding: 0; border-right:  1px rgb(149,167,188) solid; border-bottom:  1px rgb(149,167,188) solid;}
+#menu ul{width: 100%; margin: 0; padding: 0;}
+#menu ul li{width: 89%; height: 29px; background-image: url(../images/menu_bg.png); background-repeat: repeat-x; line-height: 29px; font-size: 14px; text-align: left; padding-left: 10%; color: rgb(66,115,175); border: 1px solid #aaa; margin-bottom: 1px;}
+.menu_first{background-color: rgb(64,113,140); background-image: none !important; text-align: center; color: #fff !important; font-size: 1.2rem; font-weight: 900;}
+
+.menu_second{background-image: none !important; border: none !important; padding-left: 10% !important; font-size: 12px; height: auto !important; display: none;}
+.menu_second ul li{background-image: none !important; border: none !important; color: #666 !important;}
+
+#info{margin-left: 15.5%; width: auto; border: 1px rgb(149,167,188) solid;}
+.find{background-color: rgb(242,246,256); width: 100%; padding-top: 20px; padding-left: 2%;height: 70px;}
+.input{width: 15%; margin-right: 10%;}
+.button_right{float: right; margin-right: 20%;}
+.button{color: rgb(165,113,39); border: 1px solid rgb(180,167,121); background-color: rgb(252,245,233); width: 80px; height: 20px; line-height: 18px; border-radius: 5px; padding: 0; margin: 0;}
+
+#table{width: 100%;}
+.table_title{background-image: url(../images/foot_bg.png); background-repeat: repeat-x; height: 24px; line-height: 24px; padding-left: 15px; font-weight: 900; color: rgb(103,144,203); border-top: 1px rgb(149,167,188) solid; border-bottom: 1px rgb(149,167,188) solid;}
+#table table{width: 100%; border-collapse : collapse;}
+#table th{height: 30px; border: 1px solid rgb(150,165,188);
+	background: -webkit-linear-gradient(top,rgba(255,255,255,1),rgba(234,234,234,1)); /* Safari 5.1 - 6 */
+	background: -o-linear-gradient(top,rgba(255,255,255,1),rgba(234,234,234,1)); /* Opera 11.1 - 12*/
+    background: -moz-linear-gradient(top,rgba(255,255,255,1),rgba(234,234,234,1)); /* Firefox 3.6 - 15*/
+    background: linear-gradient(to top, rgba(255,255,255,1),rgba(234,234,234,1)); /* 标准的语法 */}
+#table td{height: 30px; border: 1px solid rgb(150,165,188);}
+#table .tr1{background-color: rgb(254,251,240);}
+#table .tr2{background-color: rgb(255,255,255);}
+
+.buttom{background-image: url(../images/foot_bg.png); background-repeat: repeat-x; height: 22px; padding: 1px 5px; line-height: 22px;}
+.buttom .page{width: 14px; text-align: center;}
+.buttom .de img{height: 12px;}
+.buttom .buttom_left{float: left; padding: 0 20px; border-right: 1px solid #aaa;}
+.buttom .word{padding-top: 4px; height: 18px;}
+.buttom .buttom_right{float: right; padding: 0 20px;}
+
+.clearbox{width: 0; height: 0; clear: both;}

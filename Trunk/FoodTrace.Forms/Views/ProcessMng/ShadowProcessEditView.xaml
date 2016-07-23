@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="FoodTrace.Forms.Views.ShadowProcessEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:FoodTrace.Forms.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:FoodTrace.Forms.ViewModels"
+             cal:Message.Attach="[Event Loaded] = [Action LoadUserControl($source)]"
+             d:DesignHeight="600"
+             d:DesignWidth="300"
+             Background="White"
+             mc:Ignorable="d">
+    <Grid>
+        <StackPanel Margin="5">
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="工序" />
+                <ComboBox Grid.Column="1"
+                          cal:Message.Attach="[SelectionChanged]=[ProcessBaseSelectionChanged($source)]"
+                          DisplayMemberPath="ProcessName"
+                          ItemsSource="{Binding ProcessBases}"
+                          SelectedValue="{Binding Model.ProcessID}"
+                          SelectedValuePath="ProcessID" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="皮影" />
+                <ComboBox Grid.Column="1"
+                          cal:Message.Attach="[SelectionChanged]=[ShadowBaseSelectionChanged($source)]"
+                          DisplayMemberPath="ProductName"
+                          ItemsSource="{Binding ShadowBases}"
+                          SelectedValue="{Binding Model.ShadowID}"
+                          SelectedValuePath="ShadowID" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="皮影加工厂" />
+                <TextBox Grid.Column="1" Text="{Binding Model.CompanyID}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="加工批次" />
+                <TextBox Grid.Column="1" Text="{Binding Model.ProcessBatch}" />
+            </Grid>
+
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="工序代号" />
+                <TextBox Grid.Column="1" Text="{Binding Model.ProcessCode}" />
+            </Grid>
+
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="工序名称" />
+                <TextBox Grid.Column="1" Text="{Binding Model.ProcessName}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="操作人" />
+                <TextBox Grid.Column="1" Text="{Binding Model.WorkPeople}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="重量" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Weight}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="单价" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Price}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="排序号" />
+                <TextBox Grid.Column="1" Text="{Binding Model.SortID}" />
+            </Grid>
+
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="备注" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Remark}" />
+            </Grid>
+
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsLocked}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="是否显示" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsShow}" />
+            </Grid>
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <Button x:Name="Save"
+                        Margin="5"
+                        Content="保存" />
+                <Button x:Name="Cancel"
+                        Margin="5"
+                        Content="取消" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
+
+

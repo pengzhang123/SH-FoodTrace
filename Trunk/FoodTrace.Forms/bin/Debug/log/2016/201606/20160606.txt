@@ -1,0 +1,8 @@
+
+ 
+记录时间：2016-06-06 00:07:13,020 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 

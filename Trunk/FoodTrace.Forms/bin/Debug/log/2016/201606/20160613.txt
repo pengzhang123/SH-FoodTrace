@@ -1,0 +1,51 @@
+
+ 
+记录时间：2016-06-13 00:03:22,672 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-06-13 00:03:22,725 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-06-13 00:04:37,073 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：error property: [(null)] - 
+错误描述：test
+ 
+
+ 
+记录时间：2016-06-13 22:16:20,384 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-06-13 22:16:20,488 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-06-13 22:16:50,473 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.

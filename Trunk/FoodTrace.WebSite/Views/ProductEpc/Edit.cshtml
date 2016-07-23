@@ -1,0 +1,32 @@
+﻿
+@model FoodTrace.Model.ProductSpecModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<h2>产品规格添加</h2>
+@using (Html.BeginForm("Edit", "ProductEpc", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.SPCID)
+    <div>
+        <label for="name">产品分类代号:</label>
+        @Html.TextBoxFor(m => Model.ClassID, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">产品分类名称:</label>
+        @Html.TextBoxFor(m => Model.ClassName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">规格代号:</label>
+        @Html.TextBoxFor(m => Model.SpecCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">规格名称:</label>
+        @Html.TextBoxFor(m => Model.SpecName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">备注:</label>
+        @Html.TextAreaFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+}

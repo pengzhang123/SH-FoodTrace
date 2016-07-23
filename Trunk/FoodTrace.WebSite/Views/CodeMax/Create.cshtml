@@ -1,0 +1,40 @@
+﻿
+@model FoodTrace.Model.CodeMaxModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<h2>最大编码规则信息新增</h2>
+@using (Html.BeginForm("Create", "CodeMax", FormMethod.Post))
+{
+    <div>
+        <label for="name">对像编码:</label>
+        @Html.TextBoxFor(m => Model.ObjectCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">对像名称:</label>
+        @Html.TextBoxFor(m => Model.ObjectName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">对应值:</label>
+        @Html.TextBoxFor(m => Model.ObjectValue, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">排序号:</label>
+        @Html.TextBoxFor(m => Model.SortID, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">备注:</label>
+        @Html.TextBoxFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">是否锁定:</label>
+        @Html.TextBoxFor(m => Model.IsLocked, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">是否显示:</label>
+        @Html.TextBoxFor(m => Model.IsShow, new { @class = "easyui-validatebox easyui-combobox", data_options = "required:true" })
+    </div>
+}
+

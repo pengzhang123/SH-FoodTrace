@@ -1,0 +1,188 @@
+﻿    @{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+<table id="DataGrid" style="height:100%;"></table>
+
+<div id="CreateDialog"></div>
+<div id="EditDialog"></div>
+<script>
+
+    function Edit(id) {
+        $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Area")' + '?id=' + id).dialog('open');
+    }
+
+    function Delete(id) {
+
+        $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
+            if (r) {
+                $.post('@Url.Action("Delete", "Area")', { id: id }, function (json) {
+                    var msg = '';
+                    if (json.flag) {
+                        msg = "删除成功";
+                        $('#DataGrid').datagrid('reload');
+                    } else {
+                        msg = "删除失败";
+                    }
+                    $.messager.alert('信息提示', msg, 'info', function () {
+                    });
+                }, 'json');
+            }
+        });
+
+    }
+
+    $(function () {
+
+
+
+        $('#DataGrid').datagrid({
+            url: '@Url.Action("GetList", "Area")',
+            rownumbers: true,
+            striped: true,
+            fitColumns: true,
+            pagination: true,
+            singleSelect: true,
+            pageList: [10, 15, 20, 25],
+            toolbar: [{
+                id: 'btnAdd',
+                text: ' 新建',
+                iconCls: 'icon-add',
+                handler: function () {
+                    $('#CreateDialog').dialog('refresh', '@Url.Action("Create", "Area")').dialog('open');
+                }
+            }, {
+                id: 'btnEdit',
+                text: ' 编辑',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelected');
+                    if (row) {
+                        Edit(row.AreaID);
+                    }
+                }
+            }, {
+                id: 'btnDelete',
+                text: ' 删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelected');
+                    if (row) {
+                        Delete(row.AreaID);
+                    }
+                }
+            }, {
+                text: 'Key'
+            }, {
+                text: '<input type="text" id="key"/>'
+            }, {
+                id: 'btnFilter',
+                text: 'filter',
+                iconCls: 'icon-search',
+                handler: function () {
+                    query();
+                }
+            }],
+            columns: [[
+                    { title: '区域编号', align: 'center', field: 'AreaID', width: 35 },
+                    { title: '区域名称', align: 'center', field: 'AreaName', width: 35 }
+            ]]
+        });
+
+
+        $('#CreateDialog').dialog({
+            title: 'Create Dialog',
+            width: 400,
+            height: 280,
+            closed: true,
+            cache: false,
+            href: '@Url.Action("Create", "Area")',
+            modal: true,
+            buttons: [{
+                text: 'Save',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#CreateDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+
+                    $.messager.progress();
+                    var url = $form.prop('action');
+                    $.post(url, $form.serializeArray(), function (json) {
+
+                        var msg = '';
+                        if (json.flag) {
+                            msg = "保存成功";
+                            $('#DataGrid').datagrid('reload');
+                        } else {
+                            msg = "保存失败<br />" + json.msg;
+                        }
+                        $.messager.progress('close');
+                        $.messager.alert('信息提示', msg, 'info', function () {
+                            $('#CreateDialog').dialog('close');
+                        });
+                    }, 'json');
+                }
+            }, {
+                text: 'Close',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#CreateDialog').dialog('close');
+                }
+            }]
+        });
+
+        $('#EditDialog').dialog({
+            title: 'Create Dialog',
+            width: 400,
+            height: 280,
+            closed: true,
+            cache: false,
+            href: '@Url.Action("Edit", "Area")',
+            modal: true,
+            buttons: [{
+                text: 'Save',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#EditDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+
+                    $.messager.progress();
+                    var url = $form.prop('action');
+                    $.post(url, $form.serializeArray(), function (json) {
+
+                        var msg = '';
+                        if (json.flag) {
+                            msg = "保存成功";
+                            $('#DataGrid').datagrid('reload');
+                        } else {
+                            msg = "保存失败<br />" + json.msg;
+                        }
+                        $.messager.progress('close');
+                        $.messager.alert('信息提示', msg, 'info', function () {
+                            $('#EditDialog').dialog('close');
+                        });
+                    }, 'json');
+                }
+            }, {
+                text: 'Close',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#EditDialog').dialog('close');
+                }
+            }]
+        });
+    });
+</script>

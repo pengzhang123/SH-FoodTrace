@@ -1,0 +1,62 @@
+﻿@model FoodTrace.Model.DeptModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>区域新建</h2>
+@using (Html.BeginForm("Create", "Dept", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>公司</td>
+            <td>
+                @Html.DropDownListFor(m => Model.CompanyID, ViewBag.Company as List<SelectListItem>)
+            </td>
+        </tr>
+        <tr>
+            <td>部门名称</td>
+            <td>@Html.TextBoxFor(m => Model.DeptName)</td>
+        </tr>
+        <tr>
+            <td>上级部门</td>
+            <td>@Html.DropDownListFor(m => Model.UpperDeptID, ViewBag.Dept as List<SelectListItem>)</td>
+        </tr>
+        <tr>
+            <td>部门备注</td>
+            <td>@Html.TextBoxFor(m => Model.DeptRemark)</td>
+        </tr>
+        <tr>
+            <td>排序字</td>
+            <td>@Html.TextBoxFor(m => Model.SortID)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="保存" /></td>
+            <td><input type="button" value="取消" /></td>
+        </tr>
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        $("#CompanyID").change(function () {
+            debugger;
+            var selectId = $("#CompanyID").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDeptByCompany")',
+                data: { companyId: selectId },
+                dataType: "json",
+                success: function (data) {
+                    $("#UpperDeptID").find("option").remove();
+                    var option = "<option value='0'>--请选择--</option>";;
+                    if (data.length > 0) {
+                        //遍历json数据，拼接option，最后添加到select中
+                        $.each(data, function (i, n) {
+                            option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                        });
+                    }
+                    $("#UpperDeptID").append(option); //等同于 $(option).appendTo($("#catagery"));
+                }
+            });
+        });
+    });
+</script>

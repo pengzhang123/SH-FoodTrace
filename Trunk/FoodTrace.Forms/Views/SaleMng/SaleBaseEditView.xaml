@@ -1,0 +1,183 @@
+﻿<UserControl x:Class="FoodTrace.Forms.Views.SaleBaseEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:FoodTrace.Forms.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             cal:Message.Attach="[Event Loaded] = [Action LoadUserControl($source)]"
+             d:DesignHeight="600"
+             d:DesignWidth="300"
+             Background="White"
+             mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Margin="5">
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="销售公司" />
+                    <ComboBox Grid.Column="1"
+                              DisplayMemberPath="CompanyName"
+                              ItemsSource="{Binding Companys}"
+                              SelectedValue="{Binding Model.CompanyID}"
+                              SelectedValuePath="CompanyID" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="溯源码" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.WareHouseEPC}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="销售溯源码" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.SaleEPC}" />
+                </Grid>
+
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="二维码" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ORCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="芯片码" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ChipCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品名称" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ProductName}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品分类代号" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ClassID}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品分类名称" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ClassName}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品代号" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ProductCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品规格编号" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ProductSpcID}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品型号编号" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ProductTypeID}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="重量" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.Weight}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="价格" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.Price}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="产品拼音简码" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.PinYingCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="销售时间" />
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Model.SaleTime}" />
+                </Grid>
+
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="备注" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.Remark}" />
+                </Grid>
+
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsLocked}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="是否显示" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsShow}" />
+                </Grid>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button x:Name="Save"
+                            Margin="5"
+                            Content="保存" />
+                    <Button x:Name="Cancel"
+                            Margin="5"
+                            Content="取消" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
+
+

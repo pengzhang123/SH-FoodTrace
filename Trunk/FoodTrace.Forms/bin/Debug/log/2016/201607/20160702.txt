@@ -1,0 +1,1023 @@
+
+ 
+记录时间：2016-07-02 14:24:35,776 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 14:24:36,017 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 14:50:28,179 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 14:50:28,257 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:15:08,393 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:15:08,440 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:19:51,354 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:19:51,426 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:22:06,383 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:22:06,612 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:31:04,347 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:31:04,573 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:40:50,795 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:40:50,912 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:41:54,982 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:41:55,082 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:44:44,245 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:44:44,367 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 15:45:50,130 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 15:45:50,248 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:00:04,991 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:00:05,098 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:02:43,978 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:02:44,022 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:05:38,381 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:05:38,497 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:07:17,730 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:07:17,796 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:08:07,146 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:08:07,195 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:10:34,193 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:10:34,246 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:11:45,729 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:11:45,822 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:13:06,702 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:13:06,776 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:16:26,325 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:16:26,374 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:20:15,188 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:20:15,290 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:23:07,844 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:23:07,936 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:24:25,972 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:24:26,032 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:26:05,207 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:26:05,491 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:27:59,742 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:27:59,876 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:35:24,449 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:35:24,496 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 16:37:51,642 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 16:37:51,719 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:00:27,410 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 18:00:27,454 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:23:38,749 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 18:23:38,919 
+线程ID:[12] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:27:52,329 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 18:27:52,371 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:31:15,024 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 18:31:15,104 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:39:16,035 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 18:39:16,126 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:39:32,315 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method LoadUserControl.
+ 
+System.Exception: No target found for method LoadUserControl.
+
+ 
+记录时间：2016-07-02 18:39:32,408 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method LoadUserControl.
+ 
+System.Exception: No target found for method LoadUserControl.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-02 18:39:32,517 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method LoadUserControl.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-02 18:58:38,378 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 18:58:38,435 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 18:59:18,030 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method LoadUserControl.
+ 
+System.Exception: No target found for method LoadUserControl.
+
+ 
+记录时间：2016-07-02 18:59:18,035 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method LoadUserControl.
+ 
+System.Exception: No target found for method LoadUserControl.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-02 18:59:18,047 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method LoadUserControl.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-02 19:00:52,667 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:00:52,816 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:01:11,670 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method LoadUserControl.
+ 
+System.Exception: No target found for method LoadUserControl.
+
+ 
+记录时间：2016-07-02 19:01:11,672 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method LoadUserControl.
+ 
+System.Exception: No target found for method LoadUserControl.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-02 19:01:11,693 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method LoadUserControl.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.BroadcastEventHelper.BroadcastEvent(DependencyObject root, RoutedEvent routedEvent)
+   at System.Windows.BroadcastEventHelper.BroadcastLoadedEvent(Object root)
+   at MS.Internal.LoadedOrUnloadedOperation.DoWork()
+   at System.Windows.Media.MediaContext.FireLoadedPendingCallbacks()
+   at System.Windows.Media.MediaContext.FireInvokeOnRenderCallbacks()
+   at System.Windows.Media.MediaContext.RenderMessageHandlerCore(Object resizedCompositionTarget)
+   at System.Windows.Media.MediaContext.RenderMessageHandler(Object resizedCompositionTarget)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-02 19:02:57,183 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:02:57,403 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:05:32,075 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:05:32,155 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:06:55,759 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:06:55,804 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:08:37,808 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:08:37,906 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:09:44,118 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:09:44,171 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:11:47,241 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:11:47,461 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:12:42,652 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method ProductSelectionChanged.
+ 
+System.Exception: No target found for method ProductSelectionChanged.
+
+ 
+记录时间：2016-07-02 19:13:21,504 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:13:21,601 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:14:14,411 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method ProductSelectionChanged.
+ 
+System.Exception: No target found for method ProductSelectionChanged.
+
+ 
+记录时间：2016-07-02 19:19:19,709 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:19:19,759 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:19:53,302 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method ProductSelectionChanged.
+ 
+System.Exception: No target found for method ProductSelectionChanged.
+
+ 
+记录时间：2016-07-02 19:21:11,390 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:21:11,461 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:22:22,337 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:22:22,465 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:24:06,409 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:24:06,504 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:25:57,544 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:25:57,641 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:36:02,738 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:36:02,874 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 19:37:20,066 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 19:37:20,150 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-02 21:28:29,018 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-02 21:28:29,061 
+线程ID:[1] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 

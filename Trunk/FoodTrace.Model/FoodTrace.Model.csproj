@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D863D790-3AA4-4A37-A722-0572E692E47D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoodTrace.Model</RootNamespace>
+    <AssemblyName>FoodTrace.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseModel.cs" />
+    <Compile Include="BreedMng\BreedAreaModel.cs" />
+    <Compile Include="BreedMng\BreedBaseModel.cs" />
+    <Compile Include="BreedMng\BreedBatchModel.cs" />
+    <Compile Include="BreedMng\BreedBatchDetailModel.cs" />
+    <Compile Include="BreedMng\BreedDrugModel.cs" />
+    <Compile Include="BreedMng\BreedHealthModel.cs" />
+    <Compile Include="BreedMng\BreedHomeModel.cs" />
+    <Compile Include="BreedMng\BreedLogModel.cs" />
+    <Compile Include="BreedMng\BreedMaterialModel.cs" />
+    <Compile Include="BreedMng\CultivationBaseModel.cs" />
+    <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="KillMng\KillBatchDetailModel.cs" />
+    <Compile Include="KillMng\KillBatchModel.cs" />
+    <Compile Include="KillMng\KillCullModel.cs" />
+    <Compile Include="KillMng\KillDrugModel.cs" />
+    <Compile Include="MessageModel.cs" />
+    <Compile Include="ProcessMng\ProcessBaseModel.cs" />
+    <Compile Include="ProcessMng\ProcessBatchDetailModel.cs" />
+    <Compile Include="ProcessMng\ProcessBatchModel.cs" />
+    <Compile Include="ProcessMng\ProcessProductModel.cs" />
+    <Compile Include="ProcessMng\ShadowBaseModel.cs" />
+    <Compile Include="ProcessMng\ShadowProcessModel.cs" />
+    <Compile Include="SaleMng\SaleBaseModel.cs" />
+    <Compile Include="SaleMng\WareHouseStockModel.cs" />
+    <Compile Include="SaleMng\WareHouseDetailModel.cs" />
+    <Compile Include="SaleMng\WareHouseBaseModel.cs" />
+    <Compile Include="SystemBase\AreaModel.cs" />
+    <Compile Include="SystemBase\AreaPlatModel.cs" />
+    <Compile Include="SystemBase\TIDModel.cs" />
+    <Compile Include="SystemBase\CodeMaxModel.cs" />
+    <Compile Include="SystemBase\CodeOrderModel.cs" />
+    <Compile Include="SystemBase\CodeObjectModel.cs" />
+    <Compile Include="SystemBase\DicRootModel.cs" />
+    <Compile Include="SystemBase\LandBaseModel.cs" />
+    <Compile Include="PlansMng\LandBlockModel.cs" />
+    <Compile Include="PlansMng\PlansBatchModel.cs" />
+    <Compile Include="PlansMng\PlansDrugModel.cs" />
+    <Compile Include="PlansMng\PlansFertModel.cs" />
+    <Compile Include="PlansMng\SeedBaseModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemBase\CompanyModel.cs" />
+    <Compile Include="SystemBase\DeptModel.cs" />
+    <Compile Include="SystemBase\LogUserLoginModel.cs" />
+    <Compile Include="SystemBase\MenuModel.cs" />
+    <Compile Include="SystemBase\ProductBaseModel.cs" />
+    <Compile Include="SystemBase\ProductSpecModel.cs" />
+    <Compile Include="SystemBase\ProductTypeModel.cs" />
+    <Compile Include="SystemBase\QSCardModel.cs" />
+    <Compile Include="SystemBase\RoleMenuModel.cs" />
+    <Compile Include="SystemBase\RoleModel.cs" />
+    <Compile Include="SystemBase\UserBaseModel.cs" />
+    <Compile Include="SystemBase\UserDetailModel.cs" />
+    <Compile Include="SystemBase\UserRoleModel.cs" />
+    <Compile Include="TrunMng\TrunApplyDetailModel.cs" />
+    <Compile Include="TrunMng\TrunApplyModel.cs" />
+    <Compile Include="TrunMng\TrunDriverModel.cs" />
+    <Compile Include="TrunMng\TrunTemperatrueModel.cs" />
+    <Compile Include="TrunMng\TrunVehicleModel.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

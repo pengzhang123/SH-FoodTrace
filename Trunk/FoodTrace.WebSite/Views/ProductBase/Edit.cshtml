@@ -1,0 +1,64 @@
+﻿
+@model FoodTrace.Model.ProductBaseModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+    var productSpcList = ViewBag.ProductSpcList as List<SelectListItem>;
+    var productTypeList = ViewBag.ProductTypeList as List<SelectListItem>;
+}
+
+<h2>产品规格添加</h2>
+@using (Html.BeginForm("Edit", "ProductBase", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.ProductID)
+    <div>
+        <label for="name">产品名称:</label>
+        @Html.TextBoxFor(m => Model.ProductName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">产品分类代号:</label>
+        @Html.TextBoxFor(m => Model.ClassID, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">产品分类名称:</label>
+        @Html.TextBoxFor(m => Model.ClassName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">产品代号:</label>
+        @Html.TextBoxFor(m => Model.ProductCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+
+    <div>
+        <label for="name">产品规格:</label>
+        @Html.DropDownListFor((m => Model.ProductSpcID), productSpcList, new { @class = "easyui-validatebox easyui-combobox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">产品型号:</label>
+        @Html.DropDownListFor((m => Model.ProductTypeID), productTypeList, new { @class = "easyui-validatebox easyui-combobox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">重量:</label>
+        @Html.TextBoxFor(m => Model.Weight, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">产品拼音简码:</label>
+        @Html.TextBoxFor(m => Model.PinYinCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">价格:</label>
+        @Html.TextBoxFor(m => Model.Price, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    <div>
+        <label for="name">备注:</label>
+        @Html.TextAreaFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+    </div>
+    @*<div>
+            <label for="name">是否锁定:</label>
+            @Html.TextBoxFor(m => Model.IsLocked, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+        </div>
+        <div>
+            <label for="name">是否显示:</label>
+            @Html.TextBoxFor(m => Model.IsShow, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+        </div>*@
+}
+

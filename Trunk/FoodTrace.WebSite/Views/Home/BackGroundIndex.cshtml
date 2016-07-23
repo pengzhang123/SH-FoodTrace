@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - 食品溯源平台管理</title>
+    @Styles.Render("~/Content/jquery-easyui-1.4.5/themes/default/easyui.css")
+    @Styles.Render("~/Content/jquery-easyui-1.4.5/themes/icon.css")
+    @Scripts.Render("~/Content/jquery-easyui-1.4.5/jquery.min.js")
+    @Scripts.Render("~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js")
+    <style type="text/css">
+        ul {
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+            ul li {
+                padding: 8px;
+            }
+
+                ul li a {
+                    text-decoration: none;
+                    color: black;
+                    font-family: Arial;
+                }
+
+        a:hover {
+        }
+        
+    </style>
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north'" style="height:80px;">
+
+        <img src="~/Images/title.png" style="margin-top:15px;margin-left:15px;" />
+    </div>
+    <div data-options="region:'west',split:true" title="菜单 Menu" style="width:150px;">
+        <div class="easyui-accordion" data-options="fit:true,border:false">
+            <div title="后台管理" style="padding:10px;text-align:left;">
+                <ul>
+                    <li><a href="#"  onclick="addTab('公司管理', '/Company'); return false;">公司管理</a></li>
+                    <li><a href="#"  onclick="addTab('部门管理', '/Dept'); return false;">部门管理</a></li>
+                    <li><a href="#"  onclick="addTab('用户管理', '/UserBase'); return false;">用户管理</a></li>
+                    <li><a href="#"  onclick="addTab('角色管理', '/Role'); return false;">角色管理</a></li>
+                    <li><a href="#"  onclick="addTab('菜单管理', '/Menu'); return false;">菜单管理</a></li>
+                    <li><a href="#"  onclick="addTab('平台管理', '/AreaPlat'); return false;">平台管理</a></li>
+                    <li><a href="#"  onclick="addTab('区域管理', '/Area'); return false;">区域管理</a></li>
+                    <li><a href="#"  onclick="addTab('省份管理', '/Province'); return false;">省份管理</a></li>
+                    <li><a href="#"  onclick="addTab('城市管理', '/City'); return false;">城市管理</a></li>
+                    <li><a href="#"  onclick="addTab('区县管理', '/Country'); return false;">区县管理</a></li>
+                    <li><a href="#" onclick="addTab('产品规格管理', '/ProductEpc'); return false;">产品规格管理</a></li>
+                    <li><a href="#" onclick="addTab('产品类型管理', '/ProductType'); return false;">产品类型管理</a></li>
+                    <li><a href="#" onclick="addTab('产品管理', '/ProductBase'); return false;">产品管理</a></li>
+                    <li><a href="#" onclick="addTab('对像编码规则控制器信息管理', '/CodeObject'); return false;">对像编码规则控制器信息管理</a></li>
+                    <li><a href="#" onclick="addTab('最大编码规则信息管理', '/CodeMax'); return false;">最大编码规则信息管理</a></li>
+                    <li><a href="#" onclick="addTab('单据编码规则信息管理', '/CodeOrder'); return false;">单据编码规则信息管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="tt" class="easyui-tabs" style="border-style:none;" data-options="region:'center',title:'',iconCls:'icon-ok'">
+    </div>
+    <script type="text/javascript">
+        function addTab(title, url) {
+            if ($('#tt').tabs('exists', title)) {
+                $('#tt').tabs('select', title);
+            } else {
+                var content = '<iframe scrolling="auto" frameborder="0" src="' + url + '" style="width:100%;height:99%;border-style:none;"></iframe>';
+                $('#tt').tabs('add', {
+                    title: title,
+                    content: content,
+                    closable: true
+                });
+            }
+            
+        }
+    </script>
+</body>
+</html>
+@*<body>
+        <div id="head">
+            <img src="~/Images/title_bg.png" class="title_bg" alt="">
+            <div class="headleft">
+                <img src="~/Images/title.png" alt="">
+            </div>
+            <div class="headright">
+                <img class="headicon" src="~/Images/back.png" alt="">
+                <img class="headicon" src="~/Images/admin.png" alt="">
+                <img class="headicon" src="~/Images/home.png" alt="">
+                <div class="clearbox"></div>
+                <div class="wel">欢迎您登录：<span class="username">管理员</span>　<span class="logout">【退出】</span></div>
+            </div>
+        </div>
+        <div id="navi">
+            <ul>
+                <li class="navi_first"><a href="javascript:;">系统设置</a></li>
+                <li class="on"><a href="javascript:;">系统管理</a></li>
+                <li><a href="javascript:;">信息管理</a></li>
+                <li><a href="javascript:;">待办事项</a></li>
+                <li><a href="javascript:;">备注</a></li>
+            </ul>
+        </div>
+        <div id="menu" style="height:501px;">
+            <ul>
+                <li class="menu_first">导航菜单 menu</li>
+                <li>平台管理系统</li>
+                <li class="menu_second" style="display:block;">
+                    <ul>
+                        <li>>  <a href="/Company">公司管理</a></li>
+                        <li>>  <a href="/Dept">部门管理</a></li>
+                        <li>>  <a href="/UserBase">用户管理</a></li>
+                        <li>>  <a href="/Role">角色管理</a></li>
+                        <li>>  <a href="/Menu">菜单管理</a></li>
+                        <li>>  <a href="/AreaPlat">平台管理</a></li>
+                        <li>>  <a href="/Area">区域管理</a></li>
+                        <li>>  <a href="/Province">省份管理</a></li>
+                        <li>>  <a href="/City">城市管理</a></li>
+                        <li>>  <a href="/Country">区县管理</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="con">
+            <div id="info" style="height:501px;">
+                @RenderBody()
+            </div>
+        </div>
+        <div style="text-align:center;">版权所有:  环县食品溯源管理系统      版本v1.0</div>
+    </body>
+    </html>*@

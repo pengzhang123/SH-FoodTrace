@@ -1,0 +1,189 @@
+﻿    @{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+<table id="DataGrid" style="height:100%;"></table>
+
+<div id="CreateDialog"></div>
+<div id="EditDialog"></div>
+<script>
+
+    function Edit(id) {
+        $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Role")' + '?id=' + id).dialog('open');
+    }
+
+    function Delete(id) {
+
+        $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
+            if (r) {
+                $.post('@Url.Action("Delete", "Role")', { id: id }, function (json) {
+                    var msg = '';
+                    if (json.flag) {
+                        msg = "删除成功";
+                        $('#DataGrid').datagrid('reload');
+                    } else {
+                        msg = "删除失败";
+                    }
+                    $.messager.alert('信息提示', msg, 'info', function () {
+                    });
+                }, 'json');
+            }
+        });
+
+    }
+
+    $(function () {
+
+
+
+        $('#DataGrid').datagrid({
+            url: '@Url.Action("GetList", "Role")',
+            rownumbers: true,
+            striped: true,
+            fitColumns: true,
+            pagination: true,
+            singleSelect: true,
+            pageList: [10, 15, 20, 25],
+            toolbar: [{
+                id: 'btnAdd',
+                text: ' 新建',
+                iconCls: 'icon-add',
+                handler: function () {
+                    $('#CreateDialog').dialog('refresh', '@Url.Action("Create", "Role")').dialog('open');
+                }
+            }, {
+                id: 'btnEdit',
+                text: ' 编辑',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelected');
+                    if (row) {
+                        Edit(row.RoleID);
+                    }
+                }
+            }, {
+                id: 'btnDelete',
+                text: ' 删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelected');
+                    if (row) {
+                        Delete(row.RoleID);
+                    }
+                }
+            }, {
+                text: 'Key'
+            }, {
+                text: '<input type="text" id="key"/>'
+            }, {
+                id: 'btnFilter',
+                text: 'filter',
+                iconCls: 'icon-search',
+                handler: function () {
+                    query();
+                }
+            }],
+            columns: [[
+                    { title: '角色名称', align: 'center', field: 'RoleName', width: 35 },
+                    { title: '角色备注', align: 'center', field: 'Remark', width: 35 },
+                    { title: '排序ID', align: 'center', field: 'SortID', width: 35 }
+            ]]
+        });
+
+
+        $('#CreateDialog').dialog({
+            title: 'Create Dialog',
+            width: 600,
+            height: 380,
+            closed: true,
+            cache: false,
+            href: '@Url.Action("Create", "Role")',
+            modal: true,
+            buttons: [{
+                text: 'Save',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#CreateDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+
+                    $.messager.progress();
+                    var url = $form.prop('action');
+                    $.post(url, $form.serializeArray(), function (json) {
+
+                        var msg = '';
+                        if (json.flag) {
+                            msg = "保存成功";
+                            $('#DataGrid').datagrid('reload');
+                        } else {
+                            msg = "保存失败<br />" + json.msg;
+                        }
+                        $.messager.progress('close');
+                        $.messager.alert('信息提示', msg, 'info', function () {
+                            $('#CreateDialog').dialog('close');
+                        });
+                    }, 'json');
+                }
+            }, {
+                text: 'Close',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#CreateDialog').dialog('close');
+                }
+            }]
+        });
+
+        $('#EditDialog').dialog({
+            title: 'Create Dialog',
+            width: 600,
+            height: 380,
+            closed: true,
+            cache: false,
+            href: '@Url.Action("Edit", "Role")',
+            modal: true,
+            buttons: [{
+                text: 'Save',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#EditDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+
+                    $.messager.progress();
+                    var url = $form.prop('action');
+                    $.post(url, $form.serializeArray(), function (json) {
+
+                        var msg = '';
+                        if (json.flag) {
+                            msg = "保存成功";
+                            $('#DataGrid').datagrid('reload');
+                        } else {
+                            msg = "保存失败<br />" + json.msg;
+                        }
+                        $.messager.progress('close');
+                        $.messager.alert('信息提示', msg, 'info', function () {
+                            $('#EditDialog').dialog('close');
+                        });
+                    }, 'json');
+                }
+            }, {
+                text: 'Close',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#EditDialog').dialog('close');
+                }
+            }]
+        });
+    });
+</script>

@@ -1,0 +1,91 @@
+﻿
+@model List<FoodTrace.Model.UserDetailModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tag"></div>
+<div class="find">
+    区域名称：<input type="text" class="input">
+   <br><br>
+    <input type="button" value="新增" class="button" onclick="window.location.href='/UserDetail/Create';">
+    <div class="button_right">
+        <input type="button" value="查询" class="button">
+        <input type="button" value="重置" class="button">
+    </div>
+    <div class="clearbox"></div>
+</div>
+<div id="table">
+    <div class="table_title">
+        区域查询
+    </div>
+    <div style="overflow:auto;height:360px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>操作</th>
+                    <th>头像照片</th>
+                    <th>入职日期</th>
+                    <th>转正日期</th>
+                    <th>离职日期</th>
+                    <th>QQ号码</th>
+                    <th>出生年月</th>
+                    <th>电子邮箱</th>
+                    <th>身份证号码</th>
+                    <th>手机号码</th>
+                    <th>婚姻状况</th>
+                    <th>性别</th>
+                    <th>学历</th>
+                    <th>常住住址</th>
+                    <th>备注</th>
+                    <th>指纹考勤号</th>
+                    <th>工资发放账号</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var userDetailModel in Model)
+            {
+                    <tr class="tr1">
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", "UserDetail", new { id= userDetailModel.UserID },null)
+                        </td>
+                        <td>@userDetailModel.UserPhoto</td>
+                        <td>@userDetailModel.EntryDate</td>
+                        <td>@userDetailModel.FormalDate</td>
+                        <td>@userDetailModel.LeaveDate</td>
+                        <td>@userDetailModel.QQ</td>
+                        <td>@userDetailModel.BirthDay</td>
+                        <td>@userDetailModel.Email</td>
+                        <td>@userDetailModel.IDCard</td>
+                        <td>@userDetailModel.Mobile</td>
+                        <td>@userDetailModel.Marriage</td>
+                        <td>@userDetailModel.Gender</td>
+                        <td>@userDetailModel.Education</td>
+                        <td>@userDetailModel.HomeAddress</td>
+                        <td>@userDetailModel.Remark</td>
+                        <td>@userDetailModel.AttendanceNo</td>
+                        <td>@userDetailModel.BankNo</td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="buttom">
+        <div class="buttom_left de">
+            <img src="~/Images/first.png" alt="">
+            <img src="~/Images/pre.png" alt="">
+            <img src="~/Images/next.png" alt="">
+            <img src="~/Images/last.png" alt="">
+        </div>
+
+        <div class="buttom_left"><img src="~/Images/go.png" alt="">　第 <input type="text" value="1" class="page">页/共5页</div>
+        <div class="buttom_left">每页<select name="" id=""><option value="10">10</option></select>条</div>
+        <div class="buttom_left word">
+            <img src="~/Images/word.png" alt="">
+            <img src="~/Images/excel.png" alt="">
+        </div>
+        <div class="buttom_right">显示10条/共50条</div>
+    </div>
+</div>
+

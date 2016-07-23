@@ -1,0 +1,86 @@
+﻿@model FoodTrace.Model.RoleModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var menuList = ViewBag.Menu as List<FoodTrace.Model.MenuModel>;
+
+}
+<h2>角色新建</h2>
+@using (Html.BeginForm("Create", "Role", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>角色名称</td>
+            <td>@Html.TextBoxFor(m => Model.RoleName,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})</td>
+            <td>角色备注</td>
+            <td>@Html.TextBoxFor(m => Model.Remark,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})</td>
+        </tr>
+        <tr>
+            <td>排序字</td>
+            <td>@Html.TextBoxFor(m => Model.SortID,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})</td>
+            <td>是否锁定</td>
+            <td>@Html.TextBoxFor(m => Model.IsLocked,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})</td>
+        </tr>
+        <tr>
+            <td>菜单</td>
+            <td colspan="3">
+                <table>
+                    @{
+                        var menuRow = menuList.Count % 5 == 0 ? menuList.Count / 5 : menuList.Count / 5 + 1;
+                        for (int i = 0; i < menuRow; i++)
+                        {
+                            <tr>
+                                @if (i == menuRow - 2)
+                                {
+                                    for (int j = 0; j < 5; j++)
+                                    {
+                                        <td width="100px"><input type="checkbox" class="easyui-validatebox easyui-checkbox" data-options="required:true" id="@menuList[i * 5 + j].MenuID" value="@menuList[i * 5 + j].MenuID" name="chkMenu" />@menuList[i * 5 + j].Name</td>
+                                    }
+                                }
+                                else
+                                {
+                                    for (int j = 0; j < menuList.Count % 5; j++)
+                                    {
+                                        <td width="100px"><input type="checkbox" class="easyui-validatebox easyui-checkbox" data-options="required:true" id="@menuList[i * 5 + j].MenuID" value="@menuList[i * 5 + j].MenuID" name="chkMenu" />@menuList[i * 5 + j].Name</td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+    </table>
+                        }
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").click(function () {
+            var roleName = $("#RoleName").val();
+            var remark = $("#Remark").val();
+            var sortID = $("#SortID").val();
+            var isLocked = $("#IsLocked").val();
+            var menuIds = ";";
+            debugger;
+            var selectMenu = $("input[name=chkMenu]:checked");
+            $(selectMenu).each(function () {
+                menuIds += $(this).val() + ";";
+            });
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CreateRole")',
+                data: { roleName: roleName, remark: remark, sortID: sortID, isLocked: isLocked, menuIds: menuIds },
+                dataType: "json",
+                success: function (data) {
+                    if (data.Status == 0) {
+                        window.location = '@Url.Action("Index")';
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                }
+            });
+        });
+
+    });
+
+</script>

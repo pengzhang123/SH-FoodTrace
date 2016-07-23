@@ -1,0 +1,858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{281DA508-5804-4D0C-B4BA-4769B74CC8BD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoodTrace.Forms</RootNamespace>
+    <AssemblyName>FoodTrace.Forms</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Caliburn.Micro, Version=3.0.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.Core.3.0.1\lib\net45\Caliburn.Micro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform, Version=3.0.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.0.1\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform.Core, Version=3.0.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.3.0.1\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.2774.19990, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WL.NTAG203.Reader, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Library\WL.NTAG203.Reader.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\RemoveTabItemCommand.cs" />
+    <Compile Include="Converters\Bool2VisibilityConverter.cs" />
+    <Compile Include="Converters\ExpanderToBooleanConverter.cs" />
+    <Compile Include="Helpers\CPRODUCTEPC96.cs" />
+    <Compile Include="Helpers\Log4netLogger.cs" />
+    <Compile Include="Helpers\QRHelp.cs" />
+    <Compile Include="Helpers\ReaderHelper.cs" />
+    <Compile Include="Helpers\SerializeUtilities.cs" />
+    <Compile Include="Helpers\TreeHelper.cs" />
+    <Compile Include="Models\EditMode.cs" />
+    <Compile Include="Models\NaviModel.cs" />
+    <Compile Include="Models\PagerModel.cs" />
+    <Compile Include="UserControls\AccordationItemUserControl.xaml.cs">
+      <DependentUpon>AccordationItemUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ClosableTab.cs" />
+    <Compile Include="UserControls\CloseableHeader.xaml.cs">
+      <DependentUpon>CloseableHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\HeaderView.xaml.cs">
+      <DependentUpon>HeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MaskTextBox.cs" />
+    <Compile Include="UserControls\PageIndexChangedEventArgs.cs" />
+    <Compile Include="UserControls\PaggingUserControl.xaml.cs">
+      <DependentUpon>PaggingUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SJTextBox.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedBatchDetailEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedBatchDetailViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedBatchEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedBatchViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedDrugEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedDrugViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedHealthEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedHealthViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedMaterialEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedMaterialViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedAreaEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedAreaViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedBaseViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedHomeEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedHomeViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\CultivationBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\CultivationBaseViewModel.cs" />
+    <Compile Include="ViewModels\ChipEditViewModel.cs" />
+    <Compile Include="ViewModels\ChipViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillCullEditViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillDrugEditViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillDrugViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillCullViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillBatchDetailEditViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillBatchDetailViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillBatchEditViewModel.cs" />
+    <Compile Include="ViewModels\KillMng\KillBatchViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessBaseViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessBatchDetailEditViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessBatchDetailViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessBatchEditViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessBatchViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ShadowBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ShadowBaseViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessProductEditViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ProcessProductViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ShadowProcessEditViewModel.cs" />
+    <Compile Include="ViewModels\ProcessMng\ShadowProcessViewModel.cs" />
+    <Compile Include="ViewModels\QRViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\SaleBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\SaleBaseViewModel.cs" />
+    <Compile Include="ViewModels\ShadowBaseDisplayViewModel.cs" />
+    <Compile Include="ViewModels\SystemBase\CompanyEditViewModel.cs" />
+    <Compile Include="ViewModels\SystemBase\CompanyViewModel.cs" />
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansDrugEditViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansDrugViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansFertEditViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansFertViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansBatchEditViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansBatchViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\LandBlockEditViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\LandBlockViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\PlansBaseViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\SeedBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\PlansMng\SeedBaseViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\WareHouseBaseEditViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\WareHouseBaseViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\WareHouseDetailEditViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\WareHouseDetailViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\WareHouseStockViewModel.cs" />
+    <Compile Include="ViewModels\SaleMng\WareHouseStockEditViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunApplyDetailEditViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunApplyDetailViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunApplyEditViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunApplyViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunDriverEditViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunDriverViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunTemperatrueEditViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunTemperatrueViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunVehicleEditViewModel.cs" />
+    <Compile Include="ViewModels\TrunMng\TrunVehicleViewModel.cs" />
+    <Compile Include="Views\BreedMng\BreedBatchDetailEditView.xaml.cs">
+      <DependentUpon>BreedBatchDetailEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedBatchDetailView.xaml.cs">
+      <DependentUpon>BreedBatchDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedBatchEditView.xaml.cs">
+      <DependentUpon>BreedBatchEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedBatchView.xaml.cs">
+      <DependentUpon>BreedBatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedDrugEditView.xaml.cs">
+      <DependentUpon>BreedDrugEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedDrugView.xaml.cs">
+      <DependentUpon>BreedDrugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedHealthEditView.xaml.cs">
+      <DependentUpon>BreedHealthEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedHealthView.xaml.cs">
+      <DependentUpon>BreedHealthView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedMaterialEditView.xaml.cs">
+      <DependentUpon>BreedMaterialEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedMaterialView.xaml.cs">
+      <DependentUpon>BreedMaterialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedAreaEditView.xaml.cs">
+      <DependentUpon>BreedAreaEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedAreaView.xaml.cs">
+      <DependentUpon>BreedAreaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedBaseEditView.xaml.cs">
+      <DependentUpon>BreedBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedBaseView.xaml.cs">
+      <DependentUpon>BreedBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedHomeEditView.xaml.cs">
+      <DependentUpon>BreedHomeEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedHomeView.xaml.cs">
+      <DependentUpon>BreedHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\CultivationBaseEditView.xaml.cs">
+      <DependentUpon>CultivationBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\CultivationBaseView.xaml.cs">
+      <DependentUpon>CultivationBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChipEditView.xaml.cs">
+      <DependentUpon>ChipEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChipView.xaml.cs">
+      <DependentUpon>ChipView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillCullEditView.xaml.cs">
+      <DependentUpon>KillCullEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillDrugEditView.xaml.cs">
+      <DependentUpon>KillDrugEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillDrugView.xaml.cs">
+      <DependentUpon>KillDrugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillCullView.xaml.cs">
+      <DependentUpon>KillCullView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillBatchDetailEditView.xaml.cs">
+      <DependentUpon>KillBatchDetailEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillBatchDetailView.xaml.cs">
+      <DependentUpon>KillBatchDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillBatchEditView.xaml.cs">
+      <DependentUpon>KillBatchEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KillMng\KillBatchView.xaml.cs">
+      <DependentUpon>KillBatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessBaseEditView.xaml.cs">
+      <DependentUpon>ProcessBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessBaseView.xaml.cs">
+      <DependentUpon>ProcessBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessBatchDetailEditView.xaml.cs">
+      <DependentUpon>ProcessBatchDetailEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessBatchDetailView.xaml.cs">
+      <DependentUpon>ProcessBatchDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessBatchEditView.xaml.cs">
+      <DependentUpon>ProcessBatchEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessBatchView.xaml.cs">
+      <DependentUpon>ProcessBatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ShadowBaseEditView.xaml.cs">
+      <DependentUpon>ShadowBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ShadowBaseView.xaml.cs">
+      <DependentUpon>ShadowBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessProductEditView.xaml.cs">
+      <DependentUpon>ProcessProductEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ProcessProductView.xaml.cs">
+      <DependentUpon>ProcessProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ShadowProcessEditView.xaml.cs">
+      <DependentUpon>ShadowProcessEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessMng\ShadowProcessView.xaml.cs">
+      <DependentUpon>ShadowProcessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QRView.xaml.cs">
+      <DependentUpon>QRView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\SaleBaseEditView.xaml.cs">
+      <DependentUpon>SaleBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\SaleBaseView.xaml.cs">
+      <DependentUpon>SaleBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShadowBaseDisplayView.xaml.cs">
+      <DependentUpon>ShadowBaseDisplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SystemBase\CompanyEditView.xaml.cs">
+      <DependentUpon>CompanyEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SystemBase\CompanyView.xaml.cs">
+      <DependentUpon>CompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansDrugEditView.xaml.cs">
+      <DependentUpon>PlansDrugEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansDrugView.xaml.cs">
+      <DependentUpon>PlansDrugView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansFertEditView.xaml.cs">
+      <DependentUpon>PlansFertEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansFertView.xaml.cs">
+      <DependentUpon>PlansFertView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansBatchEditView.xaml.cs">
+      <DependentUpon>PlansBatchEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansBatchView.xaml.cs">
+      <DependentUpon>PlansBatchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\LandBlockEditView.xaml.cs">
+      <DependentUpon>LandBlockEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\LandBlockView.xaml.cs">
+      <DependentUpon>LandBlockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\PlansBaseView.xaml.cs">
+      <DependentUpon>PlansBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\SeedBaseEditView.xaml.cs">
+      <DependentUpon>SeedBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlansMng\SeedBaseView.xaml.cs">
+      <DependentUpon>SeedBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\WareHouseBaseEditView.xaml.cs">
+      <DependentUpon>WareHouseBaseEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\WareHouseBaseView.xaml.cs">
+      <DependentUpon>WareHouseBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\WareHouseDetailEditView.xaml.cs">
+      <DependentUpon>WareHouseDetailEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\WareHouseDetailView.xaml.cs">
+      <DependentUpon>WareHouseDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\WareHouseStockEditView.xaml.cs">
+      <DependentUpon>WareHouseStockEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleMng\WareHouseStockView.xaml.cs">
+      <DependentUpon>WareHouseStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunApplyDetailEditView.xaml.cs">
+      <DependentUpon>TrunApplyDetailEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunApplyDetailView.xaml.cs">
+      <DependentUpon>TrunApplyDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunApplyEditView.xaml.cs">
+      <DependentUpon>TrunApplyEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunApplyView.xaml.cs">
+      <DependentUpon>TrunApplyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunDriverEditView.xaml.cs">
+      <DependentUpon>TrunDriverEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunDriverView.xaml.cs">
+      <DependentUpon>TrunDriverView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunTemperatrueEditView.xaml.cs">
+      <DependentUpon>TrunTemperatrueEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunTemperatrueView.xaml.cs">
+      <DependentUpon>TrunTemperatrueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunVehicleEditView.xaml.cs">
+      <DependentUpon>TrunVehicleEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrunMng\TrunVehicleView.xaml.cs">
+      <DependentUpon>TrunVehicleView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Demo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Demo.xaml.cs">
+      <DependentUpon>Demo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IMainScreenTabItem.cs" />
+    <Compile Include="IShell.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Styles\CustomerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\AccordationItemUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\CloseableHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\HeaderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\PaggingUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedBatchDetailEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedBatchDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedBatchEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedBatchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedDrugEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedDrugView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedHealthEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedHealthView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedMaterialEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedMaterialView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedAreaEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedAreaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedHomeEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedHomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\CultivationBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\CultivationBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChipEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChipView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillCullEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillDrugEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillDrugView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillCullView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillBatchDetailEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillBatchDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillBatchEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KillMng\KillBatchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessBatchDetailEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessBatchDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessBatchEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessBatchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ShadowBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ShadowBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessProductEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ProcessProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ShadowProcessEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProcessMng\ShadowProcessView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QRView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\SaleBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\SaleBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShadowBaseDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SystemBase\CompanyEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SystemBase\CompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansDrugEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansDrugView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansFertEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansFertView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansBatchEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansBatchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\LandBlockEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlansMng\LandBlockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\PlansBaseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PlansMng\SeedBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlansMng\SeedBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\WareHouseBaseEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\WareHouseBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\WareHouseDetailEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\WareHouseDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\WareHouseStockEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleMng\WareHouseStockView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunApplyDetailEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunApplyDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunApplyEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunApplyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunDriverEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunDriverView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunTemperatrueEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunTemperatrueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunVehicleEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrunMng\TrunVehicleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MefBootstrapper.cs" />
+    <Compile Include="MetroWindowManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="AccessMapping.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FoodTrace.Common\FoodTrace.Common.csproj">
+      <Project>{b04ce68f-fb4c-427b-b902-e525f143e4b3}</Project>
+      <Name>FoodTrace.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodTrace.IService\FoodTrace.IService.csproj">
+      <Project>{efe84133-3f01-440c-84f6-b41b9c035606}</Project>
+      <Name>FoodTrace.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodTrace.Model\FoodTrace.Model.csproj">
+      <Project>{d863d790-3aa4-4a37-a722-0572e692e47d}</Project>
+      <Name>FoodTrace.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodTrace.Service\FoodTrace.Service.csproj">
+      <Project>{d27a5d31-f587-461b-aace-1e2448e6365e}</Project>
+      <Name>FoodTrace.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\Back.png" />
+    <Resource Include="Images\banner.png" />
+    <Resource Include="Images\banner2.png" />
+    <Resource Include="Images\banner3.png" />
+    <Resource Include="Images\BlueBar.png" />
+    <Resource Include="Images\ckChecked.jpg" />
+    <Resource Include="Images\ckNoChecked.jpg" />
+    <Resource Include="Images\ExpanderHeader.png" />
+    <Resource Include="Images\Index.png" />
+    <Resource Include="Images\LoginBallon.png" />
+    <Resource Include="Images\LoginBG.png" />
+    <Resource Include="Images\MenuTitle.png" />
+    <Resource Include="Images\Password.png" />
+    <Resource Include="Images\Spilter.png" />
+    <Resource Include="Images\Spilter2.png" />
+    <Resource Include="Images\SubmitButton.png" />
+    <Resource Include="Images\TabSelected.png" />
+    <Resource Include="Images\TabUnSelected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="favicon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,16 @@
+﻿@model FoodTrace.Model.AreaModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = null;
+    }
+
+<h2>区域编辑</h2>
+    @using (Html.BeginForm("Edit", "Area", FormMethod.Post))
+    {
+    @Html.HiddenFor(m => Model.AreaID)
+<div>
+    <label for="name">区域名称:</label>
+    @Html.TextBoxFor(m => Model.AreaName,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+</div>
+    }
+

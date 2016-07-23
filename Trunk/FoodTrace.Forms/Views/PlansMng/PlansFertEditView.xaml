@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="FoodTrace.Forms.Views.PlansFertEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:FoodTrace.Forms.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             cal:Message.Attach="[Event Loaded] = [Action LoadUserControl($source)]"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
+             mc:Ignorable="d">
+    <Grid DataContext="{Binding Model}">
+        <ScrollViewer>
+            <StackPanel Margin="5">
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="计划" />
+                    <ComboBox x:Name="lbLand"
+                              Grid.Column="1"
+                              SelectedValue="{Binding BatchID}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="肥料代号" />
+                    <TextBox Grid.Column="1" Text="{Binding FertCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="肥料名称" />
+                    <TextBox Grid.Column="1" Text="{Binding FertName}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="施肥人" />
+                    <TextBox Grid.Column="1" Text="{Binding FertPeople}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="施肥日期" />
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding FertTime}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="施肥类型" />
+                    <TextBox Grid.Column="1" Text="{Binding FertType}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="施肥方法" />
+                    <TextBox Grid.Column="1" Text="{Binding FertMethod}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="用量(千克)" />
+                    <TextBox Grid.Column="1" Text="{Binding UANum}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="天气状况" />
+                    <TextBox Grid.Column="1" Text="{Binding Weather}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="种植溯源码" />
+                    <TextBox Grid.Column="1" Text="{Binding PlansCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="备注" />
+                    <TextBox Grid.Column="1" Text="{Binding Remark}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding IsLocked}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="是否显示" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding IsShow}" />
+                </Grid>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button x:Name="Save"
+                            Margin="5"
+                            Content="保存" />
+                    <Button x:Name="Cancel"
+                            Margin="5"
+                            Content="取消" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

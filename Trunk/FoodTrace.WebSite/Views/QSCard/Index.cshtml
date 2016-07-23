@@ -1,0 +1,76 @@
+﻿
+@model List<FoodTrace.Model.QSCardModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tag"></div>
+<div class="find">
+    资质名称：<input type="text" class="input">
+   <br><br>
+    <input type="button" value="新增" class="button" onclick="window.location.href = '/QSCard/Create';">
+    <div class="button_right">
+        <input type="button" value="查询" class="button">
+        <input type="button" value="重置" class="button">
+    </div>
+    <div class="clearbox"></div>
+</div>
+<div id="table">
+    <div class="table_title">
+        资质查询
+    </div>
+    <div style="overflow:auto;height:360px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>操作</th>
+                    <th>资质名称</th>
+                    <th>公司名称</th>
+                    <th>检验方式</th>
+                    <th>资质编号</th>
+                    <th>发证日期</th>
+                    <th>有效期（年）</th>
+                    <th>附件</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var qSCardModel in Model)
+            {
+                    <tr class="tr1">
+                        <td>
+                            @Html.ActionLink("编辑", "Edit", "QSCard", new { id= qSCardModel.QSID },null)
+                        </td>
+                        <td>@qSCardModel.QSName</td>
+                        <td>@qSCardModel.Company.CompanyName</td>
+                        <td>@qSCardModel.CheckType</td>
+                        <td>@qSCardModel.QSCard</td>
+                        <td>@qSCardModel.IssuingTime</td>
+                        <td>@qSCardModel.IssuingUnit</td>
+                        <td>@qSCardModel.Validity</td>
+                        <td>@qSCardModel.Attach</td>
+                        <td>@qSCardModel.Remark</td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="buttom">
+        <div class="buttom_left de">
+            <img src="~/Images/first.png" alt="">
+            <img src="~/Images/pre.png" alt="">
+            <img src="~/Images/next.png" alt="">
+            <img src="~/Images/last.png" alt="">
+        </div>
+
+        <div class="buttom_left"><img src="~/Images/go.png" alt="">　第 <input type="text" value="1" class="page">页/共5页</div>
+        <div class="buttom_left">每页<select name="" id=""><option value="10">10</option></select>条</div>
+        <div class="buttom_left word">
+            <img src="~/Images/word.png" alt="">
+            <img src="~/Images/excel.png" alt="">
+        </div>
+        <div class="buttom_right">显示10条/共50条</div>
+    </div>
+</div>
+

@@ -1,0 +1,15 @@
+﻿@model FoodTrace.Model.AreaModel
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+<h2>区域新建</h2>
+@using(Html.BeginForm("Create","Area",FormMethod.Post))
+{
+<div>
+    <label for="name">区域名称:</label>
+    @Html.TextBoxFor(m => Model.AreaName,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+</div>
+
+}
+

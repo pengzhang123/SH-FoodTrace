@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table id="DataGrid" style="height:100%;"></table>
+<div id="CreateDialog" style="padding:10px 60px 20px 60px" ></div>
+<div id="EditDialog"  style="padding:10px 60px 20px 60px"></div>
+<script type="text/javascript">
+
+    function Edit(id) {
+        $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Company")' + '?id=' + id).dialog('open');
+    }
+
+    function Delete(id) {
+        $.messager.confirm('信息提示', '确定要删除该记录吗？', function (r) {
+            if (r) {
+                $.post('@Url.Action("Delete", "Company")', { id: id }, function (json) {
+                    var msg = '';
+                    if (json.flag) {
+                        msg = "删除成功";
+                        $('#DataGrid').datagrid('reload');
+                    } else {
+                        msg = "删除失败";
+                    }
+                    $.messager.alert('信息提示', msg, 'info', function () {
+                    });
+                }, 'json');
+            }
+        });
+
+    }
+
+    $(function () {
+        $('#DataGrid').datagrid({
+            url: '@Url.Action("GetList", "Company")',
+            rownumbers: true,
+            striped: true,
+            fitColumns: true,
+            pagination: true,
+            singleSelect: true,
+            pageList: [10, 15, 20, 25],
+            toolbar: [{
+                id: 'btnAdd',
+                text: ' 新建',
+                iconCls: 'icon-add',
+                handler: function () {
+                    $('#CreateDialog').dialog('refresh', '@Url.Action("Create", "Company")').dialog('open');
+                }
+            }, {
+                id: 'btnEdit',
+                text: ' 编辑',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelected');
+                    if (row) {
+                        Edit(row.CompanyID);
+                    }
+                }
+            }, {
+                id: 'btnDelete',
+                text: ' 删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelected');
+                    if (row) {
+                        Delete(row.CompanyID);
+                    }
+                }
+            }],
+            columns: [[
+                    { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
+                    { title: '平台代码', align: 'center', field: 'AreaCode', width: 35 },
+                    { title: '公司地址', align: 'center', field: 'Address', width: 35 },
+                    { title: '公司负责人', align: 'center', field: 'Leader', width: 35 },
+                    { title: '企业标识', align: 'center', field: 'Logo', width: 35 },
+                    { title: '组织机构代码', align: 'center', field: 'OrgID', width: 35 },
+                    { title: 'QS证', align: 'center', field: 'QsCode', width: 35 },
+                    { title: '行政区划', align: 'center', field: 'Location', width: 35 },
+                    { title: '区号', align: 'center', field: 'Code', width: 35 },
+                    { title: '邮编', align: 'center', field: 'ZipCode', width: 35 },
+                    { title: '税务登记证', align: 'center', field: 'TaxCard', width: 35 },
+                    { title: '传真号码', align: 'center', field: 'Fax', width: 35 },
+                    { title: '联系电话', align: 'center', field: 'Mobile', width: 35 },
+                    { title: '邮箱', align: 'center', field: 'Email', width: 35 },
+                    { title: '企业简介', align: 'center', field: 'Info', width: 35 },
+                    { title: '资格要求', align: 'center', field: 'Demand', width: 35 },
+                    { title: '备注', align: 'center', field: 'Remark', width: 35 }
+
+            ]]
+        });
+
+
+        $('#CreateDialog').dialog({
+            title: '新建',
+            width: 600,
+            height: 500,
+            closed: true,
+            cache: false,
+            href: '@Url.Action("Create", "Company")',
+            modal: true,
+            buttons: [{
+                text: '保存',
+                iconCls:'icon-ok',
+                handler: function () {
+                    var $form = $('#CreateDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+
+                    $.messager.progress();
+                    var url = $form.prop('action');
+                    $.post(url, $form.serializeArray(), function (json) {
+
+                        var msg = '';
+                        if (json.flag) {
+                            msg = "保存成功";
+                            $('#DataGrid').datagrid('reload');
+                        } else {
+                            msg = "保存失败<br />" + json.msg;
+                        }
+                        $.messager.progress('close');
+                        $.messager.alert('信息提示', msg, 'info', function () {
+                            $('#CreateDialog').dialog('close');
+                        });
+                    }, 'json');
+                }
+            }, {
+                text: '关闭',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#CreateDialog').dialog('close');
+                }
+            }]
+        });
+
+        $('#EditDialog').dialog({
+            title: '编辑',
+            width: 600,
+            height: 500,
+            closed: true,
+            cache: false,
+            href: '@Url.Action("Edit", "Company")',
+            modal: true,
+            buttons: [{
+                text: '保存',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#EditDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+
+                    $.messager.progress();
+                    var url = $form.prop('action');
+                    $.post(url, $form.serializeArray(), function (json) {
+
+                        var msg = '';
+                        if (json.flag) {
+                            msg = "保存成功";
+                            $('#DataGrid').datagrid('reload');
+                        } else {
+                            msg = "保存失败<br />" + json.msg;
+                        }
+                        $.messager.progress('close');
+                        $.messager.alert('信息提示', msg, 'info', function () {
+                            $('#EditDialog').dialog('close');
+                        });
+                    }, 'json');
+                }
+            }, {
+                text: '关闭',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#EditDialog').dialog('close');
+                }
+            }]
+        });
+    });
+</script>
+

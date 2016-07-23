@@ -1,0 +1,20 @@
+﻿@model FoodTrace.Model.AreaModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>区域新建</h2>
+@using(Html.BeginForm("Create","Area",FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>区域名称</td>
+            <td>@Html.TextBoxFor(m=>Model.AreaName)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="保存"/></td>
+            <td><input type="button" value="取消"/></td>
+        </tr>
+    </table>
+}
+

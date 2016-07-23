@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="FoodTrace.Forms.Views.PlansDrugEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FoodTrace.Forms.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             cal:Message.Attach="[Event Loaded] = [Action LoadUserControl($source)]"
+             d:DesignHeight="600"
+             d:DesignWidth="300"
+             Background="White"
+             mc:Ignorable="d">
+    <Grid DataContext="{Binding Model}">
+        <ScrollViewer>
+            <StackPanel Margin="5">
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="计划" />
+                    <ComboBox x:Name="lbLand"
+                              Grid.Column="1"
+                              SelectedValue="{Binding BatchID}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="防疫人员" />
+                    <TextBox Grid.Column="1" Text="{Binding People}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="病虫害防治对象" />
+                    <TextBox Grid.Column="1" Text="{Binding Object}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="用药名称" />
+                    <TextBox Grid.Column="1" Text="{Binding DrugName}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="用药日期" />
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding DrugTime}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="病虫害类型" />
+                    <TextBox Grid.Column="1" Text="{Binding Problem}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="使用方法" />
+                    <TextBox Grid.Column="1" Text="{Binding Method}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="用量(千克)" />
+                    <TextBox Grid.Column="1" Text="{Binding UANum}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="稀释倍数" />
+                    <TextBox Grid.Column="1" Text="{Binding Dilution}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="天气状况" />
+                    <TextBox Grid.Column="1" Text="{Binding Weather}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="照片" />
+                    <TextBox Grid.Column="1" Text="{Binding Pic}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="种植溯源码" />
+                    <TextBox Grid.Column="1" Text="{Binding PlansCode}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="备注" />
+                    <TextBox Grid.Column="1" Text="{Binding Remark}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding IsLocked}" />
+                </Grid>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="7*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="是否显示" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding IsShow}" />
+                </Grid>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <Button x:Name="Save"
+                            Margin="5"
+                            Content="保存" />
+                    <Button x:Name="Cancel"
+                            Margin="5"
+                            Content="取消" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

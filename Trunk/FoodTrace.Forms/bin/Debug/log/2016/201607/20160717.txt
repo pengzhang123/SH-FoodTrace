@@ -1,0 +1,655 @@
+
+ 
+记录时间：2016-07-17 00:26:41,022 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 00:26:41,076 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 00:27:15,470 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+
+ 
+记录时间：2016-07-17 00:27:30,848 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.NextPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 143
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-17 00:27:31,045 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.NextPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 143
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-17 00:27:34,924 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+
+ 
+记录时间：2016-07-17 00:27:39,425 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.LastPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 167
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-17 00:27:39,425 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.LastPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 167
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-17 00:28:58,498 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+
+ 
+记录时间：2016-07-17 00:33:21,837 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.NextPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 143
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-17 00:33:21,838 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.NextPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 143
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-17 00:38:51,374 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：Exception has been thrown by the target of an invocation.
+ 
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at FoodTrace.Forms.Helpers.ReaderHelper..ctor() in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\Helpers\ReaderHelper.cs:line 35
+   at FoodTrace.Forms.ViewModels.ShadowBaseViewModel.AddChipCode(DataGrid dg) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\ViewModels\ProcessMng\ShadowBaseViewModel.cs:line 187
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Caliburn.Micro.ActionMessage.<>c.<.cctor>b__33_0(ActionExecutionContext context)
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-17 00:38:51,378 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at FoodTrace.Forms.Helpers.ReaderHelper..ctor() in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\Helpers\ReaderHelper.cs:line 35
+   at FoodTrace.Forms.ViewModels.ShadowBaseViewModel.AddChipCode(DataGrid dg) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\ViewModels\ProcessMng\ShadowBaseViewModel.cs:line 187
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Caliburn.Micro.ActionMessage.<>c.<.cctor>b__33_0(ActionExecutionContext context)
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-17 00:40:49,456 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：Exception has been thrown by the target of an invocation.
+ 
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at FoodTrace.Forms.Helpers.ReaderHelper..ctor() in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\Helpers\ReaderHelper.cs:line 35
+   at FoodTrace.Forms.ViewModels.ShadowBaseDisplayViewModel.QueryShadowBase() in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\ViewModels\ShadowBaseDisplayViewModel.cs:line 72
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Caliburn.Micro.ActionMessage.<>c.<.cctor>b__33_0(ActionExecutionContext context)
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   at System.Windows.Controls.Button.OnClick()
+   at System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   at System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   at System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-17 00:40:49,458 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at FoodTrace.Forms.Helpers.ReaderHelper..ctor() in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\Helpers\ReaderHelper.cs:line 35
+   at FoodTrace.Forms.ViewModels.ShadowBaseDisplayViewModel.QueryShadowBase() in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\ViewModels\ShadowBaseDisplayViewModel.cs:line 72
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Caliburn.Micro.ActionMessage.<>c.<.cctor>b__33_0(ActionExecutionContext context)
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at System.Windows.Controls.Primitives.ButtonBase.OnClick()
+   at System.Windows.Controls.Button.OnClick()
+   at System.Windows.Controls.Primitives.ButtonBase.OnMouseLeftButtonUp(MouseButtonEventArgs e)
+   at System.Windows.UIElement.OnMouseLeftButtonUpThunk(Object sender, MouseButtonEventArgs e)
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.ReRaiseEventAs(DependencyObject sender, RoutedEventArgs args, RoutedEvent newEvent)
+   at System.Windows.UIElement.OnMouseUpThunk(Object sender, MouseButtonEventArgs e)
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-17 00:42:58,517 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 00:42:58,586 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 00:56:29,786 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：Caliburn.Micro.ActionMessage property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+
+ 
+记录时间：2016-07-17 01:18:40,635 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：No target found for method PageIndexChanged.
+ 
+System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.NextPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 143
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+ 
+记录时间：2016-07-17 01:18:40,659 
+线程ID:[7] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System.Exception: No target found for method PageIndexChanged.
+   at Caliburn.Micro.ActionMessage.Invoke(Object eventArgs)
+   at System.Windows.Interactivity.TriggerBase.InvokeActions(Object parameter)
+   at System.Windows.Interactivity.EventTriggerBase.OnEvent(EventArgs eventArgs)
+   at System.Windows.Interactivity.EventTriggerBase.OnEventImpl(Object sender, EventArgs eventArgs)
+   at System.Windows.RoutedPropertyChangedEventArgs`1.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs e)
+   at FoodTrace.Forms.UserControls.PaggingUserControl.NextPage_MouseUp(Object sender, MouseButtonEventArgs e) in G:\Project\FoodTrace\Trunk\FoodTrace\FoodTrace.Forms\UserControls\PaggingUserControl.xaml.cs:line 143
+   at System.Windows.Input.MouseButtonEventArgs.InvokeEventHandler(Delegate genericHandler, Object genericTarget)
+   at System.Windows.RoutedEventArgs.InvokeHandler(Delegate handler, Object target)
+   at System.Windows.RoutedEventHandlerInfo.InvokeHandler(Object target, RoutedEventArgs routedEventArgs)
+   at System.Windows.EventRoute.InvokeHandlersImpl(Object source, RoutedEventArgs args, Boolean reRaised)
+   at System.Windows.UIElement.RaiseEventImpl(DependencyObject sender, RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseTrustedEvent(RoutedEventArgs args)
+   at System.Windows.UIElement.RaiseEvent(RoutedEventArgs args, Boolean trusted)
+   at System.Windows.Input.InputManager.ProcessStagingArea()
+   at System.Windows.Input.InputManager.ProcessInput(InputEventArgs input)
+   at System.Windows.Input.InputProviderSite.ReportInput(InputReport inputReport)
+   at System.Windows.Interop.HwndMouseInputProvider.ReportInput(IntPtr hwnd, InputMode mode, Int32 timestamp, RawMouseActions actions, Int32 x, Int32 y, Int32 wheel)
+   at System.Windows.Interop.HwndMouseInputProvider.FilterMessage(IntPtr hwnd, WindowMessage msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at System.Windows.Interop.HwndSource.InputFilterMessage(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   at MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+ 
+
+ 
+记录时间：2016-07-17 02:09:31,381 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 02:09:31,426 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 02:48:52,216 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 02:48:52,262 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 02:54:05,715 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 02:54:05,764 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 02:58:51,311 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 02:58:51,373 
+线程ID:[8] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 03:01:52,804 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 03:01:52,864 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 03:08:10,741 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 03:08:10,859 
+线程ID:[10] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 
+
+ 
+记录时间：2016-07-17 09:55:27,470 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：System error.
+ 
+System.SystemException: System error.
+
+ 
+记录时间：2016-07-17 09:55:27,566 
+线程ID:[9] 
+日志级别：  ERROR 
+出错类：FoodTrace.Forms.MefBootstrapper property: [(null)] - 
+错误描述：系统启动
+ 

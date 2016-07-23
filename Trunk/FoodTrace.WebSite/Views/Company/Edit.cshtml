@@ -1,0 +1,71 @@
+﻿@model FoodTrace.Model.CompanyModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "";
+}
+
+@using (Html.BeginForm("Edit", "Company", FormMethod.Post))
+{
+    @Html.HiddenFor(m => Model.CompanyID)
+    <table>
+        <tr>
+            <td>公司名称</td>
+            <td>@Html.TextBoxFor(m => Model.CompanyName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>平台代码</td>
+            <td>@Html.DropDownListFor(m => Model.AreaCode, ViewBag.AreaPlat as List<SelectListItem>, new { @class = "easyui-validatebox easyui-combobox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>公司地址</td>
+            <td>@Html.TextBoxFor(m => Model.Address, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>公司负责人</td>
+            <td>@Html.TextBoxFor(m => Model.Leader, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>企业标识</td>
+            <td>@Html.TextBoxFor(m => Model.Logo, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>组织机构代码</td>
+            <td>@Html.TextBoxFor(m => Model.OrgID, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>QS证</td>
+            <td>@Html.TextBoxFor(m => Model.QsCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>行政区划</td>
+            <td>@Html.TextBoxFor(m => Model.Location, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>区号</td>
+            <td>@Html.TextBoxFor(m => Model.Code, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>邮编</td>
+            <td>@Html.TextBoxFor(m => Model.ZipCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>税务登记证</td>
+            <td>@Html.TextBoxFor(m => Model.TaxCard, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>传真号码</td>
+            <td>@Html.TextBoxFor(m => Model.Fax, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>联系电话</td>
+            <td>@Html.TextBoxFor(m => Model.Mobile, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>邮箱</td>
+            <td>@Html.TextBoxFor(m => Model.Email, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>企业简介</td>
+            <td>@Html.TextBoxFor(m => Model.Info, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>资格要求</td>
+            <td>@Html.TextBoxFor(m => Model.Demand, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>备注</td>
+            <td>@Html.TextBoxFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>是否锁定</td>
+            <td><input type="radio" name="IsLocked" value="是" /><input type="radio" checked name="IsLocked" value="否" /></td>
+            <td>是否显示</td>
+            <td><input type="radio" name="IsShow" checked value="是" /><input type="radio" name="IsShow" value="否" /></td>
+        </tr>
+    </table>
+
+}

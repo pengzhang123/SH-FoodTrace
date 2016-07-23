@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{21DDFE13-B221-4502-BB57-7C15222DE423}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoodTrace.DBAccess</RootNamespace>
+    <AssemblyName>FoodTrace.DBAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseAccess.cs" />
+    <Compile Include="BreedMng\BreedAreaAccess.cs" />
+    <Compile Include="BreedMng\BreedBaseAccess.cs" />
+    <Compile Include="BreedMng\BreedBatchAccess.cs" />
+    <Compile Include="BreedMng\BreedBatchDetailAccess.cs" />
+    <Compile Include="BreedMng\BreedDrugAccess.cs" />
+    <Compile Include="BreedMng\BreedDrugPicAccess.cs" />
+    <Compile Include="BreedMng\BreedDrugVideoAccess.cs" />
+    <Compile Include="BreedMng\BreedHealthAccess.cs" />
+    <Compile Include="BreedMng\BreedHealthPicAccess.cs" />
+    <Compile Include="BreedMng\BreedHealthVideoAccess.cs" />
+    <Compile Include="BreedMng\BreedHomeAccess.cs" />
+    <Compile Include="BreedMng\BreedLogAccess.cs" />
+    <Compile Include="BreedMng\BreedMaterialAccess.cs" />
+    <Compile Include="BreedMng\BreedMaterialPicAccess.cs" />
+    <Compile Include="BreedMng\BreedMaterialVideoAccess.cs" />
+    <Compile Include="BreedMng\CultivationBaseAccess.cs" />
+    <Compile Include="BreedMng\VarietyBaseAccess.cs" />
+    <Compile Include="KillMng\KillBatchAccess.cs" />
+    <Compile Include="KillMng\KillBatchDetailAccess.cs" />
+    <Compile Include="KillMng\KillCullAccess.cs" />
+    <Compile Include="KillMng\KillDrugAccess.cs" />
+    <Compile Include="SaleMng\WareHouseBaseAccess.cs" />
+    <Compile Include="SaleMng\WareHouseDetailAccess.cs" />
+    <Compile Include="SaleMng\WareHouseStockAccess.cs" />
+    <Compile Include="SaleMng\SaleBaseAccess.cs" />
+    <Compile Include="ProcessMng\ProcessBaseAccess.cs" />
+    <Compile Include="ProcessMng\ProcessBatchAccess.cs" />
+    <Compile Include="ProcessMng\ProcessBatchDetailAccess.cs" />
+    <Compile Include="ProcessMng\ProcessProductAccess.cs" />
+    <Compile Include="ProcessMng\ShadowBaseAccess.cs" />
+    <Compile Include="ProcessMng\ShadowProcessAccess.cs" />
+    <Compile Include="SystemBase\AreaAccess.cs" />
+    <Compile Include="SystemBase\AreaPlatAccess.cs" />
+    <Compile Include="SystemBase\CityAccess.cs" />
+    <Compile Include="SystemBase\TidAccess.cs" />
+    <Compile Include="SystemBase\ProductBaseAccess.cs" />
+    <Compile Include="SystemBase\ProductTypeAccess.cs" />
+    <Compile Include="SystemBase\ProductSpecAccess.cs" />
+    <Compile Include="SystemBase\CodeObjectAccess.cs" />
+    <Compile Include="SystemBase\CodeMaxAccess.cs" />
+    <Compile Include="SystemBase\CodeOrderAccess.cs" />
+    <Compile Include="SystemBase\CountryAccess.cs" />
+    <Compile Include="SystemBase\DeptAccess.cs" />
+    <Compile Include="SystemBase\LandBaseAccess.cs" />
+    <Compile Include="PlansMng\LandBlockAccess.cs" />
+    <Compile Include="PlansMng\PlansBatchAccess.cs" />
+    <Compile Include="PlansMng\PlansDrugAccess.cs" />
+    <Compile Include="PlansMng\PlansFertAccess.cs" />
+    <Compile Include="PlansMng\SeedBaseAccess.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemBase\CompanyAccess.cs" />
+    <Compile Include="SystemBase\MenuAccess.cs" />
+    <Compile Include="SystemBase\ProvinceAccess.cs" />
+    <Compile Include="SystemBase\RoleAccess.cs" />
+    <Compile Include="SystemBase\UserBaseAccess.cs" />
+    <Compile Include="SystemBase\UserDetailAccess.cs" />
+    <Compile Include="SystemBase\UserLoginAccess.cs" />
+    <Compile Include="TrunMng\TrunApplyAccess.cs" />
+    <Compile Include="TrunMng\TrunApplyDetailAccess.cs" />
+    <Compile Include="TrunMng\TrunDriverAccess.cs" />
+    <Compile Include="TrunMng\TrunTemperatrueAccess.cs" />
+    <Compile Include="TrunMng\TrunVehicleAccess.cs" />
+    <Compile Include="UserRoleAccess.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FoodTrace.Common\FoodTrace.Common.csproj">
+      <Project>{b04ce68f-fb4c-427b-b902-e525f143e4b3}</Project>
+      <Name>FoodTrace.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodTrace.DBManage\FoodTrace.DBManage.csproj">
+      <Project>{f49547ac-8766-4293-b18a-6b0bac708966}</Project>
+      <Name>FoodTrace.DBManage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodTrace.IDBAccess\FoodTrace.IDBAccess.csproj">
+      <Project>{75e34f10-f22f-4fdc-8926-da211ed7844d}</Project>
+      <Name>FoodTrace.IDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodTrace.Model\FoodTrace.Model.csproj">
+      <Project>{d863d790-3aa4-4a37-a722-0572e692e47d}</Project>
+      <Name>FoodTrace.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
