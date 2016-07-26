@@ -22,5 +22,10 @@ namespace FoodTrace.Service
         {
             return userRoleIndexAccess.InsertSingleEntity(model);
         }
+
+        public List<UserRoleModel> GetUserRefRoleByUid(int id)
+        {
+            return userRoleIndexAccess.GetUserRefRoleByUid(id);
+        }
     }
 }

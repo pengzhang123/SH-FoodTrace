@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "设置角色权限";
+}
+
+<link href="~/Scripts/ztree/css/metroStyle/metroStyle.css" rel="stylesheet" />
+
+<div>
+    <input type="hidden" id="RoleId" name="RoleId" value="@(ViewBag.RoleId)"/>
+       
+        <ul id="MenuTree" class="ztree"></ul>
+</div>
+@section scripts
+{
+    <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript">
+        var menuTree = null;
+
+        $(function () {
+            loadMenuTree();
+        });
+        function loadMenuTree() {
+            //树属性
+            var settings = {
+                check: {
+                    enable: true,
+                    chkStyle: "checkbox",
+                    chkboxType: { "Y": "", "N": "" }
+                },
+                data: {
+                    // key: { ckecked: "Checked" },
+                    simpleData: { enable: true, idKey: "id", pIdKey: "pId" }
+                },
+                callback: { onClick: menuTreeClick, onCheck: menuTreeCheck }
+            };
+            Utils.ajaxGet("/Menu/GetRoleMenuTree", null, "json", function (ret) {
+                if (ret.IsSuccess) {
+                    console.log(ret);
+                    menuTree = $.fn.zTree.init($("#MenuTree"), settings, ret.Data);
+                    setMenuTreeNodeChecked();
+                }
+                // menuTree.expandAll(true);
+            });
+        }
+
+        function menuTreeClick(event, treeId, treeNode) {
+            //当前节点的数据
+            //$("#ParentId").val(treeNode.id);
+            //layer.alert(treeNode.id);
+            SaveMenuData(treeNode.id, treeNode.checked);
+        }
+
+        function menuTreeCheck(event, treeId, treeNode) {
+            console.log(treeNode);
+            SaveMenuData(treeNode.id, treeNode.checked);
+        }
+
+        function SaveMenuData(menuId, checkStatus) {
+            var roleId = $("#RoleId").val();
+            if (roleId == '') {
+                layer.msg('请先选择角色');
+                return;
+            }
+            Utils.ajaxPost('/RoleManage/SaveRoleRefMenu', { roleId: roleId, menuId: menuId, chkStatus: checkStatus }, 'json', function (ret) {
+                console.log(ret);
+                if (ret.IsSuccess) {
+                    layer.msg('保存成功');
+
+                } else {
+                    layer.msg(ret.Msg);
+                }
+            });
+        }
+        //设置节点选中
+        function setMenuTreeNodeChecked() {
+            var menuIdArray = [];
+
+            var roleId = $("#RoleId").val();
+            if (roleId == '') {
+                return;
+            }
+            Utils.ajaxGet('/RoleManage/GetMenuByRoleId', { id: roleId }, 'json', function (ret) {
+                if (ret.IsSuccess) {
+                    menuTree.checkAllNodes(false);
+                    menuIdArray = ret.Data;
+                    for (var i = 0; i < menuIdArray.length; i++) {
+                        var node = menuTree.getNodeByParam("id", menuIdArray[i], null);
+                        if (node != null) {
+                            node.checked = true;
+                            menuTree.updateNode(node);
+                            //                            var parentNode = menuTree.getNodeByParam('id', node.pId, null);
+                            //                            if (parentNode != null) {
+                            //                                parentNode.checked = true;
+                            //                                menuTree.updateNode(parentNode);
+                            //                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+}
+
+
+
+

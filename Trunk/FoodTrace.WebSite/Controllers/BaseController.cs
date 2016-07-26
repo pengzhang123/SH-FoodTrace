@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FoodTrace.WebSite.Controllers
 {
+    [AuthorizeFilter]
     public class BaseController : Controller
     {
         

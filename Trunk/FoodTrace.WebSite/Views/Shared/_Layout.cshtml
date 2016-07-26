@@ -9,6 +9,7 @@
     @Scripts.Render("~/Content/jquery-easyui-1.4.5/jquery.min.js")
     @Scripts.Render("~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js")
     @Scripts.Render("~/Content/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js")
+    <script src="~/Scripts/base/amyUtils.js"></script>
     <style type="text/css">
         ul {
             list-style-type: none;
@@ -32,6 +33,7 @@
 </head>
 <body class="easyui-layout">
         @RenderBody()
+    @RenderSection("scripts",required:false)
     <script type="text/javascript">
         $(function () {
             $(".panel-body").css("border", "none");

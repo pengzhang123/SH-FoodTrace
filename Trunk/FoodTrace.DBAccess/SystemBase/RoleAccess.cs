@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Security.Cryptography;
+using FoodTrace.Common.Libraries;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
@@ -66,11 +67,16 @@ namespace FoodTrace.DBAccess
             return base.Context.Role.FirstOrDefault(m => m.RoleID == id && m.ModifyTime == modifyTime);
         }
 
+        /// <summary>
+        /// 更新单个实体
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public MessageModel UpdateSingleEntity(RoleModel model)
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.Role.FirstOrDefault(m => m.RoleID == model.RoleID && m.ModifyTime == model.ModifyTime);
+                var data = context.Role.FirstOrDefault(m => m.RoleID == model.RoleID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.RoleName = model.RoleName;
                 data.Remark = model.Remark;
@@ -89,6 +95,34 @@ namespace FoodTrace.DBAccess
             return base.DbOperation(operation);
         }
 
+        /// <summary>
+        /// 更新权限菜单
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public MessageModel UpdateRoleMenu(int roleId,List<RoleMenuModel> list )
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var data = context.RoleMenu.Where(s=>s.RoleID==roleId).ToList();
+                if (data.Any())
+                {
+
+                    context.BatchDelete<RoleMenuModel>(data);
+                    //context.SaveChanges();
+                }
+
+                if (list.Any())
+                {
+                    list.ForEach(s=> { s.RoleID = roleId; });
+                    context.BatctInsert(list);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
+        }
         public MessageModel DeleteSingleEntity(int id)
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
@@ -108,6 +142,71 @@ namespace FoodTrace.DBAccess
         {
             return base.Context.Role.Where(m => (string.IsNullOrEmpty(name) || m.RoleName.Contains(name)))
                     .OrderBy(m => m.RoleID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        /// <summary>
+        /// 根据角色id获取角色所拥有的权限
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<int> GetMenuListByRoleId(int id)
+        {
+            var query = (from s in base.Context.RoleMenu.Where(s => s.RoleID == id)
+                select s.MenuID).ToList();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 根据角色Id获取角色菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<MenuModel> GetRoleMenuByRoleId(int id)
+        {
+            var query = (from s in base.Context.RoleMenu.Where(s => s.RoleID == id)
+                        join m in Context.Menu on s.MenuID equals m.MenuID
+                        orderby m.SortID
+                       select m ).ToList();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 保存用户关联角色数据
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="roleIds"></param>
+        public MessageModel SaveUserRefRole(int uid, List<int> roleIds)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var userRefRole = context.UserRole.Where(s => s.UserID == uid).ToList();
+
+                context.BatchDelete(userRefRole);
+                if (roleIds != null)
+                {
+                    if (roleIds.Any())
+                    {
+                        var list = new List<UserRoleModel>();
+                        roleIds.ForEach(s =>
+                        {
+                            var model = new UserRoleModel();
+                            model.RoleID = s;
+                            model.UserID = uid;
+                            model.CreateID = UserManagement.CurrentUser.UserID;
+                            model.CreateTime = DateTime.Now;
+                            list.Add(model);
+                           
+                        });
+
+                        context.BatctInsert(list);
+                    }
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
         }
     }
 }

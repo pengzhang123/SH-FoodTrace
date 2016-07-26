@@ -4,12 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <table id="DataGrid" style="height:100%;"></table>
-<div id="CreateDialog" style="padding:10px 60px 20px 60px" ></div>
+<div id="CreateDialog" style="padding: 10px 60px 20px 60px">
+    
+</div>
 <div id="EditDialog"  style="padding:10px 60px 20px 60px"></div>
 <script type="text/javascript">
 
     function Edit(id) {
-        $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Company")' + '?id=' + id).dialog('open');
+        $('#EditDialog').dialog('open').dialog('refresh', '@Url.Action("Edit", "Company")' + '?id=' + id);
     }
 
     function Delete(id) {
@@ -104,13 +106,13 @@
                 iconCls:'icon-ok',
                 handler: function () {
                     var $form = $('#CreateDialog').find('form');
-
                     var flag = $form.form('validate');
 
                     if (!flag) {
                         $.messager.alert('Title', '必须填写完整的信息', 'error');
                         return false;
                     }
+                   
 
                     $.messager.progress();
                     var url = $form.prop('action');
@@ -144,7 +146,7 @@
             height: 500,
             closed: true,
             cache: false,
-            href: '@Url.Action("Edit", "Company")',
+            //href: '@Url.Action("Edit", "Company")',
             modal: true,
             buttons: [{
                 text: '保存',

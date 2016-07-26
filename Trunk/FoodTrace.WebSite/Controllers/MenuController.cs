@@ -23,6 +23,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            int count = menuService.GetMenuCount();
             var list = menuService.GetPagerMenu(string.Empty, page, rows).Select(_ => new
             {
                 MenuID = _.MenuID,
@@ -31,7 +32,8 @@ namespace FoodTrace.WebSite.Controllers
                 SortID = _.SortID,
                 FunctionURL = _.FunctionURL
             });
-            return Json(list, JsonRequestBehavior.AllowGet);
+            
+            return Json(new { total=count,rows=list}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -78,6 +80,26 @@ namespace FoodTrace.WebSite.Controllers
             var flag = result.Status == MessageStatus.Success ? true : false;
             var msg = result.Message;
             return Json(new { flag = flag, msg = msg });
+        }
+
+        /// <summary>
+        /// 获取所有菜单列表
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetRoleMenuTree()
+        {
+            var list = menuService.GetPagerMenu(string.Empty, 1, 100).Select(_ => new
+            {
+                id = _.MenuID,
+                name = _.Name,
+                pId = _.ParentID
+            });
+            return Json(list);
+        }
+
+        public JsonResult GetMenuByRoleId(int roleId)
+        {
+            return Json(true);
         }
     }
 }

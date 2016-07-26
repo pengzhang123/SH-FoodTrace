@@ -10,5 +10,7 @@ namespace FoodTrace.IService
     public interface IUserRoleService
     {
         MessageModel InsertSingleEntity(UserRoleModel model);
+
+        List<UserRoleModel> GetUserRefRoleByUid(int id);
     }
 }

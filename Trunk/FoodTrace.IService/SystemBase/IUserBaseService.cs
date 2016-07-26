@@ -38,7 +38,14 @@ namespace FoodTrace.IService
         /// <param name="pageSize">每页显示条数</param>
         /// <returns></returns>
         List<UserBaseModel> GetPagerUserBase(string name, int pageIndex, int pageSize);
-
+        /// <summary>
+        /// 获取当前用户所在公司的人员信息（分页）
+        /// </summary>
+        /// <param name="name">查询条件：人员名称（模糊查询）</param>
+        /// <param name="pIndex">页码</param>
+        /// <param name="pSize">每页显示条数</param>
+        /// <returns></returns>
+        List<UserBaseDto> GetUserBasePaging(string name, int pIndex, int pSize);
         /// <summary>
         /// 通过ID获取UserBase
         /// </summary>
@@ -46,6 +53,12 @@ namespace FoodTrace.IService
         /// <returns></returns>
         UserBaseModel GetUserBaseById(int id);
 
+        /// <summary>
+        /// 根据ID获取userbase 包含userdetail
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        UserBaseDto GetUserBaseWithDetailById(int id);
         /// <summary>
         /// 新增单条UserBase
         /// </summary>
@@ -68,5 +81,20 @@ namespace FoodTrace.IService
         MessageModel DeleteSingleUserBase(int id);
 
         MessageModel InsertSingleEntity(UserBaseModel userBaseModel, UserDetailModel userDetailModel, List<int> roleModel);
+
+
+        /// <summary>
+        /// 新增用户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        MessageModel InsertUserBase(UserBaseDto model);
+
+        /// <summary>
+        /// 更新用户数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        MessageModel UpdateUserBase(UserBaseDto model);
     }
 }

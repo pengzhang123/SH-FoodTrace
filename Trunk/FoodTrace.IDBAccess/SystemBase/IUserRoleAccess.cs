@@ -10,5 +10,8 @@ namespace FoodTrace.IDBAccess
     public interface IUserRoleAccess
     {
         MessageModel InsertSingleEntity(UserRoleModel model);
+
+        List<UserRoleModel> GetUserRefRoleByUid(int id);
+
     }
 }

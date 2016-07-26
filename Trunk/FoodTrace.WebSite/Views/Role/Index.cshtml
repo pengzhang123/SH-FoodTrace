@@ -165,7 +165,7 @@
                     $.post(url, $form.serializeArray(), function (json) {
 
                         var msg = '';
-                        if (json.flag) {
+                        if (json.IsSuccess) {
                             msg = "保存成功";
                             $('#DataGrid').datagrid('reload');
                         } else {

@@ -1,22 +1,73 @@
-﻿@model FoodTrace.Model.AreaModel
+﻿
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using FoodTrace.Model
+@model FoodTrace.Model.DeptModel
 <h2>区域编辑</h2>
-@using (Html.BeginForm("Edit", "Area", FormMethod.Post))
-{
-    @Html.HiddenFor(m => Model.AreaID)
+<form>
+    @Html.HiddenFor(m => Model.DeptID)
     <table>
         <tr>
-            <td>区域名称</td>
-            <td>@Html.TextBoxFor(m => Model.AreaName)</td>
+            <td>公司</td>
+            <td>
+                @Html.DropDownListFor(m => Model.CompanyID, ViewBag.CompanyList as IEnumerable<SelectListItem>)
+            </td>
         </tr>
         <tr>
-            <td><input type="submit" value="保存" /></td>
-            <td><input type="button" value="取消" /></td>
+            <td>部门名称</td>
+            <td>@Html.TextBoxFor(m => Model.DeptName)</td>
         </tr>
+        <tr>
+            <td>上级部门</td>
+            <td>
+               @Html.DropDownListFor(m => Model.UpperDeptID, ViewBag.DeptsList as IEnumerable<SelectListItem>)
+            </td>
+        </tr>
+        <tr>
+            <td>部门备注</td>
+            <td>@Html.TextBoxFor(m => Model.DeptRemark)</td>
+        </tr>
+        <tr>
+            <td>排序字</td>
+            <td>@Html.TextBoxFor(m => Model.SortID)</td>
+        </tr>
+        @*<tr>
+            <td><input type="submit" value="保存" /></td>
+            <td><input type="button" value="取消" onclick="cancel()" /></td>
+        </tr>*@
     </table>
-}
+</form>
+
+
+@section scripts{
+<script type="text/javascript">
+    $(function () {
+        $("#CompanyID").change(function () {
+            setDeptByCompany();
+        });
+
+    });
+
+    function setDeptByCompany() {
+        var selectId = $("#CompanyID").val();
+
+        Utils.ajaxGet('/Dept/GetDeptByCompany', { companyId: selectId }, 'json', function (ret) {
+            $("#UpperDeptID").empty();
+            var option = "<option value='0'>--请选择--</option>";;
+            if (ret.length > 0) {
+                //遍历json数据，拼接option，最后添加到select中
+                $.each(ret, function (i, n) {
+                    option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                });
+            }
+            $("#UpperDeptID").append(option); //等同于 $(option).appendTo($("#catagery"));
+        });
+    }
+
+</script>
+
+ }
 

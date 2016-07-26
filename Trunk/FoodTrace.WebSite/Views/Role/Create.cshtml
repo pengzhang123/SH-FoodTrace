@@ -26,27 +26,33 @@
             <td colspan="3">
                 <table>
                     @{
-                        var menuRow = menuList.Count % 5 == 0 ? menuList.Count / 5 : menuList.Count / 5 + 1;
-                        for (int i = 0; i < menuRow; i++)
+                        var menuRow = menuList.Count / 5;
+                        var remainder = menuList.Count % 5;
+                    for (int i = 0; i < menuRow; i++)
+                    {
+                     <tr>
+ 
+                        @for (int j = 0; j < 5; j++)
                         {
-                            <tr>
-                                @if (i == menuRow - 2)
-                                {
-                                    for (int j = 0; j < 5; j++)
-                                    {
-                                        <td width="100px"><input type="checkbox" class="easyui-validatebox easyui-checkbox" data-options="required:true" id="@menuList[i * 5 + j].MenuID" value="@menuList[i * 5 + j].MenuID" name="chkMenu" />@menuList[i * 5 + j].Name</td>
-                                    }
-                                }
-                                else
-                                {
-                                    for (int j = 0; j < menuList.Count % 5; j++)
-                                    {
-                                        <td width="100px"><input type="checkbox" class="easyui-validatebox easyui-checkbox" data-options="required:true" id="@menuList[i * 5 + j].MenuID" value="@menuList[i * 5 + j].MenuID" name="chkMenu" />@menuList[i * 5 + j].Name</td>
-                                    }
-                                }
-                            </tr>
+
+                        <td width="100px"><input type="checkbox"  id="@menuList[i * 5 + j].MenuID" value="@menuList[i * 5 + j].MenuID" name="chkMenu" />@menuList[i * 5 + j].Name</td>
                         }
+                     </tr>
                     }
+
+                    if (remainder > 0)
+                    {
+
+                        var remainList = menuList.Skip(menuRow * 5).Take(remainder).ToList();
+                        <tr>
+                            @for(int j = 0; j < remainder; j++)
+                            {
+
+                            <td width="100px"><input type="checkbox" id="@remainList[j].MenuID" value="@remainList[j].MenuID" name="chkMenu" />@remainList[j].Name</td>
+                            }
+                        </tr>
+                    }
+              }
                 </table>
             </td>
         </tr>

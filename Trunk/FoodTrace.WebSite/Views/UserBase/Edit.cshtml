@@ -1,22 +1,132 @@
-﻿@model FoodTrace.Model.AreaModel
+﻿@using FoodTrace.Model
+@model UserBaseDto
 @{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    ViewBag.Title = "编辑用户";
+    Layout = "~/Views/Shared/_LayoutNull.cshtml";
 
-<h2>区域编辑</h2>
-@using (Html.BeginForm("Edit", "Area", FormMethod.Post))
-{
-    @Html.HiddenFor(m => Model.AreaID)
+}
+<h2>修改用户</h2>
+<form id="mainForm">
+    @Html.HiddenFor(m=>m.UserId)
     <table>
         <tr>
-            <td>区域名称</td>
-            <td>@Html.TextBoxFor(m => Model.AreaName)</td>
+            <td>登录账号</td>
+            <td>@Html.TextBoxFor(m => Model.UserCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>登录密码</td>
+            <td>@Html.PasswordFor(m => Model.Password, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
         </tr>
         <tr>
-            <td><input type="submit" value="保存" /></td>
-            <td><input type="button" value="取消" /></td>
+            <td>用户姓名</td>
+            <td>@Html.TextBoxFor(m => Model.UserName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>公司ID</td>
+            <td>
+                @Html.DropDownListFor(m => Model.CompanyID, ViewBag.CompanyList as IEnumerable<SelectListItem>, "-请选择-", new { id = "companyId" })
+            </td>
+
+        </tr>
+        <tr>
+            <td>部门编号</td>
+            <td>
+                @Html.DropDownListFor(m => Model.DeptID, ViewBag.DeptList as IEnumerable<SelectListItem>, "-请选择-", new { id = "deptId" })
+            </td>
+            <td>平台代码</td>
+            <td>@Html.TextBoxFor(m => Model.AreaCode, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+        </tr>
+        <tr>
+            <td>用户类型</td>
+            <td>@Html.TextBoxFor(m => Model.UserType)</td>
+            <td>入职日期</td>
+            <td>@Html.TextBoxFor(m => Model.EntryDate)</td>
+        </tr>
+        <tr>
+            <td>离职日期</td>
+            <td>@Html.TextBoxFor(m => Model.LeaveDate)</td>
+            <td>转正日期</td>
+            <td>@Html.TextBoxFor(m => Model.FormalDate)</td>
+
+        </tr>
+        <tr>
+            <td>QQ号码</td>
+            <td>@Html.TextBoxFor(m => Model.QQ)</td>
+            <td>出生年月</td>
+            <td>@Html.TextBoxFor(m => Model.BirthDay)</td>
+
+        </tr>
+        <tr>
+            <td>邮箱</td>
+            <td>@Html.TextBoxFor(m => Model.Email)</td>
+            <td>身份证号码</td>
+            <td>@Html.TextBoxFor(m => Model.IDCard)</td>
+
+        </tr>
+        <tr>
+            <td>手机号码</td>
+            <td>@Html.TextBoxFor(m => Model.Mobile)</td>
+            <td>婚姻状况</td>
+            <td><select name="UserDetail.Marriage">
+                    <option value="1" selected=@(Model.Marriage==1?"selected":"")>已婚</option>
+                    <option value="2" selected=@(Model.Marriage==2?"selected":"")>未婚</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                <select name="UserDetail.Gender" data-options="required:true">
+                    <option value="1" selected=@(Model.Gender==1?"selected":"")>男</option>
+                    <option value="2" selected=@(Model.Gender ==2 ? "selected" : "")>女</option>
+                </select>
+            </td>
+            <td>学历</td>
+            <td>@Html.TextBoxFor(m => Model.Education)</td>
+        </tr>
+        <tr>
+            <td>常用住址</td>
+            <td>@Html.TextBoxFor(m => Model.HomeAddress)</td>
+            <td>备注</td>
+            <td>@Html.TextBoxFor(m => Model.Remark)</td>
+        </tr>
+        <tr>
+            <td>指纹考勤号</td>
+            <td>@Html.TextBoxFor(m => Model.AttendanceNo)</td>
+            <td>工资发放账号</td>
+            <td>@Html.TextBoxFor(m => Model.BankNo)</td>
+        </tr>
+        <tr>
+            <td>是否锁定</td>
+            <td>
+                @Html.RadioButton("IsLocked", "true", Model.IsLocked??false, new { @id = "radioEnabled1" })<label for="radioEnabled1">是</label>
+                @Html.RadioButton("IsLocked", "false",Model.IsLocked?? false, new { @id = "radioEnabled2" })<label for="radioEnabled2">否</label>
+            </td>
         </tr>
     </table>
-}
+</form>
 
+<script>
+    $(function () {
+        setDeptByCompany();
+
+        $("#CompanyID").change(function () {
+            setDeptByCompany();
+        });
+    });
+
+    function setDeptByCompany() {
+        var selectId = $("#CompanyID").val();
+
+        Utils.ajaxGet('/Dept/GetDeptByCompany', { companyId: selectId }, 'json', function (ret) {
+            $("#deptId").empty();
+            var option = "<option value='0'>--请选择--</option>";;
+            if (ret.length > 0) {
+                //遍历json数据，拼接option，最后添加到select中
+                $.each(ret, function (i, n) {
+                    option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                });
+            }
+            $("#deptId").append(option); //等同于 $(option).appendTo($("#catagery"));
+        });
+    }
+
+
+
+</script>

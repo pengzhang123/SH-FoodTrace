@@ -1,4 +1,5 @@
-﻿using FoodTrace.DBManage.IContexts;
+﻿using System.Data.Entity.Migrations.History;
+using FoodTrace.DBManage.IContexts;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -105,6 +106,29 @@ namespace FoodTrace.DBManage.Contexts
                 cmdText.Append(" @" + key + ",");
             }
             this.Database.ExecuteSqlCommand(cmdText.ToString().Substring(0, cmdText.Length - 1), sqlParams.ToArray());
+        }
+
+
+        public void BatchDelete<T>(List<T> list) where T:class 
+        {
+            if (list.Any())
+            {
+                foreach (var entity in list)
+                    this.Set<T>().Remove(entity);
+
+                this.SaveChanges();
+            }
+        }
+
+        public void BatctInsert<T>(List<T> list) where T : class
+        {
+            if (list.Any())
+            {
+                foreach (var entity in list)
+                    this.Set<T>().Add(entity);
+
+                this.SaveChanges();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FoodTrace.DBManage.IContexts;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FoodTrace.DBManage.IContexts;
 using FoodTrace.Model;
 using System.Data.Common;
 using System.Data.Entity;
@@ -30,6 +31,14 @@ namespace FoodTrace.DBManage.Contexts
             //objectContext = (this as IObjectContextAdapter).ObjectContext;
             //设置Timeout，否则数据量大会抛异常
             //objectContext.CommandTimeout = 520;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserBaseModel>()
+                .Property(x => x.UserID)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            base.OnModelCreating(modelBuilder);
         }
 
         #region SystemBase

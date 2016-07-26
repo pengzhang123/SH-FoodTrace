@@ -1,75 +1,273 @@
-﻿
-@model List<FoodTrace.Model.UserBaseModel>
+﻿@using FoodTrace.Model
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{
+    var roleList = ViewBag.RoleList as List<RoleModel> ?? new List<RoleModel>();
+}
 <div id="tag"></div>
 <div class="find">
-    区域名称：<input type="text" class="input">
-   <br><br>
-    <input type="button" value="新增" class="button" onclick="window.location.href='/UserBase/Create';">
-    <div class="button_right">
-        <input type="button" value="查询" class="button">
-        <input type="button" value="重置" class="button">
-    </div>
+    用户名：<input type="text" class="input">
+    <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
     <div class="clearbox"></div>
 </div>
 <div id="table">
     <div class="table_title">
-        区域查询
     </div>
-    <div style="overflow:auto;height:360px;">
-        <table>
-            <thead>
-                <tr>
-                    <th>操作</th>
-                    <th>登录账号</th>
-                    <th>登录密码</th>
-                    <th>用户姓名</th>
-                    <th>部门名称</th>
-                    <th>公司名称</th>
-                    <th>平台代码</th>
-                    <th>登录状态</th>
-                    <th>用户类型</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var userBaseModel in Model)
-            {
-                    <tr class="tr1">
-                        <td>
-                            @Html.ActionLink("编辑", "Edit", "UserBase", new { id= userBaseModel.UserID },null)
-                        </td>
-                        <td>@userBaseModel.UserCode</td>
-                        <td>@userBaseModel.Password</td>
-                        <td>@userBaseModel.UserName</td>
-                        <td>@userBaseModel.Dept.DeptName</td>
-                        <td>@userBaseModel.Company.CompanyName</td>
-                        <td>@userBaseModel.AreaCode</td>
-                        <td>@userBaseModel.Status</td>
-                        <td>@userBaseModel.UserType</td>
-                    </tr>
-            }
-            </tbody>
+    <div style="overflow: auto; height: 360px;">
+        <table id="DataGrid" style="height: 100%;">
         </table>
     </div>
-    <div class="buttom">
-        <div class="buttom_left de">
-            <img src="~/Images/first.png" alt="">
-            <img src="~/Images/pre.png" alt="">
-            <img src="~/Images/next.png" alt="">
-            <img src="~/Images/last.png" alt="">
-        </div>
-
-        <div class="buttom_left"><img src="~/Images/go.png" alt="">　第 <input type="text" value="1" class="page">页/共5页</div>
-        <div class="buttom_left">每页<select name="" id=""><option value="10">10</option></select>条</div>
-        <div class="buttom_left word">
-            <img src="~/Images/word.png" alt="">
-            <img src="~/Images/excel.png" alt="">
-        </div>
-        <div class="buttom_right">显示10条/共50条</div>
-    </div>
 </div>
+<div id="userDialog" title="新增用户"></div>
 
+<div id="roleDialog" title="设置角色">
+    <form id="roleForm">
+        <table>
+            <tr>
+                <td colspan="5">角色名称</td>
+               
+            </tr>
+            @{
+                int roleRow = roleList.Count/5;
+                int remainder = roleList.Count % 5;
+                for (int i = 0; i < roleRow; i++)
+                {
+                    <tr>
+                        @for (int j = 0; j < 5; j++)
+                        {
+                            <td>
+                                <input type="checkbox"  value="@(roleList[i*5+j].RoleID)" name="RoleId" />@(roleList[i*5+j].RoleName) 
+                            </td>
+                        }
+                    </tr>
+
+                }
+                
+                if(remainder > 0)
+                {
+                    var remainList = roleList.Skip(roleRow * 5).Take(remainder).ToList();
+                    <tr>
+                        @for (int i = 0; i < remainder; i++)
+                        {
+                             <td>
+                                <input type="checkbox"  value="@(remainList[i].RoleID)" name="RoleId" />@(remainList[i].RoleName) 
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+            <tr>
+            </tr>
+        </table>
+        <input type="hidden" name="UserId" id="UserId" />
+</form>
+
+</div>
+@section scripts{
+    <script >
+        var gridList = null, userDialog = null, userValidate = null,roleDialog=null;
+        $(function() {
+            gridList = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetUserList", "UserBase")',
+                rownumbers: true,
+                striped: true,
+                fitColumns: true,
+                pagination: true,
+                singleSelect: true,
+                pageList: [10, 15, 20, 25],
+                toolbar: [
+                    {
+                        id: 'btnAdd',
+                        text: ' 新建',
+                        iconCls: 'icon-add',
+                        handler: function() {
+                            create();
+                        }
+                    }, {
+                        id: 'btnEdit',
+                        text: ' 编辑',
+                        iconCls: 'icon-edit',
+                        handler: function() {
+                            var row = gridList.datagrid('getSelected');
+                            if (row) {
+                                edit(row.UserId);
+                            }
+                        }
+                    }, {
+                        id: 'btnDelete',
+                        text: ' 删除',
+                        iconCls: 'icon-remove',
+                        handler: function() {
+                            var row = $('#DataGrid').datagrid('getSelected');
+                            if (row) {
+                                $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                                    if (r) {
+                                        deleteUser(row.UserId);
+                                    }
+                                });
+                               
+                            }
+                        }
+                    }, {
+                        id: 'btnSetRole',
+                        text: ' 设置角色',
+                        iconCls: 'icon-remove',
+                        handler: function () {
+                            var row = $('#DataGrid').datagrid('getSelected');
+                            if (row) {
+                                setRole(row.UserId);
+                            }
+                        }
+                    }
+                ],
+                columns: [
+                    [
+                        { title: '登录账号', align: 'center', field: 'UserCode', width: 35 },
+                        { title: '密码', align: 'center', field: 'Password', width: 35 },
+                        { title: '用户名', align: 'center', field: 'UserName', width: 35 },
+                        { title: '部门名称', align: 'center', field: 'DeptName', width: 35 },
+                        { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
+                        { title: '平台代码', align: 'center', field: 'AreaCode', width: 35 },
+                        { title: '登录状态', align: 'center', field: 'Status', width: 35 },
+                        { title: '用户类型', align: 'center', field: 'UserTypeStr', width: 35 }
+                    ]
+                ]
+            });
+
+            userDialog = $('#userDialog').dialog({
+                title: 'My Dialog',
+                width: 800,
+                height: 500,
+                closed: true,
+                cache: false,
+                modal: true,
+                resizable: true,
+                buttons: [
+                        {
+                            text: '保存',
+                            iconCls: 'icon-ok',
+                            handler:saveUser
+                        }, {
+                            text: '取消',
+                            iconCls: 'icon-cancel',
+                            handler: function () { userDialog.dialog("close"); }
+                        }
+                ],
+                onClose: function () { }
+            });
+
+            roleDialog = $('#roleDialog').dialog({
+                width: 600,
+                height: 500,
+                closed: true,
+                cache: false,
+                modal: true,
+                resizable: true,
+                buttons: [
+                        {
+                            text: '保存',
+                            iconCls: 'icon-ok',
+                            handler: saveUserRole
+                        }, {
+                            text: '取消',
+                            iconCls: 'icon-cancel',
+                            handler: function () { roleDialog.dialog("close"); }
+                        }
+                ],
+                onClose: function () { }
+            });
+            //查询
+            $('#btnQuery').on('click', function() {
+
+            });
+        });
+
+        function create() {
+           
+            userDialog.dialog({ title: "新增用户" }).dialog('open');
+            $('#userDialog').load("/UserBase/Create");
+        }
+
+        function edit(id) {
+            userDialog.dialog({ title: "编辑用户" }).dialog('open');
+            $('#userDialog').load("/UserBase/Edit", { id: id });
+        }
+        function deleteUser(id) {
+            Utils.ajaxPost('/UserBase/Delete', { id: id },'json',function(ret) {
+                if (ret.IsSuccess) {
+                    $.messager.alert('提示', '删除成功');
+                } else {
+                    $.messager.alert('提示', '删除失败');
+                }
+            });
+        }
+
+        function saveUser() {
+
+            var $form = $('#userDialog').find('form');
+            var flag = $form.form('validate');
+            if (!flag) {
+                $.messager.alert('Title', '必须填写完整的信息', 'error');
+                return false;
+            }
+            Utils.ajaxPost('/UserBase/SaveUserData', $form.serialize(), 'json', function (ret) {
+                if (ret.IsSuccess) {
+
+                    $.messager.alert('提示', '保存成功',function() {
+                        userDialog.dialog('close');
+                    });
+                    gridList.datagrid('reload');
+                } else {
+                    $.messager.alert('提示', '保存失败');
+                }
+            });
+        }
+
+        //打开角色窗口并且
+        function setRole(id) {
+
+            $('#UserId').val(id);
+            roleDialog.dialog('open');
+            Utils.ajaxGet('/Role/GetUserRoleByUid', { uid: id }, 'json', function(ret) {
+                if (ret.IsSuccess) {
+                    console.log(ret.Data);
+                    if (ret.Data.length > 0) {
+                        setCheckVla(ret.Data);
+                    }
+
+                }
+            });
+        }
+
+        function saveUserRole() {
+            Utils.ajaxPost('/Role/SaveUserRefRole', $('#roleForm').serialize(), 'json', function(ret) {
+                if (ret.IsSuccess) {
+                    $.messager.alert('提示:', '角色设置成功!',function() {
+                        roleDialog.dialog("close");
+                    });
+                  } else {
+                    $.messager.alert('提示:', '角色设置失败!', function () {
+                        roleDialog.dialog("close");
+                    });
+                }
+            });
+        }
+
+
+        function setCheckVla(val) {
+            var chk = $('#roleForm').find("input[name='RoleId'][type=checkbox]");
+            if (chk.length) {
+                chk.each(function () {
+                    var f = $(this);
+                    f.prop("checked", false);
+                    if (f.val() === String(val) || $.inArray(f.val(), $.isArray(val) ? val : [val]) >= 0) {
+                        f.prop("checked", true);
+                    }
+                });
+             
+            }
+        }
+    </script>
+}

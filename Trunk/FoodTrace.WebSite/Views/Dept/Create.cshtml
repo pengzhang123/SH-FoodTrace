@@ -1,10 +1,10 @@
 ﻿@model FoodTrace.Model.DeptModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "新增部门";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>区域新建</h2>
-@using (Html.BeginForm("Create", "Dept", FormMethod.Post))
+@using (Html.BeginForm("Create", "Dept",FormMethod.Post, new { @id = "AddForm" }))
 {
     <table>
         <tr>
@@ -19,7 +19,10 @@
         </tr>
         <tr>
             <td>上级部门</td>
-            <td>@Html.DropDownListFor(m => Model.UpperDeptID, ViewBag.Dept as List<SelectListItem>)</td>
+            <td><select name="UpperDeptID" id="UpperDeptID">
+                  <option value="0">-请选择-</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>部门备注</td>
@@ -29,34 +32,44 @@
             <td>排序字</td>
             <td>@Html.TextBoxFor(m => Model.SortID)</td>
         </tr>
-        <tr>
+        @*<tr>
             <td><input type="submit" value="保存" /></td>
-            <td><input type="button" value="取消" /></td>
-        </tr>
+            <td><input type="button" value="取消" onclick="cancel()"/></td>
+        </tr>*@
     </table>
 }
+
+@section scripts{
 <script type="text/javascript">
     $(function () {
+        setDeptByCompany();
+
         $("#CompanyID").change(function () {
-            debugger;
-            var selectId = $("#CompanyID").val();
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("GetDeptByCompany")',
-                data: { companyId: selectId },
-                dataType: "json",
-                success: function (data) {
-                    $("#UpperDeptID").find("option").remove();
-                    var option = "<option value='0'>--请选择--</option>";;
-                    if (data.length > 0) {
-                        //遍历json数据，拼接option，最后添加到select中
-                        $.each(data, function (i, n) {
-                            option += "<option value=" + n.Value + ">" + n.Text + "</option>";
-                        });
-                    }
-                    $("#UpperDeptID").append(option); //等同于 $(option).appendTo($("#catagery"));
-                }
-            });
+            setDeptByCompany();
         });
+
     });
+
+    function setDeptByCompany()
+    {
+        var selectId = $("#CompanyID").val();
+
+        Utils.ajaxGet('/Dept/GetDeptByCompany', { companyId: selectId }, 'json', function (ret) {
+            $("#UpperDeptID").empty();
+            var option = "<option value='0'>--请选择--</option>";;
+            if (ret.length > 0) {
+                //遍历json数据，拼接option，最后添加到select中
+                $.each(ret, function (i, n) {
+                    option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                });
+            }
+            $("#UpperDeptID").append(option); //等同于 $(option).appendTo($("#catagery"));
+        });
+    }
+
+    function cancel()
+    {
+        $('#AddForm')[0].reset();
+    }
 </script>
+}

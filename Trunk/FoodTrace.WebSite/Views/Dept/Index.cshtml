@@ -4,12 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <table id="DataGrid" style="height:100%;"></table>
-<div id="CreateDialog" style="padding:10px 60px 20px 60px"></div>
+<div id="CreateDialog" style="padding: 10px 60px 20px 60px">
+</div>
 <div id="EditDialog" style="padding:10px 60px 20px 60px"></div>
 <script type="text/javascript">
-
+    var editDialog;
     function Edit(id) {
-        $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Dept")' + '?id=' + id).dialog('open');
+        editDialog.dialog('open').dialog('refresh', "/Dept/Edit/ " + id );
     }
 
     function Delete(id) {
@@ -17,7 +18,7 @@
             if (r) {
                 $.post('@Url.Action("Delete", "Dept")', { id: id }, function (json) {
                     var msg = '';
-                    if (json.flag) {
+                    if (json) {
                         msg = "删除成功";
                         $('#DataGrid').datagrid('reload');
                     } else {
@@ -45,7 +46,7 @@
                 text: ' 新建',
                 iconCls: 'icon-add',
                 handler: function () {
-                    $('#CreateDialog').dialog('refresh', '@Url.Action("Create", "Dept")').dialog('open');
+                    $('#CreateDialog').dialog('open');
                 }
             }, {
                 id: 'btnEdit',
@@ -114,23 +115,25 @@
                             $('#CreateDialog').dialog('close');
                         });
                     }, 'json');
+                    $('#CreateDialog').empty();
                 }
             }, {
                 text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#CreateDialog').dialog('close');
+                    $('#CreateDialog').empty();
                 }
             }]
         });
 
-        $('#EditDialog').dialog({
+        editDialog= $('#EditDialog').dialog({
             title: '编辑',
             width: 600,
             height: 500,
             closed: true,
             cache: false,
-            href: '@Url.Action("Edit", "Dept")',
+            href: '',
             modal: true,
             buttons: [{
                 text: '保存',
@@ -147,10 +150,10 @@
 
                     $.messager.progress();
                     var url = $form.prop('action');
-                    $.post(url, $form.serializeArray(), function (json) {
+                    $.post('/Dept/EditDept', $form.serialize(), function (json) {
 
                         var msg = '';
-                        if (json.flag) {
+                        if (json) {
                             msg = "保存成功";
                             $('#DataGrid').datagrid('reload');
                         } else {
@@ -161,12 +164,15 @@
                             $('#EditDialog').dialog('close');
                         });
                     }, 'json');
+
+                    $('#EditDialog').empty();
                 }
             }, {
                 text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#EditDialog').dialog('close');
+                    $('#EditDialog').empty();
                 }
             }]
         });

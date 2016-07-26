@@ -16,12 +16,14 @@ namespace FoodTrace.Service
         private IUserBaseAccess userBaseAccess;
         private ICompanyAccess companyAccess;
         private IDeptAccess deptAccess;
-
+        private IUserRoleAccess userRoleAccess;
         public UserBaseService()
         {
             userBaseAccess = BaseAccess.CreateAccess<IUserBaseAccess>(AccessMappingKey.UserBaseAccess.ToString());
             companyAccess = BaseAccess.CreateAccess<ICompanyAccess>(AccessMappingKey.CompanyAccess.ToString());
             deptAccess = BaseAccess.CreateAccess<IDeptAccess>(AccessMappingKey.DeptAccess.ToString());
+            userRoleAccess = BaseAccess.CreateAccess<IUserRoleAccess>(AccessMappingKey.UserRoleAccess.ToString());
+
         }
 
         /// <summary>
@@ -64,6 +66,12 @@ namespace FoodTrace.Service
             return result;
         }
 
+        public List<UserBaseDto> GetUserBasePaging(string name, int pIndex, int pSize)
+        {
+            int comId = UserManagement.CurrentCompany.CompanyID;
+
+            return userBaseAccess.GetUserBasePaging(comId,name, pIndex, pSize);
+        }
         /// <summary>
         /// 通过ID获取UserBase
         /// </summary>
@@ -74,6 +82,15 @@ namespace FoodTrace.Service
             return userBaseAccess.GetEntityById(id);
         }
 
+        /// <summary>
+        /// 根据ID获取userbase 包含userdetail
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public UserBaseDto GetUserBaseWithDetailById(int id)
+        {
+            return userBaseAccess.GetUserBaseById(id);
+        }
         /// <summary>
         /// 新增单条UserBase
         /// </summary>
@@ -114,6 +131,10 @@ namespace FoodTrace.Service
             return userBaseAccess.InsertSingleEntity(userBaseModel, userDetailModel, roleModel);
         }
 
+        public MessageModel UpdateUserBase(UserBaseModel userbase, List<int> role)
+        {
+            return userBaseAccess.UpdateSingleEntity(userbase);
+        }
         //private void SetCompany(UserBaseModel UserBase)
         //{
         //    if (UserBase.CompanyID.HasValue)
@@ -131,5 +152,26 @@ namespace FoodTrace.Service
         //    //if (UserBase.DeptID.HasValue)
         //    //    UserBase.Dept = deptAccess.GetEntityById(UserBase.DeptID.Value);
         //}
+
+        /// <summary>
+        /// 新增用户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public MessageModel InsertUserBase(UserBaseDto model)
+        {
+            return userBaseAccess.InsertUserBase(model);
+        }
+
+
+        /// <summary>
+        /// 更新用户数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public MessageModel UpdateUserBase(UserBaseDto model)
+        {
+            return userBaseAccess.UpdateUserBase(model);
+        }
     }
 }

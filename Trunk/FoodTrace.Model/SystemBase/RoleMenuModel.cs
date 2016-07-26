@@ -14,11 +14,11 @@ namespace FoodTrace.Model
         [Key]
         public int RMID { get; set; }
 
-        public int? RoleID { get; set; }
+        public int RoleID { get; set; }
         [ForeignKey("RoleID")]
         public virtual RoleModel Role { get; set; }
 
-        public int? MenuID { get; set; }
+        public int MenuID { get; set; }
         [ForeignKey("MenuID")]
         public virtual MenuModel Menu { get; set; }
 

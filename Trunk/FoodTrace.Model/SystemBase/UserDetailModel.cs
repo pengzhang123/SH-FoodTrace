@@ -13,9 +13,11 @@ namespace FoodTrace.Model
     {
         [Key]
         public int DetailID { get; set; }
+
+
         public int UserID { get; set; }
-        [ForeignKey("UserID")]
-        public virtual UserBaseModel UserBase { get; set; }
+        //[ForeignKey("UserID")]
+        //public virtual UserBaseModel UserBase { get; set; }
 
         public string UserPhoto { get; set; }
         public DateTime? EntryDate { get; set; }

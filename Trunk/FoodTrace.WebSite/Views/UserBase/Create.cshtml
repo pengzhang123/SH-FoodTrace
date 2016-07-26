@@ -1,40 +1,41 @@
-﻿@model FoodTrace.Model.UserDetailModel
+﻿@model FoodTrace.Model.UserBaseDto
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-var roleList = ViewBag.RoleList as List<FoodTrace.Model.RoleModel>;
+    ViewBag.Title = "新增用户";
+    Layout = "~/Views/Shared/_LayoutNull.cshtml";
+    //Layout = null;
+   //  var roleList = ViewBag.RoleList as List<FoodTrace.Model.RoleModel>;
     }
-    <h2>用户新建</h2>
-    @using (Html.BeginForm("Create", "UserBase", FormMethod.Post))
-    {
+    <h2>用户信息</h2>
+
+<form id="mainForm">
     <table>
         <tr>
             <td>登录账号</td>
-            <td>@Html.TextBoxFor(m => Model.UserBase.UserCode)</td>
+            <td>@Html.TextBoxFor(m => Model.UserCode, new { @class = "easyui-validatebox easyui-textbox",data_options = "required:true" })</td>
             <td>登录密码</td>
-            <td>@Html.PasswordFor(m => Model.UserBase.Password)</td>
+            <td>@Html.PasswordFor(m => Model.Password, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
         </tr>
         <tr>
             <td>用户姓名</td>
-            <td>@Html.TextBoxFor(m => Model.UserBase.UserName)</td>
-            <td>部门编号</td>
-            <td><select id="depts" name="UserBase.DeptID"><</td>
-        </tr>
-        <tr>
+            <td>@Html.TextBoxFor(m => Model.UserName, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
             <td>公司ID</td>
-            <td><select id="companys" name="UserBase.CompanyID"></select></td>
+            <td>
+                @Html.DropDownListFor(m => Model.CompanyID, ViewBag.CompanyList as IEnumerable<SelectListItem>,"-请选择-")
+            </td>
+        </tr>
+        <tr>
+            <td>部门编号</td>
+            <td>
+                <select id="deptId" name="UserBase.DeptID">
+                    <option value="0">-请选择-</option>
+                </select>
+            </td>
             <td>平台代码</td>
-            <td>@Html.TextBoxFor(m => Model.UserBase.AreaCode)</td>
+            <td>@Html.TextBoxFor(m => Model.AreaCode)</td>
         </tr>
         <tr>
-            <td>登录状态</td>
-            <td>@Html.TextBoxFor(m => Model.UserBase.Status)</td>
             <td>用户类型</td>
-            <td>@Html.TextBoxFor(m => Model.UserBase.UserType)</td>
-        </tr>
-        <tr>
-            <td>头像照片</td>
-            <td>@Html.TextBoxFor(m => Model.UserPhoto)</td>
+            <td>@Html.TextBoxFor(m => Model.UserType)</td>
             <td>入职日期</td>
             <td>@Html.TextBoxFor(m => Model.EntryDate)</td>
         </tr>
@@ -61,19 +62,29 @@ var roleList = ViewBag.RoleList as List<FoodTrace.Model.RoleModel>;
         </tr>
         <tr>
             <td>手机号码</td>
-            <td>@Html.TextBoxFor(m => Model.Mobile)</td>
+            <td>@Html.TextBoxFor(m => Model.Mobile, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
             <td>婚姻状况</td>
-            <td>@Html.TextBoxFor(m => Model.Marriage)</td>
+            <td>
+                <select name="UserDetail.Marriage">
+                    <option value="1">已婚</option>
+                    <option value="2">未婚</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>性别</td>
-            <td>@Html.TextBoxFor(m => Model.Gender)</td>
+            <td>
+                <select name="UserDetail.Gender" data-options="required:true">
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </td>
             <td>学历</td>
-            <td>@Html.TextBoxFor(m => Model.Education)</td>
+            <td>@Html.TextBoxFor(m => Model.Education, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
         </tr>
         <tr>
             <td>常用住址</td>
-            <td>@Html.TextBoxFor(m => Model.HomeAddress)</td>
+            <td>@Html.TextBoxFor(m => Model.HomeAddress, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
             <td>备注</td>
             <td>@Html.TextBoxFor(m => Model.Remark)</td>
         </tr>
@@ -81,60 +92,49 @@ var roleList = ViewBag.RoleList as List<FoodTrace.Model.RoleModel>;
             <td>指纹考勤号</td>
             <td>@Html.TextBoxFor(m => Model.AttendanceNo)</td>
             <td>工资发放账号</td>
-            <td>@Html.TextBoxFor(m => Model.BankNo)</td>
-        </tr>
-        <tr>
-            <td>角色</td>
-            <td colspan="3">
-                <table>
-                    @{
-                    var menuRow = roleList.Count % 5 == 0 ? roleList.Count / 5 : roleList.Count / 5 + 1;
-                    for (int i = 0; i < menuRow; i++)
-                    {
-                    <tr>
-                        @if (i == menuRow - 2)
-                        {
-                        for (int j = 0; j < 5; j++)
-                        {
-                        <td width="100px"><input type="checkbox" id="@roleList[i * 5 + j].RoleID" value="@roleList[i * 5 + j].RoleID" name="chkMenu" />@roleList[i * 5 + j].RoleName</td>
-                        }
-                        }
-                        else
-                        {
-                        for (int j = 0; j < roleList.Count % 5; j++)
-                        {
-                        <td width="100px"><input type="checkbox" id="@roleList[i * 5 + j].RoleID" value="@roleList[i * 5 + j].RoleID" name="chkMenu" />@roleList[i * 5 + j].RoleName</td>
-                        }
-                        }
-                    </tr>
-                    }
-                    }
-                </table>
-            </td>
+            <td>@Html.TextBoxFor(m => Model.BankNo, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
         </tr>
         <tr>
             <td>是否锁定</td>
-            <td>@Html.TextBoxFor(m => Model.UserBase.IsLocked)</td>
+            <td>
+                @Html.RadioButton("IsLocked", "true",false, new { @id = "radioEnabled1" })<label for="radioEnabled1">是</label>
+               @Html.RadioButton("IsLocked", "false", false, new { @id = "radioEnabled2" })<label for="radioEnabled2">否</label>
+            </td>
         </tr>
         <tr>
-            <td><input type="submit" value="保存" /></td>
-            <td><input type="button" value="取消" /></td>
+            <td><a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a></td>
+            <td><a id="btnCancel" href="javascript:history.back();" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">返回</a></td>
         </tr>
     </table>
-    }
+</form>
+@section scripts{
 
     <script>
         $(function () {
-            $.getJSON('ListInfo', function (json) {
-                $('#companys').empty();
-                $('#depts').empty();
-                $(json.companys).each(function (index, company) {
-                    $('#companys').append($('<option value="' + company.CompanyID + '">' + company.CompanyName + '</option>'));
-                });
-                $(json.depts).each(function (index, company) {
-                    $('#depts').append($('<option value="' + company.DeptID + '">' + company.DeptName + '</option>'));
-                });
-            })
+            setDeptByCompany();
+
+            $("#CompanyID").change(function () {
+                setDeptByCompany();
+            });
+
         });
+
+        function setDeptByCompany() {
+            var selectId = $("#CompanyID").val();
+
+            Utils.ajaxGet('/Dept/GetDeptByCompany', { companyId: selectId }, 'json', function (ret) {
+                $("#deptId").empty();
+                var option = "<option value='0'>--请选择--</option>";;
+                if (ret.length > 0) {
+                    //遍历json数据，拼接option，最后添加到select中
+                    $.each(ret, function (i, n) {
+                        option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                    });
+                }
+                $("#deptId").append(option); //等同于 $(option).appendTo($("#catagery"));
+            });
+        }
+
     </script>
 
+}

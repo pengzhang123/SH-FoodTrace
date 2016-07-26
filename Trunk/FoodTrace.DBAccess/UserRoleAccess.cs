@@ -21,5 +21,16 @@ namespace FoodTrace.DBAccess
             };
             return base.DbOperation(operation);
         }
+
+        /// <summary>
+        /// 根据用户id 获取角色列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<UserRoleModel> GetUserRefRoleByUid(int id)
+        {
+            return base.Context.UserRole.Where(s => s.UserID == id).ToList();
+        }
+
     }
 }

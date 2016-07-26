@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="button" id="loginBtn" style="background:url(/Images/LoginBTN.png) no-repeat;border:0px;width:80px;height:30px;" value="登录" />
+                      <input type="button" id="loginBtn" style="background:url(/Images/LoginBTN.png) no-repeat;border:0px;width:80px;height:30px;cursor:pointer;" value="登录" />
                     </td>
                 </tr>
             </table>
@@ -49,6 +49,18 @@
                 }, 'json');
             });
         });
+
+
+        function refreshIframeWin() {
+            if (top != this) {
+                top.location.href = "/Home/Index";
+            }
+            if (self.frameElement.tagName == "IFRAME") {
+
+                // 页面在iframe中时处理
+
+            }
+        }
     </script>
 </body>
 </html>

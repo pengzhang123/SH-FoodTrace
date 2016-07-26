@@ -36,7 +36,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                model.UserBase = null;
+                //model.UserBase = null;
                 context.UserDetail.Add(model);
                 context.SaveChanges();
                 return string.Empty;

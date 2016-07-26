@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace FoodTrace.WebSite.Controllers
 {
-    public class LogUserLoginController : BaseController
+    public class LogUserLoginController : Controller
     {
 
         IUserBaseService iUserBaseService = new UserBaseService();
@@ -24,13 +24,15 @@ namespace FoodTrace.WebSite.Controllers
         [HttpPost]
         public ActionResult Login(UserBaseModel model)
         {
-            var user = iUserBaseService.GetUserBase(model.UserName, model.Password);
+           // var user = iUserBaseService.GetUserBase(model.UserName, model.Password);
+            var user = iUserLoginService.GetUserLoginDto(model.UserName, model.Password);
             if(user == null)
             {
                 return Json(new { success=false,msg= "No Such User" });
             }
             var result = iUserLoginService.InsertSingleEntity(new LogUserLoginModel { UserID = user.UserID, LoginTime = DateTime.Now, NickName=user.UserName });
             Session["UserBase"] = user;
+            Session.Timeout =300;
             //Session["Role"] = user == null ? null : user.Role;
 
             return Json(new { success = true, msg = "Find the User" });

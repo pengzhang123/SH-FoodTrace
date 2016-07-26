@@ -66,5 +66,35 @@ namespace FoodTrace.IService
         /// <param name="id">主键</param>
         /// <returns></returns>
         MessageModel DeleteSingleRole(int id);
+
+
+        /// <summary>
+        /// 根据角色id获取角色所拥有的权限
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<int> GetMenuListByRoleId(int id);
+
+        /// <summary>
+        /// 更新权限菜单
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        MessageModel UpdateRoleMenu(int roleId, List<RoleMenuModel> list);
+
+        /// <summary>
+        /// 根据角色Id获取角色菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<MenuModel> GetRoleMenuByRoleId(int id);
+
+        /// <summary>
+        /// 保存用户关联角色数据
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="roleIds"></param>
+        MessageModel SaveUserRefRole(int uid, List<int> roleIds);
     }
 }

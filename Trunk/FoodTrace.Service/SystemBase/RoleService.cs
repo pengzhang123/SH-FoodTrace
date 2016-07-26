@@ -102,6 +102,46 @@ namespace FoodTrace.Service
             return roleAccess.DeleteSingleEntity(id);
         }
 
+        /// <summary>
+        /// 根据角色id获取角色所拥有的权限
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<int> GetMenuListByRoleId(int id)
+        {
+            return roleAccess.GetMenuListByRoleId(id);
+        }
 
+        /// <summary>
+        /// 更新权限菜单
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public MessageModel UpdateRoleMenu(int roleId, List<RoleMenuModel> list)
+        {
+            return roleAccess.UpdateRoleMenu(roleId, list);
+        }
+
+        /// <summary>
+        /// 根据角色Id获取角色菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<MenuModel> GetRoleMenuByRoleId(int id)
+        {
+            return roleAccess.GetRoleMenuByRoleId(id);
+        }
+
+
+        /// <summary>
+        /// 保存用户关联角色数据
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="roleIds"></param>
+        public MessageModel SaveUserRefRole(int uid, List<int> roleIds)
+        {
+             return roleAccess.SaveUserRefRole(uid, roleIds);
+        }
     }
 }

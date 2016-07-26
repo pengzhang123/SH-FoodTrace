@@ -10,6 +10,10 @@ namespace FoodTrace.Model
     [Table("STM_DEPT")]
     public class DeptModel : BaseModel
     {
+        public DeptModel()
+        {
+            UserBase = new List<UserBaseModel>();
+        }
         [Key]
         public int DeptID { get; set; }
 
