@@ -39,6 +39,10 @@
 
     <script>
         $(function () {
+
+            refreshIframeWin();
+
+
             $('#loginBtn').click(function () {
                 $.post('/LogUserLogin/Login', { UserName: $('#UserName').val(), Password: $('#Password').val() }, function (json) {
                     if (json.success) {
@@ -50,16 +54,16 @@
             });
         });
 
-
+        //判断是否在Iframe中打开 如果是则刷新父框架
         function refreshIframeWin() {
             if (top != this) {
                 top.location.href = "/Home/Index";
             }
-            if (self.frameElement.tagName == "IFRAME") {
+            //if (self.frameElement.tagName == "IFRAME") {
 
-                // 页面在iframe中时处理
+            //    // 页面在iframe中时处理
 
-            }
+            //}
         }
     </script>
 </body>
