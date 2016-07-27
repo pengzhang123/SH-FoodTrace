@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
+using Newtonsoft.Json;
 
 namespace FoodTrace.Service
 {
@@ -100,6 +102,68 @@ namespace FoodTrace.Service
         {
             ProcessProductAccess access = new ProcessProductAccess();
             return access.GetProcessProductByEPCOrORCode(Epc, OrCode);
+        }
+
+        /// <summary>
+        /// 根据epc获取orcode获取产品基本信息数据
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public ProductInfoDto GetProductByEpcOrCode(string epc, string orCode)
+        {
+
+            return processProductAccess.GetProductByEpcOrCode(epc, orCode);
+        
+        }
+
+        /// <summary>
+        /// 肉类,植物，溯源
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public List<ProductTraceDto> GetProductTrace(string epc, string orCode)
+        {
+            return processProductAccess.GetProductTrace(epc, orCode);
+        }
+
+        /// <summary>
+        /// 食品溯源具体数据详情
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public string GetProductTraceDetailById(int code, int type)
+        {
+            var result = string.Empty;
+
+            switch (type)
+            {
+                case 1:
+                    result = "";
+                    break;
+                case 2:
+                    result = "";
+                    break;
+                case 3:
+                    result = "";
+                    break;
+                case 4:
+                    result = "";
+                    break;
+                case 5:
+                    result = JsonConvert.SerializeObject("");
+                    break;
+                case 6:
+                    result = "";
+                    break;
+                case 7:
+                    result = "";
+                    break;
+
+            }
+            return result;
         }
     }
 }

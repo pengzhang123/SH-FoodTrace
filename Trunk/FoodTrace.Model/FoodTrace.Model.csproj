@@ -55,6 +55,7 @@
     <Compile Include="BreedMng\BreedMaterialModel.cs" />
     <Compile Include="BreedMng\CultivationBaseModel.cs" />
     <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="DtoModel\ProductInfoDto.cs" />
     <Compile Include="DtoModel\UserBaseDto.cs" />
     <Compile Include="DtoModel\UserSessionDto.cs" />
     <Compile Include="KillMng\KillBatchDetailModel.cs" />

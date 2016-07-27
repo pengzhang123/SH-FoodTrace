@@ -1,4 +1,6 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Runtime.Remoting.Contexts;
+using System.Security.Cryptography;
+using FoodTrace.Common.Libraries;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
@@ -7,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -116,5 +119,212 @@ namespace FoodTrace.DBAccess
         {
             return Context.ProcessProduct.FirstOrDefault(m => (string.IsNullOrEmpty(Epc) || m.ProcessEPC == Epc)||(string.IsNullOrEmpty(OrCode) || m.OrCode == OrCode));
         }
+
+        private ProcessProductModel GetProProductByEpc(string epc, string orCode)
+        {
+            var query = Context.ProcessProduct.AsQueryable();
+            if (!string.IsNullOrEmpty(epc))
+            {
+                query = query.Where(s => s.ChipCode == epc);
+            }
+            if (!string.IsNullOrEmpty(orCode))
+            {
+                query = query.Where(s => s.OrCode == orCode);
+            }
+
+            return query.FirstOrDefault();
+        }
+
+        private SaleBaseModel GetSaleBaseByEpc(string epc, string orCode)
+        {
+            var query = Context.SaleBase.AsQueryable();
+            if (!string.IsNullOrEmpty(epc))
+            {
+                query = query.Where(s => s.ChipCode == epc);
+            }
+            if (!string.IsNullOrEmpty(orCode))
+            {
+                query = query.Where(s => s.ORCode == orCode);
+            }
+
+            return query.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 根据epc获取orcode获取产品基本信息数据
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public ProductInfoDto GetProductByEpcOrCode(string epc, string orCode)
+        {
+            //string result = string.Empty;
+            var productBase = GetProProductByEpc(epc, orCode);
+            if (productBase != null)
+            {
+                var product = (from s in Context.ProductBase
+                    join pt in Context.ProductType on s.ProductTypeID equals pt.ProductTypeID 
+                    join ps in Context.ProductSpec on s.ProductSpcID equals ps.SPCID 
+                    where s.ProductID == productBase.PProductID
+                    select new ProductInfoDto
+                    {
+                        Name = s.ProductName,
+                        TypeName = pt.ProductTypeEN,
+                        SourceName = "",
+                        SpecName = ps.SpecName,
+                        Price = s.Price,
+                        Weight = s.Weight
+
+
+                    }).FirstOrDefault();
+
+                var company = (from com in Context.Company
+                    join pro in Context.ProcessBatch on com.CompanyID equals pro.CompanyID
+                    join prod in Context.ProcessBatchDetail on pro.PApplyID equals prod.PApplyID
+                    where prod.ProcessEPC == productBase.ProcessEPC
+                    select com).FirstOrDefault();
+
+                if (product != null)
+                {
+                    product.ShelfLife = productBase.Life;
+                    product.Type = 1;
+                    if (company != null)
+                    {
+                        product.QsNum = company.QsCode;
+                        product.CompanyName = company.CompanyName;
+                    }
+
+                    return product;
+                }
+            }
+            
+            return null;
+        }
+
+        /// <summary>
+        /// 肉类溯源
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public List<ProductTraceDto> GetProductTrace(string epc, string orCode)
+        {
+            var list = new List<ProductTraceDto>();
+
+            var productBase = GetProProductByEpc(epc,orCode);
+            if (productBase != null)
+            {
+                //销售仓库
+                var warehouse = (from s in Context.ProductBase
+                    join stock in Context.WareHouseStock on s.ProductID equals stock.ProductID
+                    join ware in Context.WareHouseBase on stock.WareHouseID equals ware.WareHouseID
+                    where s.ProductID==productBase.ProductID
+                    select new ProductTraceDto()
+                    {
+                        Code = ware.WareHouseID,
+                        Name = ware.WareHouseName,
+                        Type = 6,
+                        Image = ""
+                    }).FirstOrDefault();
+
+                if (warehouse != null)
+                {
+                    list.Add(warehouse);
+                }
+
+                //销售公司
+                var baseSale = GetSaleBaseByEpc(epc, orCode);
+                if (baseSale != null)
+                {
+                  var saleCompany = (from com in Context.Company
+                                     where com.CompanyID == baseSale.CompanyID
+                             select new ProductTraceDto
+                              {
+                                    Code = com.CompanyID,
+                                    Name = com.CompanyName,
+                                     Type= 7,
+                                     Image = ""
+                              }).FirstOrDefault();
+                                     
+                    if (saleCompany != null)
+                    {
+                       list.Add(saleCompany);
+                    }
+                }
+               
+
+                //加工厂
+                var procFactory = ( from  com in Context.Company
+                    join batch in Context.ProcessBatch on com.CompanyID equals batch.CompanyID
+                    join batchd in Context.ProcessBatchDetail on batch.PApplyID equals batchd.PApplyID
+                    where batchd.ProcessEPC== productBase.ProcessEPC
+                    select new ProductTraceDto()
+                    {
+                        Code = com.CompanyID,
+                        Name = com.CompanyName,
+                        Type = 5,
+                        Image = ""
+                    }).FirstOrDefault();
+
+                if (procFactory != null)
+                {
+                    list.Add(procFactory);
+
+                }
+
+                //屠宰场
+                var killFatory = (from com in Context.Company
+                    join k in Context.KillCull on com.CompanyID equals k.CompanyID
+                    where k.KillEpc == productBase.ProcessEPC
+                    select new ProductTraceDto()
+                    {
+                        Code = com.CompanyID,
+                        Name = com.CompanyName,
+                        Type = 3,
+                        Image = ""
+                    }).FirstOrDefault();
+                if (killFatory != null)
+                {
+                    list.Add(killFatory);
+                }
+
+                //养殖场
+                var cultivate = (from c in Context.CultivationBase
+                    join b in Context.BreedBase on c.BreedID equals b.BreedID
+                    where c.CultivationEpc == productBase.ProcessEPC
+                    select new ProductTraceDto()
+                    {
+                        Code = b.BreedID,
+                        Name = b.BreedName,
+                        Type = 2,
+                        Image = ""
+                    }).FirstOrDefault();
+
+                if (cultivate != null)
+                {
+                    list.Add(cultivate);
+                }
+
+                //个体
+                var unit = (from c in Context.CultivationBase
+                    where c.CultivationEpc == productBase.ProcessEPC
+                    select new ProductTraceDto()
+                    {
+                        Code = c.CultivationID,
+                        Name = c.VarietyName,
+                        Type = 1,
+                        Image = ""
+                    }).FirstOrDefault();
+
+                if (unit != null)
+                {
+                    list.Add(unit);
+                }
+
+            }
+            return list;
+        }
+
+      
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrace.Common", "FoodTrace.Common\FoodTrace.Common.csproj", "{B04CE68F-FB4C-427B-B902-E525F143E4B3}"
 EndProject
@@ -20,8 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrace.Forms", "FoodTrace.Forms\FoodTrace.Forms.csproj", "{281DA508-5804-4D0C-B4BA-4769B74CC8BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrace.WebAPI", "FoodTrace.WebAPI\FoodTrace.WebAPI.csproj", "{15548EDC-5ADF-4EF1-A57F-5E8E17D80B7E}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FoodTrace.Setup", "FoodTrace.Setup\FoodTrace.Setup.vdproj", "{1E992DCD-1E64-4DE0-89F1-3C0BC963CECA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodTrace.WebSite", "FoodTrace.WebSite\FoodTrace.WebSite.csproj", "{98AD6D17-6589-4114-98B4-64F929F23660}"
 EndProject
@@ -69,8 +67,6 @@ Global
 		{15548EDC-5ADF-4EF1-A57F-5E8E17D80B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15548EDC-5ADF-4EF1-A57F-5E8E17D80B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15548EDC-5ADF-4EF1-A57F-5E8E17D80B7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E992DCD-1E64-4DE0-89F1-3C0BC963CECA}.Debug|Any CPU.ActiveCfg = Debug
-		{1E992DCD-1E64-4DE0-89F1-3C0BC963CECA}.Release|Any CPU.ActiveCfg = Release
 		{98AD6D17-6589-4114-98B4-64F929F23660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98AD6D17-6589-4114-98B4-64F929F23660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98AD6D17-6589-4114-98B4-64F929F23660}.Release|Any CPU.ActiveCfg = Release|Any CPU

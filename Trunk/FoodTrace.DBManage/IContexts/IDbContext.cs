@@ -22,5 +22,9 @@ namespace FoodTrace.DBManage.IContexts
         Database Database { get; }
         int SaveChanges();
         void ExecuteProcedure(string commandText, Dictionary<string, object> parameters);
+
+
+        void BatchDelete<T>(List<T> list) where T : class;
+        void BatctInsert<T>(List<T> list) where T : class;
     }
 }

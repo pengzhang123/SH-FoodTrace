@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.IService
 {
@@ -62,5 +63,30 @@ namespace FoodTrace.IService
         /// <returns></returns>
         MessageModel DeleteSingleProcessProduct(int id);
         ProcessProductModel GetProcessProductByEPCOrORCode(string Epc, string OrCode);
+
+
+        /// <summary>
+        /// 根据epc获取orcode获取产品基本信息数据
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        ProductInfoDto GetProductByEpcOrCode(string epc, string orCode);
+
+        /// <summary>
+        /// 肉类溯源
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        List<ProductTraceDto> GetProductTrace(string epc, string orCode);
+
+        /// <summary>
+        /// 食品溯源具体数据详情
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        string GetProductTraceDetailById(int code, int type);
     }
 }
