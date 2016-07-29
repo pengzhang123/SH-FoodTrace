@@ -15,10 +15,11 @@ namespace FoodTrace.WebAPI.Controllers
     public class ProductTraceController : ApiController
     {
         private readonly IProcessProductService productService;
-
+        private readonly IShadowBaseService shadowBaseService;
         public ProductTraceController()
         {
             productService = new ProcessProductService();
+            shadowBaseService = new ShadowBaseService();
         }
 
         /// <summary>
@@ -31,15 +32,21 @@ namespace FoodTrace.WebAPI.Controllers
         {
             string result = "1";
 
-            if (!string.IsNullOrEmpty(Epc))
-            {
               // IProcessProductService productService = new ProcessProductService();
                 var data = productService.GetProductByEpcOrCode(Epc, OrCode);
                 if (data != null)
                 {
                     result = JsonConvert.SerializeObject(data);
                 }
-            }
+                else
+                {
+
+                    var shadow = shadowBaseService.GetShadowByEpcOrCode(Epc, OrCode);
+                    if (shadow != null)
+                    {
+                        result = JsonConvert.SerializeObject(shadow);
+                    }
+                }
             var resp = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(result)
@@ -59,13 +66,10 @@ namespace FoodTrace.WebAPI.Controllers
         {
             string result = "1";
 
-            if (!string.IsNullOrEmpty(Epc))
-            {
-                var data = productService.GetProductTrace(Epc, OrCode);
-                if (data.Any())
-                {
-                    result = JsonConvert.SerializeObject(data);
-                }
+            var data = productService.GetProductTrace(Epc, OrCode);
+            if (data.Any())
+             {
+                result = JsonConvert.SerializeObject(data);
             }
             var resp = new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -86,15 +90,11 @@ namespace FoodTrace.WebAPI.Controllers
         public HttpResponseMessage GetProductTraceDetail(string Epc, string OrCode, int code, int type)
         {
             string result = "1";
-
-            if (!string.IsNullOrEmpty(Epc))
-            {
                 var data = productService.GetProductTraceDetailById(Epc, OrCode,code,type);
                 if (!string.IsNullOrEmpty(data))
                 {
                     result = data;
                 }
-            }
             var resp = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(result)

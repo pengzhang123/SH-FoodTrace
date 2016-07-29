@@ -95,6 +95,13 @@ namespace FoodTrace.Service
             return companyAccess.DeleteSingleEntity(id);
         }
 
-
+        /// <summary>
+        /// 获取企业机构树
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeModel> GetCompantTree()
+        {
+            return companyAccess.GetCompantTree();
+        }
     }
 }

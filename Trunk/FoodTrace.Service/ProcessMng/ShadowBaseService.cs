@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -107,6 +108,18 @@ namespace FoodTrace.Service
         {
             ShadowBaseAccess access = new ShadowBaseAccess();
             return access.GetShawInfoByChipCode(chipCode);
+        }
+
+        /// <summary>
+        /// 皮影的基本信息
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public ShadowBaseDto GetShadowByEpcOrCode(string epc, string orCode)
+        {
+            ShadowBaseAccess access = new ShadowBaseAccess();
+            return access.GetShadowByEpcOrCode(epc, orCode);
         }
     }
 }

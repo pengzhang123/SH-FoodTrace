@@ -288,7 +288,7 @@ namespace FoodTrace.DBAccess
                     where k.KillEpc == productBase.ProcessEPC
                     select new ProductTraceDto()
                     {
-                        Code = com.CompanyID,
+                        Code = k.KillCullID,
                         Name = com.CompanyName,
                         Type = 3,
                         Image = ""

@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Security.Cryptography;
+using FoodTrace.Common.Libraries;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -115,6 +117,65 @@ namespace FoodTrace.DBAccess
         public ShadowBaseModel GetShawInfoByChipCode(string chipCode)
         {
             return base.Context.ShadowBase.FirstOrDefault(m => m.ChipCode == chipCode);
+        }
+
+        /// <summary>
+        /// 皮影的基本信息
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public ShadowBaseDto GetShadowByEpcOrCode(string epc, string orCode)
+        {
+            var query = Context.ShadowBase.AsQueryable();
+            if (!string.IsNullOrEmpty(epc))
+            {
+                query = query.Where(s => s.ChipCode == epc);
+            }
+            if (!string.IsNullOrEmpty(orCode))
+            {
+                query = query.Where(s => s.ORCode == orCode);
+            }
+
+            var model = query.FirstOrDefault();
+            if (model == null)
+            {
+                return null;
+            }
+
+            var shadow = new ShadowBaseDto()
+            {
+                Name = model.ProductName,
+                Price = model.Price,
+                Method = model.Method,
+                Temp = model.Temp,
+                Dry = model.Dry,
+                ProcessBatch = model.ProcessBatch
+            };
+            var company = Context.Company.Find(model.CompanyID);
+            if (company != null)
+            {
+                shadow.CompanyName = company.CompanyName;
+            }
+
+            var productbase = (from p in Context.ProductBase
+                join pt in Context.ProductType on p.ProductTypeID equals pt.ProductTypeID
+                where p.ProductID == model.ProductID
+                select new ProductInfoDto()
+                {
+                    Price = p.Price,
+                    Weight = p.Weight,
+                    TypeName = pt.ProductTypeEN
+                }).FirstOrDefault();
+
+            if (productbase != null)
+            {
+                shadow.Price = productbase.Price;
+                shadow.Weight = productbase.Weight;
+                shadow.TypeName = productbase.TypeName;
+            }
+
+            return shadow;
         }
     }
 }

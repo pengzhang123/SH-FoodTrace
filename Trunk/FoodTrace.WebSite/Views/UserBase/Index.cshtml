@@ -1,4 +1,5 @@
 ﻿@using FoodTrace.Model
+@model UserBaseDto
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,23 +7,23 @@
 @{
     var roleList = ViewBag.RoleList as List<RoleModel> ?? new List<RoleModel>();
 }
-<div id="tag"></div>
-<div class="find">
-    用户名：<input type="text" class="input">
-    <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
-    <div class="clearbox"></div>
-</div>
-<div id="table">
-    <div class="table_title">
-    </div>
-    <div style="overflow: auto; height: 360px;">
-        <table id="DataGrid" style="height: 100%;">
-        </table>
-    </div>
-</div>
-<div id="userDialog" title="新增用户"></div>
+<link href="~/Scripts/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
 
-<div id="roleDialog" title="设置角色">
+<div id="cc" class="easyui-layout" style="width:100%;height:100%;">
+    <div data-options="region:'west',title:'公司',split:true" style="width:250px;">
+        <ul id="OrgTree" class="ztree"></ul>
+    </div>
+    <div data-options="region:'center',title:'人员'" style="padding:5px;background:#eee;">
+        <div class="table_title">
+            用户名：<input type="text" class="input" id="uName" value="">
+            <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+            <div class="clearbox"></div>
+        </div>
+        <table id="DataGrid" style="height: 100%;"></table>
+    </div>
+</div>  
+
+<div id="roleDialog" title="设置角色" style="display:none;">
     <form id="roleForm">
         <table>
             <tr>
@@ -51,7 +52,7 @@
                     <tr>
                         @for (int i = 0; i < remainder; i++)
                         {
-                             <td>
+                            <td>
                                 <input type="checkbox"  value="@(remainList[i].RoleID)" name="RoleId" />@(remainList[i].RoleName) 
                             </td>
                         }
@@ -62,13 +63,188 @@
             </tr>
         </table>
         <input type="hidden" name="UserId" id="UserId" />
-</form>
+    </form>
 
 </div>
+
+<div id="userDialog" title="新增用户" style="display: none;">
+    <h2>用户信息</h2>
+    <form id="mainForm">
+        <input type="hidden" name="UserId" value=""/>
+        <table>
+            <tr>
+                <td>登录账号</td>
+                <td>
+                    <input type="text" name="UserCode" value="" class="easyui-validatebox " data_options="required:true" />
+                </td>
+                <td>登录密码</td>
+                <td>
+                    <input type="text" name="Password" value="" class="easyui-validatebox " data_options="required:true" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>用户姓名</td>
+                <td>
+                    <input type="text" name="UserName" value="" class="easyui-validatebox " data_options="required:true" />
+                  
+                </td>
+                <td>公司ID</td>
+                <td>
+                    @Html.DropDownListFor(m => Model.CompanyID, ViewBag.CompanyList as IEnumerable<SelectListItem>, "-请选择-")
+                </td>
+            </tr>
+            <tr>
+                <td>部门编号</td>
+                <td>
+                    <select id="deptId" name="DeptID">
+                        <option value="0">-请选择-</option>
+                    </select>
+                </td>
+                <td>平台代码</td>
+                <td>
+                    <input type="text" name="AreaCode" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>用户类型</td>
+                <td>
+                    <select id="UserType" name="UserType">
+                        <option value="1" selected>普通用户</option>
+                    </select>
+                </td>
+                <td>入职日期</td>
+                <td>
+                    <input class="Wdate" name="EntryDate" type="text" onclick="WdatePicker()"> 
+                </td>
+            </tr>
+            <tr>
+                <td>离职日期</td>
+                <td>
+                    <input class="Wdate" name="LeaveDate" type="text" onclick="WdatePicker()"> 
+                </td>
+                <td>转正日期</td>
+                <td>
+                    <input class="Wdate" name="FormalDate" type="text" onclick="WdatePicker()"> 
+                </td>
+
+            </tr>
+            <tr>
+                <td>QQ号码</td>
+                <td>
+                    <input type="text" name="QQ" value=""/>
+                </td>
+                <td>出生年月</td>
+                <td>
+                    <input class="Wdate" name="BirthDay" type="text" onclick="WdatePicker()"> 
+                </td>
+
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td>
+                    
+                    <input type="text" name="Email" value="" />
+                </td>
+                <td>身份证号码</td>
+                <td>
+                    <input type="text" name="IDCard" value="" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>手机号码</td>
+                <td>
+                    <input type="text" name="Mobile" value="" class="easyui-validatebox" data_options="required:true" />
+                </td>
+                <td>婚姻状况</td>
+                <td>
+                    <select name="Marriage">
+                        <option value="1" selected>未婚</option>
+                        <option value="2">已婚</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td>
+                    <select name="Gender" data-options="required:true">
+                        <option value="1" selected>男</option>
+                        <option value="2">女</option>
+                    </select>
+                </td>
+                <td>学历</td>
+                <td>
+                    <select name="Education" data-options="required:true">
+                        <option value="1" selected>小学及以下</option>
+                        <option value="2">初中</option>
+                        <option value="3">高中</option>
+                        <option value="4">大专</option>
+                        <option value="5">本科</option>
+                        <option value="5">研究生及以上</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>常用住址</td>
+                <td>
+                    <input type="text" name="HomeAddress" value="" class="easyui-validatebox" data_options="required:true" />
+                </td>
+                <td>备注</td>
+                <td>
+                    <input type="text" name="Remark" value="" class="easyui-validatebox" data_options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>指纹考勤号</td>
+                <td>
+                    <input type="text" name="AttendanceNo" value="" class="easyui-validatebox" data_options="required:true" />
+                </td>
+                <td>工资发放账号</td>
+                <td>
+                    <input type="text" name="BankNo" value="" class="easyui-validatebox" data_options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>是否锁定</td>
+                <td>
+                    @Html.RadioButton("IsLocked", "true", false, new { @id = "radioEnabled1" })<label for="radioEnabled1">是</label>
+                    @Html.RadioButton("IsLocked", "false", false, new { @id = "radioEnabled2" })<label for="radioEnabled2">否</label>
+                </td>
+            </tr>
+            @*<tr>
+                <td><a id="btnSave" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a></td>
+                <td><a id="btnCancel" href="javascript:history.back();" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">返回</a></td>
+            </tr>*@
+        </table>
+    </form>
+</div>
 @section scripts{
+<script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
     <script >
-        var gridList = null, userDialog = null, userValidate = null,roleDialog=null;
+        var gridList = null, userDialog = null, userValidate = null,roleDialog=null,orgTree=null;
         $(function() {
+            loadOrgTree();
+            initGridData();
+            //查询
+            $('#btnQuery').on('click', function() {
+                var uName= $('#uName').val();
+                if (uName != '') {
+                    gridList.datagrid('reload', {
+                        uName: uName
+                    });
+                }
+            });
+
+            setDeptByCompany();
+
+            $("#CompanyID").change(function () {
+                setDeptByCompany();
+            });
+        });
+
+        //初始化表格数据
+        function initGridData() {
             gridList = $('#DataGrid').datagrid({
                 url: '@Url.Action("GetUserList", "UserBase")',
                 rownumbers: true,
@@ -82,14 +258,14 @@
                         id: 'btnAdd',
                         text: ' 新建',
                         iconCls: 'icon-add',
-                        handler: function() {
+                        handler: function () {
                             create();
                         }
                     }, {
                         id: 'btnEdit',
                         text: ' 编辑',
                         iconCls: 'icon-edit',
-                        handler: function() {
+                        handler: function () {
                             var row = gridList.datagrid('getSelected');
                             if (row) {
                                 edit(row.UserId);
@@ -99,7 +275,7 @@
                         id: 'btnDelete',
                         text: ' 删除',
                         iconCls: 'icon-remove',
-                        handler: function() {
+                        handler: function () {
                             var row = $('#DataGrid').datagrid('getSelected');
                             if (row) {
                                 $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
@@ -107,7 +283,7 @@
                                         deleteUser(row.UserId);
                                     }
                                 });
-                               
+
                             }
                         }
                     }, {
@@ -148,7 +324,7 @@
                         {
                             text: '保存',
                             iconCls: 'icon-ok',
-                            handler:saveUser
+                            handler: saveUser
                         }, {
                             text: '取消',
                             iconCls: 'icon-cancel',
@@ -178,21 +354,54 @@
                 ],
                 onClose: function () { }
             });
-            //查询
-            $('#btnQuery').on('click', function() {
+        }
 
+        //加载公司部门树
+        function loadOrgTree() {
+            var settings = {
+                data: {
+                    // key: { ckecked: "Checked" },
+                    simpleData: { enable: true, idKey: "id", pIdKey: "pId" }
+                },
+                callback: { onClick: orgTreeClick}
+            };
+            Utils.ajaxGet("/UserBase/GetCompanyTree", null, "json", function (ret) {
+                if (ret.IsSuccess) {
+                    orgTree = $.fn.zTree.init($("#OrgTree"), settings, ret.Data);
+                }
+                // menuTree.expandAll(true);
             });
-        });
+        }
+
+        //树节点点击事件
+        function orgTreeClick(event, treeId, treeNode) {
+            var id = treeNode.id;
+            var type = treeNode.type;
+            console.log('id:' + id + ",type=" + type);
+
+            gridList.datagrid('reload', {
+                id: id,
+                type: type
+            });
+
+
+        }
+
 
         function create() {
            
             userDialog.dialog({ title: "新增用户" }).dialog('open');
-            $('#userDialog').load("/UserBase/Create");
+            //$('#userDialog').load("/UserBase/Create");
         }
 
         function edit(id) {
             userDialog.dialog({ title: "编辑用户" }).dialog('open');
-            $('#userDialog').load("/UserBase/Edit", { id: id });
+            Utils.ajaxGet('/UserBase/GetUserById', { id: id }, 'json', function(ret) {
+                if (ret.IsSuccess) {
+                    Utils.loadFormData($('#mainForm'), ret.Data);
+                }
+            });
+           
         }
         function deleteUser(id) {
             Utils.ajaxPost('/UserBase/Delete', { id: id },'json',function(ret) {
@@ -269,5 +478,24 @@
              
             }
         }
+
+
+        ///设置公司下拉
+        function setDeptByCompany() {
+            var selectId = $("#CompanyID").val();
+
+            Utils.ajaxGet('/Dept/GetDeptByCompany', { companyId: selectId }, 'json', function (ret) {
+                $("#deptId").empty();
+                var option = "<option value='0'>--请选择--</option>";;
+                if (ret.length > 0) {
+                    //遍历json数据，拼接option，最后添加到select中
+                    $.each(ret, function (i, n) {
+                        option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                    });
+                }
+                $("#deptId").append(option); //等同于 $(option).appendTo($("#catagery"));
+            });
+        }
+
     </script>
 }

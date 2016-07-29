@@ -61,5 +61,11 @@ namespace FoodTrace.IService
         /// <param name="id">主键</param>
         /// <returns></returns>
         MessageModel DeleteSingleCompany(int id);
+
+        /// <summary>
+        /// 获取企业机构树
+        /// </summary>
+        /// <returns></returns>
+        List<ZtreeModel> GetCompantTree();
     }
 }

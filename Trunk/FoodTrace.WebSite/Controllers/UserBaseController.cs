@@ -32,17 +32,16 @@ namespace FoodTrace.WebSite.Controllers
         // GET: UserBase
         public ActionResult Index()
         {
+            var user = new UserBaseDto();
             UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
-            var userlist = userBaseService.GetPagerUserBase("", 1, 10);
-            var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_=>new { UserBase_CompanyName=_.CompanyName, UserBase_CompanyID=_.CompanyID });
+          //  var userlist = userBaseService.GetPagerUserBase("", 1, 10);
+            //var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_=>new { UserBase_CompanyName=_.CompanyName, UserBase_CompanyID=_.CompanyID });
+            var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_ => new { CompanyName = _.CompanyName, CompanyID = _.CompanyID });
             var rolelist = roleService.GetPagerRole("", 1, 100);
 
             ViewBag.RoleList = rolelist;
-            //List<SelectListItem> itemList = new List<SelectListItem>();
-            //companylist.ForEach(m => {
-            //    itemList.Add(new SelectListItem() { Text = m.CompanyName, Value = m.CompanyID.ToString() });
-            //});
-            //ViewBag.CompanyList = new SelectList(companylist, "UserBase_CompanyName", "UserBase_CompanyID"); ;
+            ViewBag.CompanyList = new SelectList(companylist, "CompanyID", "CompanyName");
+            ViewData.Model = user;
             return View();
         }
 
@@ -56,7 +55,7 @@ namespace FoodTrace.WebSite.Controllers
             //ViewBag.RoleList = rolelist;
            // ViewBag.DeptList = new SelectList(deptlist, "DeptID","DeptName");
             ViewBag.CompanyList = new SelectList(companylist, "CompanyID", "CompanyName");
-            return View();
+            return PartialView();
         }
 
         /// <summary>
@@ -102,6 +101,27 @@ namespace FoodTrace.WebSite.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 获取用户详情信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult GetUserById(int id)
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data = userBaseService.GetUserBaseWithDetailById(id);
+                result.IsSuccess = true;
+                result.Data = data;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
         /// <summary>
         /// 保存数据
         /// </summary>
@@ -162,6 +182,10 @@ namespace FoodTrace.WebSite.Controllers
         /// <returns></returns>
         public JsonResult GetUserList(int page, int rows)
         {
+            var comId = RequestHelper.RequestPost("id", "0");
+            var type = RequestHelper.RequestPost("type", "0");
+            var uName = RequestHelper.RequestPost("uName", string.Empty);
+
             var userlist = userBaseService.GetUserBasePaging("", page, rows);
             return Json(userlist);
         }
@@ -188,6 +212,26 @@ namespace FoodTrace.WebSite.Controllers
             }
             return Json(result);
         }
+
+        /// <summary>
+        /// 获取公司部门机构数
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetCompanyTree()
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data = companyService.GetCompantTree();
+                result.IsSuccess = true;
+                result.Data = data;
+            }
+            catch (Exception)
+            {
+            }
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ListInfo()
         {
             UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };

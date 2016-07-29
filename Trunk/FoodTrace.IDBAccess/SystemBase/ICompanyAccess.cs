@@ -8,5 +8,11 @@ namespace FoodTrace.IDBAccess
         int GetEntityCount(string name);
 
         List<CompanyModel> GetPagerCompanyByConditions(string name, int pageIndex, int pageSize);
+
+        /// <summary>
+        /// 获取企业机构树
+        /// </summary>
+        /// <returns></returns>
+        List<ZtreeModel> GetCompantTree();
     }
 }

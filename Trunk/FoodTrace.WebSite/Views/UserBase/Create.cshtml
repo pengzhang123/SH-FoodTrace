@@ -1,12 +1,11 @@
 ﻿@model FoodTrace.Model.UserBaseDto
 @{
     ViewBag.Title = "新增用户";
-    Layout = "~/Views/Shared/_LayoutNull.cshtml";
+   // Layout = "~/Views/Shared/_LayoutNull.cshtml";
     //Layout = null;
    //  var roleList = ViewBag.RoleList as List<FoodTrace.Model.RoleModel>;
-    }
-    <h2>用户信息</h2>
-
+}
+ <h2>用户信息</h2>
 <form id="mainForm">
     <table>
         <tr>
@@ -35,22 +34,26 @@
         </tr>
         <tr>
             <td>用户类型</td>
-            <td>@Html.TextBoxFor(m => Model.UserType)</td>
+            <td>
+                <select id="deptId" name="@UserType">
+                    <option value="0">-请选择-</option>
+                </select>
+            </td>
             <td>入职日期</td>
-            <td>@Html.TextBoxFor(m => Model.EntryDate)</td>
+            <td>@Html.TextBoxFor(m => Model.EntryDate, new { @class = "easyui-datebox" })</td>
         </tr>
         <tr>
             <td>离职日期</td>
-            <td>@Html.TextBoxFor(m => Model.LeaveDate)</td>
+            <td>@Html.TextBoxFor(m => Model.LeaveDate, new { @class = "easyui-datebox" })</td>
             <td>转正日期</td>
-            <td>@Html.TextBoxFor(m => Model.FormalDate)</td>
+            <td>@Html.TextBoxFor(m => Model.FormalDate, new { @class = "easyui-datebox" })</td>
 
         </tr>
         <tr>
             <td>QQ号码</td>
             <td>@Html.TextBoxFor(m => Model.QQ)</td>
             <td>出生年月</td>
-            <td>@Html.TextBoxFor(m => Model.BirthDay)</td>
+            <td>@Html.TextBoxFor(m => Model.BirthDay, new { @class = "easyui-datebox" })</td>
 
         </tr>
         <tr>
@@ -80,7 +83,16 @@
                 </select>
             </td>
             <td>学历</td>
-            <td>@Html.TextBoxFor(m => Model.Education, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })</td>
+            <td>
+                <select name="Education" data-options="required:true">
+                    <option value="1">小学及以下</option>
+                    <option value="2">初中</option>
+                    <option value="3">高中</option>
+                    <option value="4">大专</option>
+                    <option value="5">本科</option>
+                    <option value="5">研究生及以上</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>常用住址</td>
@@ -109,7 +121,7 @@
 </form>
 @section scripts{
 
-    <script>
+    @*<script>
         $(function () {
             setDeptByCompany();
 
@@ -135,6 +147,6 @@
             });
         }
 
-    </script>
+    </script>*@
 
 }
