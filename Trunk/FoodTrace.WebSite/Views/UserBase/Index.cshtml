@@ -410,7 +410,9 @@
         function deleteUser(id) {
             Utils.ajaxPost('/UserBase/Delete', { id: id },'json',function(ret) {
                 if (ret.IsSuccess) {
-                    $.messager.alert('提示', '删除成功');
+                    $.messager.alert('提示', '删除成功',null,function() {
+                        gridList.datagrid('reload');
+                    });
                 } else {
                     $.messager.alert('提示', '删除失败');
                 }
@@ -457,11 +459,11 @@
         function saveUserRole() {
             Utils.ajaxPost('/Role/SaveUserRefRole', $('#roleForm').serialize(), 'json', function(ret) {
                 if (ret.IsSuccess) {
-                    $.messager.alert('提示:', '角色设置成功!',function() {
+                    $.messager.alert('提示:', '角色设置成功!',null,function() {
                         roleDialog.dialog("close");
                     });
                   } else {
-                    $.messager.alert('提示:', '角色设置失败!', function () {
+                    $.messager.alert('提示:', '角色设置失败!',null, function () {
                         roleDialog.dialog("close");
                     });
                 }
