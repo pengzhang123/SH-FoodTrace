@@ -249,6 +249,7 @@ namespace FoodTrace.DBAccess
                 LogUserLoginModel login = context.LogUserLogin.FirstOrDefault(m => m.UserID == id);
                 if (detail != null) context.Delete(detail);
                 if (login != null) context.Delete(login);
+                context.SaveChanges();
                 return string.Empty;
             };
 
