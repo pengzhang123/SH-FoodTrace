@@ -87,6 +87,6 @@ namespace FoodTrace.IService
         /// <param name="code"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        string GetProductTraceDetailById(int code, int type);
+        string GetProductTraceDetailById(string epc, string orCode,int code, int type);
     }
 }

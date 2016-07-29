@@ -11,5 +11,6 @@ namespace FoodTrace.IDBAccess
     {
         int GetEntityCount(int companyID, string code);
         List<ShadowProcessModel> GetPagerShadowProcessByConditions(int companyID, string code, int pageIndex, int pageSize);
+
     }
 }

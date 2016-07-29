@@ -31,5 +31,17 @@ namespace FoodTrace.IDBAccess
         /// <param name="orCode"></param>
         /// <returns></returns>
         List<ProductTraceDto> GetProductTrace(string epc, string orCode);
+
+
+
+        /// <summary>
+        /// 根据不同的类型返回不同的实体数据
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <param name="code"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        string GetProductTraceDetail(string epc, string orCode, int code, int type);
     }
 }
