@@ -101,7 +101,8 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<ZtreeModel> GetCompantTree()
         {
-            return companyAccess.GetCompantTree();
+            int comId = UserManagement.CurrentCompany.CompanyID;
+            return companyAccess.GetCompantTree(comId);
         }
     }
 }

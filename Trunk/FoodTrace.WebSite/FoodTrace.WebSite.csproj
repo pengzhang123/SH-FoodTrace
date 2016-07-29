@@ -220,7 +220,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\AreaPlatController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\base\BaseController.cs" />
+    <Compile Include="Controllers\base\JsonResultDateTimeFormat.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\CodeMaxController.cs" />
     <Compile Include="Controllers\CodeObjectController.cs" />

@@ -116,55 +116,59 @@ namespace FoodTrace.DBAccess
         /// 获取企业机构树
         /// </summary>
         /// <returns></returns>
-        public List<ZtreeModel> GetCompantTree()
+        public List<ZtreeModel> GetCompantTree(int comId)
         {
             var list = new List<ZtreeModel>();
             var company = (from com in Context.Company
+                where com.CompanyID == comId
                 select new ZtreeModel()
                 {
                     id = com.CompanyID.ToString(),
                     name = com.CompanyName,
                     pId = "0",
                     type = 0
-                }).ToList();
-            if (company.Any())
+                }).FirstOrDefault();
+
+            if (company != null)
             {
-                list.AddRange(company);
+                list.Add(company);
+
+                var deptbase = (from s in Context.Dept
+                                where s.CompanyID==comId
+                    select s).ToList();
+                if (deptbase.Any())
+                {
+                    var deptment = (from dept in deptbase
+                        where dept.UpperDeptID == 0
+                        select new ZtreeModel()
+                        {
+                            id = dept.DeptID.ToString(),
+                            name = dept.DeptName,
+                            pId = dept.CompanyID.ToString(),
+                            type = 1,
+                        }).ToList();
+
+                    if (deptment.Any())
+                    {
+                        list.AddRange(deptment);
+                    }
+
+                    var deptsonment = (from dept in deptbase
+                        where dept.UpperDeptID > 0
+                        select new ZtreeModel()
+                        {
+                            id = dept.DeptID.ToString(),
+                            name = dept.DeptName,
+                            pId = dept.UpperDeptID.ToString(),
+                            type = 1
+                        }).ToList();
+                    if (deptsonment.Any())
+                    {
+                        list.AddRange(deptsonment);
+                    }
+                }
             }
 
-            var deptbase = (from s in Context.Dept
-                select s).ToList();
-            if (deptbase.Any())
-            {
-                var deptment = (from dept in deptbase
-                    where dept.UpperDeptID == 0
-                    select new ZtreeModel()
-                    {
-                        id = dept.DeptID.ToString(),
-                        name = dept.DeptName,
-                        pId = dept.CompanyID.ToString(),
-                        type = 1,
-                    }).ToList();
-
-                if (deptment.Any())
-                {
-                    list.AddRange(deptment);
-                }
-
-                var deptsonment = (from dept in deptbase
-                    where dept.UpperDeptID > 0
-                    select new ZtreeModel()
-                    {
-                        id = dept.DeptID.ToString(),
-                        name = dept.DeptName,
-                        pId = dept.UpperDeptID.ToString(),
-                        type = 1
-                    }).ToList();
-                if (deptsonment.Any())
-                {
-                    list.AddRange(deptsonment);
-                }
-            }
 
             return list;
         }

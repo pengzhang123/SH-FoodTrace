@@ -13,6 +13,6 @@ namespace FoodTrace.IDBAccess
         /// 获取企业机构树
         /// </summary>
         /// <returns></returns>
-        List<ZtreeModel> GetCompantTree();
+        List<ZtreeModel> GetCompantTree(int comId);
     }
 }

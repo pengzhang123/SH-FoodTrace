@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.IService
 {
@@ -46,6 +47,16 @@ namespace FoodTrace.IService
         /// <param name="pSize">每页显示条数</param>
         /// <returns></returns>
         List<UserBaseDto> GetUserBasePaging(string name, int pIndex, int pSize);
+
+        /// <summary>
+        /// 根据条件查询分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <param name="deptId"></param>
+        /// <returns></returns>
+        GridList<UserBaseDto> GetUserBasePaging(int pIndex, int pSize, int deptId, string uName);
         /// <summary>
         /// 通过ID获取UserBase
         /// </summary>

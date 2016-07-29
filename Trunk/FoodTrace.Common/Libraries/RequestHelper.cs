@@ -25,7 +25,7 @@ namespace FoodTrace.Common.Libraries
         {
             if (HttpContext.Current.Request.Form[key] != null)
             {
-                defVal = HttpContext.Current.Request.QueryString[key];
+                defVal = HttpContext.Current.Request.Form[key];
             }
 
             return defVal;

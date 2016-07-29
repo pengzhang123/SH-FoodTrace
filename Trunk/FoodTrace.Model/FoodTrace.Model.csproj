@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDto\GridList.cs" />
     <Compile Include="BaseDto\ResultJson.cs" />
     <Compile Include="BaseDto\TreeModelDto.cs" />
     <Compile Include="BaseModel.cs" />

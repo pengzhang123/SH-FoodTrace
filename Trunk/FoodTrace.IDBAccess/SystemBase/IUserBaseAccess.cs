@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.IDBAccess
 {
@@ -38,5 +39,16 @@ namespace FoodTrace.IDBAccess
         /// <param name="model"></param>
         /// <returns></returns>
         MessageModel UpdateUserBase(UserBaseDto model);
+
+
+        /// <summary>
+        /// 根据条件查询分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <param name="deptId"></param>
+        /// <returns></returns>
+        GridList<UserBaseDto> GetUserBasePaging(int comId, int pIndex, int pSize, int deptId, string uName);
     }
 }

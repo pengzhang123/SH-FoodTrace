@@ -328,7 +328,10 @@
                         }, {
                             text: '取消',
                             iconCls: 'icon-cancel',
-                            handler: function () { userDialog.dialog("close"); }
+                            handler: function () {
+                                $('#mainForm')[0].reset();
+                                 userDialog.dialog("close");
+                            }
                         }
                 ],
                 onClose: function () { }
@@ -375,13 +378,14 @@
 
         //树节点点击事件
         function orgTreeClick(event, treeId, treeNode) {
-            var id = treeNode.id;
+            var id = 0;
             var type = treeNode.type;
             console.log('id:' + id + ",type=" + type);
-
+            if (type == 1) {
+                id = treeNode.id;
+            }
             gridList.datagrid('reload', {
-                id: id,
-                type: type
+                id: id
             });
 
 
@@ -423,8 +427,8 @@
             }
             Utils.ajaxPost('/UserBase/SaveUserData', $form.serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-
-                    $.messager.alert('提示', '保存成功',function() {
+                    $('#mainForm')[0].reset();
+                    $.messager.alert('提示', '保存成功',null,function() {
                         userDialog.dialog('close');
                     });
                     gridList.datagrid('reload');

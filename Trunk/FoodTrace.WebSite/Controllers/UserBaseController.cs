@@ -120,7 +120,7 @@ namespace FoodTrace.WebSite.Controllers
 
             }
 
-            return Json(result,JsonRequestBehavior.AllowGet);
+            return JsonEx(result);
         }
         /// <summary>
         /// 保存数据
@@ -182,11 +182,11 @@ namespace FoodTrace.WebSite.Controllers
         /// <returns></returns>
         public JsonResult GetUserList(int page, int rows)
         {
-            var comId = RequestHelper.RequestPost("id", "0");
-            var type = RequestHelper.RequestPost("type", "0");
+            var depId = RequestHelper.RequestPost("id", "0");
+            //var type = RequestHelper.RequestPost("type", "0");
             var uName = RequestHelper.RequestPost("uName", string.Empty);
 
-            var userlist = userBaseService.GetUserBasePaging("", page, rows);
+            var userlist = userBaseService.GetUserBasePaging(page, rows, Convert.ToInt32(depId), uName);
             return Json(userlist);
         }
 

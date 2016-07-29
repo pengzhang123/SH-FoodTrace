@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.DBAccess
 {
@@ -134,8 +135,9 @@ namespace FoodTrace.DBAccess
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
                 context.UserBase.Add(userBase);
-                int uid = context.SaveChanges();
-                userDetail.UserID = userBase.UserID;
+                 context.SaveChanges();
+                int uid = userBase.UserID;
+                userDetail.UserID = uid;
                 context.UserDetail.Add(userDetail);
                 context.SaveChanges();
                 return string.Empty;
@@ -153,7 +155,7 @@ namespace FoodTrace.DBAccess
 
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var data = context.UserBase.FirstOrDefault(m => m.UserID == model.UserId && m.ModifyTime == model.ModifyTime);
+                var data = context.UserBase.FirstOrDefault(m => m.UserID == model.UserId);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.UserCode = model.UserCode;
                 data.Password = model.Password;
@@ -169,25 +171,33 @@ namespace FoodTrace.DBAccess
                 data.ModifyTime = DateTime.Now;
 
                 //详细数据
-                var userDetail = context.UserDetail.Find(model.DetailId);
-                if (userDetail != null)
+                var userDetail = context.UserDetail.FirstOrDefault(s => s.UserID == model.UserId);
+
+                if (userDetail == null)
                 {
-                    userDetail.UserPhoto = model.UserPhoto;
-                    userDetail.EntryDate = model.EntryDate;
-                    userDetail.FormalDate = model.FormalDate;
-                    userDetail.LeaveDate = model.LeaveDate;
-                    userDetail.QQ = model.QQ;
-                    userDetail.BirthDay = model.BirthDay;
-                    userDetail.Email = model.Email;
-                    userDetail.IDCard = model.IDCard;
-                    userDetail.Mobile = model.Mobile;
-                    userDetail.Marriage = model.Marriage;
-                    userDetail.Gender = model.Gender;
-                    userDetail.Education = model.Education;
-                    userDetail.HomeAddress = model.HomeAddress;
-                    userDetail.Remark = model.Remark;
-                    userDetail.AttendanceNo = model.AttendanceNo;
-                    userDetail.BankNo = model.BankNo;
+                    userDetail = new UserDetailModel();
+                }
+                userDetail.UserPhoto = model.UserPhoto;
+                userDetail.EntryDate = model.EntryDate;
+                userDetail.FormalDate = model.FormalDate;
+                userDetail.LeaveDate = model.LeaveDate;
+                userDetail.QQ = model.QQ;
+                userDetail.BirthDay = model.BirthDay;
+                userDetail.Email = model.Email;
+                userDetail.IDCard = model.IDCard;
+                userDetail.Mobile = model.Mobile;
+                userDetail.Marriage = model.Marriage;
+                userDetail.Gender = model.Gender;
+                userDetail.Education = model.Education;
+                userDetail.HomeAddress = model.HomeAddress;
+                userDetail.Remark = model.Remark;
+                userDetail.AttendanceNo = model.AttendanceNo;
+                userDetail.BankNo = model.BankNo;
+
+                if (userDetail.DetailID == 0)
+                {
+                    userDetail.UserID = model.UserId;
+                    context.UserDetail.Add(userDetail);
                 }
                 //data.UserDetail = userDetail;
                 context.SaveChanges();
@@ -252,6 +262,48 @@ namespace FoodTrace.DBAccess
                     .OrderBy(m => m.UserID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 
+        /// <summary>
+        ///根据条件查询分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <param name="deptId"></param>
+        /// <returns></returns>
+        public GridList<UserBaseDto> GetUserBasePaging(int comId, int pIndex, int pSize, int deptId, string uName)
+        {
+            var query = (from s in Context.UserBase
+                join com in Context.Company on s.CompanyID equals com.CompanyID
+                join dept in Context.Dept on s.DeptID equals dept.DeptID into depl
+                from deptleft in depl.DefaultIfEmpty()
+                where s.CompanyID == comId
+                select new UserBaseDto()
+                {
+                    UserId = s.UserID,
+                    UserCode = s.UserCode,
+                    Password = s.Password,
+                    UserName = s.UserName,
+                    AreaCode = s.AreaCode,
+                    UserType = s.UserType,
+                    CompanyName = com.CompanyName,
+                    DeptName = deptleft.DeptName,
+                    Status = s.Status
+                }).AsQueryable();
+              
+            
+            if (deptId > 0)
+            {
+                query = query.Where(s => s.DeptID == deptId);
+            }
+            if (!string.IsNullOrEmpty(uName))
+            {
+                query = query.Where(s => s.UserName.Contains(uName));
+            }
+            int count = query.Count();
+            var data =query.OrderBy(o=>o.UserId).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<UserBaseDto>(){total = count,rows =data};
+        }
 
         /// <summary>
         /// 获取当前用户所在公司的人员信息（分页）
