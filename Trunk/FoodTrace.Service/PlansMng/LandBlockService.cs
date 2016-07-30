@@ -37,7 +37,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetLandBlockCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return landBlockAccess.GetEntityCount(companyID, name.Trim());
         }
 
@@ -51,7 +51,7 @@ namespace FoodTrace.Service
         public List<LandBlockModel> GetPagerLandBlock(string name, int pageIndex, int pageSize)
         {
             //var test = landBlockAccess.GetAllEntities();
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = landBlockAccess.GetPagerLandBlockByConditions(companyID, name.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetLandBase(m));
             return result;

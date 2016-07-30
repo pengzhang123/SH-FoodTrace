@@ -51,13 +51,13 @@ namespace FoodTrace.Service
 
         public int GetBreedDrugCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return breedDrugAccess.GetEntityCount(companyID, name);
         }
 
         public List<BreedDrugModel> GetPagerBreedDrug(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = breedDrugAccess.GetPagerBreedDrugByConditions(companyID, name.Trim(), pageIndex, pageSize);
             return result;
         }

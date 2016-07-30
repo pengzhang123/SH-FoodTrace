@@ -75,18 +75,18 @@
             <tr>
                 <td>登录账号</td>
                 <td>
-                    <input type="text" name="UserCode" value="" class="easyui-validatebox " data_options="required:true" />
+                    <input type="text" name="UserCode" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>登录密码</td>
                 <td>
-                    <input type="text" name="Password" value="" class="easyui-validatebox " data_options="required:true" />
+                    <input type="text" name="Password" value="" class="easyui-validatebox" data-options="required:true" />
 
                 </td>
             </tr>
             <tr>
                 <td>用户姓名</td>
                 <td>
-                    <input type="text" name="UserName" value="" class="easyui-validatebox " data_options="required:true" />
+                    <input type="text" name="UserName" value="" class="easyui-validatebox" data-options="required:true" />
                   
                 </td>
                 <td>公司ID</td>
@@ -155,7 +155,7 @@
             <tr>
                 <td>手机号码</td>
                 <td>
-                    <input type="text" name="Mobile" value="" class="easyui-validatebox" data_options="required:true" />
+                    <input type="text" name="Mobile" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>婚姻状况</td>
                 <td>
@@ -188,21 +188,21 @@
             <tr>
                 <td>常用住址</td>
                 <td>
-                    <input type="text" name="HomeAddress" value="" class="easyui-validatebox" data_options="required:true" />
+                    <input type="text" name="HomeAddress" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>备注</td>
                 <td>
-                    <input type="text" name="Remark" value="" class="easyui-validatebox" data_options="required:true" />
+                    <input type="text" name="Remark" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
             </tr>
             <tr>
                 <td>指纹考勤号</td>
                 <td>
-                    <input type="text" name="AttendanceNo" value="" class="easyui-validatebox" data_options="required:true" />
+                    <input type="text" name="AttendanceNo" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>工资发放账号</td>
                 <td>
-                    <input type="text" name="BankNo" value="" class="easyui-validatebox" data_options="required:true" />
+                    <input type="text" name="BankNo" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
             </tr>
             <tr>
@@ -378,14 +378,15 @@
 
         //树节点点击事件
         function orgTreeClick(event, treeId, treeNode) {
-            var id = 0;
+            var id = treeNode.id;
             var type = treeNode.type;
             console.log('id:' + id + ",type=" + type);
-            if (type == 1) {
-                id = treeNode.id;
-            }
+            //if (type == 1) {
+            //    id = treeNode.id;
+            //}
             gridList.datagrid('reload', {
-                id: id
+                id: id,
+                type:type
             });
 
 
@@ -435,7 +436,7 @@
                     });
                     gridList.datagrid('reload');
                 } else {
-                    $.messager.alert('提示', '保存失败');
+                    $.messager.alert('提示', ret.Msg);
                 }
             });
         }

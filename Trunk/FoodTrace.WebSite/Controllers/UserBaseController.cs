@@ -33,7 +33,7 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Index()
         {
             var user = new UserBaseDto();
-            UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
+           // UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
           //  var userlist = userBaseService.GetPagerUserBase("", 1, 10);
             //var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_=>new { UserBase_CompanyName=_.CompanyName, UserBase_CompanyID=_.CompanyID });
             var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_ => new { CompanyName = _.CompanyName, CompanyID = _.CompanyID });
@@ -47,7 +47,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult Create()
         {
-            UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
+           // UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
             var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_ => new { CompanyName = _.CompanyName, CompanyID = _.CompanyID });
             //var deptlist = deptService.GetPagerDept(string.Empty, 1, 100).Select(_ => new { DeptName = _.DeptName, DeptID = _.DeptID });
             //var rolelist = roleService.GetPagerRole("", 1, 100);
@@ -136,6 +136,12 @@ namespace FoodTrace.WebSite.Controllers
                 var msg = new MessageModel();
                 if (model.UserId == 0)
                 {
+                    bool existuser = userBaseService.JudgeUserExist(model.UserCode);
+                    if (existuser)
+                    {
+                        result.Msg = "用户名已存在";
+                        return Json(result);
+                    }
                     msg = userBaseService.InsertUserBase(model);
                 }
                 else
@@ -145,6 +151,10 @@ namespace FoodTrace.WebSite.Controllers
                 if (msg.Status == MessageStatus.Success)
                 {
                     result.IsSuccess = true;
+                }
+                else
+                {
+                    result.Msg = "保存数据失败";
                 }
             }
             catch (Exception ex)
@@ -182,11 +192,22 @@ namespace FoodTrace.WebSite.Controllers
         /// <returns></returns>
         public JsonResult GetUserList(int page, int rows)
         {
-            var depId = RequestHelper.RequestPost("id", "0");
-            //var type = RequestHelper.RequestPost("type", "0");
+            int comId = 0;
+            int deptId = 0;
+            var id = RequestHelper.RequestPost("id", "0");
+            var type = RequestHelper.RequestPost("type", "0");
+            if (type =="0")
+            {
+                comId = Convert.ToInt32(id);
+            }
+            if (type == "1")
+            {
+                deptId = Convert.ToInt32(id);
+            } 
+
             var uName = RequestHelper.RequestPost("uName", string.Empty);
 
-            var userlist = userBaseService.GetUserBasePaging(page, rows, Convert.ToInt32(depId), uName);
+            var userlist = userBaseService.GetUserBasePaging(comId,page, rows, deptId, uName);
             return Json(userlist);
         }
 
@@ -234,7 +255,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult ListInfo()
         {
-            UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
+            //UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
             var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_ => new { CompanyName = _.CompanyName, CompanyID = _.CompanyID });
             var deptlist = deptService.GetPagerDept(string.Empty, 1, 100).Select(_ => new { DeptName = _.DeptName, DeptID = _.DeptID });
             return Json(new  { companys= companylist, depts= deptlist },  JsonRequestBehavior.AllowGet);

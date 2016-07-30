@@ -45,7 +45,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult Create()
         {
-            Common.Libraries.UserManagement.CurrentCompany = new CompanyModel() { CompanyID = 1 };
+            //Common.Libraries.UserManagement.CurrentCompany = new CompanyModel() { CompanyID = 1 };
             var lstCompany = companyService.GetPagerCompany(string.Empty, 1, 100);
             List<SelectListItem> companyList = new List<SelectListItem>();
             foreach (var item in lstCompany)

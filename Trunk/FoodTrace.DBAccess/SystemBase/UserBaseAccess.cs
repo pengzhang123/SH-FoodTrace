@@ -264,6 +264,22 @@ namespace FoodTrace.DBAccess
         }
 
         /// <summary>
+        /// 判断用户登录名是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool JudgeUserExist(string username)
+        {
+            var user = Context.UserBase.FirstOrDefault(s => s.UserCode == username);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+             return true;
+        }
+        /// <summary>
         ///根据条件查询分页
         /// </summary>
         /// <param name="comId"></param>
@@ -277,7 +293,6 @@ namespace FoodTrace.DBAccess
                 join com in Context.Company on s.CompanyID equals com.CompanyID
                 join dept in Context.Dept on s.DeptID equals dept.DeptID into depl
                 from deptleft in depl.DefaultIfEmpty()
-                where s.CompanyID == comId
                 select new UserBaseDto()
                 {
                     UserId = s.UserID,
@@ -286,12 +301,17 @@ namespace FoodTrace.DBAccess
                     UserName = s.UserName,
                     AreaCode = s.AreaCode,
                     UserType = s.UserType,
+                    DeptID = s.DeptID,
+                    CompanyID = s.CompanyID,
                     CompanyName = com.CompanyName,
                     DeptName = deptleft.DeptName,
                     Status = s.Status
                 }).AsQueryable();
-              
-            
+
+            if (comId > 0)
+            {
+                query = query.Where(s => s.CompanyID == comId);
+            }
             if (deptId > 0)
             {
                 query = query.Where(s => s.DeptID == deptId);

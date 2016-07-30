@@ -15,12 +15,12 @@ namespace FoodTrace.Forms.ViewModels
     public class LoginViewModel : ViewAware
     {
         ICompanyService iCompanyService = new CompanyService();
-
+        public string LoginName { get; set; }
         public void Login()
         {
             //System.Windows.Application.Current.Shutdown();
-            
-            UserManagement.CurrentCompany = iCompanyService.GetCompanyById(UserManagement.CurrentUser.CompanyID.Value);
+            string name = LoginName;
+            UserManagement.CurrentCompany = iCompanyService.GetCompanyById(UserManagement.CurrentUser.CompanyId);
 
 
             var win = GetView() as System.Windows.Window;

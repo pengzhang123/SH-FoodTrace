@@ -39,7 +39,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetProcessBatchCount(string batchNo)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return processBatchAccess.GetEntityCount(companyID, batchNo.Trim());
         }
 
@@ -52,7 +52,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<ProcessBatchModel> GetPagerProcessBatch(string batchNo, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = processBatchAccess.GetPagerProcessBatchByConditions(companyID, batchNo.Trim(), pageIndex, pageSize);
             return result;
         }

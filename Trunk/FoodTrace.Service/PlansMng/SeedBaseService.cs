@@ -35,7 +35,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetSeedBaseCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return seedBaseAccess.GetEntityCount(name.Trim());
         }
 
@@ -48,7 +48,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<SeedBaseModel> GetPagerSeedBase(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return seedBaseAccess.GetPagerSeedBaseByConditions(name.Trim(), pageIndex, pageSize);
         }
 

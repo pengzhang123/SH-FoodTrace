@@ -38,7 +38,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetTrunApplyCount(string applyNo)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return trunApplyAccess.GetEntityCount(companyID, applyNo.Trim());
         }
 
@@ -51,7 +51,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<TrunApplyModel> GetPagerTrunApply(string applyNo, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = trunApplyAccess.GetPagerTrunApplyByConditions(companyID, applyNo.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetCompany(m));
             return result;

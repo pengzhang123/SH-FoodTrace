@@ -15,6 +15,7 @@
     @Styles.Render("~/Content/jquery-easyui-1.4.5/themes/icon.css")
     @Scripts.Render("~/Content/jquery-easyui-1.4.5/jquery.min.js")
     @Scripts.Render("~/Content/jquery-easyui-1.4.5/jquery.easyui.min.js")
+    <script src="~/Scripts/base/easyuiUtils.js"></script>
     <style type="text/css">
         ul {
             list-style-type: none;
@@ -38,12 +39,16 @@
     </style>
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north'" style="height:80px;">
+    <div data-options="region:'north'" style="height: 100px; background: #CCECF8; ">
+        <div style="position: absolute; left: 0px; bottom: 0px;">
+            <img src="~/Images/titlehx.png" style="margin-top:0px;margin-left:0px;height: 100px;" />
+        </div>
+        <div style="position: absolute; right: 50px; bottom: 20px;">
+            <a id="btn" href="@Url.Action("LoginOut","Home")" class="easyui-linkbutton">退出系统</a>  
+        </div>
 
-        <img src="~/Images/title.png" style="margin-top:15px;margin-left:15px;" />
-        <a href="@Url.Action("LoginOut","Home")">退出</a>
     </div>
-    <div data-options="region:'west',split:true" title="菜单 Menu" style="width:150px;">
+    <div data-options="region:'west',split:true" title="菜单 Menu" style="width:180px;">
         <div class="easyui-accordion" data-options="fit:true,border:false">
             <div title="后台管理" style="padding:10px;text-align:left;">
                 <ul>
@@ -57,73 +62,22 @@
             </div>
         </div>
     </div>
-    <div id="tt" class="easyui-tabs" style="border-style:none;" data-options="region:'center',title:'',iconCls:'icon-ok'">
+    <div id="tabs" class="easyui-tabs" style="border-style:none;" data-options="region:'center',title:'',iconCls:'icon-ok'">
+        
     </div>
-    <script type="text/javascript">
-        function addTab(title, url) {
-            if ($('#tt').tabs('exists', title)) {
-                $('#tt').tabs('select', title);
-            } else {
-                var content = '<iframe scrolling="auto" frameborder="0" src="' + url + '" style="width:100%;height:99%;border-style:none;"></iframe>';
-                $('#tt').tabs('add', {
-                    title: title,
-                    content: content,
-                    closable: true
-                });
-            }
-            
-        }
-    </script>
+    
+    <div id="mm" class="easyui-menu" style="width: 150px;">
+        <div id="refresh" data-options="iconCls:'icon-arrow_refresh'">刷新</div>
+        <div class="menu-sep"></div>
+        <div id="close">关闭</div>
+        <div id="closeall">全部关闭</div>
+        <div id="closeother">除此之外全部关闭</div>
+        <div class="menu-sep"></div>
+        <div id="closeright">当前页右侧全部关闭</div>
+        <div id="closeleft">当前页左侧全部关闭</div>
+        <div class="menu-sep"></div>
+        @*<div id="exit">退出</div>*@
+    </div>
 </body>
 </html>
-@*<body>
-        <div id="head">
-            <img src="~/Images/title_bg.png" class="title_bg" alt="">
-            <div class="headleft">
-                <img src="~/Images/title.png" alt="">
-            </div>
-            <div class="headright">
-                <img class="headicon" src="~/Images/back.png" alt="">
-                <img class="headicon" src="~/Images/admin.png" alt="">
-                <img class="headicon" src="~/Images/home.png" alt="">
-                <div class="clearbox"></div>
-                <div class="wel">欢迎您登录：<span class="username">管理员</span>　<span class="logout">【退出】</span></div>
-            </div>
-        </div>
-        <div id="navi">
-            <ul>
-                <li class="navi_first"><a href="javascript:;">系统设置</a></li>
-                <li class="on"><a href="javascript:;">系统管理</a></li>
-                <li><a href="javascript:;">信息管理</a></li>
-                <li><a href="javascript:;">待办事项</a></li>
-                <li><a href="javascript:;">备注</a></li>
-            </ul>
-        </div>
-        <div id="menu" style="height:501px;">
-            <ul>
-                <li class="menu_first">导航菜单 menu</li>
-                <li>平台管理系统</li>
-                <li class="menu_second" style="display:block;">
-                    <ul>
-                        <li>>  <a href="/Company">公司管理</a></li>
-                        <li>>  <a href="/Dept">部门管理</a></li>
-                        <li>>  <a href="/UserBase">用户管理</a></li>
-                        <li>>  <a href="/Role">角色管理</a></li>
-                        <li>>  <a href="/Menu">菜单管理</a></li>
-                        <li>>  <a href="/AreaPlat">平台管理</a></li>
-                        <li>>  <a href="/Area">区域管理</a></li>
-                        <li>>  <a href="/Province">省份管理</a></li>
-                        <li>>  <a href="/City">城市管理</a></li>
-                        <li>>  <a href="/Country">区县管理</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div id="con">
-            <div id="info" style="height:501px;">
-                @RenderBody()
-            </div>
-        </div>
-        <div style="text-align:center;">版权所有:  环县食品溯源管理系统      版本v1.0</div>
-    </body>
-    </html>*@
+

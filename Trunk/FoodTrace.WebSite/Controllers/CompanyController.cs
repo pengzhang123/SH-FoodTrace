@@ -20,7 +20,7 @@ namespace FoodTrace.WebSite.Controllers
         // GET: Company
         public ActionResult Index()
         {
-            UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
+          //  UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
             //var lstCompany = companyService.GetPagerCompany("", 1, 10);
             return View();
         }

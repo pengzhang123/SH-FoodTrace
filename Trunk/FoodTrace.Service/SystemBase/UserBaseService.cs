@@ -43,7 +43,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetUserBaseCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return userBaseAccess.GetEntityCount(companyID, name.Trim());
         }
 
@@ -56,7 +56,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<UserBaseModel> GetPagerUserBase(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = userBaseAccess.GetPagerUserBaseByConditions(companyID, name.Trim(), pageIndex, pageSize);
             //foreach (var item in result)
             //{
@@ -75,15 +75,15 @@ namespace FoodTrace.Service
         /// <param name="pSize"></param>
         /// <param name="deptId"></param>
         /// <returns></returns>
-        public GridList<UserBaseDto> GetUserBasePaging(int pIndex, int pSize, int deptId, string uName)
+        public GridList<UserBaseDto> GetUserBasePaging(int comId,int pIndex, int pSize, int deptId, string uName)
         {
-            int companyId = UserManagement.CurrentCompany.CompanyID;
-            var result = userBaseAccess.GetUserBasePaging(companyId, pIndex, pSize, deptId, uName);
+            //int companyId = UserManagement.CurrentUser.CompanyId;
+            var result = userBaseAccess.GetUserBasePaging(comId, pIndex, pSize, deptId, uName);
             return result;
         }
         public List<UserBaseDto> GetUserBasePaging(string name, int pIndex, int pSize)
         {
-            int comId = UserManagement.CurrentCompany.CompanyID;
+            int comId = UserManagement.CurrentUser.CompanyId;
 
             return userBaseAccess.GetUserBasePaging(comId,name, pIndex, pSize);
         }
@@ -187,6 +187,17 @@ namespace FoodTrace.Service
         public MessageModel UpdateUserBase(UserBaseDto model)
         {
             return userBaseAccess.UpdateUserBase(model);
+        }
+
+
+        /// <summary>
+        /// 判断用户登录名是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public bool JudgeUserExist(string username)
+        {
+            return userBaseAccess.JudgeUserExist(username);
         }
     }
 }

@@ -52,13 +52,13 @@ namespace FoodTrace.Service
 
         public int GetBreedBatchDetailCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return breedBatchDetail.GetEntityCount(companyID, name);
         }
 
         public List<BreedBatchDetailModel> GetPagerBreedBatchDetail(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = breedBatchDetail.GetPagerBreedBatchDetailByConditions(companyID, name.Trim(), pageIndex, pageSize);
             return result;
         }

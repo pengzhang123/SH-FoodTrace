@@ -28,7 +28,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetTrunTemperatrueCount()
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return trunTemperatrueAccess.GetEntityCount();
         }
 
@@ -39,7 +39,7 @@ namespace FoodTrace.Service
         ///// <returns></returns>
         //public int GetTrunTemperatrueCount(string carNo)
         //{
-        //    int companyID = UserManagement.CurrentCompany.CompanyID;
+        //    int companyID = UserManagement.CurrentUser.CompanyId;
         //    return trunTemperatrueAccess.GetEntityCount(companyID, carNo.Trim());
         //}
 
@@ -51,7 +51,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<TrunTemperatrueModel> GetPagerTrunTemperatrue(int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = trunTemperatrueAccess.GetPagerTrunTemperatrueByConditions(companyID, pageIndex, pageSize);
             //result.ForEach(m => SetTrunApply(m));
             return result;

@@ -40,7 +40,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetDeptCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return deptAccess.GetEntityCount(companyID, name.Trim());
         }
 
@@ -53,7 +53,11 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<DeptModel> GetPagerDept(string name, int pageIndex, int pageSize,int? companyID=null)
         {
-            //int companyID = UserManagement.CurrentCompany.CompanyID;
+            //if (companyID == null)
+            //{
+            //    companyID= UserManagement.CurrentUser.CompanyId;
+            //}
+            //int companyID = UserManagement.CurrentUser.CompanyId;
             var result = deptAccess.GetPagerDeptByConditions(name.Trim(), pageIndex, pageSize,companyID);
             //result.ForEach(m => SetCompany(m));
             return result;

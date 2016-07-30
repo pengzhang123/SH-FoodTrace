@@ -40,7 +40,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetProcessProductCount(string code)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return processProductAccess.GetEntityCount(companyID, code.Trim());
         }
 
@@ -53,7 +53,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<ProcessProductModel> GetPagerProcessProduct(string code, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = processProductAccess.GetPagerProcessProductByConditions(companyID, code.Trim(), pageIndex, pageSize);
             return result;
         }

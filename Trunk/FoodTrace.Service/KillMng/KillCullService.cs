@@ -31,7 +31,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetKillCullCount()
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return killCullAccess.GetEntityCount();
         }
 
@@ -42,7 +42,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetKillCullCount(string code)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return killCullAccess.GetEntityCount(companyID, code);
         }
 
@@ -55,7 +55,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<KillCullModel> GetPagerKillCull(string code, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = killCullAccess.GetPagerKillCullByConditions(companyID, code.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetLandBase(m));
             return result;

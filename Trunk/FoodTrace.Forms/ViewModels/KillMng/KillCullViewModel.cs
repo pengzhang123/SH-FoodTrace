@@ -108,7 +108,7 @@ namespace FoodTrace.Forms.ViewModels
                 IsLocked = true,
                 IsShow = true,
                 Company = new CompanyModel { CompanyName = UserManagement.CurrentCompany.CompanyName, CompanyID = UserManagement.CurrentCompany.CompanyID },
-                CompanyID = UserManagement.CurrentUser.CompanyID
+                CompanyID = UserManagement.CurrentUser.CompanyId
             };
             var result = IoC.Get<IWindowManager>().ShowDialog(vm, null, new Dictionary<string, object>{
                 {"Title", "添加" },{"ResizeMode", System.Windows.ResizeMode.NoResize},

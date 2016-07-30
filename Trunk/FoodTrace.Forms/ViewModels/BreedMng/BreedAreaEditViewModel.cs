@@ -23,7 +23,7 @@ namespace FoodTrace.Forms.ViewModels
 
         public BreedAreaModel Model { get; set; }
         public EditMode Mode { get; set; }
-
+        
         public void LoadUserControl(BreedAreaEditView view)
         {
             var list = iBreedBaseService.GetPagerBreedBase("", 1, 100);
@@ -47,6 +47,7 @@ namespace FoodTrace.Forms.ViewModels
             {
                 iBreedAreaService.UpdateSingleBreedArea(Model);
             }
+
             var win = GetView() as System.Windows.Window;
             if (win != null)
             {

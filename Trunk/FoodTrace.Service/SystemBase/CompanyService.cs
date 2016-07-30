@@ -51,7 +51,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<CompanyModel> GetPagerCompany(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return companyAccess.GetPagerCompanyByConditions(name.Trim(), pageIndex, pageSize);
         }
 
@@ -101,7 +101,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<ZtreeModel> GetCompantTree()
         {
-            int comId = UserManagement.CurrentCompany.CompanyID;
+            int comId = UserManagement.CurrentUser.CompanyId;
             return companyAccess.GetCompantTree(comId);
         }
     }

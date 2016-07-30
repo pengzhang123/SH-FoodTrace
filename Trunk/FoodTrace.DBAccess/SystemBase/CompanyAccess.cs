@@ -120,21 +120,23 @@ namespace FoodTrace.DBAccess
         {
             var list = new List<ZtreeModel>();
             var company = (from com in Context.Company
-                where com.CompanyID == comId
+               // where com.CompanyID == comId
                 select new ZtreeModel()
                 {
                     id = com.CompanyID.ToString(),
                     name = com.CompanyName,
                     pId = "0",
                     type = 0
-                }).FirstOrDefault();
+                }).ToList();
 
-            if (company != null)
+            if (company.Any())
             {
-                list.Add(company);
+                list.AddRange(company);
+                var model = new ZtreeModel() {id = "0", name = "全部", pId = "", type = 0};
+                list.Add(model);
 
                 var deptbase = (from s in Context.Dept
-                                where s.CompanyID==comId
+                                //where s.CompanyID==comId
                     select s).ToList();
                 if (deptbase.Any())
                 {

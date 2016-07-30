@@ -28,11 +28,10 @@ namespace FoodTrace.WebSite.Controllers
             var user = iUserLoginService.GetUserLoginDto(model.UserName, model.Password);
             if(user == null)
             {
-                return Json(new { success=false,msg= "No Such User" });
+                return Json(new { success=false,msg= "用户名错误" });
             }
             var result = iUserLoginService.InsertSingleEntity(new LogUserLoginModel { UserID = user.UserID, LoginTime = DateTime.Now, NickName=user.UserName });
             Session["UserBase"] = user;
-            Session.Timeout =300;
             //Session["Role"] = user == null ? null : user.Role;
 
             return Json(new { success = true, msg = "Find the User" });

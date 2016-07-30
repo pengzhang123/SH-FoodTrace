@@ -51,13 +51,13 @@ namespace FoodTrace.Service
 
         public int GetBreedMaterialCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return breedMaterialAccess.GetEntityCount(companyID, name);
         }
 
         public List<BreedMaterialModel> GetPagerBreedMaterial(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = breedMaterialAccess.GetPagerBreedMaterialByConditions(companyID, name.Trim(), pageIndex, pageSize);
             return result;
         }

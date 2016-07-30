@@ -61,6 +61,14 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Edit(int id)
         {
             var model = menuService.GetMenuById(id);
+            var list = menuService.GetPagerMenu(string.Empty, 1, 100).OrderBy(_ => _.SortID).ToList();
+            List<SelectListItem> itemList = new List<SelectListItem>();
+            list.ForEach(m =>
+            {
+                itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
+            });
+            itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
+            ViewBag.MenuList = itemList;
             return PartialView(model);
         }
 

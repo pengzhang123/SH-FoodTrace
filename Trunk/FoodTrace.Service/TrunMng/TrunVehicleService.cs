@@ -38,7 +38,7 @@ namespace FoodTrace.Service.TrunMng
         /// <returns></returns>
         public int GetTrunVehicleCount(string carNo)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return trunVehicleAccess.GetEntityCount(companyID, carNo.Trim());
         }
 
@@ -51,7 +51,7 @@ namespace FoodTrace.Service.TrunMng
         /// <returns></returns>
         public List<TrunVehicleModel> GetPagerTrunVehicle(string carNo, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = trunVehicleAccess.GetPagerTrunVehicleByConditions(companyID, carNo.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetCompany(m));
             return result;

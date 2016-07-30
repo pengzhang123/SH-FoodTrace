@@ -14,8 +14,8 @@ namespace FoodTrace.Model
         public string Password { get; set; }
         public string DeptName { get; set; }
         public string CompanyName { get; set; }
-        public int DeptID { get; set; }
-        public int CompanyID { get; set; }
+        public int? DeptID { get; set; }
+        public int? CompanyID { get; set; }
         public string AreaCode { get; set; }
         public int? UserType { get; set; }
         public int? Status { get; set; }

@@ -56,7 +56,7 @@ namespace FoodTrace.IService
         /// <param name="pSize"></param>
         /// <param name="deptId"></param>
         /// <returns></returns>
-        GridList<UserBaseDto> GetUserBasePaging(int pIndex, int pSize, int deptId, string uName);
+        GridList<UserBaseDto> GetUserBasePaging(int comId,int pIndex, int pSize, int deptId, string uName);
         /// <summary>
         /// 通过ID获取UserBase
         /// </summary>
@@ -107,5 +107,12 @@ namespace FoodTrace.IService
         /// <param name="model"></param>
         /// <returns></returns>
         MessageModel UpdateUserBase(UserBaseDto model);
+
+        /// <summary>
+        /// 判断用户登录名是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        bool JudgeUserExist(string username);
     }
 }

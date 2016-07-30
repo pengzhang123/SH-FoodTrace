@@ -52,7 +52,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.Menu.FirstOrDefault(m => m.MenuID == model.MenuID && m.ModifyTime == model.ModifyTime);
+                var data = context.Menu.FirstOrDefault(m => m.MenuID == model.MenuID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.ParentID = model.ParentID;
                 data.Name = model.Name;

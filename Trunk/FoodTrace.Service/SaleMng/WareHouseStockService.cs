@@ -55,13 +55,13 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetWareHouseStockCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return wareHouseStockAccess.GetEntityCount(companyID, name);
         }
 
         public List<WareHouseStockModel> GetPagerWareHouseStock(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = wareHouseStockAccess.GetPagerWareHouseStockByConditions(companyID, name.Trim(), pageIndex, pageSize);
             return result;
         }

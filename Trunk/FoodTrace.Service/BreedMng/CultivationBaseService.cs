@@ -51,13 +51,13 @@ namespace FoodTrace.Service
 
         public int GetCultivationBaseCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return cultivationBaseAccess.GetEntityCount(companyID, name);
         }
 
         public List<CultivationBaseModel> GetPagerCultivationBase(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = cultivationBaseAccess.GetPagerCultivationBaseByConditions(companyID, name.Trim(), pageIndex, pageSize);
             return result;
         }

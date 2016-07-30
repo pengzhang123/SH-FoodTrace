@@ -39,7 +39,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetLandBaseCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return landBaseAccess.GetEntityCount(companyID, name.Trim());
         }
 
@@ -52,7 +52,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<LandBaseModel> GetPagerLandBase(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return landBaseAccess.GetPagerLandBaseByConditions(companyID, name.Trim(), pageIndex, pageSize);
         }
 

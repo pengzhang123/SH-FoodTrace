@@ -695,6 +695,7 @@
     <Content Include="Images\home.png" />
     <Content Include="Images\last.png" />
     <Content Include="Images\LoginBG.png" />
+    <Content Include="Images\LoginBG_hx.png" />
     <Content Include="Images\LoginBTN.png" />
     <Content Include="Images\menu_bg.png" />
     <Content Include="Images\navi_bg.png" />
@@ -702,11 +703,13 @@
     <Content Include="Images\pre.png" />
     <Content Include="Images\tag_bg.png" />
     <Content Include="Images\title.png" />
+    <Content Include="Images\titlehx.png" />
     <Content Include="Images\title_bg.png" />
     <Content Include="Images\word.png" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\base\amyUtils.js" />
+    <Content Include="Scripts\base\easyuiUtils.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

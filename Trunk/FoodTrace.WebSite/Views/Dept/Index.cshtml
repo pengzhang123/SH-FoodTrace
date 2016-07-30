@@ -10,7 +10,7 @@
 <script type="text/javascript">
     var editDialog;
     function Edit(id) {
-        editDialog.dialog('open').dialog('refresh', "/Dept/Edit/ " + id );
+        editDialog.dialog('open').dialog('refresh', "/Dept/Edit?id=" + id );
     }
 
     function Delete(id) {
@@ -55,6 +55,7 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelected');
                     if (row) {
+                        console.log(row);
                         Edit(row.DeptID);
                     }
                 }

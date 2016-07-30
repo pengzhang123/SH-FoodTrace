@@ -87,9 +87,17 @@ namespace FoodTrace.DBAccess
 
         public List<DeptModel> GetPagerDeptByConditions(string name, int pageIndex, int pageSize,int? companyID )
         {
-            return base.Context.Dept.Where(m => (companyID==null||m.CompanyID== companyID)
-                                            && (string.IsNullOrEmpty(name) || m.DeptName.Contains(name)))
-                    .OrderBy(m => m.DeptID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var query = Context.Dept.AsQueryable();
+
+            if (companyID != null)
+            {
+                query=query.Where(s=>s.CompanyID==companyID);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.DeptName.Contains(name));
+            }
+            return query.OrderBy(m => m.DeptID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }

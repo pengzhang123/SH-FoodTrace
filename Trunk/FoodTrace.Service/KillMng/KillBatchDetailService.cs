@@ -48,7 +48,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetKillBatchDetailCount(string code)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return killBatchDetailAccess.GetEntityCount(companyID, code.Trim());
         }
 
@@ -61,7 +61,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<KillBatchDetailModel> GetPagerKillBatchDetail(string code, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = killBatchDetailAccess.GetPagerKillBatchDetailByConditions(companyID, code.Trim(), pageIndex, pageSize);
             //foreach (var item in result)
             //{

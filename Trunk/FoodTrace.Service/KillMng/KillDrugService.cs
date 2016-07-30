@@ -41,7 +41,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetKillDrugCount(string code)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return killDrugAccess.GetEntityCount(companyID, code.Trim());
         }
 
@@ -54,7 +54,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<KillDrugModel> GetPagerKillDrug(string code, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = killDrugAccess.GetPagerKillDrugByConditions(companyID, code.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetKillCull(m));
             return result;

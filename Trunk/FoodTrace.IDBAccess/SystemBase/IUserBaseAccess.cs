@@ -40,7 +40,12 @@ namespace FoodTrace.IDBAccess
         /// <returns></returns>
         MessageModel UpdateUserBase(UserBaseDto model);
 
-
+        /// <summary>
+        /// 判断用户登录名是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        bool JudgeUserExist(string username);
         /// <summary>
         /// 根据条件查询分页
         /// </summary>

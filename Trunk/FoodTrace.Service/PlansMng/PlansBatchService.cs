@@ -42,7 +42,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetPlansBatchCount(string code)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return plansBatchAccess.GetEntityCount(companyID, code.Trim());
         }
 
@@ -55,7 +55,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<PlansBatchModel> GetPagerPlansBatch(string code, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = plansBatchAccess.GetPagerPlansBatchByConditions(companyID, code.Trim(), pageIndex, pageSize);
             //foreach (var item in result)
             //{

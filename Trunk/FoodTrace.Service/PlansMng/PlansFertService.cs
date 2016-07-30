@@ -41,7 +41,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetPlansFertCount(string code)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return plansFertAccess.GetEntityCount(companyID, code.Trim());
         }
 
@@ -54,7 +54,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<PlansFertModel> GetPagerPlansFert(string code, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = plansFertAccess.GetPagerPlansFertByConditions(companyID, code.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetPlansBatch(m));
             return result;

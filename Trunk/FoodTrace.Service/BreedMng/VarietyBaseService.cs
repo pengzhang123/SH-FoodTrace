@@ -51,7 +51,7 @@ namespace FoodTrace.Service
 
         public List<VarietyBaseModel> GetPagerVarietyBase(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = varietyBaseAccess.GetPagerVarietyBaseByConditions(companyID, name.Trim(), pageIndex, pageSize);
             return result;
         }
@@ -80,7 +80,7 @@ namespace FoodTrace.Service
 
         public int GetVarietyBaseCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return varietyBaseAccess.GetEntityCount(companyID, name);
         }
     }

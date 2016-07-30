@@ -41,7 +41,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public int GetPlansDrugCount(string name)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             return plansDrugAccess.GetEntityCount(companyID, name.Trim());
         }
 
@@ -54,7 +54,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<PlansDrugModel> GetPagerPlansDrug(string name, int pageIndex, int pageSize)
         {
-            int companyID = UserManagement.CurrentCompany.CompanyID;
+            int companyID = UserManagement.CurrentUser.CompanyId;
             var result = plansDrugAccess.GetPagerPlansDrugByConditions(companyID, name.Trim(), pageIndex, pageSize);
             //result.ForEach(m => SetPlansBatch(m));
             return result;
