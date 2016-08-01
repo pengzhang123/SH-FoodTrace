@@ -105,11 +105,11 @@
                     var url = $form.prop('action');
                     $.post(url, $form.serializeArray(), function (json) {
                         var msg = '';
-                        if (json.flag) {
+                        if (json) {
                             msg = "保存成功";
                             $('#DataGrid').datagrid('reload');
                         } else {
-                            msg = "保存失败<br />" + json.msg;
+                            msg = "保存失败<br />";
                         }
                         $.messager.progress('close');
                         $.messager.alert('信息提示', msg, 'info', function () {
@@ -150,7 +150,7 @@
                     }
 
                     $.messager.progress();
-                    var url = $form.prop('action');
+                    //var url = $form.prop('action');
                     $.post('/Dept/EditDept', $form.serialize(), function (json) {
 
                         var msg = '';

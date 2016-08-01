@@ -49,7 +49,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.ProductBase.FirstOrDefault(m => m.ProductID == model.ProductID && m.ModifyTime == model.ModifyTime);
+                var data = context.ProductBase.FirstOrDefault(m => m.ProductID == model.ProductID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.ProductName = model.ProductName;
                 data.ClassID = model.ClassID;

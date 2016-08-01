@@ -58,7 +58,7 @@ namespace FoodTrace.DBAccess
             {
                 var data =
                     context.Company.FirstOrDefault(
-                        m => m.CompanyID == model.CompanyID && m.ModifyTime == model.ModifyTime);
+                        m => m.CompanyID == model.CompanyID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.CompanyName = model.CompanyName;

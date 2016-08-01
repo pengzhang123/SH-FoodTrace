@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var menuList = ViewBag.Menu as List<FoodTrace.Model.MenuModel>
-    ;
-
+    var menuList = ViewBag.Menu as List<FoodTrace.Model.MenuModel>;
     }
     <h2>角色编辑</h2>
     @using (Html.BeginForm("Edit", "Role", FormMethod.Post))

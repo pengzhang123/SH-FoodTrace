@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using Antlr.Runtime.Tree;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
@@ -24,6 +25,8 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            int count = areaPlatService.GetAreaPlatCount();
+
             var areaPlatList = areaPlatService.GetPagerAreaPlat(string.Empty, page, rows).Select(m => new
             {
                 AreaID=m.AreaID,
@@ -31,7 +34,7 @@ namespace FoodTrace.WebSite.Controllers
                 AreaName = m.AreaName,
                 Remark = m.Remark
             });
-            return Json(areaPlatList, JsonRequestBehavior.AllowGet);
+            return Json(new{total=count,rows=areaPlatList}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()

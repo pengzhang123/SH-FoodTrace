@@ -55,6 +55,8 @@ namespace FoodTrace.DBAccess
                 var data = context. AreaPlat.FirstOrDefault(m => m.AreaID == model.AreaID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.AreaName = model.AreaName;
+                data.AreaCode = model.AreaCode;
+                data.Remark = model.Remark;
                 context.SaveChanges();
                 return string.Empty;
             };

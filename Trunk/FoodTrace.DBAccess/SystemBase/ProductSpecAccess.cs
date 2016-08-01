@@ -66,7 +66,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = (context =>
             {
-                var data = context.ProductSpec.FirstOrDefault(m => m.SPCID == model.SPCID && m.ModifyTime == model.ModifyTime);
+                var data = context.ProductSpec.FirstOrDefault(m => m.SPCID == model.SPCID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.SPCID = model.SPCID;

@@ -30,7 +30,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public JsonResult GetList(int page, int rows)
         {
-           
+            int count = deptService.GetDeptCount();
             var lstDept = deptService.GetPagerDept(string.Empty, page, rows).Select(m => new
             {
                 DeptID=m.DeptID,
@@ -40,7 +40,7 @@ namespace FoodTrace.WebSite.Controllers
                 DeptRemark = m.DeptRemark,
                 SortID = m.SortID
             }).ToList();
-            return Json(lstDept, JsonRequestBehavior.AllowGet);
+            return Json(new { total = count, rows = lstDept }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -60,20 +60,27 @@ namespace FoodTrace.WebSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DeptModel deptModel)
+        public JsonResult Create(DeptModel deptModel)
         {
+            var result = false;
             try
             {
                 // TODO: Add insert logic here
                 if (deptModel.UpperDeptID.HasValue && deptModel.UpperDeptID.Value == 0)
                     deptModel.UpperDeptID = null;
-                var result = deptService.InsertSingleDept(deptModel);
-                return RedirectToAction("Index");
+                var msg = deptService.InsertSingleDept(deptModel);
+               // return RedirectToAction("Index");
+                if (msg.Status == MessageStatus.Success)
+                {
+                    result = true;
+                }
             }
             catch
             {
-                return View();
+               
             }
+
+            return Json(result);
         }
 
         /// <summary>

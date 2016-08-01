@@ -21,12 +21,13 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            int count = areaService.GetAreaCount();
             var provinceList = areaService.GetPagerArea(string.Empty, page, rows).Select(_ => new
             {
                 AreaID = _.AreaID,
                 AreaName = _.AreaName
             });
-            return Json(provinceList, JsonRequestBehavior.AllowGet);
+            return Json(new {total=count,rows=provinceList}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
