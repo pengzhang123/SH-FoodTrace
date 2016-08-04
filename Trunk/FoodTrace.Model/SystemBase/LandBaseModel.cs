@@ -14,8 +14,8 @@ namespace FoodTrace.Model
         public int LandID { get; set; }
 
         public int CompanyID { get; set; }
-        [ForeignKey("CompanyID")]
-        public virtual CompanyModel Company { get; set; }
+        //[ForeignKey("CompanyID")]
+        //public virtual CompanyModel Company { get; set; }
 
         public string LandCode { get; set; }
         public string LandName { get; set; }
@@ -24,6 +24,9 @@ namespace FoodTrace.Model
         public decimal? LandArea { get; set; }
         public int? EmployeesNum { get; set; }
         public int? LandState { get; set; }
+        /// <summary>
+        /// 1:种植,2:养殖
+        /// </summary>
         public int? LandType { get; set; }
         public string Address { get; set; }
         public string Lon { get; set; }

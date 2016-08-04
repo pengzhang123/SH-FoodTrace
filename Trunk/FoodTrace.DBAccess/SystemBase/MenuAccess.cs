@@ -92,5 +92,25 @@ namespace FoodTrace.DBAccess
             return base.Context.Menu.Where(m => (string.IsNullOrEmpty(name) || m.Name.Contains(name)))
                     .OrderBy(m => m.MenuID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeletMenuByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var menu = context.Menu.Where(s => ids.Contains(s.MenuID.ToString())).ToList();
+                if (menu.Any())
+                {
+                    context.BatchDelete(menu);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            var count = roleService.GetRoleCount();
             var list = roleService.GetPagerRole(string.Empty, page, rows).Select(_ => new
             {
                 RoleID = _.RoleID,
@@ -37,7 +38,7 @@ namespace FoodTrace.WebSite.Controllers
                 Remark = _.Remark,
                 SortID = _.SortID
             });
-            return Json(list, JsonRequestBehavior.AllowGet);
+            return Json(new{total=count,rows=list}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -131,6 +132,18 @@ namespace FoodTrace.WebSite.Controllers
             return Json(new { flag = flag, msg = msg });
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult DeletRole(string ids)
+        {
+            var result = roleService.DeleteRolesByIds(ids);
+            var flag = result.Status == MessageStatus.Success ? true : false;
+            var msg = result.Message;
+            return Json(new { flag = flag, msg = msg });
+        }
         /// <summary>
         /// 设置角色菜单权限
         /// </summary>

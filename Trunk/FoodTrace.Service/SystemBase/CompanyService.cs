@@ -96,6 +96,15 @@ namespace FoodTrace.Service
         }
 
         /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteCompanyByIds(string ids)
+        {
+            return companyAccess.DeleteCompanyByIds(ids);
+        }
+        /// <summary>
         /// 获取企业机构树
         /// </summary>
         /// <returns></returns>

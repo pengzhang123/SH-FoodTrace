@@ -235,6 +235,28 @@ namespace FoodTrace.WebSite.Controllers
         }
 
         /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult DeleteUser(string ids)
+        {
+            var result = new ResultJson();
+            try
+            {
+                var msg = userBaseService.DeleteUser(ids);
+                if (msg.Status == MessageStatus.Success)
+                {
+                    result.IsSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.ToString());
+            }
+            return Json(result);
+        }
+        /// <summary>
         /// 获取公司部门机构数
         /// </summary>
         /// <returns></returns>

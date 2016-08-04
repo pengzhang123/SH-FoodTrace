@@ -74,6 +74,15 @@ Utils.validateForm = function (formObj, submitFn) {
     });
 }
 
+Utils.resetForm=function(formObj) {
+    formObj[0].reset();
+    var hidenObj = formObj.find('input[type="hidden"]');
+    if (hidenObj.length > 0) {
+        hidenObj.each(function () {
+            $(this).val('');
+        });
+    }
+}
 //字符串转换
 Utils.formatBoolean = function (val) {
     if (typeof val == "boolean") {

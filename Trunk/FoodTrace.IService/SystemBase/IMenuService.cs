@@ -1,4 +1,5 @@
-﻿using FoodTrace.Model;
+﻿using System.Security.Cryptography.X509Certificates;
+using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,5 +59,12 @@ namespace FoodTrace.IService
         /// <param name="id">主键</param>
         /// <returns></returns>
         MessageModel DeleteSingleMenu(int id);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeletMenuByIds(string ids);
     }
 }

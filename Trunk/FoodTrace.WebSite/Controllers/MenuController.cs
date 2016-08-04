@@ -91,6 +91,18 @@ namespace FoodTrace.WebSite.Controllers
         }
 
         /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult DeleteMenu(string ids)
+        {
+            var result = menuService.DeletMenuByIds(ids);
+            var flag = result.Status == MessageStatus.Success ? true : false;
+            var msg = result.Message;
+            return Json(new { flag = flag, msg = msg });
+        }
+        /// <summary>
         /// 获取所有菜单列表
         /// </summary>
         /// <returns></returns>

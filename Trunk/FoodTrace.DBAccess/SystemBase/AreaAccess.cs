@@ -80,5 +80,27 @@ namespace FoodTrace.DBAccess
             return base.Context.Area.Where(m => (string.IsNullOrEmpty(name) || m.AreaName.Contains(name)))
                     .OrderBy(m => m.AreaID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteAreaByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var area = context.Area.Where(s => ids.Contains(s.AreaID.ToString())).ToList();
+
+                if (area.Any())
+                {
+                    context.BatchDelete(area);
+                }
+
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
     }
 }

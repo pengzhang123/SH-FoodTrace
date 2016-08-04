@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "种植基地";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table id="DataGrid" style="height: 100%;"></table>
+
+<div id="LandDialog" style="display: none;">
+    <form id="mainForm">
+        <table>
+            <tr>
+                <td>基地代号</td>
+                <td>
+                    <input type="text" name="LandCode" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>基地名称</td>
+                <td>
+                    <input type="text" name="LandName" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>公司</td>
+                <td>
+                    @Html.DropDownList("CompanyID", ViewBag.CompanyList as IEnumerable<SelectListItem>, "-请选择-")
+                </td>
+                <td>产区划分</td>
+                <td>
+                    <input type="text" name="Location" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>建立日期</td>
+                <td>
+                    <input class="Wdate" name="LandTime" type="text" onclick="WdatePicker()">
+                </td>
+                <td>基地面积</td>
+                <td>
+                    <input type="text" name="LandArea" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>员工数</td>
+                <td>
+                    <input type="text" name="EmployeesNum" value=""/>
+                </td>
+                <td>基地地址</td>
+                <td>
+                    <input name="Address" type="text" class="easyui-validatebox" data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+ 
+                <td>经度</td>
+                <td>
+                    <input name="Lon" type="text">
+                </td>
+                <td>纬度</td>
+                <td>
+                    <input name="Lat" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td>是否锁定</td>
+                <td>
+                   <input type="checkbox" value="true" name="IsLocked"/>
+                </td>
+                <td>是否显示</td>
+                <td>
+                    <input type="checkbox" value="true" name="IsShow" />
+                </td>
+            </tr>
+            <tr>
+                <td>基地类型</td>
+                <td>
+                    <select name="LandType">
+                        <option>请选择</option>
+                        <option value="1">种植基地</option>
+                        <option value="2">养殖基地</option>
+                    </select>
+                </td>
+                <td>基地状态</td>
+                <td>
+                    <select name="LandState">
+                        <option value="1">正常</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="3">
+                    <textarea name="Remark" style="width:400px;height: 80px;"></textarea>
+                </td>
+            </tr>
+          
+        </table>
+        <input type="hidden" name="LandID" id="LandID" value="" />
+    </form>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var landDialog = null,landGrid=null;
+        $(function() {
+            initGrid();
+        });
+
+        function initGrid() {
+            landGrid=$('#DataGrid').datagrid({
+                url: '@Url.Action("GetList", "LandBase")',
+                rownumbers: true,
+                striped: true,
+                fitColumns: true,
+                pagination: true,
+                singleSelect: false,
+                pageList: [10, 15, 20, 25],
+                columns: [
+                    [
+                        { field: 'ck', checkbox: true },
+                        { title: '基地代号', align: 'center', field: 'LandCode', width: 35 },
+                        { title: '基地名称', align: 'center', field: 'LandName', width: 35 },
+                        {
+                            title: '基地类型', align: 'center', field: 'LandBaseTypeStr', width: 35
+                               
+                        },
+                        { title: '面积', align: 'center', field: 'LandArea', width: 35 },
+                        { title: '地址', align: 'center', field: 'Address', width: 35 },
+                        { title: '所属公司', align: 'center', field: 'CompanyName', width: 35 }
+                    ]
+                ],
+                toolbar: [
+                    {
+                        id: 'btnAdd',
+                        text: ' 新建',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            Utils.resetForm($('#mainForm'));
+                            landDialog.dialog({ title: "新增" }).dialog('open');
+                        }
+                    }, {
+                        id: 'btnEdit',
+                        text: ' 编辑',
+                        iconCls: 'icon-edit',
+                        handler: function() {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            if (row) {
+                                if (row.length == 1) {
+                                    editLand(row[0].LandId);
+                                } else {
+                                    $.messager.alert('提示', '只能选中一条数据行进行修改');
+                                }
+                            }
+                        }
+                    }, {
+                        id: 'btnDelete',
+                        text: ' 删除',
+                        iconCls: 'icon-remove',
+                        handler: function() {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            var ids = [];
+                            if (row) {
+                                $.each(row, function (index, item) {
+                                    ids.push(item.LandId);
+                                });
+
+                                delLand(ids);
+                            }
+                        }
+                    }
+                ]
+            });
+
+            landDialog = $('#LandDialog').dialog({
+                width: 600,
+                height: 500,
+                closed: true,
+                cache: false,
+                modal: true,
+                resizable: true,
+                buttons: [
+                    {
+                        text: '保存',
+                        iconCls: 'icon-ok',
+                        handler: saveLandData
+                    }, {
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function() {
+                            $('#mainForm')[0].reset();
+                            landDialog.dialog("close");
+                        }
+                    }
+                ],
+                onClose: function() {
+                    $('#mainForm')[0].reset();
+                }
+            });
+        }
+
+        function editLand(id) {
+            
+            landDialog.dialog({ title: "编辑" }).dialog('open');
+            Utils.ajaxPost('/LandBase/GetLandBaseById', { id: id}, 'json', function(ret) {
+                if (ret.IsSuccess) {
+                    Utils.loadFormData($('#mainForm'), ret.Data);
+                } else {
+                    $.messager.alert('提示', '加载数据失败');
+                }
+            });
+
+        }
+
+        function delLand(id) {
+            $.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
+                if (r) {
+                    Utils.ajaxPost('/LandBase/DelLandBase', { ids: id.join() }, 'json', function(ret) {
+                        if (ret.IsSuccess) {
+                            landGrid.datagrid('reload');
+                        }
+                    });
+                }
+            });
+            console.log(id);
+        }
+
+        function saveLandData() {
+            var flag = $('#mainForm').form('validate');
+            if (!flag) {
+                $.messager.alert('Title', '必须填写完整的信息', 'error');
+                return false;
+            }
+
+            Utils.ajaxPost('/LandBase/SaveLandBase', $('#mainForm').serialize(), 'json', function(ret) {
+                
+                if (ret.IsSuccess) {
+                    $.messager.alert('Title', '保存成功');
+                    $('#mainForm')[0].reset();
+                    landDialog.dialog('close');
+                    landGrid.datagrid('reload');
+                } else {
+                    $.messager.alert('Title', '保存失败');
+                }
+               
+            });
+        }
+    </script>
+}
+

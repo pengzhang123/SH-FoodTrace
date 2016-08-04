@@ -14,5 +14,12 @@ namespace FoodTrace.IDBAccess
         /// </summary>
         /// <returns></returns>
         List<ZtreeModel> GetCompantTree(int comId);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeleteCompanyByIds(string ids);
     }
 }

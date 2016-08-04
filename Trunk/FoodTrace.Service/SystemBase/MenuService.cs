@@ -89,5 +89,15 @@ namespace FoodTrace.Service
         {
             return menuAccess.DeleteSingleEntity(id);
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeletMenuByIds(string ids)
+        {
+            return menuAccess.DeletMenuByIds(ids);
+        }
     }
 }

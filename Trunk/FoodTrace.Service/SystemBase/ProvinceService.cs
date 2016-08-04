@@ -91,5 +91,15 @@ namespace FoodTrace.Service
         {
             return provinceAccess.DeleteSingleEntity(id);
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return provinceAccess.DeleteByIds(ids);
+        }
     }
 }

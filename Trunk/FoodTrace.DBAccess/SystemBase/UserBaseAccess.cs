@@ -376,5 +376,35 @@ namespace FoodTrace.DBAccess
             };
             return base.DbOperation(operation);
         }
+
+             /// <summary>
+            /// 批量删除
+            /// </summary>
+            /// <param name="ids"></param>
+            /// <returns></returns>
+            public MessageModel DeleteUser(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+
+                var user = context.UserBase.Where(s => ids.Contains(s.UserID.ToString())).ToList();
+                if (user.Any())
+                {
+                    var userDetails = new List<UserDetailModel>();
+                    user.ForEach(s =>
+                    {
+                        var udetail = context.UserDetail.FirstOrDefault(m => m.UserID == s.UserID);
+                        if (udetail != null)
+                        {
+                            userDetails.Add(udetail);
+                        }
+                    });
+                    context.BatchDelete(user);
+                    context.BatchDelete(userDetails);
+                }
+                return string.Empty;
+            };
+            return base.DbOperation(operation);
+        }
     }
 }

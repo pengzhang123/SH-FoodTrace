@@ -89,5 +89,15 @@ namespace FoodTrace.Service
         {
             return codeMaxAccess.DeleteSingleEntity(id);
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return codeMaxAccess.DeleteCodeMaxByIds(ids);
+        }
     }
 }

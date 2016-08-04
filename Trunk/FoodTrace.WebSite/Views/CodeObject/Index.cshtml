@@ -17,7 +17,7 @@
 
         $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
             if (r) {
-                $.post('@Url.Action("Delete", "CodeObject")', { id: id }, function (json) {
+                $.post('@Url.Action("DeleteByIds", "CodeObject")', { id: id.join() }, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";
@@ -57,9 +57,13 @@
                 text: ' 编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
                     if (row) {
-                        Edit(row.ObjectID);
+                        if (row.length == 1) {
+                            Edit(row[0].ObjectID);
+                        } else {
+                            $.messager.alert('提示', '只能选中一条数据行进行修改');
+                        }
                     }
                 }
             }, {
@@ -67,13 +71,19 @@
                 text: ' 删除',
                 iconCls: 'icon-remove',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
                     if (row) {
-                        Delete(row.ObjectID);
+                        $.each(row, function (index, item) {
+                            ids.push(item.ObjectID);
+                        });
+
+                        Delete(ids);
                     }
                 }
             }],
             columns: [[
+                      { field: 'ck', checkbox: true },
                     { title: '对像编码', align: 'center', field: 'ObjectCode', width: 35 },
                     { title: '对像名称', align: 'center', field: 'ObjectName', width: 35 },
                     { title: '前缀', align: 'center', field: 'Prefix', width: 35 },

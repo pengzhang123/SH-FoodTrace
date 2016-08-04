@@ -199,5 +199,15 @@ namespace FoodTrace.Service
         {
             return userBaseAccess.JudgeUserExist(username);
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteUser(string ids)
+        {
+            return userBaseAccess.DeleteUser(ids);
+        }
     }
 }

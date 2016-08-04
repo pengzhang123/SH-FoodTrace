@@ -251,7 +251,7 @@
                 striped: true,
                 fitColumns: true,
                 pagination: true,
-                singleSelect: true,
+                singleSelect: false,
                 pageList: [10, 15, 20, 25],
                 toolbar: [
                     {
@@ -266,9 +266,13 @@
                         text: ' 编辑',
                         iconCls: 'icon-edit',
                         handler: function () {
-                            var row = gridList.datagrid('getSelected');
+                            var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
-                                edit(row.UserId);
+                                if (row.length == 1) {
+                                    edit(row[0].UserId);
+                                } else {
+                                    $.messager.alert('提示', '请选择需要编辑的一条数据行');
+                                }
                             }
                         }
                     }, {
@@ -276,11 +280,15 @@
                         text: ' 删除',
                         iconCls: 'icon-remove',
                         handler: function () {
-                            var row = $('#DataGrid').datagrid('getSelected');
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            var ids = [];
                             if (row) {
                                 $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                                     if (r) {
-                                        deleteUser(row.UserId);
+                                        $.each(row, function (index, item) {
+                                            ids.push(item.UserId);
+                                        });
+                                        deleteUser(ids);
                                     }
                                 });
 
@@ -291,15 +299,21 @@
                         text: ' 设置角色',
                         iconCls: 'icon-remove',
                         handler: function () {
-                            var row = $('#DataGrid').datagrid('getSelected');
+                            var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
-                                setRole(row.UserId);
+                                if (row.length == 1) {
+                                    setRole(row[0].UserId);
+                                } else {
+                                    $.messager.alert('提示', "只能选中一条数据操作");
+                                }
+
                             }
                         }
                     }
                 ],
                 columns: [
                     [
+                         { field: 'ck', checkbox: true },
                         { title: '登录账号', align: 'center', field: 'UserCode', width: 35 },
                         { title: '密码', align: 'center', field: 'Password', width: 35 },
                         { title: '用户名', align: 'center', field: 'UserName', width: 35 },
@@ -394,7 +408,7 @@
 
 
         function create() {
-           
+            Utils.resetForm($('#mainForm'));
             userDialog.dialog({ title: "新增用户" }).dialog('open');
             //$('#userDialog').load("/UserBase/Create");
         }
@@ -409,7 +423,7 @@
            
         }
         function deleteUser(id) {
-            Utils.ajaxPost('/UserBase/Delete', { id: id },'json',function(ret) {
+            Utils.ajaxPost('/UserBase/DeleteUser', { ids: id.join() },'json',function(ret) {
                 if (ret.IsSuccess) {
                     $.messager.alert('提示', '删除成功',null,function() {
                         gridList.datagrid('reload');

@@ -16,7 +16,7 @@
     function Delete(id) {
         $.messager.confirm('信息提示', '确定要删除该记录吗？', function (r) {
             if (r) {
-                $.post('@Url.Action("Delete", "Dept")', { id: id }, function (json) {
+                $.post('@Url.Action("DeleteDept", "Dept")', { ids: id.join() }, function (json) {
                     var msg = '';
                     if (json) {
                         msg = "删除成功";
@@ -55,8 +55,11 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelected');
                     if (row) {
-                        console.log(row);
-                        Edit(row.DeptID);
+                        if (row.length == 1) {
+                            Edit(row[0].DeptID);
+                        } else {
+                            $.messager.alert('提示', '请选择需要编辑的一条数据行');
+                        }
                     }
                 }
             }, {
@@ -64,13 +67,19 @@
                 text: ' 删除',
                 iconCls: 'icon-remove',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
                     if (row) {
-                        Delete(row.DeptID);
+                        $.each(row, function (index, item) {
+                            ids.push(item.DeptID);
+                        });
+
+                        Delete(ids);
                     }
                 }
             }],
             columns: [[
+                   { field: 'ck', checkbox: true },
                     { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
                     { title: '部门名称', align: 'center', field: 'DeptName', width: 35 },
                     { title: '上级部门名称', align: 'center', field: 'UpperDeptName', width: 35 },

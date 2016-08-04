@@ -113,6 +113,25 @@ namespace FoodTrace.DBAccess
         }
 
         /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteCompanyByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var company = context.Company.Where(s => ids.Contains(s.CompanyID.ToString())).ToList();
+                if (company.Any())
+                {
+                    context.BatchDelete(company);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
+        /// <summary>
         /// 获取企业机构树
         /// </summary>
         /// <returns></returns>

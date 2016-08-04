@@ -114,5 +114,12 @@ namespace FoodTrace.IService
         /// <param name="username"></param>
         /// <returns></returns>
         bool JudgeUserExist(string username);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeleteUser(string ids);
     }
 }

@@ -85,6 +85,26 @@ namespace FoodTrace.DBAccess
             return base.DbOperationInTransaction(operation);
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteDepts(string ids)
+        {
+            Func<IEntityContext, string> opera = delegate(IEntityContext context)
+            {
+                var dept = context.Dept.Where(s => ids.Contains(s.DeptID.ToString())).ToList();
+                if (dept.Any())
+                {
+                    context.BatchDelete(dept);
+                }
+
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(opera);
+        }
         public List<DeptModel> GetPagerDeptByConditions(string name, int pageIndex, int pageSize,int? companyID )
         {
             var query = Context.Dept.AsQueryable();

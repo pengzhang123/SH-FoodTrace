@@ -80,6 +80,25 @@ namespace FoodTrace.DBAccess
             return base.DbOperationInTransaction(operation);
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteCityByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var city = context.City.Where(s => ids.Contains(s.CityID.ToString())).ToList();
+                if (city.Any())
+                {
+                    context.BatchDelete(city);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
         public List<CityModel> GetPagerCityByConditions(int? provinceId, string name, int pageIndex, int pageSize)
         {
             //var province = Context.Province.FirstOrDefault(m => (!provinceId.HasValue || m.ProvinceID == provinceId));

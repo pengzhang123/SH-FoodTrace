@@ -144,6 +144,27 @@ namespace FoodTrace.WebSite.Controllers
             return Json(isSuccess);
 
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult DeleteDept(string ids)
+        {
+            bool isSuccess = false;
+            try
+            {
+                deptService.DeleteDepts(ids);
+                isSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
+
+            return Json(isSuccess);
+        }
         /// <summary>
         /// 
         /// </summary>

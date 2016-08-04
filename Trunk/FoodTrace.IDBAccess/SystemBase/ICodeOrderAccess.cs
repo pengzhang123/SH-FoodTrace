@@ -12,5 +12,12 @@ namespace FoodTrace.IDBAccess
         int GetEntityCount(string name);
 
         List<CodeOrderModel> GetPagerCodeOrderByConditions(string name, int pageIndex, int pageSize);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeleteByIds(string ids);
     }
 }

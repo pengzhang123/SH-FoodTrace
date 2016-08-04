@@ -89,6 +89,27 @@ namespace FoodTrace.DBAccess
             return base.DbOperationInTransaction(operation);
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var data = context.ProductBase.Where(s => ids.Contains(s.ProductID.ToString())).ToList();
+                if (data.Any())
+                {
+                    context.BatchDelete(data);
+                }
+                //if (context.Country.Any(m => m.CountryCode == data.CountryCode)) return "该区县信息存在关联数据，不能被删除！";
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
+
         public List<ProductBaseModel> GetPagerProductBaseByConditions(string name, int pageIndex, int pageSize)
         {
             //var province = Context.Province.FirstOrDefault(m => (!provinceId.HasValue || m.ProvinceID == provinceId));

@@ -63,6 +63,12 @@ namespace FoodTrace.IService
         MessageModel DeleteSingleCompany(int id);
 
         /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeleteCompanyByIds(string ids);
+        /// <summary>
         /// 获取企业机构树
         /// </summary>
         /// <returns></returns>

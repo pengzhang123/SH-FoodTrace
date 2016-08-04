@@ -23,6 +23,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            var count = codeObjectService.GetCodeObjectCount();
             var productSpecList = codeObjectService.GetPagerCodeObject(string.Empty, page, rows).Select(m => new
             {
                 ObjectID = m.ObjectID,
@@ -38,7 +39,7 @@ namespace FoodTrace.WebSite.Controllers
                 IsLocked = m.IsLocked,
                 IsShow = m.IsShow
             });
-            return Json(productSpecList, JsonRequestBehavior.AllowGet);
+            return Json(new{total=count,rows= productSpecList}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -78,5 +79,19 @@ namespace FoodTrace.WebSite.Controllers
             var msg = result.Message;
             return Json(new { flag = flag, msg = msg });
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult DeleteByIds(string ids)
+        {
+            var result = codeObjectService.DeleteByIds(ids);
+            var flag = result.Status == MessageStatus.Success ? true : false;
+            var msg = result.Message;
+            return Json(new { flag = flag, msg = msg });
+        }
+
     }
 }

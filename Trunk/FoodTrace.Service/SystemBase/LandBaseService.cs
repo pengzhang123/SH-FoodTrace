@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -94,6 +96,30 @@ namespace FoodTrace.Service
         public MessageModel DeleteSingleLandBase(int id)
         {
             return landBaseAccess.DeleteSingleEntity(id);
+        }
+
+
+        /// <summary>
+        /// 养殖基地分页数据
+        /// </summary>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<LandBaseDto> GetLandBaseListPaging(int pIndex, int pSize, string name)
+        {
+            int comId = UserManagement.CurrentUser.CompanyId;
+            return landBaseAccess.GetLandBaseListPaging(comId, pIndex, pSize, name);
+        }
+
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DelLandBaseByIds(string ids)
+        {
+            return landBaseAccess.DelLandBaseByIds(ids);
         }
     }
 }

@@ -89,5 +89,15 @@ namespace FoodTrace.Service
         {
             return areaPlatAccess.DeleteSingleEntity(id);
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteAreaPlatByIds(string ids)
+        {
+            return areaPlatAccess.DeleteAreaPlatByIds(ids);
+        }
     }
 }

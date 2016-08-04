@@ -233,6 +233,7 @@
     <Compile Include="Controllers\DicController.cs" />
     <Compile Include="Controllers\DicRootController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandBaseController.cs" />
     <Compile Include="Controllers\LogUserLoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -874,6 +875,7 @@
     <Content Include="Views\Role\SetRoleMenu.cshtml" />
     <Content Include="Scripts\ztree\css\awesomeStyle\awesome.less" />
     <Content Include="Scripts\ztree\css\awesomeStyle\fa.less" />
+    <Content Include="Views\LandBase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

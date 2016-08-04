@@ -55,5 +55,12 @@ namespace FoodTrace.IDBAccess
         /// <param name="deptId"></param>
         /// <returns></returns>
         GridList<UserBaseDto> GetUserBasePaging(int comId, int pIndex, int pSize, int deptId, string uName);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeleteUser(string ids);
     }
 }

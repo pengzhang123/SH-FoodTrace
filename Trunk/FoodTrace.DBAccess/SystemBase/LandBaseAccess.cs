@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -54,7 +56,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.LandBase.FirstOrDefault(m => m.LandID == model.LandID && m.ModifyTime == model.ModifyTime);
+                var data = context.LandBase.FirstOrDefault(m => m.LandID == model.LandID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.CompanyID = model.CompanyID;
                 data.LandCode = model.LandCode;
@@ -102,6 +104,65 @@ namespace FoodTrace.DBAccess
             return base.Context.LandBase.Where(m => m.CompanyID == companyID
                                                     && (string.IsNullOrEmpty(name) || m.LandName.Contains(name)))
                    .OrderBy(m => m.LandID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DelLandBaseByIds(string ids)
+        {
+
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                //基地名下包含基地地块信息，则不能被直接删除
+                if (ids.Length > 0)
+                {
+                    var landBase = context.LandBase.Where(s => ids.Contains(s.LandID.ToString())).ToList();
+                    if (landBase.Any())
+                    {
+                        context.BatchDelete(landBase);
+                    }
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
+        }
+        /// <summary>
+        /// 养殖基地分页数据
+        /// </summary>
+        /// <param name="compamyId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<LandBaseDto> GetLandBaseListPaging(int compamyId, int pIndex, int pSize,string name)
+        {
+            var query =(from s in  Context.LandBase
+                        join com in Context.Company on s.CompanyID equals com.CompanyID
+                        select new LandBaseDto()
+                        {
+                            LandId = s.LandID,
+                            LandCode = s.LandCode,
+                            LandArea = s.LandArea,
+                            LandName = s.LandName,
+                            LandBaseType = s.LandType,
+                            Address = s.Address,
+                            CompanyId = com.CompanyID,
+                            CompanyName = com.CompanyName
+                        }
+                            ).AsQueryable();
+            if (compamyId > 0)
+            {
+                query = query.Where(s => s.CompanyId == compamyId);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.LandName.Contains(name));
+            }
+
+            return new GridList<LandBaseDto>() { rows = query.OrderBy(s=>s.LandId).ToList(), total = query.Count() };
         }
     }
 }

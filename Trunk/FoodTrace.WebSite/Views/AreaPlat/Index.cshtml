@@ -14,7 +14,7 @@
     function Delete(id) {
         $.messager.confirm('信息提示', '确定要删除该记录吗？', function (r) {
             if (r) {
-                $.post('@Url.Action("Delete", "AreaPlat")', { id: id }, function (json) {
+                $.post('@Url.Action("DeleteAreaPlat", "AreaPlat")', { id: id.join() }, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";
@@ -37,7 +37,7 @@
             striped: true,
             fitColumns: true,
             pagination: true,
-            singleSelect: true,
+            singleSelect: false,
             pageList: [10, 15, 20, 25],
             toolbar: [{
                 id: 'btnAdd',
@@ -51,9 +51,13 @@
                 text: ' 编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
                     if (row) {
-                        Edit(row.AreaID);
+                        if (row.length == 1) {
+                            Edit(row[0].AreaID);
+                        } else {
+                            $.messager.alert('提示', '只能选中一条数据行进行修改');
+                        }
                     }
                 }
             }, {
@@ -61,13 +65,20 @@
                 text: ' 删除',
                 iconCls: 'icon-remove',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
                     if (row) {
-                        Delete(row.AreaID);
+                        $.each(row, function (index, item) {
+                            ids.push(item.LandId);
+                        });
+
+                        Delete(ids);
                     }
+                  
                 }
             }],
             columns: [[
+                    { field: 'ck', checkbox: true },
                     { title: '平台代码', align: 'center', field: 'AreaCode', width: 35 },
                     { title: '平台名称', align: 'center', field: 'AreaName', width: 35 },
                     { title: '备注', align: 'center', field: 'Remark', width: 35 }

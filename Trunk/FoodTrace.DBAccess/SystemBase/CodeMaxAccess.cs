@@ -82,6 +82,25 @@ namespace FoodTrace.DBAccess
             return base.DbOperationInTransaction(operation);
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteCodeMaxByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var data = context.City.Where(s => ids.Contains(s.CityID.ToString())).ToList();
+                if (data.Any())
+                {
+                    context.BatchDelete(data);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
         public List<CodeMaxModel> GetPagerCodeMaxByConditions(string name, int pageIndex, int pageSize)
         {
             return base.Context.CodeMax.Where(m => (string.IsNullOrEmpty(name) || m.ObjectName.Contains(name)))

@@ -17,7 +17,7 @@
 
         $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
             if (r) {
-                $.post('@Url.Action("Delete", "Role")', { id: id }, function (json) {
+                $.post('@Url.Action("DeleteRole", "Role")', { ids: id.join()}, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";
@@ -57,19 +57,30 @@
                 text: ' 编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+
+                    var row = $('#DataGrid').datagrid('getSelections');
                     if (row) {
-                        Edit(row.RoleID);
+                        if (row.length == 1) {
+                            Edit(row[0].RoleID);
+                        } else {
+                            $.messager.alert('提示', '只能选中一条数据行进行修改');
+                        }
                     }
+                  
                 }
             }, {
                 id: 'btnDelete',
                 text: ' 删除',
                 iconCls: 'icon-remove',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
                     if (row) {
-                        Delete(row.RoleID);
+                        $.each(row, function (index, item) {
+                            ids.push(item.LandId);
+                        });
+
+                        Delete(ids);
                     }
                 }
             }, {

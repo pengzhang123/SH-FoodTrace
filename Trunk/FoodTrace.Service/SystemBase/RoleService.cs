@@ -143,5 +143,15 @@ namespace FoodTrace.Service
         {
              return roleAccess.SaveUserRefRole(uid, roleIds);
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteRolesByIds(string ids)
+        {
+            return roleAccess.DeleteRolesByIds(ids);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Data.OleDb;
+using FoodTrace.Common.Libraries;
 using FoodTrace.DBAccess;
 using FoodTrace.IDBAccess;
 using FoodTrace.IService;
@@ -110,6 +111,15 @@ namespace FoodTrace.Service
         //        dept.Company = companyAccess.GetEntityById(dept.CompanyID.Value);
         //}
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteDepts(string ids)
+        {
+            return deptAccess.DeleteDepts(ids);
+        }
         
     }
 }

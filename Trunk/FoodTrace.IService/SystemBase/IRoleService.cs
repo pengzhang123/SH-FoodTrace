@@ -96,5 +96,12 @@ namespace FoodTrace.IService
         /// <param name="uid"></param>
         /// <param name="roleIds"></param>
         MessageModel SaveUserRefRole(int uid, List<int> roleIds);
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        MessageModel DeleteRolesByIds(string ids);
     }
 }

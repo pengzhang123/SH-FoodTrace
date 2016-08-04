@@ -138,6 +138,26 @@ namespace FoodTrace.DBAccess
             return base.DbOperationInTransaction(operation);
         }
 
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteRolesByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var roles = context.Role.Where(s => ids.Contains(s.RoleID.ToString())).ToList();
+                if (roles.Any())
+                {
+                    context.BatchDelete(roles);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperationInTransaction(operation);
+        }
+
         public List<RoleModel> GetPagerRoleByConditions(string name, int pageIndex, int pageSize)
         {
             return base.Context.Role.Where(m => (string.IsNullOrEmpty(name) || m.RoleName.Contains(name)))

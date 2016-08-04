@@ -77,5 +77,18 @@ namespace FoodTrace.WebSite.Controllers
             var msg = result.Message;
             return Json(new { flag = flag, msg = msg });
         }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public JsonResult DeleteAreaPlat(string ids)
+        {
+            var result = areaPlatService.DeleteAreaPlatByIds(ids);
+            var flag = result.Status == MessageStatus.Success ? true : false;
+            var msg = result.Message;
+            return Json(new { flag = flag, msg = msg });
+        }
     }
 }
