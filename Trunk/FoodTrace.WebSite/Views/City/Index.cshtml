@@ -168,7 +168,7 @@
     function Delete(id) {
         $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
             if (r) {
-                $.post('@Url.Action("DeleteByIds", "City")', { id: id.join() }, function (json) {
+                $.post('@Url.Action("DeleteByIds", "City")', { ids: id.join() }, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";

@@ -153,5 +153,14 @@ namespace FoodTrace.Service
         {
             return roleAccess.DeleteRolesByIds(ids);
         }
+
+        /// <summary>
+        /// 角色树
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeModel> GetRoleTreeList()
+        {
+            return roleAccess.GetRoleTree();
+        } 
     }
 }

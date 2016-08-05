@@ -25,6 +25,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            var count = countryService.GetCountryCount();
             var list = countryService.GetPagerCountry(null, string.Empty, page, rows).Select(_ => new
             {
                 CityID = _.CityID,
@@ -33,7 +34,7 @@ namespace FoodTrace.WebSite.Controllers
                 CountryName = _.CountryName,
                 CountryID = _.CountryID
             });
-            return Json(list, JsonRequestBehavior.AllowGet);
+            return Json(new{total=count,rows=list}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -83,6 +84,14 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Delete(int id)
         {
             var result = countryService.DeleteSingleCountry(id);
+            var flag = result.Status == MessageStatus.Success ? true : false;
+            var msg = result.Message;
+            return Json(new { flag = flag, msg = msg });
+        }
+
+        public JsonResult DeleteByIds(string ids)
+        {
+            var result = countryService.DeleteByIds(ids);
             var flag = result.Status == MessageStatus.Success ? true : false;
             var msg = result.Message;
             return Json(new { flag = flag, msg = msg });

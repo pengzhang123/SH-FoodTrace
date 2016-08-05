@@ -4,9 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{
-    var roleList = ViewBag.RoleList as List<RoleModel> ?? new List<RoleModel>();
-}
+
 <link href="~/Scripts/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
 
 <div id="cc" class="easyui-layout" style="width:100%;height:100%;">
@@ -25,43 +23,9 @@
 
 <div id="roleDialog" title="设置角色" style="display:none;">
     <form id="roleForm">
-        <table>
-            <tr>
-                <td colspan="5">角色名称</td>
-               
-            </tr>
-            @{
-                int roleRow = roleList.Count/5;
-                int remainder = roleList.Count % 5;
-                for (int i = 0; i < roleRow; i++)
-                {
-                    <tr>
-                        @for (int j = 0; j < 5; j++)
-                        {
-                            <td>
-                                <input type="checkbox"  value="@(roleList[i*5+j].RoleID)" name="RoleId" />@(roleList[i*5+j].RoleName) 
-                            </td>
-                        }
-                    </tr>
-
-                }
-                
-                if(remainder > 0)
-                {
-                    var remainList = roleList.Skip(roleRow * 5).Take(remainder).ToList();
-                    <tr>
-                        @for (int i = 0; i < remainder; i++)
-                        {
-                            <td>
-                                <input type="checkbox"  value="@(remainList[i].RoleID)" name="RoleId" />@(remainList[i].RoleName) 
-                            </td>
-                        }
-                    </tr>
-                }
-            }
-            <tr>
-            </tr>
-        </table>
+        <ul class="ztree" id="RoleTree">
+            
+        </ul>
         <input type="hidden" name="UserId" id="UserId" />
     </form>
 
@@ -222,10 +186,11 @@
 @section scripts{
 <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
     <script >
-        var gridList = null, userDialog = null, userValidate = null,roleDialog=null,orgTree=null;
+        var gridList = null, userDialog = null, userValidate = null,roleDialog=null,orgTree=null,roleTree=null;
         $(function() {
             loadOrgTree();
             initGridData();
+            loadRoleTree();
             //查询
             $('#btnQuery').on('click', function() {
                 var uName= $('#uName').val();
@@ -352,8 +317,8 @@
             });
 
             roleDialog = $('#roleDialog').dialog({
-                width: 600,
-                height: 500,
+                width: 400,
+                height: 300,
                 closed: true,
                 cache: false,
                 modal: true,
@@ -400,10 +365,32 @@
             //}
             gridList.datagrid('reload', {
                 id: id,
-                type:type
+                type: type
             });
 
 
+        }
+
+        //角色树
+        function loadRoleTree() {
+            //树属性
+            var settings = {
+                check: {
+                    enable: true,
+                    chkStyle: "checkbox",
+                    chkboxType: { "Y": "", "N": "" }
+                },
+                data: {
+                    // key: { ckecked: "Checked" },
+                    simpleData: { enable: true, idKey: "id", pIdKey: "pId" }
+                }
+            };
+            Utils.ajaxGet("/Role/GetRoleTree", null, "json", function (ret) {
+                if (ret.IsSuccess) {
+                    roleTree = $.fn.zTree.init($("#RoleTree"), settings, ret.Data);
+                }
+                //moduleTree.expandAll(true);GetRoleTree
+            });
         }
 
 
@@ -457,14 +444,20 @@
 
         //打开角色窗口并且
         function setRole(id) {
-
+           
             $('#UserId').val(id);
             roleDialog.dialog('open');
             Utils.ajaxGet('/Role/GetUserRoleByUid', { uid: id }, 'json', function(ret) {
                 if (ret.IsSuccess) {
-                    console.log(ret.Data);
-                    if (ret.Data.length > 0) {
-                        setCheckVla(ret.Data);
+                    roleTree.checkAllNodes(false);
+                    var idArry = ret.Data;
+                    for (var i = 0; i < idArry.length; i++) {
+                        var node = roleTree.getNodeByParam("id", idArry[i], null);
+                        if (node != null) {
+                            node.checked = true;
+                            roleTree.updateNode(node);
+                           
+                        }
                     }
 
                 }
@@ -472,7 +465,15 @@
         }
 
         function saveUserRole() {
-            Utils.ajaxPost('/Role/SaveUserRefRole', $('#roleForm').serialize(), 'json', function(ret) {
+            var checkedNode =roleTree.getCheckedNodes(true);
+            var roleId = [];
+            if (checkedNode.length > 0) {
+                for (var i = 0; i < checkedNode.length; i++) {
+                    roleId.push(checkedNode[i].id);
+                }
+            }
+            var userid = $('#UserId').val();
+            Utils.ajaxPost('/Role/SaveUserRefRole', { UserId: userid, RoleId: roleId }, 'json', function (ret) {
                 if (ret.IsSuccess) {
                     $.messager.alert('提示:', '角色设置成功!',null,function() {
                         roleDialog.dialog("close");
@@ -486,19 +487,6 @@
         }
 
 
-        function setCheckVla(val) {
-            var chk = $('#roleForm').find("input[name='RoleId'][type=checkbox]");
-            if (chk.length) {
-                chk.each(function () {
-                    var f = $(this);
-                    f.prop("checked", false);
-                    if (f.val() === String(val) || $.inArray(f.val(), $.isArray(val) ? val : [val]) >= 0) {
-                        f.prop("checked", true);
-                    }
-                });
-             
-            }
-        }
 
 
         ///设置公司下拉

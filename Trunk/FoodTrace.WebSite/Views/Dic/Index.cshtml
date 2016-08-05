@@ -1,66 +1,183 @@
-﻿@model List<FoodTrace.Model.DicModel>
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="tag"></div>
-<div class="find">
-    对象名称：<input type="text" class="input">
-    <br><br>
-    <input type="button" value="新增" class="button" onclick="window.location.href = '/Dic/Create';">
-    <div class="button_right">
-        <input type="button" value="查询" class="button">
-        <input type="button" value="重置" class="button">
-    </div>
-    <div class="clearbox"></div>
-</div>
-<div id="table">
+<div id="table" style="height: 100%">
     <div class="table_title">
-        对象查询
+        根字典查询<input type="text" name="" id="" value="" />
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
     </div>
-    <div style="overflow:auto;height:360px;">
-        <table>
-            <thead>
-                <tr>
-                    <th>操作</th>
-                    <th>字典编码</th>
-                    <th>字典名称</th>
-                    <th>描述</th>
-                    <th>排序</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var dicModel in Model)
-            {
-                    <tr class="tr1">
-                        <td>
-                            @Html.ActionLink("编辑", "Edit", "Dic", new { id = dicModel.DicID }, null)
-                        </td>
-                        <td>@dicModel.Code</td>
-                        <td>@dicModel.Name</td>
-                        <td>@dicModel.Description</td>
-                        <td>@dicModel.SortID</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="buttom">
-        <div class="buttom_left de">
-            <img src="~/Images/first.png" alt="">
-            <img src="~/Images/pre.png" alt="">
-            <img src="~/Images/next.png" alt="">
-            <img src="~/Images/last.png" alt="">
-        </div>
-
-        <div class="buttom_left"><img src="~/Images/go.png" alt="">　第 <input type="text" value="1" class="page">页/共5页</div>
-        <div class="buttom_left">每页<select name="" id=""><option value="10">10</option></select>条</div>
-        <div class="buttom_left word">
-            <img src="~/Images/word.png" alt="">
-            <img src="~/Images/excel.png" alt="">
-        </div>
-        <div class="buttom_right">显示10条/共50条</div>
-    </div>
+         <table id="DataGrid" style="height:100%;"></table>
 </div>
+<div id="DicDialog" style="display: none;" title="新建">
+    <form id="mainForm">
+        <input type="hidden" name="DicID" value="" />
+        <table>
+            <tr>
+                <td>父级</td>
+                <td>
+                    @Html.DropDownList("RootID", ViewBag.DicRoot as IEnumerable<SelectListItem>, "-请选择-")
+                </td>
+                <td>编码</td>
+                <td>
+                    <input type="text" name="Code" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td>
+                    <input type="text" name="Name" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>描述</td>
+                <td>
+                    <input type="text" name="Description" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>排序</td>
+                <td>
+                    <input type="text" name="SortID" value="" class="easyui-validatebox" data-options="validType:'number'" />
 
+                </td>
+                <td>是否锁定</td>
+                <td>
+                    <input type="checkbox" name="IsLocked" value="true" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    var dicGrid = null,dicDialog=null;
+    $(function() {
+        initDicGrid();
+         dicDialog =$('#DicDialog').dialog({
+            width: 600,
+            height: 380,
+            closed: true,
+            cache: false,
+            modal: true,
+            buttons: [{
+                text: 'Save',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#DicDialog').find('form');
+
+                    var flag = $form.form('validate');
+                    if (flag) {
+
+                    }
+                    saveDic();
+                }
+            }, {
+                text: 'Close',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#DicDialog').dialog('close');
+                }
+            }]
+        });
+    });
+
+    function initDicGrid() {
+      dicGrid=  $('#DataGrid').datagrid({
+            url: '@Url.Action("GetDicList", "Dic")',
+            rownumbers: true,
+            striped: true,
+            fitColumns: true,
+            pagination: true,
+            singleSelect: false,
+            pageList: [10, 15, 20, 25],
+            columns: [[
+                 { field: 'ck', checkbox: true },
+                { title: '编码', align: 'center', field: 'Code', width: 35 },
+              { title: '名称', align: 'center', field: 'Name', width: 35 },
+               { title: '父级', align: 'center', field: 'RootID', width: 35 },
+              { title: '描述', align: 'center', field: 'Description', width: 35 },
+              { title: '排序', align: 'center', field: 'SortID', width: 35 }
+            ]],
+            toolbar: [{
+                id: 'btnAdd',
+                text: ' 新建',
+                iconCls: 'icon-add',
+                handler: function () {
+                    Utils.resetForm($('#mainForm'));
+                    dicDialog.dialog('open');
+
+                }
+            }, {
+                id: 'btnEdit',
+                text: ' 编辑',
+                iconCls: 'icon-edit',
+                handler: function () {
+
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    if (row) {
+                        if (row.length == 1) {
+                            Edit(row[0].DicID);
+                        } else {
+                            $.messager.alert('提示', '只能选中一条数据行进行修改');
+                        }
+                    }
+
+                }
+            }, {
+                id: 'btnDelete',
+                text: ' 删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
+                    if (row) {
+                        $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                            if (r) {
+                                $.each(row, function (index, item) {
+                                    ids.push(item.DicID);
+                                });
+                                Delete(ids);
+                            }
+                        });
+                    }
+                }
+            }]
+
+        });
+    }
+
+    function Edit(id) {
+        dicDialog.dialog({ title: "编辑用户" }).dialog('open');
+        Utils.ajaxGet('/Dic/GetDicById', { rootId: id }, 'json', function(ret) {
+            if (ret.IsSuccess) {
+                Utils.loadFormData($('#mainForm'), ret.Data);
+            } else {
+                $.messager.alert('提示', '加载数据失败');
+            }
+        });
+    }
+
+    function Delete(id) {
+        Utils.ajaxPost('/Dic/DeleteByIds', { ids: id.join() }, 'json', function(ret) {
+            if (ret.IsSuccess) {
+                dicGrid.datagrid('reload');
+            } else {
+                $.messager.alert('提示', '删除数据失败');
+            }
+        });
+    }
+    function saveDic() {
+        var flag = $('#mainForm').form('validate');
+        if (!flag) {
+            $.messager.alert('Title', '必须填写完整的信息', 'error');
+            return false;
+        }
+        Utils.ajaxPost('/Dic/SaveDic', $('#mainForm').serialize(), 'json', function(ret) {
+            if (ret.IsSuccess) {
+                $.messager.alert('提示', '保存成功');
+                dicDialog.dialog('close');
+                dicGrid.datagrid('reload');
+            }
+        });
+    }
+</script>

@@ -117,6 +117,23 @@ namespace FoodTrace.WebSite.Controllers
             return Json(list);
         }
 
+        public JsonResult GetMenuTree()
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data = menuService.GetMenuTreeList();
+                result.IsSuccess = true;
+                result.Data = data;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetMenuByRoleId(int roleId)
         {
             return Json(true);

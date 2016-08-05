@@ -178,6 +178,21 @@ namespace FoodTrace.DBAccess
         }
 
         /// <summary>
+        /// 获取角色树
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeModel> GetRoleTree()
+        {
+            var list = new List<ZtreeModel>();
+            list = (from s in Context.Role
+                select new ZtreeModel()
+                {
+                    id = s.RoleID.ToString(),
+                    name = s.RoleName
+                }).ToList();
+            return list;
+        }
+        /// <summary>
         /// 根据角色Id获取角色菜单
         /// </summary>
         /// <param name="id"></param>

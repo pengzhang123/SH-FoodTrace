@@ -112,5 +112,22 @@ namespace FoodTrace.DBAccess
 
             return base.DbOperationInTransaction(operation);
         }
+
+        /// <summary>
+        /// 获取菜单数据
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeModel> GetMenuTreeList()
+        {
+            var list = (from s in Context.Menu
+                select new ZtreeModel()
+                {
+                    id = s.MenuID.ToString(),
+                    name = s.Name,
+                    pId = s.ParentID.ToString()
+                }).ToList();
+
+            return list;
+        }
     }
 }

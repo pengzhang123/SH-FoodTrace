@@ -99,5 +99,14 @@ namespace FoodTrace.Service
         {
             return menuAccess.DeletMenuByIds(ids);
         }
+
+        /// <summary>
+        /// 获取菜单数据
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeModel> GetMenuTreeList()
+        {
+            return menuAccess.GetMenuTreeList();
+        }
     }
 }

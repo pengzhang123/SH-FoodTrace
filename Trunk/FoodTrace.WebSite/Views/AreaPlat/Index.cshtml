@@ -14,7 +14,7 @@
     function Delete(id) {
         $.messager.confirm('信息提示', '确定要删除该记录吗？', function (r) {
             if (r) {
-                $.post('@Url.Action("DeleteAreaPlat", "AreaPlat")', { id: id.join() }, function (json) {
+                $.post('@Url.Action("DeleteAreaPlat", "AreaPlat")', { ids: id.join() }, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";
@@ -69,7 +69,7 @@
                     var ids = [];
                     if (row) {
                         $.each(row, function (index, item) {
-                            ids.push(item.LandId);
+                            ids.push(item.AreaID);
                         });
 
                         Delete(ids);

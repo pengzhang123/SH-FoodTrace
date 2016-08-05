@@ -82,6 +82,7 @@
     <Compile Include="SystemBase\AreaPlatService.cs" />
     <Compile Include="SystemBase\AreaService.cs" />
     <Compile Include="SystemBase\CityService.cs" />
+    <Compile Include="SystemBase\DicService.cs" />
     <Compile Include="SystemBase\ProductBaseService.cs" />
     <Compile Include="SystemBase\ProductSpecService.cs" />
     <Compile Include="SystemBase\ProductTypeService.cs" />

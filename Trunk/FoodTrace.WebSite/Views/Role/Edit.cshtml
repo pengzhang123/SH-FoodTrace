@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var menuList = ViewBag.Menu as List<FoodTrace.Model.MenuModel>;
     }
     <h2>角色编辑</h2>
     @using (Html.BeginForm("Edit", "Role", FormMethod.Post))
@@ -27,70 +26,7 @@
                 </select>
             </td>
         </tr>
-        <tr>
-            <td>菜单</td>
-            <td colspan="3">
-                <table>
-                    @{
-                        var roleMenu = ViewBag.RoleMenu as List<int> ?? new List<int>();
-
-                        var menuRow = menuList.Count / 5;
-                        var remainder = menuList.Count % 5;
-                    for (int i = 0; i < menuRow; i++)
-                    {
-                     <tr>
- 
-                        @for (int j = 0; j < 5; j++)
-                        {
-                            var chkVla = menuList[i*5 + j].MenuID;
-                            var roleRef = roleMenu.Where(s => s == chkVla);
-                            <td width="100px">
-                                @if (roleRef.Any())
-                                {
-                                    <input type="checkbox" value="@chkVla" name="chkMenu"  checked/>
-                                }
-                                else
-                                {
-                                    <input type="checkbox" value="@chkVla" name="chkMenu" />
-                                }
-                                @menuList[i * 5 + j].Name
-                            </td>
-                           
-                       
-                        }
-                     </tr>
-                    }
-
-                    if (remainder > 0)
-                    {
-                        var remainList = menuList.Skip(menuRow * 5).Take(remainder).ToList();
-                        <tr>
-                            @for (int j = 0; j < remainder; j++)
-                            {
-                                var chkVla = remainList[j].MenuID;
-                                var roleRef = roleMenu.Where(s => s == chkVla);
-
-                                <td width="100px">
-
-                                    @if (roleRef.Any())
-                                    {
-                                        <input type="checkbox" checked value="@chkVla" name="chkMenu" />
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" value="@chkVla" name="chkMenu" />
-                                    }
-                                    @remainList[j].Name
-
-                                </td>
-
-                            }
-                        </tr>
-                    }
-                }
-                </table>
-            </td>
-        </tr>
+       
     </table>
     }
     

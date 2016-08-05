@@ -33,13 +33,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Index()
         {
             var user = new UserBaseDto();
-           // UserManagement.CurrentCompany = new Model.CompanyModel() { CompanyID = 1 };
-          //  var userlist = userBaseService.GetPagerUserBase("", 1, 10);
-            //var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_=>new { UserBase_CompanyName=_.CompanyName, UserBase_CompanyID=_.CompanyID });
+          
             var companylist = companyService.GetPagerCompany(string.Empty, 1, 100).Select(_ => new { CompanyName = _.CompanyName, CompanyID = _.CompanyID });
-            var rolelist = roleService.GetPagerRole("", 1, 100);
-
-            ViewBag.RoleList = rolelist;
             ViewBag.CompanyList = new SelectList(companylist, "CompanyID", "CompanyName");
             ViewData.Model = user;
             return View();

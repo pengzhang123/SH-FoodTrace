@@ -1,7 +1,9 @@
 ﻿using FoodTrace.DBManage.Contexts;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IService;
+using FoodTrace.IService.SystemBase;
 using FoodTrace.Service;
+using FoodTrace.Service.SystemBase;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -50,6 +52,7 @@ namespace FoodTrace.WebSite
             container.RegisterType<ICodeMaxService, CodeMaxService>();
             container.RegisterType<ICodeObjectService, CodeObjectService>();
             container.RegisterType<ICodeOrderService, CodeOrderService>();
+            container.RegisterType<IDicService,DicService>();
             return container;
         }
 

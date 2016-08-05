@@ -43,31 +43,17 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Menu = menuService.GetPagerMenu(string.Empty, 1, 1000);
+            //ViewBag.Menu = menuService.GetPagerMenu(string.Empty, 1, 1000);
             return View();
         }
 
         [HttpPost]
-        public JsonResult Create(RoleModel roleModel, List<string> chkMenu, int SortID)
+        public JsonResult Create(RoleModel roleModel)
         {
             try
             {
-                List<RoleMenuModel> roleMenu = new List<RoleMenuModel>();
-                if (chkMenu != null)
-                {
-                    foreach (var id in chkMenu)
-                    {
-                        if (!string.IsNullOrEmpty(id))
-                        {
-                            roleMenu.Add(new RoleMenuModel() { MenuID = Convert.ToInt32(id), CreateID = null, CreateName = "", CreateTime = DateTime.Now });
-                        }
-                         
-                    }
-
-                }
-             
                 // TODO: Add insert logic here
-                var result = roleService.InsertSingleRole(roleModel, roleMenu);
+                var result = roleService.InsertSingleRole(roleModel);
                 var flag = result.Status == MessageStatus.Success ? true : false;
                 var msg = result.Message;
                 return Json(new { flag = flag, msg = msg });
@@ -81,39 +67,19 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Edit(int id)
         {
             var model = roleService.GetRoleById(id);
-            ViewBag.RoleMenu =roleService.GetMenuListByRoleId(id) ;
-            ViewBag.Menu = menuService.GetPagerMenu(string.Empty, 1, 1000);
+            //ViewBag.RoleMenu =roleService.GetMenuListByRoleId(id) ;
+            //ViewBag.Menu = menuService.GetPagerMenu(string.Empty, 1, 1000);
             return PartialView(model);
         }
 
         [HttpPost]
-        public JsonResult Edit(RoleModel roleModel, List<string> chkMenu, int SortID)
+        public JsonResult Edit(RoleModel roleModel)
         {
             ResultJson result=new ResultJson();
             try
             {
-                List<RoleMenuModel> roleMenu = new List<RoleMenuModel>();
-                if (chkMenu != null)
-                {
-                    foreach (var id in chkMenu)
-                    {
-                        if (!string.IsNullOrEmpty(id))
-                        {
-                            roleMenu.Add(new RoleMenuModel()
-                            {
-                                MenuID = Convert.ToInt32(id),
-                                CreateID = null,
-                                CreateName = "",
-                                CreateTime = DateTime.Now
-                            });
-                        }
- 
-                    }
-
-                }
-            
+                
                  roleService.UpdateSingleRole(roleModel);
-                roleService.UpdateRoleMenu(roleModel.RoleID, roleMenu);
                 result.IsSuccess = true;
                 return Json(result);
             }
@@ -162,11 +128,23 @@ namespace FoodTrace.WebSite.Controllers
         /// <param name="menuId"></param>
         /// <param name="chkStatus"></param>
         /// <returns></returns>
-        public JsonResult SaveRoleRefMenu(int roleId, string menuId, bool chkStatus)
+        public JsonResult SaveRoleRefMenu(int roleId, List<int> chkMenu)
         {
             var result = new ResultJson();
             try
             {
+                List<RoleMenuModel> roleMenu = new List<RoleMenuModel>();
+                if (chkMenu != null && chkMenu.Count>0)
+                {
+                    foreach (var id in chkMenu)
+                    {
+                      
+                        roleMenu.Add(new RoleMenuModel() { MenuID = id, CreateID = null, CreateName = "", CreateTime = DateTime.Now });
+
+                    }
+
+                }
+                roleService.UpdateRoleMenu(roleId, roleMenu);
                 //_roleApp.SaveRoleRefMenu(roleId, menuId, chkStatus);
                 result.IsSuccess = true;
             }
@@ -200,6 +178,28 @@ namespace FoodTrace.WebSite.Controllers
         }
 
         /// <summary>
+        /// 加载机构数
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetRoleTree()
+        {
+            var result =new ResultJson();
+            try
+            {
+               var data= roleService.GetRoleTreeList();
+                result.Data = data;
+                result.IsSuccess = true;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// 修改用户角色相关
         /// </summary>
         /// <param name="UserId"></param>
@@ -219,5 +219,20 @@ namespace FoodTrace.WebSite.Controllers
             }
             return Json(result);
         }
+        public JsonResult GetMenuByRoleId(int roleId)
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data = roleService.GetMenuListByRoleId(roleId);
+                result.IsSuccess = true;
+                result.Data = data;
+            }
+            catch (Exception)
+            {
+            }
+            return Json(result,JsonRequestBehavior.AllowGet);
+        }
+       
     }
 }

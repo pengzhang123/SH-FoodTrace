@@ -103,5 +103,11 @@ namespace FoodTrace.IService
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeleteRolesByIds(string ids);
+
+        /// <summary>
+        /// 角色树
+        /// </summary>
+        /// <returns></returns>
+        List<ZtreeModel> GetRoleTreeList();
     }
 }

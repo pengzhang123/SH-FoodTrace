@@ -66,5 +66,11 @@ namespace FoodTrace.IService
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeletMenuByIds(string ids);
+
+        /// <summary>
+        /// 获取菜单数据
+        /// </summary>
+        /// <returns></returns>
+        List<ZtreeModel> GetMenuTreeList();
     }
 }

@@ -51,5 +51,11 @@ namespace FoodTrace.IDBAccess
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeleteRolesByIds(string ids);
+
+        /// <summary>
+        /// 获取角色树
+        /// </summary>
+        /// <returns></returns>
+        List<ZtreeModel> GetRoleTree();
     }
 }

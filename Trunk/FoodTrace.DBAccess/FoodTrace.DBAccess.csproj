@@ -86,6 +86,7 @@
     <Compile Include="SystemBase\AreaAccess.cs" />
     <Compile Include="SystemBase\AreaPlatAccess.cs" />
     <Compile Include="SystemBase\CityAccess.cs" />
+    <Compile Include="SystemBase\DicAccess.cs" />
     <Compile Include="SystemBase\TidAccess.cs" />
     <Compile Include="SystemBase\ProductBaseAccess.cs" />
     <Compile Include="SystemBase\ProductTypeAccess.cs" />

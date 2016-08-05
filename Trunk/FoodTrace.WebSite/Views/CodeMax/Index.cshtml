@@ -5,8 +5,8 @@
 
 <table id="DataGrid" style="height:100%;"></table>
 
-<div id="CreateDialog"></div>
-<div id="EditDialog"></div>
+<div id="CreateDialog" style="display: none;"></div>
+<div id="EditDialog" style="display: none;"></div>
 <script>
 
     function Edit(id) {
@@ -17,7 +17,7 @@
 
         $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
             if (r) {
-                $.post('@Url.Action("Delete", "CodeMax")', { id: id }, function (json) {
+                $.post('@Url.Action("DeleteByIds", "CodeMax")', { ids: id.join() }, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";
@@ -43,7 +43,7 @@
             striped: true,
             fitColumns: true,
             pagination: true,
-            singleSelect: true,
+            singleSelect: false,
             pageList: [10, 15, 20, 25],
             toolbar: [{
                 id: 'btnAdd',
@@ -57,23 +57,37 @@
                 text: ' 编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+
+                    var row = $('#DataGrid').datagrid('getSelections');
                     if (row) {
-                        Edit(row.CodeMaxID);
+                        if (row.length == 1) {
+                            Edit(row[0].CodeMaxID);
+                        } else {
+                            $.messager.alert('提示', '只能选中一条数据行进行修改');
+                        }
                     }
+                  
                 }
             }, {
                 id: 'btnDelete',
                 text: ' 删除',
                 iconCls: 'icon-remove',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
                     if (row) {
-                        Delete(row.CodeMaxID);
+                        $.each(row, function (index, item) {
+                            ids.push(item.CodeMaxID);
+                        });
+
+                        Delete(ids);
                     }
+
+                 
                 }
             }],
             columns: [[
+                 { field: 'ck', checkbox: true },
                     { title: '对像编码', align: 'center', field: 'ObjectCode', width: 35 },
                     { title: '对像名称', align: 'center', field: 'ObjectName', width: 35 },
                     { title: '对应值', align: 'center', field: 'ObjectValue', width: 35 },

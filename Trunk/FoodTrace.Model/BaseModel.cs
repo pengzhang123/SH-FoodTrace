@@ -48,7 +48,7 @@ namespace FoodTrace.Model
         UserLoginAccess,
         UserDetailAccess,
         UserRoleAccess,
-
+        DicAccess,
         ProductBaseAccess,
         ProductSpecAccess,
         ProductTypeAccess,

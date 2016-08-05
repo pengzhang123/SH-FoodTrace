@@ -24,6 +24,7 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
+            var count = productTypeService.GetProductTypeCount();
             var productSpecList = productTypeService.GetPagerProductType(string.Empty, page, rows).Select(m => new
             {
                 ProductTypeID = m.ProductTypeID,
@@ -32,7 +33,7 @@ namespace FoodTrace.WebSite.Controllers
                 IsLocked = m.IsLocked,
                 IsShow = m.IsShow,
             });
-            return Json(productSpecList, JsonRequestBehavior.AllowGet);
+            return Json(new { total = count, rows = productSpecList }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -68,6 +69,14 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Delete(int id)
         {
             var result = productTypeService.DeleteSingleProductType(id);
+            var flag = result.Status == MessageStatus.Success ? true : false;
+            var msg = result.Message;
+            return Json(new { flag = flag, msg = msg });
+        }
+
+        public JsonResult DeleteByIds(string ids)
+        {
+            var result = productTypeService.DeleteByIds(ids);
             var flag = result.Status == MessageStatus.Success ? true : false;
             var msg = result.Message;
             return Json(new { flag = flag, msg = msg });
