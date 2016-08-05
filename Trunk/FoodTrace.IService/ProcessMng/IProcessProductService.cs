@@ -82,6 +82,13 @@ namespace FoodTrace.IService
         List<ProductTraceDto> GetProductTrace(string epc, string orCode);
 
         /// <summary>
+        /// 种植流程追溯
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        List<ProductTraceDto> GetProductPlantTrace(string epc, string orCode);
+        /// <summary>
         /// 食品溯源具体数据详情
         /// </summary>
         /// <param name="code"></param>

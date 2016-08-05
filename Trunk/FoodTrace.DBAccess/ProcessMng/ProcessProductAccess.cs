@@ -388,6 +388,121 @@ namespace FoodTrace.DBAccess
 
 
         /// <summary>
+        /// 种植流程追溯
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public List<ProductTraceDto> GetProductPlantTrace(string epc, string orCode)
+        {
+            var list = new List<ProductTraceDto>();
+
+            var productBase = GetProProductByEpc(epc, orCode);
+            if (productBase != null)
+            {
+                var model = new ProductTraceDto() {Type = 6};
+                //销售仓库
+                var warehouse = (from s in Context.ProductBase
+                    join stock in Context.WareHouseStock on s.ProductID equals stock.ProductID
+                    join ware in Context.WareHouseBase on stock.WareHouseID equals ware.WareHouseID
+                    where s.ProductID == productBase.ProductID
+                    select new ProductTraceDto()
+                    {
+                        Code = ware.WareHouseID,
+                        Name = ware.WareHouseName,
+                        Type = 6,
+                        Image = ""
+                    }).FirstOrDefault();
+
+                if (warehouse != null)
+                {
+                    model = warehouse;
+                }
+                list.Add(model);
+                //销售公司
+                var baseSale = GetSaleBaseByEpc(epc, orCode);
+                if (baseSale != null)
+                {
+                    var saleModel = new ProductTraceDto() {Type = 7};
+                    var saleCompany = (from com in Context.Company
+                        where com.CompanyID == baseSale.CompanyID
+                        select new ProductTraceDto
+                        {
+                            Code = com.CompanyID,
+                            Name = com.CompanyName,
+                            Type = 7,
+                            Image = ""
+                        }).FirstOrDefault();
+
+                    if (saleCompany != null)
+                    {
+                        saleModel = saleCompany;
+                    }
+                    list.Add(saleModel);
+                }
+
+
+                //加工厂
+                var processModel = new ProductTraceDto() {Type = 5};
+                var procFactory = (from com in Context.Company
+                    join batch in Context.ProcessBatch on com.CompanyID equals batch.CompanyID
+                    join batchd in Context.ProcessBatchDetail on batch.PApplyID equals batchd.PApplyID
+                    where batchd.ProcessEPC == productBase.ProcessEPC
+                    select new ProductTraceDto()
+                    {
+                        Code = com.CompanyID,
+                        Name = com.CompanyName,
+                        Type = 5,
+                        Image = ""
+                    }).FirstOrDefault();
+
+                if (procFactory != null)
+                {
+                    processModel = procFactory;
+                }
+                list.Add(processModel);
+
+                //种植基地
+                var plantModel=new ProductTraceDto(){Type = 11};
+                var plantFactory = (from lbase in Context.LandBase
+                    join lb in Context.LandBlock on lbase.LandID equals lb.LandID
+                    join pb in Context.PlansBatch on lb.BlockID equals pb.BlockID
+                    where pb.BatchCode == productBase.ProcessEPC
+                    select new ProductTraceDto()
+                    {
+                        Code = lbase.LandID,
+                        Name = lbase.LandName,
+                        Type = 2,
+                        Image = ""
+                    }).FirstOrDefault();
+                if (plantFactory != null)
+                {
+                    plantModel = plantFactory;
+                }
+                list.Add(plantModel);
+
+                //种子
+                var seedModel=new ProductTraceDto(){Type = 12};
+                var seed=(from s in Context.SeedBase
+                          join pb in Context.PlansBatch on s.SeedID equals pb.SeedID
+                          where pb.BatchCode ==productBase.ProcessEPC
+                          select new ProductTraceDto()
+                          {
+                              Code = s.SeedID,
+                              Name = s.SeedName,
+                              Type = 12,
+                              Image = ""
+                          }).FirstOrDefault();
+                if (seed != null)
+                {
+                    seedModel = seed;
+                }
+                list.Add(seedModel);
+            }
+
+            return list;
+        }
+        /// <summary>
         /// 根据不同的类型返回不同的实体数据
         /// </summary>
         /// <param name="epc"></param>

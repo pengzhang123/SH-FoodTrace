@@ -62,14 +62,28 @@ namespace FoodTrace.WebAPI.Controllers
         /// <param name="Epc"></param>
         /// <param name="OrCode"></param>
         /// <returns></returns>
-        public HttpResponseMessage GetProductTraceInfo(string Epc, string OrCode)
+        public HttpResponseMessage GetProductTraceInfo(string Epc, string OrCode,int type)
         {
             string result = "1";
 
-            var data = productService.GetProductTrace(Epc, OrCode);
+            //养殖
+            if (type == 1)
+            {
+               var data = productService.GetProductTrace(Epc, OrCode);
             if (data.Any())
-             {
+            {
                 result = JsonConvert.SerializeObject(data);
+            }
+            }
+            //种植
+             if (type == 3)
+            {
+                var plant = productService.GetProductPlantTrace(Epc, OrCode);
+                if (plant.Any())
+                {
+                    result = JsonConvert.SerializeObject(plant);
+                }
+              
             }
             var resp = new HttpResponseMessage(HttpStatusCode.OK)
             {

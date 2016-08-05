@@ -117,7 +117,7 @@ namespace FoodTrace.Service
         }
 
         /// <summary>
-        /// 肉类,植物，溯源
+        /// 肉类，溯源
         /// </summary>
         /// <param name="epc"></param>
         /// <param name="orCode"></param>
@@ -127,6 +127,16 @@ namespace FoodTrace.Service
             return processProductAccess.GetProductTrace(epc, orCode);
         }
 
+        /// <summary>
+        /// 种植流程追溯
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="orCode"></param>
+        /// <returns></returns>
+        public List<ProductTraceDto> GetProductPlantTrace(string epc, string orCode)
+        {
+            return processProductAccess.GetProductPlantTrace(epc, orCode);
+        }
         /// <summary>
         /// 食品溯源具体数据详情
         /// </summary>

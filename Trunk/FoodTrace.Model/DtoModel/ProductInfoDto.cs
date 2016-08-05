@@ -16,7 +16,7 @@ namespace FoodTrace.Model.DtoModel
 
         public int Code { get; set; }
         /// <summary>
-        /// 牲畜，养殖：1，皮影:2
+        /// 牲畜，养殖：1，皮影:2,种植：3
         /// </summary>
         public int Type { get; set; }
         public string Name { get; set; }
@@ -58,7 +58,7 @@ namespace FoodTrace.Model.DtoModel
         public string Name { get; set; }
 
         /// <summary>
-        /// 牲畜：1，养殖场:2,屠宰场:3,屠宰加工仓库：4， 加工厂：5，销售仓库：6，销售公司：7,产品:8,父：9，母:10
+        /// 牲畜：1，养殖场:2,屠宰场:3,屠宰加工仓库：4， 加工厂：5，销售仓库：6，销售公司：7,产品:8,父：9，母:10,种植场：11，种子：12
         /// </summary>
         public int Type { get; set; }
 
