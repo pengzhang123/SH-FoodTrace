@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using FoodTrace.Common;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
@@ -127,7 +128,7 @@ namespace FoodTrace.WebSite.Controllers
             var result = new ResultJson();
             try
             {
-               
+                model.Password = EncodeStrToMd5.String32ToMD5(model.Password);
                 var msg = new MessageModel();
                 if (model.UserId == 0)
                 {
@@ -137,6 +138,7 @@ namespace FoodTrace.WebSite.Controllers
                         result.Msg = "用户名已存在";
                         return Json(result);
                     }
+                   
                     msg = userBaseService.InsertUserBase(model);
                 }
                 else

@@ -20,6 +20,11 @@ namespace FoodTrace.Model
         public int? CreateID { get; set; }
         public string CreateName { get; set; }
         public DateTime? CreateTime { get; set; }
+
+        /// <summary>
+        /// 平台：0，客户端:1
+        /// </summary>
+        public int Flag { get; set; }
         public virtual ICollection<RoleModel> Role { get; set; }
     }
 }

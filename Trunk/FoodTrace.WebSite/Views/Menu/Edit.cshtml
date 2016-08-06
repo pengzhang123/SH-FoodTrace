@@ -9,6 +9,13 @@
     @using (Html.BeginForm("Edit", "Menu", FormMethod.Post))
     {
     @Html.HiddenFor(_=>_.MenuID);
+        <div>
+        <label for="name">菜单类别:</label>
+             <select name="Flag">
+                 <option value="1">平台</option>
+                 <option value="2">客户端</option>
+             </select>
+         </div>
     <div>
         <label for="name">菜单名称:</label>
         @Html.TextBoxFor(m => Model.Name,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
@@ -23,7 +30,7 @@
     </div>
     <div>
         <label for="name">功能页面路径:</label>
-        @Html.TextBoxFor(m => Model.FunctionURL,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+        @Html.TextBoxFor(m => Model.FunctionURL,new {@class="easyui-textbox"})
     </div>
     }
 

@@ -147,7 +147,7 @@
     }
 
     function Edit(id) {
-        dicDialog.dialog({ title: "编辑用户" }).dialog('open');
+        dicDialog.dialog({ title: "修改" }).dialog('open');
         Utils.ajaxGet('/Dic/GetDicById', { rootId: id }, 'json', function(ret) {
             if (ret.IsSuccess) {
                 Utils.loadFormData($('#mainForm'), ret.Data);

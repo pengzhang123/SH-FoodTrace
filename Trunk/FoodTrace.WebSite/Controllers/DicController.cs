@@ -59,7 +59,7 @@ namespace FoodTrace.WebSite.Controllers
             var result = new ResultJson();
             try
             {
-                if (model.RootID == 0)
+                if (model.DicID == 0)
                 {
                     _dicService.InsertDicData(model);
                 }

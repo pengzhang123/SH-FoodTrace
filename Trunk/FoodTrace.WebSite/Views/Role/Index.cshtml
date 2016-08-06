@@ -8,12 +8,16 @@
 <div id="CreateDialog" style="display: none;"></div>
 <div id="EditDialog" style="display: none;"></div>
 <div id="MenuDialog" style="display: none;">
-    <input type="hidden" id="roleId" value=""/>
+   
     <ul id="menuTree" class="ztree"></ul>
+</div>
+<input type="hidden" id="roleId" value="" />
+<div id="ClientMenuDialog" style="display: none;">
+    <ul id="ClientMenuTree" class="ztree"></ul>
 </div>
 <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
 <script>
-    var menuDialog = null,roleMenuTree;
+    var menuDialog = null,roleMenuTree=null,roleClientMenu=null,clientDialog;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Role")' + '?id=' + id).dialog('open');
     }
@@ -88,9 +92,9 @@
                 }
             },{
             id: 'btnSetMenu',
-        text: ' 设置权限菜单',
-        iconCls: 'icon-remove',
-        handler: function () {
+            text: ' 设置平台权限',
+            iconCls: 'icon-remove',
+            handler: function () {
             var row = $('#DataGrid').datagrid('getSelections');
             if (row) {
                 if (row.length == 1) {
@@ -99,8 +103,22 @@
                     $.messager.alert('提示', '只能选中一条数据行进行修改');
                 }
             }
-        }
-    }, {
+         }
+            }, {
+                id: 'btnSetMenu',
+                text: ' 设置客户端权限',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    if (row) {
+                        if (row.length == 1) {
+                            setClientMenu(row[0].RoleID);
+                        } else {
+                            $.messager.alert('提示', '只能选中一条数据行进行修改');
+                        }
+                    }
+                }
+            }, {
                 text: 'Key'
             }, {
                 text: '<input type="text" id="key"/>'
@@ -116,7 +134,15 @@
                  { field: 'ck', checkbox: true },
                     { title: '角色名称', align: 'center', field: 'RoleName', width: 35 },
                     { title: '角色备注', align: 'center', field: 'Remark', width: 35 },
-                    { title: '排序ID', align: 'center', field: 'SortID', width: 35 }
+                    { title: '排序ID', align: 'center', field: 'SortID', width: 35 },
+                    {
+                        title: '菜单类型', align: 'center', field: 'Flag', width: 35, formatter: function (value, row, index) {
+                        if (value == 1) {
+                            return "平台";
+                        } else {
+                            return "客户端";
+                        }
+                    }}
             ]]
         });
 
@@ -237,7 +263,28 @@
                 }
             }]
         });
-
+        //设置角色相关权限菜单弹出框
+        clientDialog = $('#ClientMenuDialog').dialog({
+            title: '设置客户端权限菜单',
+            width: 600,
+            height: 380,
+            closed: true,
+            cache: false,
+            modal: true,
+            buttons: [{
+                text: 'Save',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    saveRoleRefClientMenu();
+                }
+            }, {
+                text: 'Close',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#ClientMenuDialog').dialog('close');
+                }
+            }]
+        });
         initMenuTree();
     });
 
@@ -247,16 +294,27 @@
             check: {
                 enable: true,
                 chkStyle: "checkbox",
-                chkboxType: { "Y": "", "N": "" }
+                chkboxType: { "Y": "ps", "N": "ps" }
             },
             data: {
                 // key: { ckecked: "Checked" },
                 simpleData: { enable: true, idKey: "id", pIdKey: "pId" }
             }
         };
-        Utils.ajaxGet("/Menu/GetMenuTree", null, "json", function (ret) {
+        Utils.ajaxGet("/Menu/GetMenuTree", {flag:0}, "json", function (ret) {
             if (ret.IsSuccess) {
-                roleMenuTree = $.fn.zTree.init($("#menuTree"), settings, ret.Data);
+                var webMenu = [], clietMenu = [];
+
+                $.each(ret.Data, function(i, item) {
+                    if (item.type == 1) {
+                        webMenu.push(item);
+                    }
+                    if (item.type == 2) {
+                        clietMenu.push(item);
+                    }
+                });
+                roleMenuTree = $.fn.zTree.init($("#menuTree"), settings, webMenu);
+                roleClientMenu = $.fn.zTree.init($('#ClientMenuTree'), settings, clietMenu);
             }
             //moduleTree.expandAll(true);GetRoleTree
         });
@@ -301,6 +359,50 @@
             } else {
                 $.messager.alert('提示:', '权限设置失败!', null, function () {
                     menuDialog.dialog("close");
+                });
+            }
+        });
+    }
+
+    //客户端权限弹出框
+    function setClientMenu(id) {
+        $('#roleId').val(id);
+        clientDialog.dialog('open');
+        Utils.ajaxGet('/Role/GetMenuByRoleId', { roleId: id }, 'json', function (ret) {
+            if (ret.IsSuccess) {
+                roleMenuTree.checkAllNodes(false);
+                var idArry = ret.Data;
+                for (var i = 0; i < idArry.length; i++) {
+                    var node = roleMenuTree.getNodeByParam("id", idArry[i], null);
+                    if (node != null) {
+                        node.checked = true;
+                        roleMenuTree.updateNode(node);
+
+                    }
+                }
+
+            }
+        });
+    }
+
+    ///客户端权限设置
+    function saveRoleRefClientMenu() {
+        var checkedNode = roleClientMenu.getCheckedNodes(true);
+        var menuId = [];
+        if (checkedNode.length > 0) {
+            for (var i = 0; i < checkedNode.length; i++) {
+                menuId.push(checkedNode[i].id);
+            }
+        }
+        var roleId = $('#roleId').val();
+        Utils.ajaxPost('/Role/SaveRoleRefMenu', { roleId: roleId, chkMenu: menuId }, 'json', function (ret) {
+            if (ret.IsSuccess) {
+                $.messager.alert('提示:', '权限设置成功!', null, function () {
+                    clientDialog.dialog("close");
+                });
+            } else {
+                $.messager.alert('提示:', '权限设置失败!', null, function () {
+                    clientDialog.dialog("close");
                 });
             }
         });

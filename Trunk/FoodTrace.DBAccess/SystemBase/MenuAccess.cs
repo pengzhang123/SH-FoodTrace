@@ -117,17 +117,22 @@ namespace FoodTrace.DBAccess
         /// 获取菜单数据
         /// </summary>
         /// <returns></returns>
-        public List<ZtreeModel> GetMenuTreeList()
+        public List<ZtreeModel> GetMenuTreeList(int flag)
         {
-            var list = (from s in Context.Menu
+            var query = (from s in Context.Menu
                 select new ZtreeModel()
                 {
                     id = s.MenuID.ToString(),
                     name = s.Name,
-                    pId = s.ParentID.ToString()
-                }).ToList();
+                    pId = s.ParentID.ToString(),
+                    type=s.Flag
+                }).AsQueryable();
 
-            return list;
+            if (flag >0)
+            {
+                query = query.Where(s => s.type == flag);
+            }
+            return query.ToList();
         }
     }
 }

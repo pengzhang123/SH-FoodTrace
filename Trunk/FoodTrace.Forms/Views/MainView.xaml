@@ -10,6 +10,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:uc="clr-namespace:FoodTrace.Forms.UserControls"
+             cal:Message.Attach="[Event Loaded] = [Action LoadUserControl($source)]"
              d:DesignHeight="600"
              d:DesignWidth="1000"
              mc:Ignorable="d">
@@ -49,10 +50,10 @@
                     <TextBlock VerticalAlignment="Center"
                                FontSize="15"
                                Text="欢迎您登录: " />
-                    <TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center" x:Name="UserName"
                                FontSize="15"
                                Foreground="#5096DB"
-                               Text="管理员" />
+                               Text="" />
                     <TextBlock Margin="20,0,0,0"
                                VerticalAlignment="Center"
                                cal:Message.Attach="[MouseDown] = [LoginOut]"

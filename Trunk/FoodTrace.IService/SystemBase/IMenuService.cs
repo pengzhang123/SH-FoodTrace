@@ -71,6 +71,6 @@ namespace FoodTrace.IService
         /// 获取菜单数据
         /// </summary>
         /// <returns></returns>
-        List<ZtreeModel> GetMenuTreeList();
+        List<ZtreeModel> GetMenuTreeList(int flag);
     }
 }

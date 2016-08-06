@@ -25,9 +25,9 @@ namespace FoodTrace.Forms.ViewModels
         {
             
             ILandBaseService iLandBaseService = new LandBaseService();
-            var landBases = iLandBaseService.GetPagerLandBase(string.Empty, 1, 10);
+            var landBases = iLandBaseService.GetLandBaseListByType(1);
             view.lbLand.ItemsSource = landBases;
-            view.lbLand.SelectedValuePath = "LandID";
+            view.lbLand.SelectedValuePath = "LandId";
             view.lbLand.DisplayMemberPath = "LandName";
         }
 

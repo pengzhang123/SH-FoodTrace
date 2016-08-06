@@ -5,8 +5,8 @@
 
 <table id="DataGrid" style="height:100%;"></table>
 
-<div id="CreateDialog"></div>
-<div id="EditDialog"></div>
+<div id="CreateDialog" style="display: none;"></div>
+<div id="EditDialog" style="display: none;"></div>
 <script>
 
     function Edit(id) {
@@ -43,7 +43,7 @@
             striped: true,
             fitColumns: true,
             pagination: true,
-            singleSelect: true,
+            singleSelect: false,
             pageList: [10, 15, 20, 25],
             toolbar: [{
                 id: 'btnAdd',
@@ -94,10 +94,11 @@
                 }
             }],
             columns: [[
+                   { field: 'ck', checkbox: true },
                     { title: '菜单名称', align: 'center', field: 'Name', width: 35 },
                     { title: '父菜单编号', align: 'center', field: 'ParentID', width: 35 },
                     { title: '排序号', align: 'center', field: 'SortID', width: 35 },
- { title: '功能页面路径', align: 'center', field: 'FunctionURL', width: 35 }
+                   { title: '功能页面路径', align: 'center', field: 'FunctionURL', width: 35 }
             ]]
         });
 

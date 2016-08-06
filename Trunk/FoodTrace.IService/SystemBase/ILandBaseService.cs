@@ -78,5 +78,12 @@ namespace FoodTrace.IService
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DelLandBaseByIds(string ids);
+
+        /// <summary>
+        /// 根据类别获取基地1:种植,2:养殖
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        List<LandBaseDto> GetLandBaseListByType(int type);
     }
 }

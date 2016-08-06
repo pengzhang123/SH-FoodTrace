@@ -8,7 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              cal:Message.Attach="[Event Loaded] = [Action LoadUserControl($source)]"
              d:DesignHeight="600"
-             d:DesignWidth="300"
+             d:DesignWidth="400"
              Background="White"
              mc:Ignorable="d">
     <Grid DataContext="{Binding Model}">

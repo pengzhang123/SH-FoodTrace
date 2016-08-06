@@ -104,9 +104,9 @@ namespace FoodTrace.Service
         /// 获取菜单数据
         /// </summary>
         /// <returns></returns>
-        public List<ZtreeModel> GetMenuTreeList()
+        public List<ZtreeModel> GetMenuTreeList(int flag)
         {
-            return menuAccess.GetMenuTreeList();
+            return menuAccess.GetMenuTreeList(flag);
         }
     }
 }

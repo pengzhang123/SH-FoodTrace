@@ -23,8 +23,8 @@ namespace FoodTrace.Model
         public int DicID { get; set; }
 
         public int? RootID { get; set; }
-        [ForeignKey("RootID")]
-        public virtual DicRootModel DicRoot { get; set; }
+        //[ForeignKey("RootID")]
+        //public virtual DicRootModel DicRoot { get; set; }
 
         public string Code { get; set; }
         public string Name { get; set; }

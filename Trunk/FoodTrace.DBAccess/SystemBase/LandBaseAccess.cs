@@ -151,8 +151,7 @@ namespace FoodTrace.DBAccess
                             Address = s.Address,
                             CompanyId = com.CompanyID,
                             CompanyName = com.CompanyName
-                        }
-                            ).AsQueryable();
+                        }).AsQueryable();
             if (compamyId > 0)
             {
                 query = query.Where(s => s.CompanyId == compamyId);
@@ -164,5 +163,27 @@ namespace FoodTrace.DBAccess
 
             return new GridList<LandBaseDto>() { rows = query.OrderBy(s=>s.LandId).ToList(), total = query.Count() };
         }
+
+        /// <summary>
+        /// 根据类别获取基地1:种植,2:养殖
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<LandBaseDto> GetLandBaseListByType(int comId,int type)
+        {
+            var list = (from s in Context.LandBase
+                         where s.CompanyID==comId && s.LandType==type
+                         select new LandBaseDto()
+                         {
+                             LandId = s.LandID,
+                             LandCode = s.LandCode,
+                             LandArea = s.LandArea,
+                             LandName = s.LandName,
+                             LandBaseType = s.LandType,
+                             Address = s.Address
+                         }).ToList();
+
+            return list;
+        } 
     }
 }

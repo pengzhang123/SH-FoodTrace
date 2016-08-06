@@ -11,23 +11,17 @@ namespace FoodTrace.Common.Libraries
 {
     public class UserManagement
     {
-        public  static UserSessionDto CurrentUser
+        public UserManagement()
         {
-
-            get
-            {
-                var userDto=new UserSessionDto(){ UserID = 1, UserName = "test", CompanyId= 1 };
                 if (HttpContext.Current != null)
                 {
                     if (HttpContext.Current.Session["UserBase"] != null)
                     {
-                        userDto = (UserSessionDto)HttpContext.Current.Session["UserBase"];
+                        CurrentUser = (UserSessionDto)HttpContext.Current.Session["UserBase"];
                     }
                 }
-
-                    return userDto;
-            }
         }
+        public  static UserSessionDto CurrentUser { get; set; }
 
         public static CompanyModel CurrentCompany
         {

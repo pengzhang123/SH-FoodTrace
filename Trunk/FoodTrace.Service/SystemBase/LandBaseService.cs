@@ -121,5 +121,16 @@ namespace FoodTrace.Service
         {
             return landBaseAccess.DelLandBaseByIds(ids);
         }
+
+        /// <summary>
+        /// 根据类别获取基地1:种植,2:养殖
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<LandBaseDto> GetLandBaseListByType(int type)
+        {
+            int comId = UserManagement.CurrentUser.CompanyId;
+            return landBaseAccess.GetLandBaseListByType(comId, type);
+        }
     }
 }

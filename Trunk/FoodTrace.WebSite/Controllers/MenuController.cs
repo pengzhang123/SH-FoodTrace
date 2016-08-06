@@ -117,12 +117,12 @@ namespace FoodTrace.WebSite.Controllers
             return Json(list);
         }
 
-        public JsonResult GetMenuTree()
+        public JsonResult GetMenuTree(int flag)
         {
             var result = new ResultJson();
             try
             {
-                var data = menuService.GetMenuTreeList();
+                var data = menuService.GetMenuTreeList(flag);
                 result.IsSuccess = true;
                 result.Data = data;
             }

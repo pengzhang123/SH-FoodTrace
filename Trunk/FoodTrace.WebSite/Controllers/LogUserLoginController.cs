@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common;
+using FoodTrace.IService;
 using FoodTrace.Model;
 using FoodTrace.Service;
 using System;
@@ -25,10 +26,11 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Login(UserBaseModel model)
         {
            // var user = iUserBaseService.GetUserBase(model.UserName, model.Password);
-            var user = iUserLoginService.GetUserLoginDto(model.UserName, model.Password);
+            string pwd = EncodeStrToMd5.String32ToMD5(model.Password);
+            var user = iUserLoginService.GetUserLoginDto(model.UserName, pwd);
             if(user == null)
             {
-                return Json(new { success=false,msg= "用户名错误" });
+                return Json(new { success=false,msg= "用户名或密码错误" });
             }
             var result = iUserLoginService.InsertSingleEntity(new LogUserLoginModel { UserID = user.UserID, LoginTime = DateTime.Now, NickName=user.UserName });
             Session["UserBase"] = user;

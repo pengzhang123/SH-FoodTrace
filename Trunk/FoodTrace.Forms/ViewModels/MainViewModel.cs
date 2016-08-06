@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using System.Windows;
 using System.Windows.Input;
+using FoodTrace.Common.Libraries;
 using FoodTrace.Forms.Commands;
 using System.Windows.Controls;
 using FoodTrace.Forms.Helpers;
@@ -33,6 +34,10 @@ namespace FoodTrace.Forms.ViewModels
             DisplayName = "";
         }
 
+        public void LoadUserControl(MainView view)
+        {
+            view.UserName.Text = UserManagement.CurrentUser.UserName;
+        }
         /// <summary>
         /// 点击左侧菜单，打开Tab Panel
         /// </summary>

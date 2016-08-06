@@ -25,10 +25,10 @@ namespace FoodTrace.Forms.ViewModels
 
         public void LoadUserControl(BreedBaseEditView view)
         {
-            var list = iLandBaseService.GetPagerLandBase("", 1, 100);
+            var list = iLandBaseService.GetLandBaseListByType(2);
             view.cbLandBase.ItemsSource = list;
             view.cbLandBase.DisplayMemberPath = "LandName";
-            view.cbLandBase.SelectedValuePath = "LandID";
+            view.cbLandBase.SelectedValuePath = "LandId";
         }
 
         public void Save()
