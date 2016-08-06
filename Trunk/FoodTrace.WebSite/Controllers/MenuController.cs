@@ -61,17 +61,45 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Edit(int id)
         {
             var model = menuService.GetMenuById(id);
-            var list = menuService.GetPagerMenu(string.Empty, 1, 100).OrderBy(_ => _.SortID).ToList();
-            List<SelectListItem> itemList = new List<SelectListItem>();
-            list.ForEach(m =>
-            {
-                itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
-            });
-            itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
-            ViewBag.MenuList = itemList;
+            //var list = menuService.GetPagerMenu(string.Empty, 1, 100).OrderBy(_ => _.SortID).ToList();
+            //List<SelectListItem> itemList = new List<SelectListItem>();
+            //list.ForEach(m =>
+            //{
+            //    itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
+            //});
+            //itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
+            //ViewBag.MenuList = itemList;
             return PartialView(model);
         }
 
+        /// <summary>
+        /// 获取模块列表
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public JsonResult GetMenuByMenuType(int type)
+        {
+            var result = new ResultJson();
+            try
+            {
+                var list = menuService.GetPagerMenu(string.Empty, 1, 100).OrderBy(_ => _.SortID).Where(s => s.Flag == type && s.ParentID == 0).ToList();
+                List<SelectListItem> itemList = new List<SelectListItem>();
+                list.ForEach(m =>
+                {
+                    itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
+                });
+                itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
+                result.Data = list;
+                result.IsSuccess = true;
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         public ActionResult Edit(MenuModel model)
         {

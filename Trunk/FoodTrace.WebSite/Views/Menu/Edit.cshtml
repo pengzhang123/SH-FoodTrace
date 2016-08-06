@@ -11,7 +11,7 @@
     @Html.HiddenFor(_=>_.MenuID);
         <div>
         <label for="name">菜单类别:</label>
-             <select name="Flag">
+             <select id="flag" name="Flag">
                  <option value="1">平台</option>
                  <option value="2">客户端</option>
              </select>
@@ -22,7 +22,7 @@
     </div>
     <div>
         <label for="name">父菜单:</label>
-        @Html.DropDownListFor(m => Model.ParentID,pList,new {@class="easyui-validatebox easyui-combobox",data_options="required:true"})
+        <select name="ParentID" id="parentId"></select>
     </div>
     <div>
         <label for="name">排序号:</label>
@@ -34,3 +34,27 @@
     </div>
     }
 
+<script>
+    $(function() {
+        loadParentMenu();
+        $('#flag').on('change', function() {
+            loadParentMenu();
+        });
+    });
+
+    function loadParentMenu() {
+        var flag = $('#flag').val();
+        Utils.ajaxGet('/Menu/GetMenuByMenuType', { type: flag }, 'json', function(ret) {
+            console.log(ret);
+            if (ret.IsSuccess) {
+                var option = "";;
+                $.each(ret.Data, function (i, n) {
+                    option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+                });
+                $("#parentId").append(option);
+                $('#parentId').val('@Model.ParentID');
+            }
+         
+        });
+    }
+</script>
