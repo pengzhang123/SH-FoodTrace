@@ -101,11 +101,11 @@ namespace FoodTrace.DBAccess
         /// <param name="roleId"></param>
         /// <param name="list"></param>
         /// <returns></returns>
-        public MessageModel UpdateRoleMenu(int roleId,List<RoleMenuModel> list )
+        public MessageModel UpdateRoleMenu(int roleId,List<RoleMenuModel> list,int flag)
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var data = context.RoleMenu.Where(s=>s.RoleID==roleId).ToList();
+                var data = context.RoleMenu.Where(s=>s.RoleID==roleId && s.Flag==flag).ToList();
                 if (data.Any())
                 {
 
@@ -115,7 +115,11 @@ namespace FoodTrace.DBAccess
 
                 if (list.Any())
                 {
-                    list.ForEach(s=> { s.RoleID = roleId; });
+                    list.ForEach(s =>
+                    {
+                        s.RoleID = roleId;
+                        s.Flag = flag;
+                    });
                     context.BatctInsert(list);
                 }
                 return string.Empty;
@@ -169,9 +173,9 @@ namespace FoodTrace.DBAccess
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<int> GetMenuListByRoleId(int id)
+        public List<int> GetMenuListByRoleId(int id,int flag)
         {
-            var query = (from s in base.Context.RoleMenu.Where(s => s.RoleID == id)
+            var query = (from s in base.Context.RoleMenu.Where(s => s.RoleID == id && s.Flag==flag)
                 select s.MenuID).ToList();
 
             return query;
@@ -197,9 +201,9 @@ namespace FoodTrace.DBAccess
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<MenuModel> GetRoleMenuByRoleId(int id)
+        public List<MenuModel> GetRoleMenuByRoleId(int id,int flag)
         {
-            var query = (from s in base.Context.RoleMenu.Where(s => s.RoleID == id)
+            var query = (from s in base.Context.RoleMenu.Where(s => s.RoleID == id && s.Flag==flag)
                         join m in Context.Menu on s.MenuID equals m.MenuID
                         orderby m.SortID
                        select m ).ToList();

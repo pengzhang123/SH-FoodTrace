@@ -13,6 +13,8 @@ namespace FoodTrace.Model
         public string Description { get; set; }
         public int? SortID { get; set; }
         public bool? IsLocked { get; set; }
+
+        public string Code { get; set; }
         public virtual ICollection<DicModel> Dic { get; set; }
     }
 

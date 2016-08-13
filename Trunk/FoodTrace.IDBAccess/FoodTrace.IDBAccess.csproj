@@ -106,6 +106,7 @@
     <Compile Include="TrunMng\ITrunDriverAccess.cs" />
     <Compile Include="TrunMng\ITrunTemperatrueAccess.cs" />
     <Compile Include="TrunMng\ITrunVehicleAccess.cs" />
+    <Compile Include="WinCe\IWinceDicAccess.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -156,13 +156,17 @@
                         handler: function() {
                             var row = $('#DataGrid').datagrid('getSelections');
                             var ids = [];
-                            if (row) {
+                            if (row.length == 0) {
+                                $.messager.alert('提示', '请选择需要删除的数据');
+                                return;
+                            }
+                        
                                 $.each(row, function (index, item) {
                                     ids.push(item.LandId);
                                 });
 
                                 delLand(ids);
-                            }
+                            
                         }
                     }
                 ]
@@ -224,19 +228,19 @@
         function saveLandData() {
             var flag = $('#mainForm').form('validate');
             if (!flag) {
-                $.messager.alert('Title', '必须填写完整的信息', 'error');
+                $.messager.alert('提示', '必须填写完整的信息', 'error');
                 return false;
             }
 
             Utils.ajaxPost('/LandBase/SaveLandBase', $('#mainForm').serialize(), 'json', function(ret) {
                 
                 if (ret.IsSuccess) {
-                    $.messager.alert('Title', '保存成功');
+                    $.messager.alert('提示', '保存成功');
                     $('#mainForm')[0].reset();
                     landDialog.dialog('close');
                     landGrid.datagrid('reload');
                 } else {
-                    $.messager.alert('Title', '保存失败');
+                    $.messager.alert('提示', '保存失败');
                 }
                
             });

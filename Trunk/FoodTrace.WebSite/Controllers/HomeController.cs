@@ -32,7 +32,7 @@ namespace FoodTrace.WebSite.Controllers
             var roleMenu = (List<MenuModel>) Session["RoleMenu"];
             if (roleMenu == null)
             {
-                 roleMenu= _roleService.GetRoleMenuByRoleId(user.RoleId);
+                 roleMenu= _roleService.GetRoleMenuByRoleId(user.RoleId,1);
                 //后面改为放缓存
                  Session["RoleMenu"] = roleMenu;
             }

@@ -116,6 +116,7 @@
     <Compile Include="TrunMng\TrunTemperatrueAccess.cs" />
     <Compile Include="TrunMng\TrunVehicleAccess.cs" />
     <Compile Include="UserRoleAccess.cs" />
+    <Compile Include="WinCe\WinceDicAccess.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

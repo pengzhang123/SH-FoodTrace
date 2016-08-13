@@ -41,5 +41,6 @@ namespace FoodTrace.Model
         public string url { get; set; }
 
         public int type { get; set; }
+        public string code { get; set; }
     }
 }

@@ -107,9 +107,9 @@ namespace FoodTrace.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<int> GetMenuListByRoleId(int id)
+        public List<int> GetMenuListByRoleId(int id,int flag)
         {
-            return roleAccess.GetMenuListByRoleId(id);
+            return roleAccess.GetMenuListByRoleId(id,flag);
         }
 
         /// <summary>
@@ -118,9 +118,9 @@ namespace FoodTrace.Service
         /// <param name="roleId"></param>
         /// <param name="list"></param>
         /// <returns></returns>
-        public MessageModel UpdateRoleMenu(int roleId, List<RoleMenuModel> list)
+        public MessageModel UpdateRoleMenu(int roleId, List<RoleMenuModel> list,int flag)
         {
-            return roleAccess.UpdateRoleMenu(roleId, list);
+            return roleAccess.UpdateRoleMenu(roleId, list,flag);
         }
 
         /// <summary>
@@ -128,9 +128,9 @@ namespace FoodTrace.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<MenuModel> GetRoleMenuByRoleId(int id)
+        public List<MenuModel> GetRoleMenuByRoleId(int id,int flag)
         {
-            return roleAccess.GetRoleMenuByRoleId(id);
+            return roleAccess.GetRoleMenuByRoleId(id,flag);
         }
 
 

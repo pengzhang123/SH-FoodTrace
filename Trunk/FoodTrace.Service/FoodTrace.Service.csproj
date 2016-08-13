@@ -106,6 +106,7 @@
     <Compile Include="TrunMng\TrunVehicleService.cs" />
     <Compile Include="SystemBase\UserDetailService.cs" />
     <Compile Include="UserRoleService.cs" />
+    <Compile Include="WinCe\WinceDicService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

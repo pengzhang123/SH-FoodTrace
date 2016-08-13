@@ -5,8 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using FoodTrace.Model;
 using FoodTrace.Forms.Models;
+using FoodTrace.Service;
 
 namespace FoodTrace.Forms
 {
@@ -18,10 +21,11 @@ namespace FoodTrace.Forms
         public static UserBaseModel CurrentUser { get; set; }
 
         public static List<NaviModel> Navis { get; private set; }
-
+      
 
         static App()
         {
+
             Navis = new List<NaviModel> {
                 
                 new NaviModel {

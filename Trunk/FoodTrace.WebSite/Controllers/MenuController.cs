@@ -89,7 +89,7 @@ namespace FoodTrace.WebSite.Controllers
                     itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
                 });
                 itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
-                result.Data = list;
+                result.Data = itemList;
                 result.IsSuccess = true;
 
             }

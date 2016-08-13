@@ -105,6 +105,7 @@
     <Compile Include="TrunMng\ITrunDriverService.cs" />
     <Compile Include="TrunMng\ITrunTemperatrueService.cs" />
     <Compile Include="TrunMng\ITrunVehicleService.cs" />
+    <Compile Include="WinCe\IWinceDicService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

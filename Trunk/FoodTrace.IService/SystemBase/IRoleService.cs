@@ -73,7 +73,7 @@ namespace FoodTrace.IService
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<int> GetMenuListByRoleId(int id);
+        List<int> GetMenuListByRoleId(int id,int flag);
 
         /// <summary>
         /// 更新权限菜单
@@ -81,14 +81,14 @@ namespace FoodTrace.IService
         /// <param name="roleId"></param>
         /// <param name="list"></param>
         /// <returns></returns>
-        MessageModel UpdateRoleMenu(int roleId, List<RoleMenuModel> list);
+        MessageModel UpdateRoleMenu(int roleId, List<RoleMenuModel> list,int flag);
 
         /// <summary>
         /// 根据角色Id获取角色菜单
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<MenuModel> GetRoleMenuByRoleId(int id);
+        List<MenuModel> GetRoleMenuByRoleId(int id,int flag);
 
         /// <summary>
         /// 保存用户关联角色数据

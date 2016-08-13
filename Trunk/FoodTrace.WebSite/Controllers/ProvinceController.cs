@@ -26,16 +26,9 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
-            var count = provinceService.GetProvinceCount();
-            var provinceList = provinceService.GetPagerProvince(null, string.Empty, page, rows).Select(_ => new
-            {
-                AreaID = _.AreaID,
-                AreaName = _.Area.AreaName,
-                ProvinceCode = _.ProvinceCode,
-                ProvinceName = _.ProvinceName,
-                ProvinceID = _.ProvinceID
-            });
-            return Json(new {total=count,rows=provinceList}, JsonRequestBehavior.AllowGet);
+           // var count = provinceService.GetProvinceCount();
+            var provinceList = provinceService.GetProviceListPaging(null, string.Empty, page, rows);
+            return Json(provinceList, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()

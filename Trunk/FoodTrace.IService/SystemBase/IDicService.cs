@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FoodTrace.Model;
 using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.IService.SystemBase
 {
@@ -58,7 +59,7 @@ namespace FoodTrace.IService.SystemBase
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        GridList<DicModel> GetDicList(int pIndex, int pSize);
+        GridList<DicGridDto> GetDicList(int dicId, string dicName, int pIndex, int pSize);
         /// <summary>
         /// 根据id获取
         /// </summary>
@@ -86,6 +87,12 @@ namespace FoodTrace.IService.SystemBase
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeleteDicByIds(string ids);
+
+        /// <summary>
+        /// 获取根字典数据项
+        /// </summary>
+        /// <returns></returns>
+        List<ZtreeModel> GetRootDicTree();
 
         #endregion
     }

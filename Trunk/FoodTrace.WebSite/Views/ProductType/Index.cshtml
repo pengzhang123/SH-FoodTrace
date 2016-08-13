@@ -3,9 +3,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="padding:10px;">
-    <table id="DataGrid"></table>
-</div>
+               <div style="height: 95%">
+                   <table id="DataGrid" style="height: 100%"></table>
+               </div>
 
 <div id="CreateDialog" style="display: none;"></div>
 <div id="EditDialog" style="display: none;"></div>
@@ -73,16 +73,19 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelections');
                     var ids = [];
-                    if (row) {
-                        $.each(row, function (index, item) {
-                            ids.push(item.ProductTypeID);
-                        });
-
-                        Delete(ids);
+                    if (row.length==0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
                     }
+                    $.each(row, function (index, item) {
+                        ids.push(item.ProductTypeID);
+                    });
+
+                    Delete(ids);
                 }
             }],
             columns: [[
+                    { field: 'ck', checkbox: true },
                     { title: '产品型号名称', align: 'center', field: 'ProductTypeEN', width: 35 },
                     { title: '备注', align: 'center', field: 'Remark', width: 35 }
 

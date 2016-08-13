@@ -54,7 +54,7 @@
                 text: ' 编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
                     if (row) {
                         if (row.length > 1) {
                             $.messager.alert('提示', '只能编辑一条数据');
@@ -69,13 +69,18 @@
                 iconCls: 'icon-remove',
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelections');
-                    if (row) {
-                        var ids = [];
-                            $.each(row, function (index, item) {
-                                ids.push(item.CompanyID);
-                            });
-                            Delete(ids);
+
+                    if (row.length == 0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
                     }
+
+                      var ids = [];
+                        $.each(row, function (index, item) {
+                                ids.push(item.CompanyID);
+                        });
+                       Delete(ids);
+                    
                 }
             }],
             columns: [[

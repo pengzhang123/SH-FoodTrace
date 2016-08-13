@@ -20,7 +20,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="pack://application:,,,/FoodTrace.Forms;component/Images/LoginBG.png" />
             </Grid.Background>
-            <TextBlock  HorizontalAlignment="Center" Margin="0,62,0,0" Text="淘宁夏农特产品溯源直供管理平台" Foreground="White" FontSize="30" />
+            <TextBlock  HorizontalAlignment="Center" Margin="0,62,0,0" Text="环县农特产品溯源管理系统" Foreground="White" FontSize="30" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.IService
 {
@@ -33,6 +35,15 @@ namespace FoodTrace.IService
         /// <returns></returns>
         List<ProvinceModel> GetPagerProvince(int? areaId, string name, int pageIndex, int pageSize);
 
+        /// <summary>
+        /// 分页数据查询
+        /// </summary>
+        /// <param name="areaId"></param>
+        /// <param name="name"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        GridList<ProviceDto> GetProviceListPaging(int? areaId, string name, int pageIndex, int pageSize);
         /// <summary>
         /// 通过ID获取Province
         /// </summary>

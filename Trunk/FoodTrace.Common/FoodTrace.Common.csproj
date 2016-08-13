@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Libraries\CommonConfig.cs" />
     <Compile Include="Libraries\EncodeStrToMd5.cs" />
+    <Compile Include="Libraries\ReflectionHelper.cs" />
     <Compile Include="Libraries\RequestHelper.cs" />
     <Compile Include="Libraries\UserManagement.cs" />
     <Compile Include="Log\Logger.cs" />

@@ -22,6 +22,6 @@ namespace FoodTrace.Model
         public DateTime? CreateTime { get; set; }
         
         public virtual ICollection<UserBaseModel> UserBase { get; set; }
-        public virtual ICollection<MenuModel> Menu { get; set; }
+        //public virtual ICollection<MenuModel> Menu { get; set; }
     }
 }

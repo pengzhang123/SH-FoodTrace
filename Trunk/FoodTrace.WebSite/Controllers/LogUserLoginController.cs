@@ -1,6 +1,8 @@
 ﻿using FoodTrace.Common;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
 using FoodTrace.Model;
+using FoodTrace.Model.DtoModel;
 using FoodTrace.Service;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,8 @@ namespace FoodTrace.WebSite.Controllers
             var result = iUserLoginService.InsertSingleEntity(new LogUserLoginModel { UserID = user.UserID, LoginTime = DateTime.Now, NickName=user.UserName });
             Session["UserBase"] = user;
             //Session["Role"] = user == null ? null : user.Role;
+ 
+             UserManagement.CurrentUser =user;
 
             return Json(new { success = true, msg = "Find the User" });
         }

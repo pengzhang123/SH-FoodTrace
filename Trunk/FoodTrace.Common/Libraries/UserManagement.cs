@@ -9,19 +9,22 @@ using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Common.Libraries
 {
-    public class UserManagement
+    public  class UserManagement
     {
-        public UserManagement()
+        public   UserManagement()
         {
-                if (HttpContext.Current != null)
-                {
-                    if (HttpContext.Current.Session["UserBase"] != null)
-                    {
-                        CurrentUser = (UserSessionDto)HttpContext.Current.Session["UserBase"];
-                    }
-                }
+                //if (HttpContext.Current != null)
+                //{
+                //    if (HttpContext.Current.Session["UserBase"] != null)
+                //    {
+                //        CurrentUser = (UserSessionDto)HttpContext.Current.Session["UserBase"];
+                //    }
+                //}
         }
-        public  static UserSessionDto CurrentUser { get; set; }
+
+        public static UserSessionDto CurrentUser { get;
+            set;
+        }
 
         public static CompanyModel CurrentCompany
         {

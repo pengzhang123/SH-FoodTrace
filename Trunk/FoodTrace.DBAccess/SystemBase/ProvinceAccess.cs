@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -55,6 +57,7 @@ namespace FoodTrace.DBAccess
                 var data = context.Province.FirstOrDefault(m => m.ProvinceID == model.ProvinceID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.ProvinceCode = model.ProvinceCode;
+                data.AreaID = model.AreaID;
                 data.ProvinceName = model.ProvinceName;
                 context.SaveChanges();
                 return string.Empty;
@@ -100,9 +103,54 @@ namespace FoodTrace.DBAccess
         }
         public List<ProvinceModel> GetPagerProvinceByConditions(int? areaId, string name, int pageIndex, int pageSize)
         {
-            return base.Context.Province.Where(m => (!areaId.HasValue || m.AreaID == areaId.Value)
-                                                && (string.IsNullOrEmpty(name) || m.ProvinceName.Contains(name)))
-                    .OrderBy(m => m.ProvinceID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var query=base.Context.Province.AsQueryable();
+            if (areaId != null && areaId > 0)
+            {
+                query = query.Where(s => s.AreaID == areaId);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.ProvinceName.Contains(name));
+            }
+               
+             var list=query.OrderBy(m => m.ProvinceID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+
+            return list;
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="areaId"></param>
+        /// <param name="name"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public GridList<ProviceDto> GetProviceListPaging(int? areaId, string name, int pageIndex, int pageSize)
+        {
+            var query = (from s in base.Context.Province
+                         join area in base.Context.Area on s.AreaID equals area.AreaID into areal
+                         from arealeft in areal.DefaultIfEmpty()
+                         select new ProviceDto
+                         {
+                             AreaID = s.AreaID,
+                             AreaName = arealeft.AreaName,
+                             ProvinceCode = s.ProvinceCode,
+                             ProvinceName = s.ProvinceName,
+                             ProvinceID = s.ProvinceID
+                         }).AsQueryable();
+            if (areaId != null && areaId > 0)
+            {
+                query = query.Where(s => s.AreaID == areaId);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.ProvinceName.Contains(name));
+            }
+
+            var list = query.OrderBy(m => m.ProvinceID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+
+            return new GridList<ProviceDto>(){total = query.Count(),rows = list};
         }
     }
 }

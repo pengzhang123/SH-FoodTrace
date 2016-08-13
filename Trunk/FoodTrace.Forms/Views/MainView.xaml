@@ -197,7 +197,7 @@
                                 <Grid Background="#FFF4EE">
                                     <TextBlock HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
-                                               Text="版权所有:宁夏百创信息技术有限公司；技术支持：上海沃标智能科技有限公司 版本v1.0" />                                </Grid>
+                                               Text="版权所有：环县人民政府；技术支持：宁夏百创信息技术有限公司 版本v1.0" />                                </Grid>
                             </Border>
 
                         </Grid>

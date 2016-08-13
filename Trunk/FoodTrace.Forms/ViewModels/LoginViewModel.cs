@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using FoodTrace.Common;
+using FoodTrace.Forms.Models;
 using FoodTrace.Forms.UserControls;
 using FoodTrace.Forms.Views;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
+using FoodTrace.Model;
 using FoodTrace.Service;
 
 namespace FoodTrace.Forms.ViewModels
@@ -23,6 +25,8 @@ namespace FoodTrace.Forms.ViewModels
         private SJTextBox Upwd { get; set; }
         public string Password { get; set; }
 
+        public static List<NaviModel> Navis =new List<NaviModel>();
+        public static List<MenuModel> RoleMenuList=new List<MenuModel>(); 
         public void LoadUserControl(LoginView view)
         {
             Upwd = view.Upwd;
@@ -50,6 +54,8 @@ namespace FoodTrace.Forms.ViewModels
                 {
                     if (user != null)
                     {
+
+                        LoadUserMenuNavi();
                         win.DialogResult = true;
                         win.Close();
                        
@@ -63,6 +69,24 @@ namespace FoodTrace.Forms.ViewModels
         
         }
 
+        public void LoadUserMenuNavi()
+        {
+            int roleId = UserManagement.CurrentUser.RoleId;
+            IRoleService _roleService = new RoleService();
+            var roleMenu = _roleService.GetRoleMenuByRoleId(roleId, 2);
+            RoleMenuList = roleMenu;
+            var module = roleMenu.Where(s => s.ParentID == 0).ToList();
+            int i =1;
+            module.ForEach(s =>
+            {
+                var naviModel = new NaviModel();
+                naviModel.Name = s.Name;
+                naviModel.NaviIndex = i++;
+                naviModel.IsExpanded = false;
+                naviModel.Menus = roleMenu.Where(m => m.ParentID == s.MenuID).Select(m => m.Name).ToList();
+                Navis.Add(naviModel);
+            });
+        }
         public void Cancel()
         {
             var win = GetView() as System.Windows.Window;

@@ -45,7 +45,6 @@
     function loadParentMenu() {
         var flag = $('#flag').val();
         Utils.ajaxGet('/Menu/GetMenuByMenuType', { type: flag }, 'json', function(ret) {
-            console.log(ret);
             if (ret.IsSuccess) {
                 var option = "";;
                 $.each(ret.Data, function (i, n) {

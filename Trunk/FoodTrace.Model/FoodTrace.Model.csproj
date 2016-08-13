@@ -57,6 +57,10 @@
     <Compile Include="BreedMng\BreedMaterialModel.cs" />
     <Compile Include="BreedMng\CultivationBaseModel.cs" />
     <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="DtoModel\DicGridDto.cs" />
+    <Compile Include="DtoModel\ProviceDto.cs" />
+    <Compile Include="WinCeModel\BredDrug.cs" />
+    <Compile Include="WinCeModel\DicDto.cs" />
     <Compile Include="DtoModel\LandBaseDto.cs" />
     <Compile Include="DtoModel\ProductInfoDto.cs" />
     <Compile Include="DtoModel\ShadowBaseDto.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="TrunMng\TrunDriverModel.cs" />
     <Compile Include="TrunMng\TrunTemperatrueModel.cs" />
     <Compile Include="TrunMng\TrunVehicleModel.cs" />
+    <Compile Include="WinCeModel\WinceUser.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

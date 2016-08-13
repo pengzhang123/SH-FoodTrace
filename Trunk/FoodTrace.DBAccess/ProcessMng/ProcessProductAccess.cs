@@ -300,7 +300,7 @@ namespace FoodTrace.DBAccess
                 }
                 list.Add(killModel);
 
-                    //养殖场
+                  //养殖场
                 var culModel = new ProductTraceDto() {Type = 2};
                 var cultivate = (
                                 from b in Context.BreedBase 

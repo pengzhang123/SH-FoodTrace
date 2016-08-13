@@ -128,7 +128,7 @@ namespace FoodTrace.WebSite.Controllers
         /// <param name="menuId"></param>
         /// <param name="chkStatus"></param>
         /// <returns></returns>
-        public JsonResult SaveRoleRefMenu(int roleId, List<int> chkMenu)
+        public JsonResult SaveRoleRefMenu(int roleId, List<int> chkMenu,int flag)
         {
             var result = new ResultJson();
             try
@@ -144,7 +144,7 @@ namespace FoodTrace.WebSite.Controllers
                     }
 
                 }
-                roleService.UpdateRoleMenu(roleId, roleMenu);
+                roleService.UpdateRoleMenu(roleId, roleMenu,flag);
                 //_roleApp.SaveRoleRefMenu(roleId, menuId, chkStatus);
                 result.IsSuccess = true;
             }
@@ -219,12 +219,12 @@ namespace FoodTrace.WebSite.Controllers
             }
             return Json(result);
         }
-        public JsonResult GetMenuByRoleId(int roleId)
+        public JsonResult GetMenuByRoleId(int roleId,int flag)
         {
             var result = new ResultJson();
             try
             {
-                var data = roleService.GetMenuListByRoleId(roleId);
+                var data = roleService.GetMenuListByRoleId(roleId,flag);
                 result.IsSuccess = true;
                 result.Data = data;
             }

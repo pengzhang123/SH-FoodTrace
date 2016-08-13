@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService.SystemBase;
 using FoodTrace.Model;
 using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
+using Microsoft.Ajax.Utilities;
 
 namespace FoodTrace.WebSite.Controllers
 {
@@ -21,9 +24,11 @@ namespace FoodTrace.WebSite.Controllers
         // GET: Dic
         public ActionResult Index()
         {
-            var dicRoot = _dicService.GetDicrootList(1, 100);
+            //var dicRoot = _dicService.GetDicrootList(1, 100);
+            var list = _dicService.GetRootDicTree();
 
-            ViewBag.DicRoot = new SelectList(dicRoot.rows, "RootID", "Name");
+            list.Insert(0, new ZtreeModel() { id = "0", name = "请选择" });
+            ViewBag.DicRoot = new SelectList(list, "id", "name");
             return View();
         }
 
@@ -35,15 +40,18 @@ namespace FoodTrace.WebSite.Controllers
         /// <returns></returns>
         public JsonResult GetDicList(int page, int rows)
         {
-            var list = new GridList<DicModel>();
+            var list = new GridList<DicGridDto>();
             try
             {
-                list = _dicService.GetDicList(page, rows);
+                var dicName = RequestHelper.RequestPost("dicName", string.Empty);
+                var dicId = RequestHelper.RequestPost("dicId", "0");
+
+                int id = int.Parse(dicId);
+                list = _dicService.GetDicList(id,dicName,page, rows);
             }
             catch (Exception)
             {
-
-                throw;
+              
             }
 
             return Json(list);
@@ -111,7 +119,8 @@ namespace FoodTrace.WebSite.Controllers
             var result = new ResultJson();
             try
             {
-                _dicService.GetDicModelById(id);
+               var data= _dicService.GetDicModelById(id);
+                result.Data = data;
                 result.IsSuccess = true;
 
             }
@@ -122,6 +131,28 @@ namespace FoodTrace.WebSite.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取字典树
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetRootDicTree()
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data=_dicService.GetRootDicTree();
+                result.IsSuccess = true;
+                result.Data = data;
+
+            }
+            catch (Exception ex)
+            {
+               
+            }
+
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
     }
 }

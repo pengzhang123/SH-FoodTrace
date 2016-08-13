@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <table id="DataGrid" style="height:100%;"></table>
-<div id="CreateDialog" style="padding: 10px 60px 20px 60px">
+<div id="CreateDialog">
 </div>
-<div id="EditDialog" style="padding:10px 60px 20px 60px"></div>
+<div id="EditDialog"></div>
 <script type="text/javascript">
     var editDialog;
     function Edit(id) {
@@ -39,7 +39,7 @@
             striped: true,
             fitColumns: true,
             pagination: true,
-            singleSelect: true,
+            singleSelect: false,
             pageList: [10, 15, 20, 25],
             toolbar: [{
                 id: 'btnAdd',
@@ -53,7 +53,7 @@
                 text: ' 编辑',
                 iconCls: 'icon-edit',
                 handler: function () {
-                    var row = $('#DataGrid').datagrid('getSelected');
+                    var row = $('#DataGrid').datagrid('getSelections');
                     if (row) {
                         if (row.length == 1) {
                             Edit(row[0].DeptID);
@@ -69,13 +69,17 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelections');
                     var ids = [];
-                    if (row) {
+                    if (row.length == 0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
+                    }
+
                         $.each(row, function (index, item) {
                             ids.push(item.DeptID);
                         });
 
                         Delete(ids);
-                    }
+                    
                 }
             }],
             columns: [[

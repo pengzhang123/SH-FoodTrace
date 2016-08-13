@@ -26,7 +26,7 @@
 
         $.messager.confirm('信息提示', '确定要删除该记录吗', function (r) {
             if (r) {
-                $.post('@Url.Action("DeleteRole", "Role")', { ids: id.join()}, function (json) {
+                $.post('@Url.Action("DeletRole", "Role")', { ids: id.join()}, function (json) {
                     var msg = '';
                     if (json.flag) {
                         msg = "删除成功";
@@ -82,13 +82,17 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelections');
                     var ids = [];
-                    if (row) {
+
+                    if (row.length == 0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
+                    }
                         $.each(row, function (index, item) {
                             ids.push(item.RoleID);
                         });
 
                         Delete(ids);
-                    }
+                   
                 }
             },{
             id: 'btnSetMenu',
@@ -324,7 +328,7 @@
     function setMenu(id) {
         $('#roleId').val(id);
         menuDialog.dialog('open');
-        Utils.ajaxGet('/Role/GetMenuByRoleId', { roleId: id }, 'json', function (ret) {
+        Utils.ajaxGet('/Role/GetMenuByRoleId', { roleId: id ,flag:1}, 'json', function (ret) {
             if (ret.IsSuccess) {
                 roleMenuTree.checkAllNodes(false);
                 var idArry = ret.Data;
@@ -351,7 +355,7 @@
             }
         }
         var roleId = $('#roleId').val();
-        Utils.ajaxPost('/Role/SaveRoleRefMenu', { roleId: roleId, chkMenu: menuId }, 'json', function (ret) {
+        Utils.ajaxPost('/Role/SaveRoleRefMenu', { roleId: roleId, chkMenu: menuId,flag:1 }, 'json', function (ret) {
             if (ret.IsSuccess) {
                 $.messager.alert('提示:', '权限设置成功!', null, function () {
                     menuDialog.dialog("close");
@@ -368,15 +372,15 @@
     function setClientMenu(id) {
         $('#roleId').val(id);
         clientDialog.dialog('open');
-        Utils.ajaxGet('/Role/GetMenuByRoleId', { roleId: id }, 'json', function (ret) {
+        Utils.ajaxGet('/Role/GetMenuByRoleId', { roleId: id ,flag:2}, 'json', function (ret) {
             if (ret.IsSuccess) {
-                roleMenuTree.checkAllNodes(false);
+                roleClientMenu.checkAllNodes(false);
                 var idArry = ret.Data;
                 for (var i = 0; i < idArry.length; i++) {
-                    var node = roleMenuTree.getNodeByParam("id", idArry[i], null);
+                    var node = roleClientMenu.getNodeByParam("id", idArry[i], null);
                     if (node != null) {
                         node.checked = true;
-                        roleMenuTree.updateNode(node);
+                        roleClientMenu.updateNode(node);
 
                     }
                 }
@@ -395,7 +399,7 @@
             }
         }
         var roleId = $('#roleId').val();
-        Utils.ajaxPost('/Role/SaveRoleRefMenu', { roleId: roleId, chkMenu: menuId }, 'json', function (ret) {
+        Utils.ajaxPost('/Role/SaveRoleRefMenu', { roleId: roleId, chkMenu: menuId,flag:2 }, 'json', function (ret) {
             if (ret.IsSuccess) {
                 $.messager.alert('提示:', '权限设置成功!', null, function () {
                     clientDialog.dialog("close");

@@ -2,15 +2,21 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div id="table" style="height: 100%">
-    <div class="table_title">
-        根字典查询<input type="text" name="" id="" value="" />
-        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
-        <div class="clearbox"></div>
+<link href="~/Scripts/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<div id="cc" class="easyui-layout" style="width:100%;height:100%;">
+    <div data-options="region:'west',title:'根字典',split:true" style="width:250px;">
+        <ul id="rootDicTree" class="ztree"></ul>
     </div>
-         <table id="DataGrid" style="height:100%;"></table>
-</div>
+    <div data-options="region:'center',title:'字典子项'" style="padding:5px;background:#eee;">
+        <div class="table_title">
+            字典名称查询：<input type="text" class="input" id="dicName" value="">
+            <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+            <div class="clearbox"></div>
+        </div>
+        <table id="DataGrid" style="height: 100%;"></table>
+    </div>
+</div>  
+
 <div id="DicDialog" style="display: none;" title="新建">
     <form id="mainForm">
         <input type="hidden" name="DicID" value="" />
@@ -18,12 +24,13 @@
             <tr>
                 <td>父级</td>
                 <td>
-                    @Html.DropDownList("RootID", ViewBag.DicRoot as IEnumerable<SelectListItem>, "-请选择-")
+                    @Html.DropDownList("RootID", ViewBag.DicRoot as IEnumerable<SelectListItem>)
                 </td>
                 <td>编码</td>
                 <td>
-                    <input type="text" name="Code" value="" />
+                   <input type="text" name="Code" id="Code" value="" />
                 </td>
+
             </tr>
             <tr>
                 <td>名称</td>
@@ -49,10 +56,13 @@
         </table>
     </form>
 </div>
+@section scripts{
+    <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
 <script>
-    var dicGrid = null,dicDialog=null;
+    var dicGrid = null,dicDialog=null,rootTree=null;
     $(function() {
         initDicGrid();
+        initRootDicTree();
          dicDialog =$('#DicDialog').dialog({
             width: 600,
             height: 380,
@@ -66,10 +76,11 @@
                     var $form = $('#DicDialog').find('form');
 
                     var flag = $form.form('validate');
-                    if (flag) {
-
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
                     }
-                    saveDic();
+                    saveDic($form);
                 }
             }, {
                 text: 'Close',
@@ -78,12 +89,23 @@
                     $('#DicDialog').dialog('close');
                 }
             }]
+         });
+
+        $('#btnQuery').on('click', function() {
+            var name = $('#dicName').val();
+            if (name != '') {
+                dicGrid.datagrid('reload', {
+                    dicName: name
+                });
+            }
         });
     });
 
+     //加载数据表格
     function initDicGrid() {
       dicGrid=  $('#DataGrid').datagrid({
             url: '@Url.Action("GetDicList", "Dic")',
+            pageNumber: 1,
             rownumbers: true,
             striped: true,
             fitColumns: true,
@@ -94,7 +116,7 @@
                  { field: 'ck', checkbox: true },
                 { title: '编码', align: 'center', field: 'Code', width: 35 },
               { title: '名称', align: 'center', field: 'Name', width: 35 },
-               { title: '父级', align: 'center', field: 'RootID', width: 35 },
+               { title: '父级', align: 'center', field: 'ParentName', width: 35 },
               { title: '描述', align: 'center', field: 'Description', width: 35 },
               { title: '排序', align: 'center', field: 'SortID', width: 35 }
             ]],
@@ -130,25 +152,55 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelections');
                     var ids = [];
-                    if (row) {
-                        $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
-                            if (r) {
-                                $.each(row, function (index, item) {
-                                    ids.push(item.DicID);
-                                });
-                                Delete(ids);
-                            }
-                        });
+                    if (row.length == 0) {
+                        $.messager.alert('提示', '请先选中数据行');
+                        return;
                     }
+                    $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                        if (r) {
+                            $.each(row, function (index, item) {
+                                ids.push(item.DicID);
+                            });
+                            Delete(ids);
+                        }
+                    });
                 }
             }]
 
         });
     }
 
+    //初始化字典树
+    function initRootDicTree() {
+        var settings = {
+            data: {
+                // key: { ckecked: "Checked" },
+                simpleData: { enable: true, idKey: "id", pIdKey: "pId" }
+            },
+            callback: { onClick: orgTreeClick }
+        };
+        Utils.ajaxGet("/Dic/GetRootDicTree", null, "json", function (ret) {
+            if (ret.IsSuccess) {
+                rootTree = $.fn.zTree.init($("#rootDicTree"), settings, ret.Data);
+            }
+            // menuTree.expandAll(true);
+        });
+    }
+
+    //树节点点击事件
+    function orgTreeClick(event, treeId, treeNode) {
+        var id = treeNode.id;
+        //var code = treeNode.code;
+            dicGrid.datagrid('reload', {
+                dicId: id
+            });
+        
+
+    }
+
     function Edit(id) {
         dicDialog.dialog({ title: "修改" }).dialog('open');
-        Utils.ajaxGet('/Dic/GetDicById', { rootId: id }, 'json', function(ret) {
+        Utils.ajaxGet('/Dic/GetDicById', { id: id }, 'json', function(ret) {
             if (ret.IsSuccess) {
                 Utils.loadFormData($('#mainForm'), ret.Data);
             } else {
@@ -161,23 +213,23 @@
         Utils.ajaxPost('/Dic/DeleteByIds', { ids: id.join() }, 'json', function(ret) {
             if (ret.IsSuccess) {
                 dicGrid.datagrid('reload');
+                initRootDicTree();
             } else {
                 $.messager.alert('提示', '删除数据失败');
             }
         });
     }
-    function saveDic() {
-        var flag = $('#mainForm').form('validate');
-        if (!flag) {
-            $.messager.alert('Title', '必须填写完整的信息', 'error');
-            return false;
-        }
-        Utils.ajaxPost('/Dic/SaveDic', $('#mainForm').serialize(), 'json', function(ret) {
+    function saveDic(formobj) {
+        //var flag = $('#mainForm').form('validate');
+      
+        Utils.ajaxPost('/Dic/SaveDic', formobj.serialize(), 'json', function (ret) {
             if (ret.IsSuccess) {
                 $.messager.alert('提示', '保存成功');
                 dicDialog.dialog('close');
                 dicGrid.datagrid('reload');
+                initRootDicTree();
             }
         });
     }
 </script>
+}

@@ -55,6 +55,7 @@ namespace FoodTrace.Model
         CodeOrderAccess,
         CodeMaxAccess,
         CodeObjectAccess,
+        WinceDicAccess,
         #endregion
 
         #region PlansMng

@@ -25,5 +25,7 @@ namespace FoodTrace.Model
         public int? CreateID { get; set; }
         public string CreateName { get; set; }
         public DateTime? CreateTime { get; set; }
+
+        public int Flag { get; set; }
     }
 }

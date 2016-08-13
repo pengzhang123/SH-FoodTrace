@@ -319,6 +319,32 @@ namespace FoodTrace.Forms.ViewModels
             }
         }
 
+
+        public void OpenTabNew(TextBlock tb)
+        {
+            //var menuList = LoginViewModel.RoleMenuList;
+            //var navi = menuList.Where(s => s.ParentID > 0).ToList();
+            //if (navi.Any())
+            //{
+            //    var item = navi.SingleOrDefault(_ => _.Name == tb.Tag.ToString());
+            //    if (item != null)
+            //    {
+            //    string fullName = "FoodTrace.Forms.ViewModels" + item.FunctionURL;
+            //    string assemblyName = "FoodTrace.Forms";
+            //        var obj = ReflectionHelper.CreateInstance(fullName, assemblyName);
+            //        Type objType = obj.GetType();
+            //        int index = count++;
+            //    string displayName = tb.Tag.ToString();
+            //    ActivateItem(new objType()
+            //            {
+            //                TabItemIndex = index,
+            //                DisplayName = displayName
+            //            });
+            //    }
+
+            //}
+         
+        }
         public void HideLeftPanel(Image img, Grid grid)
         {
             if (img.Tag.ToString() == "0")//Hide grid
@@ -356,7 +382,7 @@ namespace FoodTrace.Forms.ViewModels
         public MainView ViewSelf { get; set; }
 
         //public RemoveTabItemCommand RemoveTabItemCommand { get; set; }
-
+       // public static List<NaviModel> Navis { get; private set; }
         protected override void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
@@ -367,6 +393,7 @@ namespace FoodTrace.Forms.ViewModels
             
             //MainTabSelectionChanged(MainTab, null);
             Navis = new BindableCollection<NaviModel>(App.Navis);
+            //Navis = new BindableCollection<NaviModel>(LoginViewModel.Navis);
             NotifyOfPropertyChange(() => Navis);
 
         }

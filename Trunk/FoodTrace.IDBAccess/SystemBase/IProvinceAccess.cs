@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.IDBAccess
 {
@@ -13,6 +15,7 @@ namespace FoodTrace.IDBAccess
 
         List<ProvinceModel> GetPagerProvinceByConditions(int? areaId, string name, int pageIndex, int pageSize);
 
+        GridList<ProviceDto> GetProviceListPaging(int? areaId, string name, int pageIndex, int pageSize);
         /// <summary>
         /// 批量删除
         /// </summary>

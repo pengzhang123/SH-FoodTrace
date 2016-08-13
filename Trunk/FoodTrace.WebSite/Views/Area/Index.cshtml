@@ -73,12 +73,15 @@
                 handler: function () {
                     var row = $('#DataGrid').datagrid('getSelections');
                     var ids = [];
-                    if (row) {
+                    if (row.length==0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
+                    }
                         $.each(row, function (index, item) {
                             ids.push(item.AreaID);
                         });
                         Delete(ids);
-                    }
+                    
                 }
             }, {
                 text: 'Key'

@@ -1,10 +1,10 @@
-﻿@model List<FoodTrace.Model.ProductSpecModel>
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style="padding:10px;">
-    <table id="DataGrid"></table>
+<div style="height: 100%">
+    <table id="DataGrid" style="height: 90%"></table>
 </div>
 
 <div id="CreateDialog" style="display: none;"></div>
@@ -75,16 +75,21 @@
 
                     var row = $('#DataGrid').datagrid('getSelections');
                     var ids = [];
-                    if (row) {
-                        $.each(row, function (index, item) {
+                    if (row.length == 0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
+                    }
+
+                    $.each(row, function (index, item) {
                             ids.push(item.SPCID);
                         });
 
                         Delete(ids);
                     }
-                }
+                
             }],
             columns: [[
+                   { field: 'ck', checkbox: true },
                     { title: '分类名称', align: 'center', field: 'ClassName', width: 35 },
                     { title: '规格代号', align: 'center', field: 'SpecCode', width: 35 },
                     { title: '规格名称', align: 'center', field: 'SpecName', width: 35 }

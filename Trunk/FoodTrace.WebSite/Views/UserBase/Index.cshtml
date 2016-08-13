@@ -247,8 +247,12 @@
                         handler: function () {
                             var row = $('#DataGrid').datagrid('getSelections');
                             var ids = [];
-                            if (row) {
-                                $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                            if (row.length == 0) {
+                                $.messager.alert('提示', '请选择需要删除的数据');
+                                return;
+                            }
+
+                            $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                                     if (r) {
                                         $.each(row, function (index, item) {
                                             ids.push(item.UserId);
@@ -257,7 +261,7 @@
                                     }
                                 });
 
-                            }
+                            
                         }
                     }, {
                         id: 'btnSetRole',
@@ -359,7 +363,7 @@
         function orgTreeClick(event, treeId, treeNode) {
             var id = treeNode.id;
             var type = treeNode.type;
-            console.log('id:' + id + ",type=" + type);
+            //console.log('id:' + id + ",type=" + type);
             //if (type == 1) {
             //    id = treeNode.id;
             //}

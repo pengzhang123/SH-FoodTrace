@@ -9,6 +9,7 @@ using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess.SystemBase;
 using FoodTrace.Model;
 using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -28,7 +29,7 @@ namespace FoodTrace.DBAccess
             var query = (from s in Context.DicRoot
                 select s).AsQueryable();
 
-            return new GridList<DicRootModel>(){rows = query.ToList(),total=query.Count()};
+            return new GridList<DicRootModel>() { rows = query.OrderBy(s => s.RootID).Skip((pIndex - 1) * pSize).Take(pSize).ToList(), total = query.Count() };
         }
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace FoodTrace.DBAccess
                     dicroot.Description = model.Description;
                     dicroot.SortID = model.SortID;
                     dicroot.IsLocked = model.IsLocked;
+                    dicroot.Code = model.Code;
                     dicroot.ModifyID = UserManagement.CurrentUser.UserID;
                     dicroot.ModifyTime = DateTime.Now;
                     dicroot.ModifyName = UserManagement.CurrentUser.UserName;
@@ -105,14 +107,30 @@ namespace FoodTrace.DBAccess
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        public GridList<DicModel> GetDicList(int pIndex, int pSize)
+        public GridList<DicGridDto> GetDicList(int dicId, string dicName, int pIndex, int pSize)
         {
-            var list = new GridList<DicRootModel>();
 
             var query = (from s in Context.Dic
-                         select s).AsQueryable();
-
-            return new GridList<DicModel>() { rows = query.ToList(), total = query.Count() };
+                         join dic in Context.Dic on s.RootID equals dic.DicID into dicl
+                         from dicleft in dicl.DefaultIfEmpty()
+                         select new DicGridDto()
+                         {
+                             DicID = s.DicID,
+                             Code = s.Code,
+                             Description = s.Description,
+                             Name = s.Name,
+                             ParentName = dicleft.Name,
+                             RootID = s.RootID
+                         }).AsQueryable();
+            if (dicId > 0)
+            {
+                query = query.Where(s => s.DicID == dicId || s.RootID == dicId);
+            }
+            if (!string.IsNullOrEmpty(dicName))
+            {
+                query = query.Where(s => s.Name.Contains(dicName));
+            }
+            return new GridList<DicGridDto>() { rows = query.OrderBy(s => s.DicID).Skip((pIndex - 1) * pSize).Take(pSize).ToList(), total = query.Count() };
         }
 
         /// <summary>
@@ -193,5 +211,23 @@ namespace FoodTrace.DBAccess
             return base.DbOperationInTransaction(opera);
         }
         #endregion
+
+        /// <summary>
+        /// 获取根字典数据项
+        /// </summary>
+        /// <returns></returns>
+        public List<ZtreeModel> GetRootDicTree()
+        {
+            var list = (from s in Context.Dic
+                        where s.RootID==0
+                select new ZtreeModel()
+                {
+                    id = s.DicID.ToString(),
+                    name = s.Name,
+                    pId = "0",
+                    code = s.Code
+                }).ToList();
+            return list;
+        }
     }
 }

@@ -25,6 +25,6 @@ namespace FoodTrace.Model
         /// 平台：0，客户端:1
         /// </summary>
         public int Flag { get; set; }
-        public virtual ICollection<RoleModel> Role { get; set; }
+        //public virtual ICollection<RoleModel> Role { get; set; }
     }
 }
