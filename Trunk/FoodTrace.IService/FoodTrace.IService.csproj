@@ -59,6 +59,7 @@
     <Compile Include="BreedMng\ICultivationBaseService.cs" />
     <Compile Include="BreedMng\IVarietyBaseService.cs" />
     <Compile Include="IUserRoleService.cs" />
+    <Compile Include="ProductTrace\IProductTraceApiService.cs" />
     <Compile Include="SystemBase\IDicService.cs" />
     <Compile Include="SystemBase\ITidService.cs" />
     <Compile Include="SystemBase\IUserDetailService.cs" />

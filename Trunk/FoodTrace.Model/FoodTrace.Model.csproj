@@ -57,6 +57,7 @@
     <Compile Include="BreedMng\BreedMaterialModel.cs" />
     <Compile Include="BreedMng\CultivationBaseModel.cs" />
     <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="DtoModel\CultivationDto.cs" />
     <Compile Include="DtoModel\DicGridDto.cs" />
     <Compile Include="DtoModel\ProviceDto.cs" />
     <Compile Include="WinCeModel\BredDrug.cs" />

@@ -59,6 +59,7 @@
     <Compile Include="BreedMng\ICultivationBaseAccess.cs" />
     <Compile Include="BreedMng\IVarietyBaseAccess.cs" />
     <Compile Include="IBaseAccess.cs" />
+    <Compile Include="ProdcutTraceApi\IProductTraceApiAccess.cs" />
     <Compile Include="SystemBase\IDicAccess.cs" />
     <Compile Include="SystemBase\ITidAccess.cs" />
     <Compile Include="SystemBase\IUserRoleAccess.cs" />

@@ -73,6 +73,7 @@
     <Compile Include="KillMng\KillBatchDetailAccess.cs" />
     <Compile Include="KillMng\KillCullAccess.cs" />
     <Compile Include="KillMng\KillDrugAccess.cs" />
+    <Compile Include="ProductTraceApi\ProductTraceApiAccess.cs" />
     <Compile Include="SaleMng\WareHouseBaseAccess.cs" />
     <Compile Include="SaleMng\WareHouseDetailAccess.cs" />
     <Compile Include="SaleMng\WareHouseStockAccess.cs" />

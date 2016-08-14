@@ -63,5 +63,7 @@ namespace FoodTrace.Model.DtoModel
         public int Type { get; set; }
 
         public string Image { get; set; }
+
+        public object DetailData { get; set; }
     }
 }

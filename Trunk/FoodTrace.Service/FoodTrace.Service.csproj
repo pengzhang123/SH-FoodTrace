@@ -74,6 +74,7 @@
     <Compile Include="ProcessMng\ProcessProductService.cs" />
     <Compile Include="ProcessMng\ShadowBaseService.cs" />
     <Compile Include="ProcessMng\ShadowProcessService.cs" />
+    <Compile Include="ProductTrace\ProductTraceApiService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaleMng\WareHouseBaseService.cs" />
     <Compile Include="SaleMng\WareHouseDetailService.cs" />
