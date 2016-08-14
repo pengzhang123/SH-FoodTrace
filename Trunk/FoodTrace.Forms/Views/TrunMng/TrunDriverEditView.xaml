@@ -32,7 +32,10 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="司机标签" />
-                    <TextBox Grid.Column="1" Text="{Binding Model.DriverEPC}" />
+                    <TextBox Grid.Column="1"
+                             cal:Message.Attach="[GotFocus]=[EpcGotFocus]"
+                             IsReadOnly="True"
+                             Text="{Binding Model.DriverEPC}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>

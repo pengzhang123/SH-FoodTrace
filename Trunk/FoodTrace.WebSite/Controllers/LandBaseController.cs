@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using FoodTrace.Model.BaseDto;
 using FoodTrace.Model.DtoModel;
 using FoodTrace.Service;
 using Microsoft.Ajax.Utilities;
+using Microsoft.SqlServer.Server;
 
 namespace FoodTrace.WebSite.Controllers
 {
@@ -39,7 +41,8 @@ namespace FoodTrace.WebSite.Controllers
             var data = new GridList<LandBaseDto>();
             try
             {
-                data = _landBaseService.GetLandBaseListPaging(page, rows, string.Empty);
+                string landName = RequestHelper.RequestPost("landName", string.Empty);
+                data = _landBaseService.GetLandBaseListPaging(page, rows, landName);
             }
             catch (Exception ex)
             {

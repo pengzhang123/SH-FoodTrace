@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
             var count = productTypeService.GetProductTypeCount();
-            var productSpecList = productTypeService.GetPagerProductType(string.Empty, page, rows).Select(m => new
+            string typeName = RequestHelper.RequestPost("typeName", string.Empty);
+            var productSpecList = productTypeService.GetPagerProductType(typeName, page, rows).Select(m => new
             {
                 ProductTypeID = m.ProductTypeID,
                 ProductTypeEN = m.ProductTypeEN,

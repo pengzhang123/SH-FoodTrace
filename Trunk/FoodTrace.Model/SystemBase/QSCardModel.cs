@@ -14,8 +14,7 @@ namespace FoodTrace.Model
         public int QSID { get; set; }
         
         public int? CompanyID { get; set; }
-        [ForeignKey("CompanyID")]
-        public virtual CompanyModel Company { get; set; }
+       
         public string QSName { get; set; }
         public int? CheckType { get; set; }
         public string QSCard { get; set; }

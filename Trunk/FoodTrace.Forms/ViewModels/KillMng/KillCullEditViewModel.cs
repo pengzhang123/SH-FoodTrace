@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
@@ -20,6 +21,26 @@ namespace FoodTrace.Forms.ViewModels
         private IKillCullService iKillCullService = new KillCullService();
         private IKillBatchService iKillBatchService = new KillBatchService();
         private IKillBatchDetailService iKillBatchDetailService = new KillBatchDetailService();
+
+
+        private ICodeMaxService iCodeMaxService = new CodeMaxService();
+        public void EpcGotFocus()
+        {
+            CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
+            //种植场号
+            pro96.BusinessCode = Model.Company.CompanyID.ToString();
+            //批次号
+            pro96.GoodsCode = Model.KillBatchID.ToString();
+            //生成日期
+            pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
+            var maxId = iCodeMaxService.GetMaxCode("KillCull");
+            //序号
+            pro96.SeqNo = maxId;
+            //标签类型
+            pro96.EpcType = "3";
+            Model.KillEpc = pro96.PackEpc();
+            NotifyOfPropertyChange(() => Model);
+        }
 
         public KillCullEditView ViewSelf { get; set; }
 

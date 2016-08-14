@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
@@ -17,6 +18,24 @@ namespace FoodTrace.Forms.ViewModels
     public class PlansBatchEditViewModel : ViewAware
     {
         private IPlansBatchService iPlansBatchService = new PlansBatchService();
+        private ICodeMaxService iCodeMaxService = new CodeMaxService();
+        public void EpcGotFocus()
+        {
+            CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
+            //种植场号
+            pro96.BusinessCode = "3";
+            //批次号
+            pro96.BatchNo = "";
+            //生成日期
+            pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
+            var maxId = iCodeMaxService.GetMaxCode("PlansBatch");
+            //序号
+            pro96.SeqNo = maxId;
+            //标签类型
+            pro96.EpcType = "3";
+            Model.BatchCode = pro96.PackEpc();
+            NotifyOfPropertyChange(() => Model);
+        }
 
         public PlansBatchModel Model { get; set; }
         public EditMode Mode { get; set; }
@@ -38,6 +57,7 @@ namespace FoodTrace.Forms.ViewModels
             view.lbSeed.ItemsSource = seeds;
         }
 
+       
         public void Save()
         {
             if (Mode == EditMode.CREATE)

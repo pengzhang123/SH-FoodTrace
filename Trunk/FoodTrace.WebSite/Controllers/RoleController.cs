@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Log;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.Common.Log;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
@@ -31,7 +32,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
             var count = roleService.GetRoleCount();
-            var list = roleService.GetPagerRole(string.Empty, page, rows).Select(_ => new
+            string roleName = RequestHelper.RequestPost("roleName", string.Empty);
+            var list = roleService.GetPagerRole(roleName, page, rows).Select(_ => new
             {
                 RoleID = _.RoleID,
                 RoleName = _.RoleName,

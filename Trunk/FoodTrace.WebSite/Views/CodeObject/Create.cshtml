@@ -29,11 +29,17 @@
     </div>
     <div>
         <label for="name">是否固定长度:</label>
-        @Html.TextBoxFor(m => Model.IsFixedLength, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+        <select name="IsFixedLength">
+            <option value="true">是</option>
+            <option value="false">否</option>
+        </select>
     </div>
     <div>
-        <label for="name">是否自动:</label>
-        @Html.TextBoxFor(m => Model.IsAuto, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+        <label for="IsAuto">是否自动:</label>
+        <select name="IsAuto">
+            <option value="true">是</option>
+            <option value="false">否</option>
+        </select>
     </div>
     <div>
         <label for="name">排序号:</label>
@@ -44,12 +50,18 @@
         @Html.TextBoxFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
     </div>
     <div>
-        <label for="name">是否锁定:</label>
-        @Html.TextBoxFor(m => Model.IsLocked, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
+        <label for="IsLocked">是否锁定:</label>
+        <select name="IsLocked">
+            <option value="true">是</option>
+            <option value="false">否</option>
+        </select>
     </div>
     <div>
-        <label for="name">是否显示:</label>
-        @Html.TextBoxFor(m => Model.IsShow, new { @class = "easyui-validatebox easyui-combobox", data_options = "required:true" })
+        <label for="IsShow">是否显示:</label>
+        <select name="IsShow">
+            <option value="true">是</option>
+            <option value="false">否</option>
+        </select>
     </div>
 }
 

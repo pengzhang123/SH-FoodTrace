@@ -3,14 +3,19 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-               <div style="height: 95%">
-                   <table id="DataGrid" style="height: 100%"></table>
-               </div>
+<div style="height: 100%">
+    <div class="table_title">
+        类型名称：<input type="text" class="input" id="typeName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height: 80%"></table>
+</div>
 
 <div id="CreateDialog" style="display: none;"></div>
 <div id="EditDialog" style="display: none;"></div>
 <script>
-
+    var typeGrid = null;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "ProductType")' + '?id=' + id).dialog('open');
     }
@@ -37,7 +42,7 @@
 
     $(function () {
 
-        $('#DataGrid').datagrid({
+       typeGrid= $('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "ProductType")',
             rownumbers: true,
             striped: true,
@@ -102,7 +107,7 @@
             href: '@Url.Action("Create", "ProductType")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     debugger;
@@ -133,7 +138,7 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#CreateDialog').dialog('close');
@@ -150,7 +155,7 @@
             href: '@Url.Action("Edit", "ProductType")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#EditDialog').find('form');
@@ -180,12 +185,20 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#EditDialog').dialog('close');
                 }
             }]
+        });
+
+        $('#btnQuery').on('click', function() {
+            var typeName = $('#typeName').val();
+                typeGrid.datagrid('reload', {
+                    typeName: typeName
+                });
+            
         });
     });
 </script>

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
@@ -20,6 +21,23 @@ namespace FoodTrace.Forms.ViewModels
         private ITrunVehicleService iTrunVehicleService = new TrunVehicleService();
 
         private ICompanyService iCompanyService = new CompanyService();
+
+
+
+
+
+        private ICodeMaxService iCodeMaxService = new CodeMaxService();
+        public void EpcGotFocus()
+        {
+            CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
+            pro96.CardNo = Model.CarNo;
+            //生成日期
+            pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
+            //标签类型
+            pro96.EpcType = "5";
+            Model.CarCode = pro96.PackEpc();
+            NotifyOfPropertyChange(() => Model);
+        }
 
         public TrunVehicleModel Model { get; set; }
         public EditMode Mode { get; set; }

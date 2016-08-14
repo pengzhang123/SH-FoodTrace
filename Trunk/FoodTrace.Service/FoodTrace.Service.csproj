@@ -96,6 +96,7 @@
     <Compile Include="SystemBase\LandBaseService.cs" />
     <Compile Include="SystemBase\MenuService.cs" />
     <Compile Include="SystemBase\ProvinceService.cs" />
+    <Compile Include="SystemBase\QSCardService.cs" />
     <Compile Include="SystemBase\RoleService.cs" />
     <Compile Include="SystemBase\TidService.cs" />
     <Compile Include="SystemBase\UserBaseService.cs" />

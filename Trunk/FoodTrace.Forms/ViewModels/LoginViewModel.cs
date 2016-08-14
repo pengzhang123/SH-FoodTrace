@@ -48,13 +48,14 @@ namespace FoodTrace.Forms.ViewModels
             string pwd = EncodeStrToMd5.String32ToMD5(userPwd);
             var user = _user.GetUserLoginDto(name, pwd);
 
-                UserManagement.CurrentUser = user;
                 var win = GetView() as System.Windows.Window;
                 if (win != null)
                 {
                     if (user != null)
                     {
-
+                        UserManagement.CurrentUser = user;
+                        var company = new CompanyModel { CompanyID = user.CompanyId, CompanyName = user.CompanyName };
+                        UserManagement.CurrentCompany = company;
                         LoadUserMenuNavi();
                         win.DialogResult = true;
                         win.Close();

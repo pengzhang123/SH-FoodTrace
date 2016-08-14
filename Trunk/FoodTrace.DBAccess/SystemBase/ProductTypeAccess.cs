@@ -67,7 +67,7 @@ namespace FoodTrace.DBAccess
 
         public List<ProductTypeModel> GetPagerProductTypeByConditions(string name, int pageIndex, int pageSize)
         {
-            return base.Context.ProductType.Where(m => string.IsNullOrEmpty(name) || m.ProductTypeEN == name)
+            return base.Context.ProductType.Where(m => string.IsNullOrEmpty(name) || m.ProductTypeEN.Contains(name))
                                                     .OrderBy(m => m.ProductTypeID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 

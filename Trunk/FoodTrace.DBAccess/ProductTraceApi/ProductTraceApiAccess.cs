@@ -12,6 +12,9 @@ namespace FoodTrace.DBAccess
 {
     public class ProductTraceApiAccess:BaseAccess,IProductTraceApiAccess
     {
+        //http://192.168.1.104:8008/uploadfile/test/test.png
+
+        private readonly string _ImageUrl = "";
         /// <summary>
         /// 根据epc获取orcode获取产品基本信息数据
         /// </summary>
@@ -104,7 +107,7 @@ namespace FoodTrace.DBAccess
                                      Code = ware.WareHouseID,
                                      Name = ware.WareHouseName,
                                      Type = 6,
-                                     Image = ""
+                                     Image = _ImageUrl
                                  }).FirstOrDefault();
 
                 if (warehouse != null)
@@ -126,7 +129,7 @@ namespace FoodTrace.DBAccess
                                            Code = com.CompanyID,
                                            Name = com.CompanyName,
                                            Type = 7,
-                                           Image = ""
+                                           Image = _ImageUrl
                                        }).FirstOrDefault();
 
                     if (saleCompany != null)
@@ -150,7 +153,7 @@ namespace FoodTrace.DBAccess
                                        Code = com.CompanyID,
                                        Name = com.CompanyName,
                                        Type = 5,
-                                       Image = ""
+                                       Image = _ImageUrl
                                    }).FirstOrDefault();
 
                 if (procFactory != null)
@@ -171,7 +174,7 @@ namespace FoodTrace.DBAccess
                                       Code = k.KillCullID,
                                       Name = com.CompanyName,
                                       Type = 3,
-                                      Image = ""
+                                      Image = _ImageUrl
                                   }).FirstOrDefault();
 
                 if (killFatory != null)
@@ -194,7 +197,7 @@ namespace FoodTrace.DBAccess
                                     Code = c.CultivationID,
                                     Name = b.BreedName,
                                     Type = 2,
-                                    Image = ""
+                                    Image = _ImageUrl
                                 }).FirstOrDefault();
 
                 if (cultivate != null)
@@ -215,7 +218,7 @@ namespace FoodTrace.DBAccess
                                 Code = c.CultivationID,
                                 Name = c.VarietyName,
                                 Type = 1,
-                                Image = ""
+                                Image = _ImageUrl
                             }).FirstOrDefault();
 
                 if (unit != null)
@@ -242,7 +245,7 @@ namespace FoodTrace.DBAccess
                                             Code = c.CultivationID,
                                             Name = c.VarietyName,
                                             Type = 10,
-                                            Image = ""
+                                            Image = _ImageUrl
                                         }).FirstOrDefault();
                     if (parentMother != null)
                     {
@@ -641,7 +644,7 @@ namespace FoodTrace.DBAccess
                     Address=lbase.Address,
                     SoilType = lb.SoilType,
                     SoilName=lb.SoilName,
-                });
+                }).FirstOrDefault();
 
             return query;
         }

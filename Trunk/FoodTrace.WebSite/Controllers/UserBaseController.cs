@@ -116,7 +116,7 @@ namespace FoodTrace.WebSite.Controllers
 
             }
 
-            return JsonEx(result);
+            return JsonEx(result,"yyyy-MM-dd");
         }
         /// <summary>
         /// 保存数据
@@ -128,7 +128,7 @@ namespace FoodTrace.WebSite.Controllers
             var result = new ResultJson();
             try
             {
-                model.Password = EncodeStrToMd5.String32ToMD5(model.Password);
+              
                 var msg = new MessageModel();
                 if (model.UserId == 0)
                 {
@@ -138,7 +138,7 @@ namespace FoodTrace.WebSite.Controllers
                         result.Msg = "用户名已存在";
                         return Json(result);
                     }
-                   
+                    model.Password = EncodeStrToMd5.String32ToMD5("123456");
                     msg = userBaseService.InsertUserBase(model);
                 }
                 else
@@ -253,6 +253,33 @@ namespace FoodTrace.WebSite.Controllers
             }
             return Json(result);
         }
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public JsonResult ResetUserPwd(string ids, string pwd)
+        {
+            var result = new ResultJson();
+            try
+            {
+                string newPwd = EncodeStrToMd5.String32ToMD5(pwd);
+                var msg = userBaseService.ResetUserPwd(ids, newPwd);
+                if (msg.Status == MessageStatus.Success)
+                {
+                    result.IsSuccess = true;
+
+                }
+            }
+            catch (Exception)
+            {
+ 
+            }
+
+            return Json(result);
+        }
+
         /// <summary>
         /// 获取公司部门机构数
         /// </summary>

@@ -40,7 +40,10 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="销售溯源码" />
-                    <TextBox Grid.Column="1" Text="{Binding Model.SaleEPC}" />
+                    <TextBox Grid.Column="1"
+                             cal:Message.Attach="[GotFocus]=[EpcGotFocus]"
+                             IsReadOnly="True"
+                             Text="{Binding Model.SaleEPC}" />
                 </Grid>
 
                 <Grid Margin="0,5">

@@ -24,6 +24,7 @@ namespace FoodTrace.Forms.ViewModels
         private IProductBaseService iProductBaseService = new ProductBaseService();
         private IProductTypeService iProductTypeService = new ProductTypeService();
         private IProductSpecService iProductSpecService = new ProductSpecService();
+        private ICodeMaxService iCodeMaxService = new CodeMaxService();
 
         public ShadowBaseModel Model { get; set; }
         public EditMode Mode { get; set; }
@@ -45,7 +46,7 @@ namespace FoodTrace.Forms.ViewModels
             pro96.GoodsCode = Model.ProductID.ToString();
             //生成日期
             pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
-            var maxId = MaxId;
+            var maxId = iCodeMaxService.GetMaxCode("ShadowBase");
             //销售店号
             pro96.BusinessCode = maxId;
             //商品号型
@@ -63,6 +64,9 @@ namespace FoodTrace.Forms.ViewModels
         {
             get
             {
+
+                return new CodeMaxService().GetMaxCode("ShadowBase");
+
                 int maxId = 10000;
                 string path = "maxid";
 

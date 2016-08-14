@@ -50,7 +50,8 @@
                     <TextBlock VerticalAlignment="Center"
                                FontSize="15"
                                Text="欢迎您登录: " />
-                    <TextBlock VerticalAlignment="Center" x:Name="UserName"
+                    <TextBlock x:Name="UserName"
+                               VerticalAlignment="Center"
                                FontSize="15"
                                Foreground="#5096DB"
                                Text="" />
@@ -58,7 +59,7 @@
                                VerticalAlignment="Center"
                                cal:Message.Attach="[MouseDown] = [LoginOut]"
                                FontSize="15"
-                               Foreground="Red"
+                               Foreground="#EEB2B9"
                                Text="【退出】" />
                 </StackPanel>
             </StackPanel>
@@ -127,6 +128,7 @@
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <Expander cal:Message.Attach="[Expanded]=[Navi_Expanded($source)]"
+                                                          Foreground="#9A222E"
                                                           Header="{Binding Name}"
                                                           IsExpanded="{Binding IsExpanded}"
                                                           Style="{DynamicResource ImageExpanderStyle}"
@@ -197,7 +199,8 @@
                                 <Grid Background="#FFF4EE">
                                     <TextBlock HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
-                                               Text="版权所有：环县人民政府；技术支持：宁夏百创信息技术有限公司 版本v1.0" />                                </Grid>
+                                               Text="版权所有：环县人民政府；技术支持：宁夏百创信息技术有限公司 版本v1.0" />
+                                </Grid>
                             </Border>
 
                         </Grid>

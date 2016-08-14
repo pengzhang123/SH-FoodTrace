@@ -11,7 +11,7 @@
              d:DesignWidth="300"
              Background="White"
              mc:Ignorable="d">
-    <Grid DataContext="{Binding Model}">
+    <Grid>
         <ScrollViewer>
             <StackPanel Margin="5">
                 <Grid Margin="0,5">
@@ -22,7 +22,7 @@
                     <TextBlock HorizontalAlignment="Center" Text="地块" />
                     <ComboBox x:Name="lbLand"
                               Grid.Column="1"
-                              SelectedValue="{Binding BlockID}" />
+                              SelectedValue="{Binding Model.BlockID}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                     <TextBlock HorizontalAlignment="Center" Text="种子" />
                     <ComboBox x:Name="lbSeed"
                               Grid.Column="1"
-                              SelectedValue="{Binding SeedID}" />
+                              SelectedValue="{Binding Model.SeedID}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -40,7 +40,10 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="种植批次溯源码" />
-                    <TextBox Grid.Column="1" Text="{Binding BatchCode}" />
+                    <TextBox Grid.Column="1"
+                             cal:Message.Attach="[GotFocus]=[EpcGotFocus]"
+                             IsReadOnly="True"
+                             Text="{Binding Model.BatchCode}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -48,7 +51,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="计划编号" />
-                    <TextBox Grid.Column="1" Text="{Binding BatchNO}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.BatchNO}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -56,7 +59,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="种植日期" />
-                    <DatePicker Grid.Column="1" SelectedDate="{Binding PlansTime}" />
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Model.PlansTime}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -64,7 +67,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="种植茨龄" />
-                    <TextBox Grid.Column="1" Text="{Binding PlansYear}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.PlansYear}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -72,7 +75,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="收获日期" />
-                    <DatePicker Grid.Column="1" SelectedDate="{Binding HarvestTime}" />
+                    <DatePicker Grid.Column="1" SelectedDate="{Binding Model.HarvestTime}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -80,7 +83,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="种植面积" />
-                    <TextBox Grid.Column="1" Text="{Binding PlansArea}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.PlansArea}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -88,7 +91,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="栽培负责人" />
-                    <TextBox Grid.Column="1" Text="{Binding ChargePerson}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.ChargePerson}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -96,7 +99,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="预计收获量" />
-                    <TextBox Grid.Column="1" Text="{Binding HarvestCount}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.HarvestCount}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -104,7 +107,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="实际收获量" />
-                    <TextBox Grid.Column="1" Text="{Binding RealCount}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.RealCount}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -112,7 +115,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="植保员" />
-                    <TextBox Grid.Column="1" Text="{Binding People}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.People}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -120,7 +123,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="备注" />
-                    <TextBox Grid.Column="1" Text="{Binding Remark}" />
+                    <TextBox Grid.Column="1" Text="{Binding Model.Remark}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -128,7 +131,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
-                    <CheckBox Grid.Column="1" IsChecked="{Binding IsLocked}" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsLocked}" />
                 </Grid>
                 <Grid Margin="0,5">
                     <Grid.ColumnDefinitions>
@@ -136,7 +139,7 @@
                         <ColumnDefinition Width="7*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="是否显示" />
-                    <CheckBox Grid.Column="1" IsChecked="{Binding IsShow}" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsShow}" />
                 </Grid>
                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center"

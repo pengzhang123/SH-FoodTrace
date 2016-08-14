@@ -3,8 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     }
 <link href="~/Scripts/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
-<table id="DataGrid" style="height:100%;"></table>
-
+<div style="height: 100%">
+    <div class="table_title">
+        角色名称：<input type="text" class="input" id="roleName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height:80%;"></table>
+</div>
 <div id="CreateDialog" style="display: none;"></div>
 <div id="EditDialog" style="display: none;"></div>
 <div id="MenuDialog" style="display: none;">
@@ -17,7 +23,7 @@
 </div>
 <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
 <script>
-    var menuDialog = null,roleMenuTree=null,roleClientMenu=null,clientDialog;
+    var menuDialog = null,roleMenuTree=null,roleClientMenu=null,clientDialog,roleGrid;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Role")' + '?id=' + id).dialog('open');
     }
@@ -44,7 +50,7 @@
 
     $(function () {
            //表格
-        $('#DataGrid').datagrid({
+        roleGrid=$('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "Role")',
             rownumbers: true,
             striped: true,
@@ -122,17 +128,6 @@
                         }
                     }
                 }
-            }, {
-                text: 'Key'
-            }, {
-                text: '<input type="text" id="key"/>'
-            }, {
-                id: 'btnFilter',
-                text: 'filter',
-                iconCls: 'icon-search',
-                handler: function () {
-                    query();
-                }
             }],
             columns: [[
                  { field: 'ck', checkbox: true },
@@ -160,7 +155,7 @@
             href: '@Url.Action("Create", "Role")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#CreateDialog').find('form');
@@ -190,7 +185,7 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#CreateDialog').dialog('close');
@@ -207,7 +202,7 @@
             href: '@Url.Action("Edit", "Role")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#EditDialog').find('form');
@@ -237,7 +232,7 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#EditDialog').dialog('close');
@@ -290,6 +285,15 @@
             }]
         });
         initMenuTree();
+
+        $('#btnQuery').on('click', function() {
+            var roleName = $('#roleName').val();
+                roleGrid.datagrid('reload', {
+                    roleName: roleName
+                });
+            
+
+        });
     });
 
     function initMenuTree() {

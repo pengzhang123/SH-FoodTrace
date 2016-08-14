@@ -48,7 +48,7 @@ namespace FoodTrace.DBAccess
 
         public List<ProductSpecModel> GetPagerProductSpecByConditions(string name, int pageIndex, int pageSize)
         {
-            return base.Context.ProductSpec.Where(m => string.IsNullOrEmpty(name) || m.SpecName == name)
+            return base.Context.ProductSpec.Where(m => string.IsNullOrEmpty(name) || m.SpecName.Contains(name))
                                                     .OrderBy(m => m.SPCID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 

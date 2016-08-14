@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using System.Web.Mvc;
 using FoodTrace.Model;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
             var count = cityService.GetCityCount();
-            var cityList = cityService.GetPagerCity(null, string.Empty, page, rows).Select(m => new
+            string cityName = RequestHelper.RequestPost("cityName", string.Empty);
+            var cityList = cityService.GetPagerCity(null, cityName, page, rows).Select(m => new
             {
                 CityID = m.CityID,
                 CityCode = m.CityCode,

@@ -10,6 +10,7 @@ using FoodTrace.IService;
 using FoodTrace.Model;
 using FoodTrace.Forms.Models;
 using FoodTrace.Service;
+using MahApps.Metro;
 
 namespace FoodTrace.Forms
 {
@@ -52,6 +53,22 @@ namespace FoodTrace.Forms
                       Menus=new List<string> { "芯片管理", "农产品查询" }
                 }
             };
+        }
+
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ThemeManager.AddAccent("CustomerAccent", new Uri("pack://application:,,,/FoodTrace.Forms;component/Styles/CustomerAccent.xaml"));
+
+            // get the current app style (theme and accent) from the application
+            Tuple<AppTheme, Accent> theme = ThemeManager.DetectAppStyle(Application.Current);
+
+            // now change app style to the custom accent and current theme
+            ThemeManager.ChangeAppStyle(Application.Current,
+                                        ThemeManager.GetAccent("CustomerAccent"),
+                                        theme.Item1);
+            
+            base.OnStartup(e);
         }
 
     }

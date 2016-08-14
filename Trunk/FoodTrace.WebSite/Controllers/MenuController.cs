@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
             int count = menuService.GetMenuCount();
-            var list = menuService.GetPagerMenu(string.Empty, page, rows).Select(_ => new
+            string menuName = RequestHelper.RequestPost("menuName", string.Empty);
+            var list = menuService.GetPagerMenu(menuName, page, rows).Select(_ => new
             {
                 MenuID = _.MenuID,
                 Name = _.Name,

@@ -12,12 +12,14 @@
         <ul id="OrgTree" class="ztree"></ul>
     </div>
     <div data-options="region:'center',title:'人员'" style="padding:5px;background:#eee;">
-        <div class="table_title">
-            用户名：<input type="text" class="input" id="uName" value="">
-            <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
-            <div class="clearbox"></div>
+        <div style="height: 100%">
+            <div class="table_title">
+                用户名：<input type="text" class="input" id="uName" value="">
+                <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+                <div class="clearbox"></div>
+            </div>
+            <table id="DataGrid" style="height: 80%;"></table>
         </div>
-        <table id="DataGrid" style="height: 100%;"></table>
     </div>
 </div>  
 
@@ -30,9 +32,23 @@
     </form>
 
 </div>
+<div id="pwdDialog" title="密码重置" style="display:none;">
+    <form id="pwdForm">
+        <input type="hidden" value="" id="UserIds" />
+        <table>
+        <tr>
+            <td>请输入新密码</td>
+            <td>
+                <input type="text" id="NewPwd" value="" class="easyui-validatebox" data-options="required:true" />
+            </td>
+        </tr>
+        </table>
+               
+    </form>
 
+</div>
 <div id="userDialog" title="新增用户" style="display: none;">
-    <h2>用户信息</h2>
+    <h2>用户信息(默认密码：123456)</h2>
     <form id="mainForm">
         <input type="hidden" name="UserId" value=""/>
         <table>
@@ -41,33 +57,22 @@
                 <td>
                     <input type="text" name="UserCode" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
-                <td>登录密码</td>
+                <td>用户姓名</td>
                 <td>
-                    <input type="text" name="Password" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="UserName" value="" class="easyui-validatebox" data-options="required:true" />
 
                 </td>
             </tr>
             <tr>
-                <td>用户姓名</td>
-                <td>
-                    <input type="text" name="UserName" value="" class="easyui-validatebox" data-options="required:true" />
-                  
-                </td>
                 <td>公司ID</td>
                 <td>
                     @Html.DropDownListFor(m => Model.CompanyID, ViewBag.CompanyList as IEnumerable<SelectListItem>, "-请选择-")
                 </td>
-            </tr>
-            <tr>
                 <td>部门编号</td>
                 <td>
                     <select id="deptId" name="DeptID">
                         <option value="0">-请选择-</option>
                     </select>
-                </td>
-                <td>平台代码</td>
-                <td>
-                    <input type="text" name="AreaCode" value="" />
                 </td>
             </tr>
             <tr>
@@ -77,9 +82,19 @@
                         <option value="1" selected>普通用户</option>
                     </select>
                 </td>
+                <td>平台代码</td>
+                <td>
+                    <input type="text" name="AreaCode" value="" />
+                </td>
+            </tr>
+            <tr>
                 <td>入职日期</td>
                 <td>
                     <input class="Wdate" name="EntryDate" type="text" onclick="WdatePicker()"> 
+                </td>
+                <td>转正日期</td>
+                <td>
+                    <input class="Wdate" name="FormalDate" type="text" onclick="WdatePicker()">
                 </td>
             </tr>
             <tr>
@@ -87,9 +102,9 @@
                 <td>
                     <input class="Wdate" name="LeaveDate" type="text" onclick="WdatePicker()"> 
                 </td>
-                <td>转正日期</td>
+                <td>出生年月</td>
                 <td>
-                    <input class="Wdate" name="FormalDate" type="text" onclick="WdatePicker()"> 
+                    <input class="Wdate" name="BirthDay" type="text" onclick="WdatePicker()">
                 </td>
 
             </tr>
@@ -98,35 +113,22 @@
                 <td>
                     <input type="text" name="QQ" value=""/>
                 </td>
-                <td>出生年月</td>
+                <td>邮箱</td>
                 <td>
-                    <input class="Wdate" name="BirthDay" type="text" onclick="WdatePicker()"> 
+
+                    <input type="text" name="Email" value="" />
                 </td>
 
             </tr>
             <tr>
-                <td>邮箱</td>
-                <td>
-                    
-                    <input type="text" name="Email" value="" />
-                </td>
+
                 <td>身份证号码</td>
                 <td>
                     <input type="text" name="IDCard" value="" />
                 </td>
-
-            </tr>
-            <tr>
                 <td>手机号码</td>
                 <td>
                     <input type="text" name="Mobile" value="" class="easyui-validatebox" data-options="required:true" />
-                </td>
-                <td>婚姻状况</td>
-                <td>
-                    <select name="Marriage">
-                        <option value="1" selected>未婚</option>
-                        <option value="2">已婚</option>
-                    </select>
                 </td>
             </tr>
             <tr>
@@ -137,6 +139,15 @@
                         <option value="2">女</option>
                     </select>
                 </td>
+                <td>婚姻状况</td>
+                <td>
+                    <select name="Marriage">
+                        <option value="1" selected>未婚</option>
+                        <option value="2">已婚</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>学历</td>
                 <td>
                     <select name="Education" data-options="required:true">
@@ -148,28 +159,28 @@
                         <option value="5">研究生及以上</option>
                     </select>
                 </td>
-            </tr>
-            <tr>
                 <td>常用住址</td>
                 <td>
                     <input type="text" name="HomeAddress" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
-                <td>备注</td>
-                <td>
-                    <input type="text" name="Remark" value="" class="easyui-validatebox" data-options="required:true" />
-                </td>
             </tr>
+
             <tr>
                 <td>指纹考勤号</td>
                 <td>
                     <input type="text" name="AttendanceNo" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
+
                 <td>工资发放账号</td>
                 <td>
                     <input type="text" name="BankNo" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
             </tr>
             <tr>
+                <td>备注</td>
+                <td>
+                    <input type="text" name="Remark" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
                 <td>是否锁定</td>
                 <td>
                     @Html.RadioButton("IsLocked", "true", false, new { @id = "radioEnabled1" })<label for="radioEnabled1">是</label>
@@ -186,7 +197,7 @@
 @section scripts{
 <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
     <script >
-        var gridList = null, userDialog = null, userValidate = null,roleDialog=null,orgTree=null,roleTree=null;
+        var gridList = null, userDialog = null, userValidate = null,roleDialog=null,orgTree=null,roleTree=null,pwdDialog=null;
         $(function() {
             loadOrgTree();
             initGridData();
@@ -194,11 +205,10 @@
             //查询
             $('#btnQuery').on('click', function() {
                 var uName= $('#uName').val();
-                if (uName != '') {
                     gridList.datagrid('reload', {
                         uName: uName
                     });
-                }
+                
             });
 
             setDeptByCompany();
@@ -264,6 +274,24 @@
                             
                         }
                     }, {
+                        id: 'btnResetPwd',
+                        text: ' 重置密码',
+                        iconCls: 'icon-remove',
+                        handler: function () {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            if (row) {
+                                if (row.length == 0) {
+                                    $.messager.alert('提示', '请选择需要删除的数据');
+                                    return;
+                                }
+                                var ids = [];
+                                $.each(row, function (index, item) {
+                                    ids.push(item.UserId);
+                                });
+                                resetPwd(ids);
+                            }
+                        }
+                    }, {
                         id: 'btnSetRole',
                         text: ' 设置角色',
                         iconCls: 'icon-remove',
@@ -312,7 +340,7 @@
                             text: '取消',
                             iconCls: 'icon-cancel',
                             handler: function () {
-                                $('#mainForm')[0].reset();
+                              
                                  userDialog.dialog("close");
                             }
                         }
@@ -336,6 +364,27 @@
                             text: '取消',
                             iconCls: 'icon-cancel',
                             handler: function () { roleDialog.dialog("close"); }
+                        }
+                ],
+                onClose: function () { }
+            });
+
+            pwdDialog = $('#pwdDialog').dialog({
+                width: 300,
+                height: 200,
+                closed: true,
+                cache: false,
+                modal: true,
+                resizable: true,
+                buttons: [
+                        {
+                            text: '保存',
+                            iconCls: 'icon-ok',
+                            handler: saveUserNewPwd
+                        }, {
+                            text: '取消',
+                            iconCls: 'icon-cancel',
+                            handler: function () { pwdDialog.dialog("close"); }
                         }
                 ],
                 onClose: function () { }
@@ -405,6 +454,7 @@
         }
 
         function edit(id) {
+            Utils.resetForm($('#mainForm'));
             userDialog.dialog({ title: "编辑用户" }).dialog('open');
             Utils.ajaxGet('/UserBase/GetUserById', { id: id }, 'json', function(ret) {
                 if (ret.IsSuccess) {
@@ -425,6 +475,32 @@
             });
         }
 
+        function resetPwd(ids) {
+            Utils.resetForm($('#pwdForm'));
+            pwdDialog.dialog('open');
+            $('#pwdForm #UserIds').val(ids.join());
+        }
+
+        function saveUserNewPwd() {
+            var flag = $('#pwdForm').form('validate');
+               if (!flag) {
+                $.messager.alert('Title', '必须填写完整的信息', 'error');
+            return false;
+            }
+
+               var uids = $('#pwdForm #UserIds').val();
+               var newpwd=$('#pwdForm #NewPwd').val();
+            Utils.ajaxPost('/UserBase/ResetUserPwd', { ids: uids, pwd: newpwd }, 'json', function(ret) {
+                if (ret.IsSuccess) {
+                    pwdDialog.dialog("close");
+                    gridList.datagrid('reload');
+                    $.messager.alert('提示', "重置密码成功");
+                } else {
+                    $.messager.alert('提示', "重置密码失败");
+                }
+            });
+        }
+
         function saveUser() {
 
             var $form = $('#userDialog').find('form');
@@ -435,7 +511,6 @@
             }
             Utils.ajaxPost('/UserBase/SaveUserData', $form.serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-                    $('#mainForm')[0].reset();
                     $.messager.alert('提示', '保存成功',null,function() {
                         userDialog.dialog('close');
                     });

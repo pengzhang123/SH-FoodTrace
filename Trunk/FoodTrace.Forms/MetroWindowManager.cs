@@ -45,7 +45,9 @@ namespace FoodTrace.Forms
             {
                 window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             }
-
+            window.BorderThickness = new Thickness(2);
+            window.BorderBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(154, 34, 46));
+            
             return window;
         }
 
@@ -67,7 +69,8 @@ namespace FoodTrace.Forms
                     Content = view
                 };
             }
-
+            result.BorderThickness = new Thickness(2);
+            result.BorderBrush = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(154, 34, 46));
             //AddMetroResources(result);
             return result;
         }

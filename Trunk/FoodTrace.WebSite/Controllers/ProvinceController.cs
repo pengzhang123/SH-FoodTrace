@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using System.Web.Mvc;
 using FoodTrace.Model;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
            // var count = provinceService.GetProvinceCount();
-            var provinceList = provinceService.GetProviceListPaging(null, string.Empty, page, rows);
+            string provinceName = RequestHelper.RequestPost("provinceName", string.Empty);
+            var provinceList = provinceService.GetProviceListPaging(null, provinceName, page, rows);
             return Json(provinceList, JsonRequestBehavior.AllowGet);
         }
 

@@ -70,7 +70,7 @@
             cache: false,
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#DicDialog').find('form');
@@ -83,7 +83,7 @@
                     saveDic($form);
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#DicDialog').dialog('close');
@@ -93,11 +93,10 @@
 
         $('#btnQuery').on('click', function() {
             var name = $('#dicName').val();
-            if (name != '') {
                 dicGrid.datagrid('reload', {
                     dicName: name
                 });
-            }
+            
         });
     });
 

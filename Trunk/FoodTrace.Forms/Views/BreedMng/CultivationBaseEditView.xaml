@@ -11,7 +11,7 @@
              d:DesignWidth="300"
              Background="White"
              mc:Ignorable="d">
-    <Grid DataContext="{Binding Model}">
+    <Grid>
         <StackPanel Margin="5">
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -19,7 +19,10 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="溯源码" />
-                <TextBox Grid.Column="1" Text="{Binding AreaName}" />
+                <TextBox Grid.Column="1"
+                         cal:Message.Attach="[GotFocus]=[EpcGotFocus]"
+                         IsReadOnly="True"
+                         Text="{Binding Model.CultivationEpc}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -27,7 +30,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="批次代号" />
-                <TextBox Grid.Column="1" Text="{Binding BatchCode}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.BatchCode}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -35,7 +38,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="来源" />
-                <TextBox Grid.Column="1" Text="{Binding Source}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Source}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -43,7 +46,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="父亲编号" />
-                <TextBox Grid.Column="1" Text="{Binding FatherID}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.FatherID}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -51,7 +54,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="母亲编号" />
-                <TextBox Grid.Column="1" Text="{Binding MontherID}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.MontherID}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -59,7 +62,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="种类" />
-                <TextBox Grid.Column="1" Text="{Binding VarietyType}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.VarietyType}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -67,7 +70,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="品种代号" />
-                <TextBox Grid.Column="1" Text="{Binding VarietyCode}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.VarietyCode}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -75,7 +78,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="品种名称" />
-                <TextBox Grid.Column="1" Text="{Binding VarietyName}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.VarietyName}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -83,7 +86,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="备注" />
-                <TextBox Grid.Column="1" Text="{Binding Remark}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Remark}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -91,7 +94,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
-                <CheckBox Grid.Column="1" IsChecked="{Binding IsLocked}" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsLocked}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -99,7 +102,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="是否显示" />
-                <CheckBox Grid.Column="1" IsChecked="{Binding IsShow}" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsShow}" />
             </Grid>
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"

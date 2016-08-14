@@ -26,8 +26,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
             int count = areaPlatService.GetAreaPlatCount();
-
-            var areaPlatList = areaPlatService.GetPagerAreaPlat(string.Empty, page, rows).Select(m => new
+            string platName = RequestHelper.RequestPost("platName", string.Empty);
+            var areaPlatList = areaPlatService.GetPagerAreaPlat(platName, page, rows).Select(m => new
             {
                 AreaID=m.AreaID,
                 AreaCode = m.AreaCode,

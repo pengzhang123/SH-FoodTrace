@@ -2,13 +2,18 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     }
-
-<table id="DataGrid" style="height:100%;"></table>
-
+<div style="height: 100%">
+    <div class="table_title">
+        菜单名称：<input type="text" class="input" id="menuName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height:80%;"></table>
+</div>
 <div id="CreateDialog" style="display: none;"></div>
 <div id="EditDialog" style="display: none;"></div>
 <script>
-
+    var menuGrid = null;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Menu")' + '?id=' + id).dialog('open');
     }
@@ -37,7 +42,7 @@
 
 
 
-        $('#DataGrid').datagrid({
+        menuGrid=$('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "Menu")',
             rownumbers: true,
             striped: true,
@@ -86,17 +91,6 @@
                       Delete(ids);
                     
                 }
-            }, {
-                text: 'Key'
-            }, {
-                text: '<input type="text" id="key"/>'
-            }, {
-                id: 'btnFilter',
-                text: 'filter',
-                iconCls: 'icon-search',
-                handler: function () {
-                    query();
-                }
             }],
             columns: [[
                    { field: 'ck', checkbox: true },
@@ -117,7 +111,7 @@
             href: '@Url.Action("Create", "Menu")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#CreateDialog').find('form');
@@ -147,7 +141,7 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#CreateDialog').dialog('close');
@@ -164,7 +158,7 @@
             href: '@Url.Action("Edit", "Menu")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#EditDialog').find('form');
@@ -194,12 +188,23 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#EditDialog').dialog('close');
                 }
             }]
+        });
+
+
+        $("#btnQuery").on('click', function() {
+            var menuName = $('#menuName').val();
+
+                menuGrid.datagrid('reload', {
+                    menuName: menuName
+                });
+            
+
         });
     });
 </script>

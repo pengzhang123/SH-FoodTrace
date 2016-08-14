@@ -61,6 +61,7 @@
     <Compile Include="IUserRoleService.cs" />
     <Compile Include="ProductTrace\IProductTraceApiService.cs" />
     <Compile Include="SystemBase\IDicService.cs" />
+    <Compile Include="SystemBase\IQSCardService.cs" />
     <Compile Include="SystemBase\ITidService.cs" />
     <Compile Include="SystemBase\IUserDetailService.cs" />
     <Compile Include="KillMng\IKillBatchDetailService.cs" />

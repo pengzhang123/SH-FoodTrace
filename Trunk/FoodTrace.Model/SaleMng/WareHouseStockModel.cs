@@ -29,14 +29,14 @@ namespace FoodTrace.Model
         public int? ProductTypeID { get; set; }
         [ForeignKey("ProductTypeID")]
         public virtual ProductTypeModel ProductType { get; set; }
-        public double Weight { get; set; }
+        public double? Weight { get; set; }
         public string PinYingCode { get; set; }
-        public int StockCount { get; set; }
-        public int TotalCount { get; set; }
-        public int UseCount { get; set; }
-        public int FreezeCount { get; set; }
+        public int? StockCount { get; set; }
+        public int? TotalCount { get; set; }
+        public int? UseCount { get; set; }
+        public int? FreezeCount { get; set; }
         public string Remark { get; set; }
-        public bool IsLocked { get; set; }
-        public bool IsShow { get; set; }
+        public bool? IsLocked { get; set; }
+        public bool? IsShow { get; set; }
     }
 }

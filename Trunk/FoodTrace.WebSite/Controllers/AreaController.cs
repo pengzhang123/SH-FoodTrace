@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using System.Web.Mvc;
 using FoodTrace.Model;
 using System.Linq;
@@ -22,7 +23,8 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult GetList(int page, int rows)
         {
             int count = areaService.GetAreaCount();
-            var provinceList = areaService.GetPagerArea(string.Empty, page, rows).Select(_ => new
+            string areaName = RequestHelper.RequestPost("areaName", string.Empty);
+            var provinceList = areaService.GetPagerArea(areaName, page, rows).Select(_ => new
             {
                 AreaID = _.AreaID,
                 AreaName = _.AreaName

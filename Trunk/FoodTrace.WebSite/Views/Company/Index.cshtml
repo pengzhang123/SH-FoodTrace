@@ -3,13 +3,18 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table id="DataGrid" style="height:100%;"></table>
-<div id="CreateDialog" style="padding: 10px 60px 20px 60px">
+<div style="height: 100%">
+    公司名称：<input type="text" class="input" id="comName" value="">
+    <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+    <div class="clearbox"></div>
+    <table id="DataGrid" style="height:80%;"></table>
+</div>
+<div id="CreateDialog" >
     
 </div>
-<div id="EditDialog"  style="padding:10px 60px 20px 60px"></div>
+<div id="EditDialog" ></div>
 <script type="text/javascript">
-
+    var comGrid = null;
     function Edit(id) {
         $('#EditDialog').dialog('open').dialog('refresh', '@Url.Action("Edit", "Company")' + '?id=' + id);
     }
@@ -34,7 +39,7 @@
     }
 
     $(function () {
-        $('#DataGrid').datagrid({
+        comGrid=$('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "Company")',
             rownumbers: true,
             striped: true,
@@ -199,6 +204,14 @@
                     $('#EditDialog').dialog('close');
                 }
             }]
+        });
+
+        $('#btnQuery').on('click', function() {
+            var comName = $('#comName').val();
+
+            comGrid.datagrid('reload', {
+                comName: comName
+            });
         });
     });
 </script>

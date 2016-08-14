@@ -1,4 +1,5 @@
-﻿using FoodTrace.IService;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
@@ -30,8 +31,9 @@ namespace FoodTrace.WebSite.Controllers
 
         public JsonResult GetList(int page, int rows)
         {
+            string deptName = RequestHelper.RequestPost("deptName", string.Empty);
             int count = deptService.GetDeptCount();
-            var lstDept = deptService.GetPagerDept(string.Empty, page, rows).Select(m => new
+            var lstDept = deptService.GetPagerDept(deptName, page, rows).Select(m => new
             {
                 DeptID=m.DeptID,
                 CompanyName = m.Company == null ? string.Empty: m.Company.CompanyName,

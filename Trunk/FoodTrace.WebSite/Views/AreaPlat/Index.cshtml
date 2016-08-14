@@ -2,11 +2,18 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table id="DataGrid" style="height:100%;"></table>
+<div style="height: 100%">
+    <div class="table_title">
+        平台名称：<input type="text" class="input" id="platName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height:80%;"></table>
+</div>
 <div id="CreateDialog" style="padding:10px 60px 20px 60px"></div>
 <div id="EditDialog" style="padding:10px 60px 20px 60px"></div>
 <script type="text/javascript">
-
+    var platGrid = null;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "AreaPlat")' + '?id=' + id).dialog('open');
     }
@@ -31,7 +38,7 @@
     }
 
     $(function () {
-        $('#DataGrid').datagrid({
+        platGrid=$('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "AreaPlat")',
             rownumbers: true,
             striped: true,
@@ -182,6 +189,14 @@
                     $('#EditDialog').dialog('close');
                 }
             }]
+        });
+
+        $('#btnQuery').on('click', function() {
+            var platName = $('#platName').val();
+                platGrid.datagrid('reload', {
+                    platName:platName
+                });
+            
         });
     });
 </script>

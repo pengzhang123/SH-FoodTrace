@@ -4,13 +4,19 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="table_title">
+        城市名称：<input type="text" class="input" id="cityName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+      </div>
     <table id="DataGrid" style="height:100%;"></table>
 <div id="CreateDialog"></div>
 <div id="EditDialog"></div>
 
 <script type="text/javascript">
+    var cityGrid = null;
     $(function () {
-        $('#DataGrid').datagrid({
+        cityGrid= $('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "City")',
             rownumbers: true,
             striped: true,
@@ -53,20 +59,20 @@
                         $.messager.alert('提示', '请选择需要删除的数据');
                         return;
                     }
-                        $.each(row, function (index, item) {
-                            ids.push(item.CityID);
-                        });
+                    $.each(row, function (index, item) {
+                        ids.push(item.CityID);
+                    });
 
-                        Delete(ids);
+                    Delete(ids);
                     
                 }
             }],
             columns: [[
-                  { field: 'ck', checkbox: true },
-                    { title: '省份名称', align: 'center', field: 'ProvinceName', width: 35 },
-                    { title: '城市编码', align: 'center', field: 'CityCode', width: 35 },
-                    { title: '城市名称', align: 'center', field: 'CityName', width: 35 },
-                    { title: '城市区号', align: 'center', field: 'CityAreaCode', width: 35 }
+                { field: 'ck', checkbox: true },
+                { title: '省份名称', align: 'center', field: 'ProvinceName', width: 35 },
+                { title: '城市编码', align: 'center', field: 'CityCode', width: 35 },
+                { title: '城市名称', align: 'center', field: 'CityName', width: 35 },
+                { title: '城市区号', align: 'center', field: 'CityAreaCode', width: 35 }
             ]]
         });
 
@@ -79,7 +85,7 @@
             href: '@Url.Action("Create", "City")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#CreateDialog').find('form');
@@ -109,7 +115,7 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#CreateDialog').dialog('close');
@@ -126,7 +132,7 @@
             href: '@Url.Action("Edit", "City")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#EditDialog').find('form');
@@ -156,12 +162,20 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#EditDialog').dialog('close');
                 }
             }]
+        });
+
+        $('#btnQuery').on('click', function() {
+            var cityName = $('#cityName').val();
+                cityGrid.datagrid('reload', {
+                    cityName: cityName
+                });
+            
         });
     });
 

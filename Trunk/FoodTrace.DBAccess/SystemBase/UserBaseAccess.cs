@@ -158,7 +158,7 @@ namespace FoodTrace.DBAccess
                 var data = context.UserBase.FirstOrDefault(m => m.UserID == model.UserId);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.UserCode = model.UserCode;
-                data.Password = model.Password;
+                //data.Password = model.Password;
                 data.UserName = model.UserName;
                 data.DeptID = model.DeptID;
                 data.CompanyID = model.CompanyID;
@@ -401,6 +401,31 @@ namespace FoodTrace.DBAccess
                     });
                     context.BatchDelete(user);
                     context.BatchDelete(userDetails);
+                }
+                return string.Empty;
+            };
+            return base.DbOperation(operation);
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="newpwd"></param>
+        /// <returns></returns>
+        public MessageModel ResetUserPwd(string ids, string newpwd)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+
+                var user = context.UserBase.Where(s => ids.Contains(s.UserID.ToString())).ToList();
+                if (user.Any())
+                {
+                    user.ForEach(s =>
+                    {
+                        s.Password = newpwd;
+                    });
+                    context.BatctUpdate(user);
                 }
                 return string.Empty;
             };

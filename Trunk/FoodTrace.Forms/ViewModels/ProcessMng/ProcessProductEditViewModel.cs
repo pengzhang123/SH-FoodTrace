@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
@@ -22,6 +23,31 @@ namespace FoodTrace.Forms.ViewModels
         private IShadowProcessService iShadowProcessService = new ShadowProcessService();
         private IProcessBaseService iProcessBaseService = new ProcessBaseService();
         private IProcessBatchDetailService iProcessBatchDetailService = new ProcessBatchDetailService();
+
+
+        private ICodeMaxService iCodeMaxService = new CodeMaxService();
+        public void EpcGotFocus()
+        {
+            CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
+            //商品类别
+            pro96.GoodsType = "3";
+            //商品代号
+            pro96.GoodsCode = Model.ProductID.ToString();
+            //生成日期
+            pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
+            var maxId = iCodeMaxService.GetMaxCode("ProcessProduct");
+            //销售店号
+            pro96.BusinessCode = "112233";
+            //商品号型
+            pro96.GoodsSize = "255";
+            
+            //序号
+            pro96.SeqNo = maxId;
+            //标签类型
+            pro96.EpcType = "4";
+            Model.ShadowEPC = pro96.PackEpc();
+            NotifyOfPropertyChange(() => Model);
+        }
 
         public ProcessProductModel Model { get; set; }
         public EditMode Mode { get; set; }

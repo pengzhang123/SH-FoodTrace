@@ -87,8 +87,10 @@ namespace FoodTrace.Forms
                         {"Height", 697},
                     {"Icon", new BitmapImage(new Uri("pack://application:,,,/FoodTrace.Forms;component/favicon.ico", UriKind.Absolute)) },
                         {"UseNoneWindowStyle", true},
+
                         //{"Background", new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(0,0,0,0))},
-                        {"ResizeMode", System.Windows.ResizeMode.NoResize}
+                        {"ResizeMode", System.Windows.ResizeMode.NoResize},
+                            {"BorderBrush",new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent)}
                     });
 
 

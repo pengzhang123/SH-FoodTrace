@@ -68,9 +68,12 @@ namespace FoodTrace.Forms.ViewModels
                 IsShow = true
             };
             var result = IoC.Get<IWindowManager>().ShowDialog(vm, null, new Dictionary<string, object>{
-                {"Title", "添加地块" },{"ResizeMode", System.Windows.ResizeMode.NoResize},
+                {"Title", "添加车辆" },{"ResizeMode", System.Windows.ResizeMode.NoResize},
                         {"Width", 450},
-                        {"Height", 600} });
+                        {"Height", 600},
+            
+                        {"BorderBrush", new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(154, 34, 46))}
+            });
             if (result ?? false)
             {
                 LoadData(string.Empty);

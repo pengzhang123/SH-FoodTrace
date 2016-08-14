@@ -26,6 +26,7 @@ namespace FoodTrace.Model.DtoModel
         public string Temp { get; set; }
         public string Dry { get; set; }
 
+        public string ImgUrl { get; set; }
         public string ProcessBatch { get; set; }
 
     }

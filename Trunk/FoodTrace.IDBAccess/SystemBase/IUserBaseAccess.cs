@@ -62,5 +62,13 @@ namespace FoodTrace.IDBAccess
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeleteUser(string ids);
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="newpwd"></param>
+        /// <returns></returns>
+        MessageModel ResetUserPwd(string ids, string newpwd);
     }
 }

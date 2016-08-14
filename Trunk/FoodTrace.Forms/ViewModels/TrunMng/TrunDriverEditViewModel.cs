@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
@@ -19,6 +20,26 @@ namespace FoodTrace.Forms.ViewModels
         private ITrunDriverService iTrunDriverService = new TrunDriverService();
 
         private ICompanyService iCompanyService = new CompanyService();
+
+
+        private ICodeMaxService iCodeMaxService = new CodeMaxService();
+        public void EpcGotFocus()
+        {
+            CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
+            //种植场号
+            pro96.CompanyCode = Model.CompanyID.ToString();
+            pro96.CompanyType = "1";
+            pro96.Driver = Model.DriverName.ToString();
+            //生成日期
+            pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
+            //标签类型
+            pro96.EpcType = "6";
+            Model.DriverEPC = pro96.PackEpc();
+            NotifyOfPropertyChange(() => Model);
+        }
+
+
+   
 
         public TrunDriverModel Model { get; set; }
         public EditMode Mode { get; set; }

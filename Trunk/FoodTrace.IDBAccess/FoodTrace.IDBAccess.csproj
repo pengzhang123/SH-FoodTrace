@@ -61,6 +61,7 @@
     <Compile Include="IBaseAccess.cs" />
     <Compile Include="ProdcutTraceApi\IProductTraceApiAccess.cs" />
     <Compile Include="SystemBase\IDicAccess.cs" />
+    <Compile Include="SystemBase\IQSCardAccess.cs" />
     <Compile Include="SystemBase\ITidAccess.cs" />
     <Compile Include="SystemBase\IUserRoleAccess.cs" />
     <Compile Include="KillMng\IKillBatchAccess.cs" />

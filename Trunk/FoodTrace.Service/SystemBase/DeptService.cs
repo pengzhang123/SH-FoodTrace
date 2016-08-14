@@ -54,10 +54,10 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public List<DeptModel> GetPagerDept(string name, int pageIndex, int pageSize,int? companyID=null)
         {
-            //if (companyID == null)
-            //{
-            //    companyID= UserManagement.CurrentUser.CompanyId;
-            //}
+            if (companyID == null)
+            {
+                companyID = UserManagement.CurrentUser.CompanyId;
+            }
             //int companyID = UserManagement.CurrentUser.CompanyId;
             var result = deptAccess.GetPagerDeptByConditions(name.Trim(), pageIndex, pageSize,companyID);
             //result.ForEach(m => SetCompany(m));

@@ -3,13 +3,20 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table id="DataGrid" style="height:100%;"></table>
+<div style="height: 100%">
+    <div class="table_title">
+        部门名称：<input type="text" class="input" id="deptName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height:80%;"></table>
+</div>
 <div id="CreateDialog">
 </div>
 <div id="EditDialog"></div>
 
 <script type="text/javascript">
-    var editDialog;
+    var editDialog = null, deptGrid = null;
     function Edit(id) {
         editDialog.dialog('open').dialog('refresh', "/Dept/Edit?id=" + id );
     }
@@ -34,7 +41,7 @@
     }
 
     $(function () {
-        $('#DataGrid').datagrid({
+        deptGrid = $('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "Dept")',
             rownumbers: true,
             striped: true,
@@ -190,6 +197,17 @@
                     $('#EditDialog').empty();
                 }
             }]
+        });
+
+
+        //查询
+        $('#btnQuery').on('click', function() {
+            var deptName = $('#deptName').val();
+                deptGrid.datagrid('reload', {
+                    deptName: deptName
+                });
+            
+        
         });
     });
 </script>

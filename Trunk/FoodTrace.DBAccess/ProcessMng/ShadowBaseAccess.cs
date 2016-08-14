@@ -150,7 +150,8 @@ namespace FoodTrace.DBAccess
                 Method = model.Method,
                 Temp = model.Temp,
                 Dry = model.Dry,
-                ProcessBatch = model.ProcessBatch
+                ProcessBatch = model.ProcessBatch,
+                ImgUrl=""
             };
             var company = Context.Company.Find(model.CompanyID);
             if (company != null)

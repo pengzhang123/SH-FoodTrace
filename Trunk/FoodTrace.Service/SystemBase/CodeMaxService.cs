@@ -99,5 +99,12 @@ namespace FoodTrace.Service
         {
             return codeMaxAccess.DeleteCodeMaxByIds(ids);
         }
+
+
+        public string GetMaxCode(string objectCode)
+        {
+            string result = codeMaxAccess.GetMaxCode(objectCode);
+            return result;
+        }
     }
 }

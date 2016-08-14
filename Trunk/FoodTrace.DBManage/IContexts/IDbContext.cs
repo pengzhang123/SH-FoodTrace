@@ -26,5 +26,7 @@ namespace FoodTrace.DBManage.IContexts
 
         void BatchDelete<T>(List<T> list) where T : class;
         void BatctInsert<T>(List<T> list) where T : class;
+
+        void BatctUpdate<T>(List<T> list) where T : class;
     }
 }

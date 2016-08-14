@@ -49,6 +49,7 @@ namespace FoodTrace.WebSite
             container.RegisterType<IProductTypeService, ProductTypeService>();
             container.RegisterType<IProductBaseService, ProductBaseService>();
 
+            container.RegisterType<IQSCardService, QSCardService>();
             container.RegisterType<ICodeMaxService, CodeMaxService>();
             container.RegisterType<ICodeObjectService, CodeObjectService>();
             container.RegisterType<ICodeOrderService, CodeOrderService>();

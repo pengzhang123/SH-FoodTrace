@@ -130,5 +130,16 @@ namespace FoodTrace.DBManage.Contexts
                 this.SaveChanges();
             }
         }
+
+        public void BatctUpdate<T>(List<T> list) where T : class
+        {
+            if (list.Any())
+            {
+                foreach (var entity in list)
+                   this.Entry<T>(entity).State = EntityState.Modified;
+
+                this.SaveChanges();
+            }
+        }
     }
 }

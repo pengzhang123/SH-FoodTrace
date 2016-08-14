@@ -119,7 +119,10 @@ namespace FoodTrace.DBAccess
                 //基地名下包含基地地块信息，则不能被直接删除
                 if (ids.Length > 0)
                 {
-                    var landBase = context.LandBase.Where(s => ids.Contains(s.LandID.ToString())).ToList();
+                    var idsArra = ids.Split(',');
+                    var landBase =(from s in context.LandBase
+                                    join id in idsArra on s.LandID.ToString() equals id  
+                                    select s).ToList();
                     if (landBase.Any())
                     {
                         context.BatchDelete(landBase);

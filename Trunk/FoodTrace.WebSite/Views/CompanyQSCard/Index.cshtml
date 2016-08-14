@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="height: 100%">
+    <div class="table_title">
+        资质名称：<input type="text" class="input" id="qsName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height:80%;"></table>
+</div>
+<div id="QsDialog" style="display: none;">
+    <form id="mainForm">
+        <input type="hidden" name="QSID" value="" />
+        <table>
+            <tr>
+                <td>公司</td>
+                <td>
+                    @Html.DropDownList("CompanyID", ViewBag.Company as IEnumerable<SelectListItem>)
+                </td>
+                <td>资质名称</td>
+                <td>
+                    <input type="text" name="QSName" id="QSName" value="" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>资质编号</td>
+                <td>
+                    <input type="text" name="QSCard" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>发证日期</td>
+                <td>
+                    <input class="Wdate" name="IssuingTime" type="text" onclick="WdatePicker()"> 
+                </td>
+            </tr>
+            <tr>
+                <td>发证单位</td>
+                <td>
+                    <input type="text" name="IssuingUnit" value="" class="easyui-validatebox" data-options="validType:'number'" />
+
+                </td>
+                <td>有效期</td>
+                <td>
+                    <input type="text" name="Validity" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td>
+                    <input type="text" name="Remark" value="" class="easyui-validatebox" data-options="validType:'number'" />
+
+                </td>
+                
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    var qsDialog = null,qsGrid=null;
+   
+    function Delete(id) {
+        $.messager.confirm('信息提示', '确定要删除该记录吗？', function (r) {
+            if (r) {
+                $.post('@Url.Action("DeleteQsCardByIds", "CompanyQSCard")', { ids: id.join() }, function (json) {
+                    var msg = '';
+                    if (json.IsSuccess) {
+                        msg = "删除成功";
+                        $('#DataGrid').datagrid('reload');
+                    } else {
+                        msg = "删除失败";
+                    }
+                    $.messager.alert('信息提示', msg, 'info', function () {
+                    });
+                }, 'json');
+            }
+        });
+
+    }
+
+    $(function () {
+        qsGrid = $('#DataGrid').datagrid({
+            url: '@Url.Action("GetQsCardList", "CompanyQSCard")',
+            rownumbers: true,
+            striped: true,
+            fitColumns: true,
+            pagination: true,
+            singleSelect: false,
+            pageList: [10, 15, 20, 25],
+            toolbar: [{
+                id: 'btnAdd',
+                text: ' 新建',
+                iconCls: 'icon-add',
+                handler: function () {
+                    $('#QsDialog').dialog('open');
+                }
+            }, {
+                id: 'btnEdit',
+                text: ' 编辑',
+                iconCls: 'icon-edit',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    if (row) {
+                        if (row.length == 1) {
+                            edit(row[0].QSID);
+                        } else {
+                            $.messager.alert('提示', '请选择需要编辑的一条数据行');
+                        }
+                    }
+                }
+            }, {
+                id: 'btnDelete',
+                text: ' 删除',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    var ids = [];
+                    if (row.length == 0) {
+                        $.messager.alert('提示', '请选择需要删除的数据');
+                        return;
+                    }
+                        $.each(row, function (index, item) {
+                            ids.push(item.QSID);
+                        });
+
+                        Delete(ids);
+
+                }
+            }],
+            columns: [[
+                   { field: 'ck', checkbox: true },
+                    { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
+                    { title: '资质名称', align: 'center', field: 'QSName', width: 35 },
+                    { title: '资质编号', align: 'center', field: 'QSCard', width: 35 },
+                    { title: '发证日期', align: 'center', field: 'IssuingTime', width: 35 },
+                    { title: '发证单位', align: 'center', field: 'IssuingUnit', width: 35 },
+                    { title: '有效期', align: 'center', field: 'Validity', width: 35 }
+            ]]
+        });
+
+
+        qsDialog= $('#QsDialog').dialog({
+            title: '新建',
+            width: 600,
+            height: 500,
+            closed: true,
+            cache: false,
+            modal: true,
+            buttons: [{
+                text: '保存',
+                iconCls:'icon-ok',
+                handler: function () {
+                    var $form = $('#QsDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+                    saveQsCard();
+
+                }
+            }, {
+                text: '关闭',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#QsDialog').dialog('close');
+                }
+            }]
+        });
+        //查询
+        $('#btnQuery').on('click', function() {
+            var qsName = $('#qsName').val();
+                qsGrid.datagrid('reload', {
+                    qsName: qsName
+                });
+
+
+        });
+    });
+
+
+    function edit(id) {
+        Utils.resetForm($('#mainForm'));
+        qsDialog.dialog({ title: "编辑" }).dialog('open');
+        Utils.ajaxGet('/CompanyQSCard/GetQSCardByid', { id: id }, 'json', function (ret) {
+            if (ret.IsSuccess) {
+                Utils.loadFormData($('#mainForm'), ret.Data);
+            } else {
+                $.messager.alert('提示', "数据加载失败");
+            }
+
+        });
+    }
+
+    function saveQsCard() {
+
+        Utils.ajaxPost('/CompanyQSCard/SaveCardData', $('#mainForm').serialize(), 'json', function (ret) {
+            if (ret.IsSuccess) {
+                qsDialog.dialog('close');
+                $.messager.alert('提示', "保存成功");
+                qsGrid.datagrid('reload');
+            } else {
+                $.messager.alert('提示', "保存失败");
+            }
+        });
+    }
+</script>
+
+

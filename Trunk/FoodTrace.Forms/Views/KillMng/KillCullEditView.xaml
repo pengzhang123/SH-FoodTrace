@@ -11,7 +11,7 @@
              d:DesignWidth="300"
              Background="White"
              mc:Ignorable="d">
-    <Grid DataContext="{Binding Model}">
+    <Grid>
         <StackPanel Margin="5">
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
                 <TextBlock HorizontalAlignment="Center" Text="屠宰场" />
                 <TextBox Grid.Column="1"
                          IsReadOnly="True"
-                         Text="{Binding Path=Company.CompanyName}" />
+                         Text="{Binding Path=Model.Company.CompanyName}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -32,7 +32,7 @@
                 <ComboBox x:Name="cbKillBatch"
                           Grid.Column="1"
                           cal:Message.Attach="[SelectionChanged]=[KillBatchSelectionChanged]"
-                          SelectedValue="{Binding KillBatchID}" />
+                          SelectedValue="{Binding Model.KillBatchID}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
                 <ComboBox x:Name="cbKillBatchDetail"
                           Grid.Column="1"
                           cal:Message.Attach="[SelectionChanged]=[KillBatchDetailSelectionChanged($source)]"
-                          SelectedValue="{Binding CultivationID}" />
+                          SelectedValue="{Binding Model.CultivationID}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -53,7 +53,7 @@
                 <TextBlock HorizontalAlignment="Center" Text="养殖溯源码" />
                 <TextBox x:Name="YZSUYM"
                          Grid.Column="1"
-                         Text="{Binding KillEpc}" />
+                         Text="{Binding Model.CultivationEpc}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -61,7 +61,10 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="屠宰溯源码" />
-                <TextBox Grid.Column="1" Text="{Binding KillEpc}" />
+                <TextBox Grid.Column="1"
+                         cal:Message.Attach="[GotFocus]=[EpcGotFocus]"
+                         IsReadOnly="True"
+                         Text="{Binding Model.KillEpc}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -71,7 +74,7 @@
                 <TextBlock HorizontalAlignment="Center" Text="产品" />
                 <ComboBox x:Name="cbProducts"
                           Grid.Column="1"
-                          SelectedValue="{Binding ProductID}" />
+                          SelectedValue="{Binding Model.ProductID}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -79,7 +82,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="个体名称" />
-                <TextBox Grid.Column="1" Text="{Binding ProductName}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.ProductName}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -87,7 +90,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="个体重量" />
-                <TextBox Grid.Column="1" Text="{Binding Weight}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Weight}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -95,7 +98,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="屠宰流程" />
-                <TextBox Grid.Column="1" Text="{Binding Flow}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Flow}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -103,7 +106,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="备注" />
-                <TextBox Grid.Column="1" Text="{Binding Remark}" />
+                <TextBox Grid.Column="1" Text="{Binding Model.Remark}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -111,7 +114,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="是否锁定" />
-                <CheckBox Grid.Column="1" IsChecked="{Binding IsLocked}" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsLocked}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>
@@ -119,7 +122,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="是否显示" />
-                <CheckBox Grid.Column="1" IsChecked="{Binding IsShow}" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding Model.IsShow}" />
             </Grid>
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"

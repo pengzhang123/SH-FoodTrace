@@ -11,6 +11,7 @@ namespace FoodTrace.IDBAccess
     public interface ICodeMaxAccess : IBaseAccess<CodeMaxModel>
     {
         int GetEntityCount(string name);
+        string GetMaxCode(string objectCode);
 
         List<CodeMaxModel> GetPagerCodeMaxByConditions(string name, int pageIndex, int pageSize);
 

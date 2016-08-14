@@ -14,7 +14,12 @@ namespace FoodTrace.IService
         /// </summary>
         /// <returns></returns>
         int GetCodeMaxCount();
-
+        /// <summary>
+        /// 根据对象编码取得对应的最大的ID
+        /// </summary>
+        /// <param name="objectCode"></param>
+        /// <returns></returns>
+        string GetMaxCode(string objectCode);
         /// <summary>
         /// 获取CodeMax总条数
         /// </summary>

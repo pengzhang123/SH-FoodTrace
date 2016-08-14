@@ -201,7 +201,9 @@
                                                 Header="是否显示" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <Grid Grid.Row="1" Margin="0,10">
+                <Grid Grid.Row="1"
+                      Margin="0,10"
+                      Background="#EEB2B9">
                     <uc:PaggingUserControl VerticalAlignment="Center"
                                            cal:Message.Attach="[PageIndexChanged]=[PageIndexChanged($source, $eventArgs)];[PagePrint]=[PagePrint($source, $eventArgs)]"
                                            DataContext="{Binding PagerModel}"

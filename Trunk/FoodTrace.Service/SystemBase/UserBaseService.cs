@@ -209,5 +209,16 @@ namespace FoodTrace.Service
         {
             return userBaseAccess.DeleteUser(ids);
         }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="newpwd"></param>
+        /// <returns></returns>
+        public MessageModel ResetUserPwd(string ids, string newpwd)
+        {
+            return userBaseAccess.ResetUserPwd(ids, newpwd);
+        }
     }
 }

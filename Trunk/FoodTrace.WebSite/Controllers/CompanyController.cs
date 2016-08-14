@@ -27,7 +27,9 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
-            var companyList = companyService.GetPagerCompany(string.Empty, page, rows).Select(m => new
+
+            string comName = RequestHelper.RequestPost("comName", string.Empty);
+            var companyList = companyService.GetPagerCompany(comName, page, rows).Select(m => new
             {
                 CompanyID = m.CompanyID,
                 CompanyName = m.CompanyName,

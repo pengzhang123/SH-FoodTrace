@@ -91,7 +91,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var data = context.City.Where(s => ids.Contains(s.CityID.ToString())).ToList();
+                var data = context.CodeMax.Where(s => ids.Contains(s.CodeMaxID.ToString())).ToList();
                 if (data.Any())
                 {
                     context.BatchDelete(data);
@@ -105,6 +105,29 @@ namespace FoodTrace.DBAccess
         {
             return base.Context.CodeMax.Where(m => (string.IsNullOrEmpty(name) || m.ObjectName.Contains(name)))
                     .OrderBy(m => m.CodeMaxID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+        public string GetMaxCode(string objectCode)
+        {
+            try
+            {
+                var data = base.Context.CodeMax.Where(s => s.ObjectCode == objectCode.Trim()).FirstOrDefault();
+                if (data != null)
+                {
+                    int maxId = Convert.ToInt32(data.ObjectValue ?? "0");
+                    int tmpId = maxId + 1;
+                    data.ObjectValue = tmpId.ToString();
+                    UpdateSingleEntity(data);
+                    return maxId.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+
+           
+            return "-1";
         }
     }
 }

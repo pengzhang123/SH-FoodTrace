@@ -2,13 +2,17 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     }
-
+<div class="table_title">
+    省名称：<input type="text" class="input" id="provinceName" value="">
+    <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+    <div class="clearbox"></div>
+</div>
 <table id="DataGrid" style="height:100%;"></table>
 
 <div id="CreateDialog"></div>
 <div id="EditDialog"></div>
 <script>
-
+    var provinceGrid = null;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Province")' + '?id=' + id).dialog('open');
     }
@@ -37,7 +41,7 @@
 
 
 
-        $('#DataGrid').datagrid({
+        provinceGrid = $('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "Province")',
             rownumbers: true,
             striped: true,
@@ -105,7 +109,7 @@
             href: '@Url.Action("Create", "Province")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls:'icon-ok',
                 handler: function () {
                     var $form = $('#CreateDialog').find('form');
@@ -135,7 +139,7 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#CreateDialog').dialog('close');
@@ -152,7 +156,7 @@
             href: '@Url.Action("Edit", "Province")',
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     var $form = $('#EditDialog').find('form');
@@ -182,12 +186,20 @@
                     }, 'json');
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#EditDialog').dialog('close');
                 }
             }]
+        });
+
+        $('#btnQuery').on('click', function() {
+            var provinceName = $('#provinceName').val();
+                provinceGrid.datagrid('reload', {
+                    provinceName: provinceName
+                });
+           
         });
     });
 </script>
