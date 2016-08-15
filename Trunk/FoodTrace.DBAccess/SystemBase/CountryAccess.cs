@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.DBAccess
 {
@@ -89,7 +90,8 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var data = context.Country.Where(s=>ids.Contains(s.CountryID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var data = context.Country.Where(s=>idsArray.Contains(s.CountryID.ToString())).ToList();
                 if (data.Any())
                 {
                     context.BatchDelete(data);
@@ -107,5 +109,41 @@ namespace FoodTrace.DBAccess
                                                 && (string.IsNullOrEmpty(name) || m.CountryName.Contains(name)))
                     .OrderBy(m => m.CountryID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
+
+        /// <summary>
+        /// 获取分页列表
+        /// </summary>
+        /// <param name="cityId"></param>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<CountryDto> GetCountryListPaging(int? cityId, string name, int pIndex, int pSize)
+         {
+             var query = (from s in Context.Country
+                 join c in Context.City on s.CityID equals c.CityID into cl
+                 from cleft in cl.DefaultIfEmpty()
+                 select new CountryDto()
+                 {
+                     CountryID = s.CountryID,
+                     CountryCode = s.CountryCode,
+                     CountryName = s.CountryName,
+                     CityID = s.CityID,
+                     CityName = cleft.CityName
+                 }).AsQueryable();
+
+             if (cityId != null && cityId > 0)
+             {
+                 query = query.Where(s => s.CityID == cityId);
+             }
+             if (!string.IsNullOrEmpty(name))
+             {
+                 query = query.Where(s => s.CountryName.Contains(name));
+             }
+
+             var list = query.OrderBy(s => s.CountryID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+             return new GridList<CountryDto>(){rows=list,total=query.Count()};
+         }
     }
 }

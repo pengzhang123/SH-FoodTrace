@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.DBAccess
 {
@@ -89,7 +90,11 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var city = context.City.Where(s => ids.Contains(s.CityID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var city =(from s in context.City
+                            join id in idsArray on s.CityID.ToString() equals  id
+                               select s
+                               ).ToList();
                 if (city.Any())
                 {
                     context.BatchDelete(city);
@@ -105,6 +110,20 @@ namespace FoodTrace.DBAccess
             return base.Context.City.Where(m => (!provinceId.HasValue || m.ProvinceID == provinceId)
                                                 /*&& (string.IsNullOrEmpty(name) || m.CityName.Contains(name))*/)
                     .OrderBy(m => m.CityID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+        /// <summary>
+        /// 根据省份获取城市列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<ZtreeModel> GetCityListByProvinceId(int id)
+        {
+            var query=(from s in base.Context.City
+                       where s.ProvinceID==id
+                       select new ZtreeModel() { id = s.CityID.ToString(),name = s.CityName}
+                           ).ToList();
+
+            return query;
         }
     }
 }

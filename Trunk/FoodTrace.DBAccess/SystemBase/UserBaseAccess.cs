@@ -386,8 +386,8 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-
-                var user = context.UserBase.Where(s => ids.Contains(s.UserID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var user = context.UserBase.Where(s => idsArray.Contains(s.UserID.ToString())).ToList();
                 if (user.Any())
                 {
                     var userDetails = new List<UserDetailModel>();

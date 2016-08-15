@@ -29,10 +29,10 @@ namespace FoodTrace.WebSite.Controllers
         {
             var user=(UserSessionDto)Session["UserBase"];
 
-            var roleMenu = (List<MenuModel>) Session["RoleMenu"];
-            if (roleMenu == null)
+            var roleMenu = (List<RoleModuleDto>)Session["RoleMenu"];
+            if (roleMenu == null || roleMenu.Count==0)
             {
-                 roleMenu= _roleService.GetRoleMenuByRoleId(user.RoleId,1);
+                 roleMenu= _roleService.GetRoleModuleMenuByRoleId(user.RoleId,1);
                 //后面改为放缓存
                  Session["RoleMenu"] = roleMenu;
             }

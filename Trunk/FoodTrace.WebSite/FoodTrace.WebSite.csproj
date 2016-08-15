@@ -749,6 +749,7 @@
     <Content Include="Images\go.png" />
     <Content Include="Images\home.png" />
     <Content Include="Images\huanxian.png" />
+    <Content Include="Images\huanxianbt.png" />
     <Content Include="Images\last.png" />
     <Content Include="Images\LoginBG.png" />
     <Content Include="Images\LoginBG_hx.png" />

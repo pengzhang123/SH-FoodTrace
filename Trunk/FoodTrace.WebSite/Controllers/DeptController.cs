@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoodTrace.Common.Log;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.WebSite.Controllers
 {
@@ -31,18 +32,18 @@ namespace FoodTrace.WebSite.Controllers
 
         public JsonResult GetList(int page, int rows)
         {
-            string deptName = RequestHelper.RequestPost("deptName", string.Empty);
-            int count = deptService.GetDeptCount();
-            var lstDept = deptService.GetPagerDept(deptName, page, rows).Select(m => new
+            var list = new GridList<DeptDto>();
+            try
             {
-                DeptID=m.DeptID,
-                CompanyName = m.Company == null ? string.Empty: m.Company.CompanyName,
-                DeptName = m.DeptName,
-                Address = m.UpperDept==null?string.Empty:m.UpperDept.DeptName,
-                DeptRemark = m.DeptRemark,
-                SortID = m.SortID
-            }).ToList();
-            return Json(new { total = count, rows = lstDept }, JsonRequestBehavior.AllowGet);
+                 string deptName = RequestHelper.RequestPost("deptName", string.Empty);
+                list = deptService.GetDeptPagingList(deptName, page, rows);
+            }
+            catch (Exception)
+            {
+              
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()

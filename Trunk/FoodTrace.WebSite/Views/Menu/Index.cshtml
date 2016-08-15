@@ -2,18 +2,27 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     }
-<div style="height: 100%">
-    <div class="table_title">
-        菜单名称：<input type="text" class="input" id="menuName" value="">
-        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
-        <div class="clearbox"></div>
+<link href="~/Scripts/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+
+<div id="cc" class="easyui-layout" style="width:100%;height:100%;">
+    <div data-options="region:'west',title:'模块',split:true" style="width:250px;">
+        <ul id="moduleTree" class="ztree"></ul>
     </div>
-    <table id="DataGrid" style="height:80%;"></table>
-</div>
+    <div data-options="region:'center',title:'菜单'" style="padding:5px;background:#eee;">
+        <div class="table_title">
+            菜单名称：<input type="text" class="input" id="menuName" value="">
+            <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+            <div class="clearbox"></div>
+        </div>
+        <table id="DataGrid" style="height: 80%;"></table>
+    </div>
+</div>  
+
 <div id="CreateDialog" style="display: none;"></div>
 <div id="EditDialog" style="display: none;"></div>
+<script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
 <script>
-    var menuGrid = null;
+    var menuGrid = null,menuTree=null;
     function Edit(id) {
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Menu")' + '?id=' + id).dialog('open');
     }
@@ -40,7 +49,7 @@
 
     $(function () {
 
-
+        initModuleTree();
 
         menuGrid=$('#DataGrid').datagrid({
             url: '@Url.Action("GetList", "Menu")',
@@ -103,7 +112,7 @@
 
 
         $('#CreateDialog').dialog({
-            title: 'Create Dialog',
+            title: '新增',
             width: 400,
             height: 280,
             closed: true,
@@ -150,7 +159,7 @@
         });
 
         $('#EditDialog').dialog({
-            title: 'Create Dialog',
+            title: '修改',
             width: 400,
             height: 280,
             closed: true,
@@ -196,6 +205,31 @@
             }]
         });
 
+        //初始化字典树
+        function initModuleTree() {
+            var settings = {
+                data: {
+                    // key: { ckecked: "Checked" },
+                    simpleData: { enable: true, idKey: "id", pIdKey: "pId" }
+                },
+                callback: { onClick: orgTreeClick }
+            };
+            Utils.ajaxGet("/Menu/GetModuleTree", null, "json", function (ret) {
+                if (ret.IsSuccess) {
+                    menuTree = $.fn.zTree.init($("#moduleTree"), settings, ret.Data);
+                }
+                // menuTree.expandAll(true);
+            });
+        }
+
+        //树节点点击事件
+        function orgTreeClick(event, treeId, treeNode) {
+            var id = treeNode.id;
+            //var code = treeNode.code;
+            menuGrid.datagrid('reload', {
+                moduleId: id
+            });
+        }
 
         $("#btnQuery").on('click', function() {
             var menuName = $('#menuName').val();

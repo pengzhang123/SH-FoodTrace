@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
@@ -24,18 +25,13 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult GetList(int page, int rows)
         {
-            int count = menuService.GetMenuCount();
+           
             string menuName = RequestHelper.RequestPost("menuName", string.Empty);
-            var list = menuService.GetPagerMenu(menuName, page, rows).Select(_ => new
-            {
-                MenuID = _.MenuID,
-                Name = _.Name,
-                ParentID = _.ParentID,
-                SortID = _.SortID,
-                FunctionURL = _.FunctionURL
-            });
-            
-            return Json(new { total=count,rows=list}, JsonRequestBehavior.AllowGet);
+            string moduleId = RequestHelper.RequestPost("moduleId", "0");
+
+            var list = menuService.GetMenuListPaging(int.Parse(moduleId), menuName, page, rows);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -63,14 +59,14 @@ namespace FoodTrace.WebSite.Controllers
         public ActionResult Edit(int id)
         {
             var model = menuService.GetMenuById(id);
-            //var list = menuService.GetPagerMenu(string.Empty, 1, 100).OrderBy(_ => _.SortID).ToList();
-            //List<SelectListItem> itemList = new List<SelectListItem>();
-            //list.ForEach(m =>
-            //{
-            //    itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
-            //});
-            //itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
-            //ViewBag.MenuList = itemList;
+            var list = menuService.GetPagerMenu(string.Empty, 1, 100).OrderBy(_ => _.SortID).ToList();
+            List<SelectListItem> itemList = new List<SelectListItem>();
+            list.ForEach(m =>
+            {
+                itemList.Add(new SelectListItem() { Text = m.Name, Value = m.MenuID.ToString() });
+            });
+            itemList.Insert(0, new SelectListItem() { Text = "顶级分类", Value = "0" });
+            ViewBag.MenuList = new SelectList(itemList,model.ParentID);
             return PartialView(model);
         }
 
@@ -160,6 +156,28 @@ namespace FoodTrace.WebSite.Controllers
             {
                 
                 throw;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 获取模块列表
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetModuleTree()
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data = menuService.GetMenuTreeList(1);
+                var module = data.Where(s => s.pId == "0").ToList();
+                result.IsSuccess = true;
+                result.Data = module;
+            }
+            catch (Exception)
+            {
+
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

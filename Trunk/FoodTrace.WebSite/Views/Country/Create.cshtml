@@ -1,9 +1,9 @@
 ﻿
 @model FoodTrace.Model.CountryModel
  @{
-                                               ViewBag.Title = "Create";
-                                               Layout = null;
-                                               var cityList = ViewBag.CityList as List<SelectListItem>
+        ViewBag.Title = "Create";
+        Layout = null;
+        var cityList = ViewBag.ProvinceList as List<SelectListItem>
     ;
     }
 
@@ -16,13 +16,49 @@
         <label for="name">区县代码:</label>
         @Html.TextBoxFor(m => Model.CountryCode,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
     </div>
-    <div>
-        <label for="name">区县名称:</label>
-        @Html.TextBoxFor(m => Model.CountryName,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+        <div>
+            <label for="name">区县名称:</label>
+            @Html.TextBoxFor(m => Model.CountryName,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})
+        </div>
+         <div>
+        <label for="name">所在省份:</label>
+        @Html.DropDownList("ProvinceId",cityList)
     </div>
     <div>
-        <label for="name">城市名称:</label>
-        @Html.DropDownListFor((m => Model.CityID),cityList,new {@class="easyui-validatebox easyui-combobox",data_options="required:true"})
+        <label for="name">所在地级市:</label>
+        <select name="CityID" id="CityId">
+           
+        </select>
     </div>
 
     }
+
+<script type="text/javascript">
+
+    $(function() {
+
+        initCity();
+    });
+
+    $('#ProvinceId').on('change', function() {
+        initCity();
+    });
+    function initCity() {
+        var provinceId = $('#ProvinceId').val();
+
+        Utils.ajaxGet('/City/GetCityListByProvinceId', { id: provinceId }, 'JSON', function(ret) {
+            if (ret.IsSuccess) {
+                var $city = $("#CityId");
+                $city.empty();
+                var option = "<option value='0'>--请选择--</option>";;
+                if (ret.length > 0) {
+                    //遍历json数据，拼接option，最后添加到select中
+                    $.each(ret.Data, function (i, n) {
+                        option += "<option value=" + n.id + ">" + n.name + "</option>";
+                    });
+                }
+                $city.append(option); //等同于 $(option).appendTo($("#catagery"));
+            }
+        });
+    }
+</script>

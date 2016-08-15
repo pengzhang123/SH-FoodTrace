@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -161,6 +162,16 @@ namespace FoodTrace.Service
         public List<ZtreeModel> GetRoleTreeList()
         {
             return roleAccess.GetRoleTree();
-        } 
+        }
+
+        /// <summary>
+        /// 根据角色Id获取角色菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<RoleModuleDto> GetRoleModuleMenuByRoleId(int id, int flag)
+        {
+            return roleAccess.GetRoleModuleMenuByRoleId(id, flag);
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.DBAccess
 {
@@ -94,6 +95,31 @@ namespace FoodTrace.DBAccess
         }
 
         /// <summary>
+        /// 分页获取数据
+        /// </summary>
+        /// <param name="moduleId"></param>
+        /// <param name="name"></param>
+        /// <param name="pindex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<MenuModel> GetMenuListPaging(int moduleId, string name, int pindex, int pSize)
+        {
+            var query = Context.Menu.AsQueryable();
+
+            if (moduleId > 0)
+            {
+                query = query.Where(s => s.MenuID == moduleId || s.ParentID == moduleId);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.Name.Contains(name));
+            }
+
+            var list = query.OrderBy(s => s.MenuID).Skip((pindex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<MenuModel>(){rows =list,total = query.Count()};
+        }
+        /// <summary>
         /// 批量删除
         /// </summary>
         /// <param name="ids"></param>
@@ -102,7 +128,8 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var menu = context.Menu.Where(s => ids.Contains(s.MenuID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var menu = context.Menu.Where(s => idsArray.Contains(s.MenuID.ToString())).ToList();
                 if (menu.Any())
                 {
                     context.BatchDelete(menu);

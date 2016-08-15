@@ -121,7 +121,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var baselist = context.QSCard.Where(s => ids.Contains(s.QSID.ToString())).ToList();
+
+                var idsArray = ids.Split(',');
+                var baselist = context.QSCard.Where(s => idsArray.Contains(s.QSID.ToString())).ToList();
                 if (baselist.Any())
                 {
                     context.BatchDelete(baselist);

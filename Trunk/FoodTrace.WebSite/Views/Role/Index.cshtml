@@ -147,7 +147,7 @@
 
         //数据编辑弹出框
         $('#CreateDialog').dialog({
-            title: 'Create Dialog',
+            title: '新建',
             width: 600,
             height: 380,
             closed: true,
@@ -194,7 +194,7 @@
         });
             
         $('#EditDialog').dialog({
-            title: 'Create Dialog',
+            title: '修改',
             width: 600,
             height: 380,
             closed: true,
@@ -249,13 +249,13 @@
             cache: false,
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     saveRoleRefMenu();
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#MenuDialog').dialog('close');
@@ -271,13 +271,13 @@
             cache: false,
             modal: true,
             buttons: [{
-                text: 'Save',
+                text: '保存',
                 iconCls: 'icon-ok',
                 handler: function () {
                     saveRoleRefClientMenu();
                 }
             }, {
-                text: 'Close',
+                text: '关闭',
                 iconCls: 'icon-cancel',
                 handler: function () {
                     $('#ClientMenuDialog').dialog('close');

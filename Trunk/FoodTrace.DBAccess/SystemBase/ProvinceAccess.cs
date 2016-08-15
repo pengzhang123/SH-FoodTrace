@@ -90,7 +90,8 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var data = context.Province.Where(s => ids.Contains(s.ProvinceID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var data = context.Province.Where(s => idsArray.Contains(s.ProvinceID.ToString())).ToList();
                 if (data.Any())
                 {
                     context.BatchDelete(data);

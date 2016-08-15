@@ -87,7 +87,8 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> opera = delegate(IEntityContext context)
             {
-                var dicroot = context.DicRoot.Where(s => ids.Contains(s.RootID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var dicroot = context.DicRoot.Where(s => idsArray.Contains(s.RootID.ToString())).ToList();
                 if (dicroot.Any())
                 {
                     context.BatchDelete(dicroot);

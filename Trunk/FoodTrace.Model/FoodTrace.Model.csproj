@@ -57,10 +57,13 @@
     <Compile Include="BreedMng\BreedMaterialModel.cs" />
     <Compile Include="BreedMng\CultivationBaseModel.cs" />
     <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="DtoModel\CountryDto.cs" />
     <Compile Include="DtoModel\CultivationDto.cs" />
+    <Compile Include="DtoModel\DeptDto.cs" />
     <Compile Include="DtoModel\DicGridDto.cs" />
     <Compile Include="DtoModel\ProviceDto.cs" />
     <Compile Include="DtoModel\QsCardDto.cs" />
+    <Compile Include="DtoModel\RoleModuleDto.cs" />
     <Compile Include="WinCeModel\BredDrug.cs" />
     <Compile Include="WinCeModel\DicDto.cs" />
     <Compile Include="DtoModel\LandBaseDto.cs" />

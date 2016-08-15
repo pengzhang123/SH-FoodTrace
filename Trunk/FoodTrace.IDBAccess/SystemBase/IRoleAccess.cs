@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.IDBAccess
 {
@@ -57,5 +58,12 @@ namespace FoodTrace.IDBAccess
         /// </summary>
         /// <returns></returns>
         List<ZtreeModel> GetRoleTree();
+
+        /// <summary>
+        /// 根据角色Id获取角色菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<RoleModuleDto> GetRoleModuleMenuByRoleId(int id, int flag);
     }
 }

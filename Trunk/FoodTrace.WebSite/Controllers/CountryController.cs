@@ -11,11 +11,12 @@ namespace FoodTrace.WebSite.Controllers
     {
         ICityService cityService;
         ICountryService countryService;
-
-        public CountryController(ICityService cityService, ICountryService countryService)
+        IProvinceService provinceService;
+        public CountryController(ICityService cityService, ICountryService countryService, IProvinceService provinceService)
         {
             this.cityService = cityService;
             this.countryService = countryService;
+            this.provinceService = provinceService;
         }
 
         // GET: City
@@ -24,30 +25,23 @@ namespace FoodTrace.WebSite.Controllers
             return View();
         }
 
-        public ActionResult GetList(int page, int rows)
+        public JsonResult GetList(int page, int rows)
         {
-            var count = countryService.GetCountryCount();
             string countryName = RequestHelper.RequestPost("countryName", string.Empty);
-            var list = countryService.GetPagerCountry(null, countryName, page, rows).Select(_ => new
-            {
-                CityID = _.CityID,
-                CityName = _.City.CityName,
-                CountryCode = _.CountryCode,
-                CountryName = _.CountryName,
-                CountryID = _.CountryID
-            });
-            return Json(new{total=count,rows=list}, JsonRequestBehavior.AllowGet);
+            var list = countryService.GetCountryListPaging(null, countryName, page, rows);
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
         {
-            var areaList = cityService.GetPagerCity(null, string.Empty, 1, 100);
+            var provinceList = provinceService.GetPagerProvince(null, string.Empty, 1, 100);
             List<SelectListItem> itemList = new List<SelectListItem>();
-            areaList.ForEach(m =>
+            provinceList.ForEach(m =>
             {
-                itemList.Add(new SelectListItem() { Text = m.CityName, Value = m.CityID.ToString() });
+                itemList.Add(new SelectListItem() { Text = m.ProvinceName, Value = m.ProvinceID.ToString() });
             });
-            ViewBag.CityList = itemList;
+            ViewBag.ProvinceList = itemList;
+          
             return PartialView(new CountryModel());
         }
 
@@ -62,13 +56,13 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult Edit(int id)
         {
-            var areaList = cityService.GetPagerCity(null, string.Empty, 1, 100);
+            var provinceList = provinceService.GetPagerProvince(null, string.Empty, 1, 100);
             List<SelectListItem> itemList = new List<SelectListItem>();
-            areaList.ForEach(m =>
+            provinceList.ForEach(m =>
             {
-                itemList.Add(new SelectListItem() { Text = m.CityName, Value = m.CityID.ToString() });
+                itemList.Add(new SelectListItem() { Text = m.ProvinceName, Value = m.ProvinceID.ToString() });
             });
-            ViewBag.CityList = itemList;
+            ViewBag.ProvinceList = itemList;
             var model = countryService.GetCountryById(id);
             return PartialView(model);
         }

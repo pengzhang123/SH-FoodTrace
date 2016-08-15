@@ -1,10 +1,11 @@
-﻿@using FoodTrace.Model
+﻿
+@using FoodTrace.Model.DtoModel
 @{
     ViewBag.Title = "Index";
     Layout = "";
 }
 @{
-    var roleMenu = ViewBag.RoleMenu as List<MenuModel> ?? new List<MenuModel>();
+    var roleMenu = ViewBag.RoleMenu as List<RoleModuleDto> ?? new List<RoleModuleDto>();
 }
 <!DOCTYPE html>
 <html>
@@ -41,7 +42,7 @@
 <body class="easyui-layout">
     <div data-options="region:'north'" style="height: 100px; background: #F0E1E3; ">
         <div style="position: absolute; left: 0px; bottom: 0px;">
-            <img src="~/Images/huanxian.png" style="margin-top:0px;margin-left:0px;height: 100px;" />
+            <img src="~/Images/huanxianbt.png" style="margin-top:0px;margin-left:0px;height: 40px;" />
         </div>
         <div style="position: absolute; right: 50px; bottom: 20px;">
             <a id="btn" href="@Url.Action("LoginOut","Home")" class="easyui-linkbutton">退出系统</a>  
@@ -50,16 +51,24 @@
     </div>
     <div data-options="region:'west',split:true" title="菜单 Menu" style="width:180px;">
         <div class="easyui-accordion" data-options="fit:true,border:false">
-            <div title="后台管理" style="padding:10px;text-align:left;">
-                <ul>
-                    @{
-                        foreach (var item in roleMenu)
+            @{
+                foreach (var dto in roleMenu)
+                {
+                   <div title="@(dto.ModuleName)" style="padding:10px;text-align:left;">
+                 <ul>
+                     @{
+                       var menu = dto.RoleMenu;
+
+                         foreach (var item in menu)
                         {
-                            <li><a href="#"  onclick="addTab('@(item.Name)', '@(item.FunctionURL)'); return false;">@(item.Name)</a></li>
+                            <li><a href="#"  onclick="addTab('@(item.MenuName)', '@(item.MenuUrl)'); return false;">@(item.MenuName)</a></li>
                         }
                     }
-                </ul>
-            </div>
+                  </ul>
+                  </div> 
+                }
+            }
+           
         </div>
     </div>
     <div id="tabs" class="easyui-tabs" style="border-style:none;" data-options="region:'center',title:'',iconCls:'icon-ok'">

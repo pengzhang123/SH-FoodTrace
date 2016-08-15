@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.Service
 {
@@ -64,6 +65,19 @@ namespace FoodTrace.Service
             return result;
         }
 
+        /// <summary>
+        /// 部门分页数据
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
+        public GridList<DeptDto> GetDeptPagingList(string name, int pIndex, int pSize)
+        {
+            int comId = UserManagement.CurrentUser.CompanyId;
+            return deptAccess.GetDeptPagingList(name, pIndex, pSize, comId);
+        }
 
         /// <summary>
         /// 通过ID获取Dept

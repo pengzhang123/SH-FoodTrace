@@ -1,4 +1,5 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System;
+using FoodTrace.Common.Libraries;
 using FoodTrace.IService;
 using System.Web.Mvc;
 using FoodTrace.Model;
@@ -106,6 +107,28 @@ namespace FoodTrace.WebSite.Controllers
             var flag = result.Status == MessageStatus.Success ? true : false;
             var msg = result.Message;
             return Json(new { flag = flag, msg = msg });
+        }
+
+        /// <summary>
+        /// 根据省份获取城市列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult GetCityListByProvinceId(int id)
+        {
+            var result = new ResultJson();
+            try
+            {
+                var data = cityService.GetCityListByProvinceId(id);
+                result.Data = data;
+                result.IsSuccess = true;
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

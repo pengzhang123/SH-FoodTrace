@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.DBAccess
 {
@@ -94,7 +95,10 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> opera = delegate(IEntityContext context)
             {
-                var dept = context.Dept.Where(s => ids.Contains(s.DeptID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var dept =(from s in context.Dept
+                            join id in idsArray on s.DeptID.ToString() equals  id
+                            select s).ToList();
                 if (dept.Any())
                 {
                     context.BatchDelete(dept);
@@ -118,6 +122,45 @@ namespace FoodTrace.DBAccess
                 query = query.Where(s => s.DeptName.Contains(name));
             }
             return query.OrderBy(m => m.DeptID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        /// <summary>
+        /// 部门分页数据
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <param name="companyId"></param>
+        /// <returns></returns>
+        public GridList<DeptDto> GetDeptPagingList(string name, int pIndex, int pSize, int? companyId)
+        {
+            var query =(from s in  Context.Dept
+                        join d in Context.Dept on s.UpperDeptID equals d.DeptID into dl   
+                        join com in Context.Company on s.CompanyID equals com.CompanyID into coml
+                        from dleft in dl.DefaultIfEmpty()
+                        from comleft in coml.DefaultIfEmpty()
+                        select new DeptDto()
+                        {
+                            DeptID = s.DeptID,
+                            DeptName = s.DeptName,
+                            CompanyId = s.CompanyID,
+                            CompanyName =comleft.CompanyName,
+                            UpperDeptName = dleft.DeptName,
+                            DeptRemark=s.DeptRemark,
+                            SortID = s.SortID
+                        }).AsQueryable();
+
+            if (companyId != null)
+            {
+                query = query.Where(s => s.CompanyId == companyId);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.DeptName.Contains(name));
+            }
+            var list= query.OrderBy(m => m.DeptID).Skip((pIndex - 1) * pSize).Take(pSize).ToList();
+
+            return new GridList<DeptDto>(){rows = list,total = query.Count()}; 
         }
     }
 }

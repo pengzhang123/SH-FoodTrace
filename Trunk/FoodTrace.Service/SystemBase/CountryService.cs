@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.Service
 {
@@ -100,6 +101,19 @@ namespace FoodTrace.Service
         public MessageModel DeleteByIds(string ids)
         {
             return countryAccess.DeleteByIds(ids);
+        }
+
+        /// <summary>
+        /// 获取分页列表
+        /// </summary>
+        /// <param name="cityId"></param>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<CountryDto> GetCountryListPaging(int? cityId, string name, int pIndex, int pSize)
+        {
+            return countryAccess.GetCountryListPaging(cityId, name, pIndex, pSize);
         }
     }
 }

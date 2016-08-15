@@ -100,5 +100,16 @@ namespace FoodTrace.Service
         {
             return cityAccess.DeleteCityByIds(ids);
         }
+
+
+        /// <summary>
+        /// 根据省份获取城市列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<ZtreeModel> GetCityListByProvinceId(int id)
+        {
+            return cityAccess.GetCityListByProvinceId(id);
+        }
     }
 }

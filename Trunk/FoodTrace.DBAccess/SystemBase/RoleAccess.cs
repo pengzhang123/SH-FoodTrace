@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -209,6 +210,42 @@ namespace FoodTrace.DBAccess
                        select m ).ToList();
 
             return query;
+        }
+
+        /// <summary>
+        /// 根据角色Id获取角色菜单
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<RoleModuleDto> GetRoleModuleMenuByRoleId(int id, int flag)
+        {
+            var moduleList = new List<RoleModuleDto>();
+            try
+            {
+                var list = GetRoleMenuByRoleId(id, flag);
+
+                moduleList = (from s in list
+                              where s.ParentID==0
+                    select new RoleModuleDto()
+                    {
+                        ModuleName = s.Name,
+                        ModuleIco = "",
+                        Sort = s.SortID,
+                        RoleMenu = (from m in list
+                                        where m.ParentID==s.MenuID
+                                        select new RoleMenuDto()
+                                        {
+                                            MenuName = m.Name,
+                                            MenuUrl = m.FunctionURL,
+                                            MenuIcon = "",
+                                            Sort = m.SortID
+                                        })
+                    }).ToList();
+            }
+            catch
+            {
+            }
+            return moduleList;
         }
 
         /// <summary>

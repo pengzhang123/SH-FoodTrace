@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
 
 namespace FoodTrace.IService
 {
@@ -72,5 +73,15 @@ namespace FoodTrace.IService
         /// </summary>
         /// <returns></returns>
         List<ZtreeModel> GetMenuTreeList(int flag);
+
+        /// <summary>
+        /// 分页获取数据
+        /// </summary>
+        /// <param name="moduleId"></param>
+        /// <param name="name"></param>
+        /// <param name="pindex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        GridList<MenuModel> GetMenuListPaging(int moduleId, string name, int pindex, int pSize);
     }
 }

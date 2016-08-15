@@ -90,7 +90,10 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
-                var area = context.Area.Where(s => ids.Contains(s.AreaID.ToString())).ToList();
+                var idsArray = ids.Split(',');
+                var area =(from s in context.Area
+                            join id in idsArray on s.AreaID.ToString() equals  id
+                            select s).ToList();
 
                 if (area.Any())
                 {

@@ -19,5 +19,12 @@ namespace FoodTrace.IDBAccess
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeleteCityByIds(string ids);
+
+        /// <summary>
+        /// 根据省份获取城市列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<ZtreeModel> GetCityListByProvinceId(int id);
     }
 }
