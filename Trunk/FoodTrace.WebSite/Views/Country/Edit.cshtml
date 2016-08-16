@@ -2,8 +2,6 @@
 @{
     ViewBag.Title = "Edit";
     Layout = null;
-    var cityList = ViewBag.CityList as List<SelectListItem>
-    ;
     }
 
     <h2>区县编辑</h2>
@@ -20,7 +18,7 @@
     </div>
     <div>
         <label for="name">所在省份:</label>
-        @Html.DropDownList("ProvinceId",cityList)
+        @Html.DropDownList("ProvinceId", ViewBag.ProvinceList as List<SelectListItem>)
     </div>
     <div>
         <label for="name">所在地级市:</label>
@@ -49,13 +47,15 @@
                 var $city = $("#CityId");
                 $city.empty();
                 var option = "<option value='0'>--请选择--</option>";;
-                if (ret.length > 0) {
+                if (ret.Data.length > 0) {
                     //遍历json数据，拼接option，最后添加到select中
                     $.each(ret.Data, function (i, n) {
+                      
                         option += "<option value=" + n.id + ">" + n.name + "</option>";
                     });
                 }
                 $city.append(option); //等同于 $(option).appendTo($("#catagery"));
+                $city.val('@Model.CityID');
             }
         });
     }

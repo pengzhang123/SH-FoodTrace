@@ -56,14 +56,19 @@ namespace FoodTrace.WebSite.Controllers
 
         public ActionResult Edit(int id)
         {
+            var model = countryService.GetCountryById(id);
             var provinceList = provinceService.GetPagerProvince(null, string.Empty, 1, 100);
             List<SelectListItem> itemList = new List<SelectListItem>();
             provinceList.ForEach(m =>
             {
-                itemList.Add(new SelectListItem() { Text = m.ProvinceName, Value = m.ProvinceID.ToString() });
+                itemList.Add(new SelectListItem()
+                {
+                    Text = m.ProvinceName, Value = m.ProvinceID.ToString(),
+                    Selected = m.ProvinceID==model.ProvinceId ?true:false
+                });
             });
             ViewBag.ProvinceList = itemList;
-            var model = countryService.GetCountryById(id);
+
             return PartialView(model);
         }
 

@@ -58,6 +58,7 @@ namespace FoodTrace.DBAccess
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.CountryCode = model.CountryCode;
                 data.CountryName = model.CountryName;
+                data.ProvinceId = model.ProvinceId;
                 data.CityID = model.CityID;
                 context.SaveChanges();
                 return string.Empty;

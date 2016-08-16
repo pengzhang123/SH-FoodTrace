@@ -27,8 +27,8 @@ namespace FoodTrace.WebSite.Controllers
         {
             var companylist = _companyService.GetPagerCompany(string.Empty, 1, 100);
                
-            var model = new CompanyModel() {CompanyID = 0, CompanyName = "请选择"};
-            companylist.Insert(0,model);
+            //var model = new CompanyModel() {CompanyID = 0, CompanyName = "请选择"};
+            //companylist.Insert(0,model);
 
             var data=companylist .Select(_ => new { CompanyName = _.CompanyName, CompanyID = _.CompanyID });
             ViewBag.CompanyList = new SelectList(data, "CompanyID", "CompanyName");

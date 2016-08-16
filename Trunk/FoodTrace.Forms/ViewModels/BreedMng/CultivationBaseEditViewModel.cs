@@ -19,7 +19,7 @@ namespace FoodTrace.Forms.ViewModels
     public class CultivationBaseEditViewModel : ViewAware
     {
         private ICultivationBaseService iCultivationBaseService = new CultivationBaseService();
-
+        private IBreedBaseService iBreedBaseService = new BreedBaseService();
 
 
         private ICodeMaxService iCodeMaxService = new CodeMaxService();
@@ -45,7 +45,10 @@ namespace FoodTrace.Forms.ViewModels
 
         public void LoadUserControl(CultivationBaseEditView view)
         {
-
+            var list = iBreedBaseService.GetPagerBreedBase("", 1, 100);
+            view.cbBreedBase.ItemsSource = list;
+            view.cbBreedBase.DisplayMemberPath = "BreedName";
+            view.cbBreedBase.SelectedValuePath = "BreedID";
         }
 
         public void Save()

@@ -50,6 +50,7 @@ namespace FoodTrace.Model
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
 
+        public int? ProvinceId { get; set; }
         public int? CityID { get; set; }
         [ForeignKey("CityID")]
         public virtual CityModel City { get; set; }

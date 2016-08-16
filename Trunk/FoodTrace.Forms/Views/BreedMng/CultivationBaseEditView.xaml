@@ -18,6 +18,16 @@
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="养殖场" />
+                <ComboBox x:Name="cbBreedBase"
+                          Grid.Column="1"
+                          SelectedValue="{Binding Model.BreedID}" />
+            </Grid>
+            <Grid Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="7*" />
+                </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="溯源码" />
                 <TextBox Grid.Column="1"
                          cal:Message.Attach="[GotFocus]=[EpcGotFocus]"

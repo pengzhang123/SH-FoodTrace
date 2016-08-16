@@ -50,9 +50,18 @@ namespace FoodTrace.DBAccess
 
         public List<CultivationBaseModel> GetPagerCultivationBaseByConditions(int companyID, string name, int pageIndex, int pageSize)
         {
-            return base.Context.CultivationBase.Where(m => m.BreedBase.LandBase.CompanyID == companyID
-                                                    && (string.IsNullOrEmpty(name) || m.CultivationEpc == name))
-                                                    .OrderBy(m => m.CultivationID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var query = (from s in Context.CultivationBase
+                join bb in Context.BreedBase on s.BreedID equals bb.BreedID
+                join lb in Context.LandBase on bb.LandID equals lb.LandID
+                where lb.CompanyID == companyID
+                select s).AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.CultivationEpc == name);
+            }
+
+            return query.OrderBy(m => m.CultivationID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public MessageModel InsertSingleEntity(CultivationBaseModel model)
@@ -69,13 +78,12 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = (context =>
             {
-                var data = context.CultivationBase.FirstOrDefault(m => m.BreedID == model.BreedID && m.ModifyTime == model.ModifyTime);
+                var data = context.CultivationBase.FirstOrDefault(m => m.BreedID == model.BreedID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.CultivationID = model.CultivationID;
                 data.BreedID = model.BreedID;
                 data.AreaID = model.AreaID;
-                data.BreedID = model.BreedID;
                 data.HomeID = model.HomeID;
                 data.CultivationEpc = model.CultivationEpc;
                 data.BatchCode = model.BatchCode;

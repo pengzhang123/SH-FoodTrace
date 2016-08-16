@@ -148,7 +148,7 @@
                         </DataGridTemplateColumn>
 
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Path=BreedBase.BreedCode}"
+                                            Binding="{Binding CultivationEPC}"
                                             Header="溯源码" />
                         <DataGridTextColumn MinWidth="80"
                                             Binding="{Binding BatchCode}"

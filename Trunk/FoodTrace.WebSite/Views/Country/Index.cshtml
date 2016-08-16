@@ -15,6 +15,7 @@
 <script>
     var countryGrid = null;
     function Edit(id) {
+        $('#CreateDialog').empty();
         $('#EditDialog').dialog('refresh', '@Url.Action("Edit", "Country")' + '?id=' + id).dialog('open');
     }
 
@@ -55,7 +56,9 @@
                 text: ' 新建',
                 iconCls: 'icon-add',
                 handler: function () {
-                    $('#CreateDialog').dialog('refresh', '@Url.Action("Create", "Country")').dialog('open');
+                    $('#EditDialog').empty();
+                    $('#CreateDialog').empty();
+                    $('#CreateDialog').dialog('open');
                 }
             }, {
                 id: 'btnEdit',
@@ -106,7 +109,7 @@
 
 
         $('#CreateDialog').dialog({
-            title: 'Create Dialog',
+            title: '新建',
             width: 400,
             height: 280,
             closed: true,
@@ -151,7 +154,7 @@
         });
 
         $('#EditDialog').dialog({
-            title: 'Create Dialog',
+            title: '编辑',
             width: 400,
             height: 280,
             closed: true,
