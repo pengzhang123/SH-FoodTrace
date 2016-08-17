@@ -5,6 +5,8 @@ using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -54,7 +56,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.PlansBatch.FirstOrDefault(m => m.BatchID == model.BatchID && m.ModifyTime == model.ModifyTime);
+                var data = context.PlansBatch.FirstOrDefault(m => m.BatchID == model.BatchID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.BlockID = model.BlockID;
@@ -107,6 +109,96 @@ namespace FoodTrace.DBAccess
         public PlansBatchModel GetPlansBatchByEPCOrORCode(string Epc, string OrCode)
         {
             return Context.PlansBatch.FirstOrDefault(m => string.IsNullOrEmpty(Epc) || m.BatchCode == Epc);
+        }
+
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<PlatPlanDto> GetPlatPlanList(int pIndex, int pSize)
+        {
+            var query = (from s in Context.PlansBatch
+                select new PlatPlanDto()
+                {
+                    BatchID = s.BatchID,
+                    BlockID = s.BlockID,
+                    SeedID = s.SeedID,
+                    BatchNO = s.BatchNO,
+                    BatchCode = s.BatchCode,
+                    PlansTime = s.PlansTime,
+                    PlansYear = s.PlansYear,
+                    HarvestTime = s.HarvestTime,
+                    PlansArea = s.PlansArea,
+                    ChargePerson = s.ChargePerson,
+                    HarvestCount = s.HarvestCount,
+                    RealCount = s.RealCount,
+                    People = s.People,
+                    Remark = s.Remark,
+                    IsLocked = s.IsLocked,
+                    IsShow = s.IsShow
+                }).AsQueryable();
+
+            var list = query.Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<PlatPlanDto>(){rows = list,total = query.Count()};
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlatPlanDto GetPlatPlanDtoById(int id)
+        {
+            var model = (from s in Context.PlansBatch
+                         where s.BatchID==id
+                         select new PlatPlanDto()
+                         {
+                             BatchID = s.BatchID,
+                             BlockID = s.BlockID,
+                             SeedID = s.SeedID,
+                             BatchNO = s.BatchNO,
+                             BatchCode = s.BatchCode,
+                             PlansTime = s.PlansTime,
+                             PlansYear = s.PlansYear,
+                             HarvestTime = s.HarvestTime,
+                             PlansArea = s.PlansArea,
+                             ChargePerson = s.ChargePerson,
+                             HarvestCount = s.HarvestCount,
+                             RealCount = s.RealCount,
+                             People = s.People,
+                             Remark = s.Remark,
+                             IsLocked = s.IsLocked,
+                             IsShow = s.IsShow
+                         }).FirstOrDefault();
+
+            return model;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+
+                var idArray = ids.Split(',');
+                var list = context.PlansBatch.Where(s => idArray.Contains(s.BatchID.ToString())).ToList();
+
+                if (list.Any())
+                {
+                   context.BatchDelete(list);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
         }
     }
 }

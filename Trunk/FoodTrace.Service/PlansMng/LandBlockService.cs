@@ -4,6 +4,8 @@ using FoodTrace.IDBAccess;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using System.Collections.Generic;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -97,7 +99,19 @@ namespace FoodTrace.Service
             return landBlockAccess.DeleteSingleEntity(id);
         }
 
-
+        /// <summary>
+        /// 数据分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<LandBlockDto> GetLandBlockPaging(string name, int pIndex, int pSize)
+        {
+            int comid = UserManagement.CurrentUser.CompanyId;
+            return landBlockAccess.GetLandBlockPaging(comid, name, pIndex, pSize);
+        }
         //private void SetLandBase(LandBlockModel model)
         //{
         //    if (model.LandID.HasValue)
@@ -105,5 +119,26 @@ namespace FoodTrace.Service
         //        model.LandBase = landBaseAccess.GetEntityById(model.LandID.Value);
         //    }
         //}
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return landBlockAccess.DeleteByIds(ids);
+        }
+
+
+        /// <summary>
+        /// 根据id获取地块名称
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public LandBlockDto GetLandBlockDtoById(int id)
+        {
+            return landBlockAccess.GetLandBlockById(id);
+        }
     }
 }

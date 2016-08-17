@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -63,7 +65,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.LandBlock.FirstOrDefault(m => m.BlockID == model.BlockID && m.ModifyTime == model.ModifyTime);
+                var data = context.LandBlock.FirstOrDefault(m => m.BlockID == model.BlockID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.LandID = model.LandID;
@@ -114,6 +116,109 @@ namespace FoodTrace.DBAccess
             return base.Context.LandBlock.Where(m => m.LandBase.CompanyID == companyID
                                                     && (string.IsNullOrEmpty(name) || m.BlockName.Contains(name)))
                      .OrderBy(m => m.BlockID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        /// <summary>
+        /// 数据分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<LandBlockDto> GetLandBlockPaging(int comId, string name, int pIndex, int pSize)
+        {
+            var query = (from s in Context.LandBlock
+                join lb in Context.LandBase on s.LandID equals lb.LandID into lbl
+                from lbleft in lbl.DefaultIfEmpty()
+                where lbleft.CompanyID == comId
+
+                select new LandBlockDto()
+                {
+                    BlockID = s.BlockID,
+                    BlockName = s.BlockName,
+                    BlockArea = s.BlockArea,
+                    BlockCode = s.BlockCode,
+                    SoilType = s.SoilType,
+                    SoilName = s.SoilName,
+                    SoilSalinity = s.SoilSalinity,
+                    SoilQuality = s.SoilQuality,
+                    Lon = s.Lon,
+                    Lat = s.Lat,
+                    Remark = s.Remark,
+                    LandBaseName = lbleft.LandName
+                }).AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.BlockName.Contains(name));
+
+            }
+
+            var list = query.OrderBy(s=>s.BlockID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<LandBlockDto>(){rows = list,total =query.Count()};
+        }
+
+        /// <summary>
+        /// 根据id获取地块名称
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public LandBlockDto GetLandBlockById(int id)
+        {
+            var query = (from s in Context.LandBlock
+                where s.BlockID == id
+                select new LandBlockDto()
+                {
+                    BlockID = s.BlockID,
+                    BlockName = s.BlockName,
+                    BlockArea = s.BlockArea,
+                    BlockCode = s.BlockCode,
+                    SoilType = s.SoilType,
+                    SoilName = s.SoilName,
+                    SoilSalinity = s.SoilSalinity,
+                    SoilQuality = s.SoilQuality,
+                    Lon = s.Lon,
+                    Lat = s.Lat,
+                    Remark = s.Remark,
+                    Toc=s.Toc,
+                    LakerSalinity = s.LakerSalinity,
+                    WaterSalinity = s.WaterSalinity,
+                    GroundWater = s.GroundWater,
+                    WaterQuality = s.WaterQuality,
+                    IsLocked = s.IsLocked,
+                    IsShow = s.IsShow
+                }).FirstOrDefault();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                //基地名下包含基地地块信息，则不能被直接删除
+                if (ids.Length > 0)
+                {
+                    var idsArra = ids.Split(',');
+                    var landBlock = (from s in context.LandBlock
+                                    join id in idsArra on s.BlockID.ToString() equals id
+                                    select s).ToList();
+                    if (landBlock.Any())
+                    {
+                        context.BatchDelete(landBlock);
+                    }
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
         }
     }
 }

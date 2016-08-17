@@ -1,0 +1,275 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="height: 100%">
+    <div class="table_title">
+        地块名称：<input type="text" class="input" id="uName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height: 80%;"></table>
+</div>
+<div id="landblockDialog" style="display: none;">
+    <form id="mainForm">
+        <input type="hidden" name="BlockID" value="" />
+        <table>
+            <tr>
+                <td>所属基地</td>
+                <td>
+                   @Html.DropDownList("LandID", ViewBag.LandBase as SelectList)
+                </td>
+                <td>地块编码</td>
+                <td>
+                    <input type="text" name="BlockCode" value="" class="easyui-validatebox" data-options="required:true" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>地块名称</td>
+                <td>
+                    <input type="text" name="BlockName" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>面积</td>
+                <td>
+                    <input type="text" name="BlockArea" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>土壤种类</td>
+                <td>
+                    <input type="text" name="SoilType" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>土质</td>
+                <td>
+                    <input type="text" name="SoilName" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>土壤含盐量</td>
+                <td>
+                    <input type="text" name="SoilSalinity" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>土壤质量</td>
+                <td>
+                    <input type="text" name="SoilQuality" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>有机质含量</td>
+                <td>
+                    <input  name="Toc" type="text"/>
+                </td>
+                <td>湖水地区水矿化</td>
+                <td>
+                    <input  name="LakerSalinity" type="text" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>引水灌区水矿化</td>
+                <td>
+                    <input type="text" name="WaterSalinity" value="" />
+                </td>
+                <td>地下水位</td>
+                <td>
+                    <input type="text" name="GroundWater" value="" />
+                </td>
+
+            </tr>
+            <tr>
+
+                <td>水质</td>
+                <td>
+                    <input type="text" name="WaterQuality" value="" />
+                </td>
+                <td>经度</td>
+                <td>
+                    <input type="text" name="Lon" value=""/>
+                </td>
+            </tr>
+            <tr>
+                <td>纬度</td>
+                <td>
+                    <input type="text" name="Lat" value="" />
+                </td>
+                <td>备注</td>
+                <td>
+                    <input type="text" name="Remark" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>是否锁定</td>
+                <td>
+                  <input type="checkbox" name="IsLocked" value="true"/>
+                </td>
+                <td>是否显示</td>
+                <td>
+                    <input type="checkbox" name="IsShow" value="true" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        var landblockGrid = null,landblockDialog=null;
+        $(function() {
+            initGrid();
+        });
+
+        function initGrid() {
+            landblockGrid = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetLandBlockList", "LandBlock")',
+                rownumbers: true,
+                striped: true,
+                fitColumns: true,
+                pagination: true,
+                singleSelect: false,
+                pageList: [10, 15, 20, 25],
+                columns: [
+                   [
+                        { field: 'ck', checkbox: true },
+                       { title: '所属基地', align: 'center', field: 'LandBaseName', width: 35 },
+                       { title: '地块名称', align: 'center', field: 'BlockName', width: 35 },
+                       { title: '地块编号', align: 'center', field: 'BlockCode', width: 35 },
+                       { title: '面积', align: 'center', field: 'BlockArea', width: 35 },
+                       { title: '土壤种类', align: 'center', field: 'SoilType', width: 35 },
+                       { title: '土质', align: 'center', field: 'SoilName', width: 35 },
+                       { title: '土壤含盐量', align: 'center', field: 'SoilSalinity', width: 35 },
+                       { title: '土壤质量', align: 'center', field: 'SoilQuality', width: 35 },
+                       { title: '经度', align: 'center', field: 'Lon', width: 35 },
+                       { title: '纬度', align: 'center', field: 'Lat', width: 35 },
+                       { title: '备注', align: 'center', field: 'Remark', width: 35 }
+                   ]
+                ],
+                toolbar: [
+                    {
+                        id: 'btnAdd',
+                        text: ' 新建',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            create();
+                        }
+                    }, {
+                        id: 'btnEdit',
+                        text: ' 编辑',
+                        iconCls: 'icon-edit',
+                        handler: function () {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            if (row) {
+                                if (row.length == 1) {
+                                    edit(row[0].BlockID);
+                                } else {
+                                    $.messager.alert('提示', '请选择需要编辑的一条数据行');
+                                }
+                            }
+                        }
+                    }, {
+                        id: 'btnDelete',
+                        text: ' 删除',
+                        iconCls: 'icon-remove',
+                        handler: function () {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            var ids = [];
+                            if (row.length == 0) {
+                                $.messager.alert('提示', '请选择需要删除的数据');
+                                return;
+                            }
+
+                            $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                                if (r) {
+                                    $.each(row, function (index, item) {
+                                        ids.push(item.BlockID);
+                                    });
+                                    deleteByIds(ids);
+                                }
+                            });
+
+
+                        }
+                    }
+                ]
+               
+            });
+
+
+            landblockDialog = $('#landblockDialog').dialog({
+                title: '新增',
+                width: 600,
+                height:400,
+                closed: true,
+                cache: false,
+                modal: true,
+                resizable: true,
+                buttons: [
+                        {
+                            text: '保存',
+                            iconCls: 'icon-ok',
+                            handler: saveBlockData
+                        }, {
+                            text: '取消',
+                            iconCls: 'icon-cancel',
+                            handler: function () {
+
+                                landblockDialog.dialog("close");
+                            }
+                        }
+                ],
+                onClose: function () { }
+            });
+        }
+
+
+        function create() {
+            Utils.resetForm($('#mainForm'));
+            landblockDialog.dialog('open');
+        }
+        function edit(id) {
+            Utils.resetForm($('#mainForm'));
+            landblockDialog.dialog({ title: "修改" }).dialog('open');
+
+            Utils.ajaxPost('/LandBlock/GetLandBlockById', { id: id }, 'json', function(ret) {
+                if (ret.IsSuccess) {
+                    Utils.loadFormData($('#mainForm'), ret.Data);
+                }
+            });
+        }
+
+        function saveBlockData()
+        {
+            var flag = $('#mainForm').form('validate');
+            if (!flag) {
+                $.messager.alert('Title', '必须填写完整的信息', 'error');
+                return false;
+            }
+
+           
+            Utils.ajaxPost('/LandBlock/SaveLandBlock',$('#mainForm').serialize(), 'json', function (ret) {
+                if (ret.IsSuccess) {
+                    landblockDialog.dialog("close");
+                    landblockGrid.datagrid('reload');
+                    $.messager.alert('提示', "保存成功");
+                } else {
+                    $.messager.alert('提示', "保存失败");
+                }
+            });
+        }
+        function deleteByIds(ids) {
+            Utils.ajaxPost('/LandBlock/DeleteBlockByIds', { ids: ids.join() }, 'json', function(ret) {
+                   
+                if (ret.IsSuccess) {
+                    $.messgager.alert('提示', '删除成功');
+
+                    landblockGrid.datgrid('reload');
+                } else {
+                    $.messgager.alert('提示', '删除失败');
+                }
+
+            });
+        }
+    </script>
+}

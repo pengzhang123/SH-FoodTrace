@@ -1,0 +1,241 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div style="height: 100%">
+    <div class="table_title">
+        种子名称：<input type="text" class="input" id="uName" value="">
+        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+        <div class="clearbox"></div>
+    </div>
+    <table id="DataGrid" style="height: 80%;"></table>
+</div>
+<div id="landseedDialog" style="display: none;">
+    <form id="mainForm">
+        <input type="hidden" name="SeedID" value="" />
+        <table>
+            <tr>
+                <td>种子名称</td>
+                <td>
+                    <input type="text" name="SeedName" value="" class="easyui-validatebox" data-options="required:true" />
+
+                </td>
+                <td>批次</td>
+                <td>
+                    <input type="text" name="BatchNO" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+              
+            </tr>
+            <tr>
+                <td>供应商</td>
+                <td>
+                    <input type="text" name="Supplier" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>产地</td>
+                <td>
+                    <input type="text" name="Place" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+                <td>采购人员</td>
+                <td>
+                    <input type="text" name="PurchPerson" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>采购时间</td>
+                <td>
+                    <input type="text" name="BuyTime" value="" class="Wdate easyui-validatebox" data-options="required:true" onclick="WdatePicker()" />
+                </td>
+            </tr>
+            <tr>
+                <td>数量</td>
+                <td>
+                    <input type="text" name="BuyCount" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>单位</td>
+                <td>
+                    <input name="Units" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>是否锁定</td>
+                <td>
+                    <input type="checkbox" name="IsLocked" value="true" />
+                </td>
+                <td>是否显示</td>
+                <td>
+                    <input type="checkbox" name="IsShow" value="true" />
+                </td>
+            </tr>
+            <tr>
+
+                <td>备注</td>
+                <td colspan="3">
+                    <input name="Remark" type="text" />
+                </td>
+
+            </tr>
+        </table>
+    </form>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        var landseedGrid = null,landseedDialog=null;
+        $(function() {
+            initGrid();
+        });
+
+        function initGrid() {
+            landseedGrid = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetList", "PlantSeed")',
+                rownumbers: true,
+                striped: true,
+                fitColumns: true,
+                pagination: true,
+                singleSelect: false,
+                pageList: [10, 15, 20, 25],
+                columns: [
+                   [
+                        { field: 'ck', checkbox: true },
+                       { title: '种子溯源码', align: 'center', field: 'SeedCode', width: 35 },
+                       { title: '种子名称', align: 'center', field: 'SeedName', width: 35 },
+                       { title: '批次', align: 'center', field: 'BatchNO', width: 35 },
+                       { title: '产地', align: 'center', field: 'Place', width: 35 },
+                       { title: '供应商', align: 'center', field: 'Supplier', width: 35 },
+                       { title: '采购人员', align: 'center', field: 'PurchPerson', width: 35 },
+                       { title: '采购时间', align: 'center', field: 'BuyTime', width: 35 },
+                       { title: '数量', align: 'center', field: 'BuyCount', width: 35 },
+                       { title: '单位', align: 'center', field: 'Units', width: 35 },
+                       { title: '备注', align: 'center', field: 'Remark', width: 35 }
+                   ]
+                ],
+                toolbar: [
+                    {
+                        id: 'btnAdd',
+                        text: ' 新建',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            create();
+                        }
+                    }, {
+                        id: 'btnEdit',
+                        text: ' 编辑',
+                        iconCls: 'icon-edit',
+                        handler: function () {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            if (row) {
+                                if (row.length == 1) {
+                                    edit(row[0].SeedID);
+                                } else {
+                                    $.messager.alert('提示', '请选择需要编辑的一条数据行');
+                                }
+                            }
+                        }
+                    }, {
+                        id: 'btnDelete',
+                        text: ' 删除',
+                        iconCls: 'icon-remove',
+                        handler: function () {
+                            var row = $('#DataGrid').datagrid('getSelections');
+                            var ids = [];
+                            if (row.length == 0) {
+                                $.messager.alert('提示', '请选择需要删除的数据');
+                                return;
+                            }
+
+                            $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                                if (r) {
+                                    $.each(row, function (index, item) {
+                                        ids.push(item.SeedID);
+                                    });
+                                    deleteByIds(ids);
+                                }
+                            });
+
+
+                        }
+                    }
+                ]
+
+            });
+
+
+             landseedDialog = $('#landseedDialog').dialog({
+                title: '新增',
+                width: 600,
+                height:400,
+                closed: true,
+                cache: false,
+                modal: true,
+                resizable: true,
+                buttons: [
+                        {
+                            text: '保存',
+                            iconCls: 'icon-ok',
+                            handler: saveSeedData
+                        }, {
+                            text: '取消',
+                            iconCls: 'icon-cancel',
+                            handler: function () {
+
+                                landseedDialog.dialog("close");
+                            }
+                        }
+                ],
+                onClose: function () { }
+            });
+        }
+
+
+        function create() {
+            Utils.resetForm($('#mainForm'));
+            landseedDialog.dialog('open');
+        }
+        function edit(id) {
+            Utils.resetForm($('#mainForm'));
+            landseedDialog.dialog({ title: "修改" }).dialog('open');
+
+            Utils.ajaxPost('/PlantSeed/GetSeedById', { id: id }, 'json', function (ret) {
+                if (ret.IsSuccess) {
+                    Utils.loadFormData($('#mainForm'), ret.Data);
+                } else {
+                    $.messager.alert('提示', '数据加载失败', 'error');
+                }
+            });
+        }
+
+        function saveSeedData()
+        {
+            var flag = $('#mainForm').form('validate');
+            if (!flag) {
+                $.messager.alert('提示', '必须填写完整的信息', 'error');
+                return false;
+            }
+
+
+            Utils.ajaxPost('/PlantSeed/SaveSeedData', $('#mainForm').serialize(), 'json', function (ret) {
+                if (ret.IsSuccess) {
+                    landseedDialog.dialog("close");
+                    landseedGrid.datagrid('reload');
+                    $.messager.alert('提示', "保存成功");
+                } else {
+                    $.messager.alert('提示', "保存失败");
+                }
+            });
+        }
+        function deleteByIds(ids) {
+            Utils.ajaxPost('/PlantSeed/DeleteSeedByIds', { ids: ids.join() }, 'json', function (ret) {
+
+                if (ret.IsSuccess) {
+                    $.messgager.alert('提示', '删除成功');
+
+                    landseedGrid.datgrid('reload');
+                } else {
+                    $.messgager.alert('提示', '删除失败');
+                }
+
+            });
+        }
+    </script>
+}

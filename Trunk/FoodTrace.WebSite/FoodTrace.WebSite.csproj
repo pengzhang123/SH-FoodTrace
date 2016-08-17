@@ -217,40 +217,46 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AreaController.cs" />
-    <Compile Include="Controllers\AreaPlatController.cs" />
+    <Compile Include="Controllers\PlantManage\LandBlockController.cs" />
+    <Compile Include="Controllers\PlantManage\PlantDrugController.cs" />
+    <Compile Include="Controllers\PlantManage\PlantFertController.cs" />
+    <Compile Include="Controllers\PlantManage\PlantPlanController.cs" />
+    <Compile Include="Controllers\PlantManage\PlantSeedController.cs" />
+    <Compile Include="Controllers\SytemManage\AccountController.cs" />
+    <Compile Include="Controllers\SytemManage\AreaController.cs" />
+    <Compile Include="Controllers\SytemManage\AreaPlatController.cs" />
     <Compile Include="Controllers\base\BaseController.cs" />
     <Compile Include="Controllers\base\JsonResultDateTimeFormat.cs" />
-    <Compile Include="Controllers\CityController.cs" />
-    <Compile Include="Controllers\CodeMaxController.cs" />
-    <Compile Include="Controllers\CodeObjectController.cs" />
-    <Compile Include="Controllers\CodeOrderController.cs" />
-    <Compile Include="Controllers\CompanyController.cs" />
-    <Compile Include="Controllers\CompanyQSCardController.cs" />
-    <Compile Include="Controllers\CountryController.cs" />
-    <Compile Include="Controllers\DemoController.cs" />
-    <Compile Include="Controllers\DeptController.cs" />
-    <Compile Include="Controllers\DicController.cs" />
-    <Compile Include="Controllers\DicRootController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LandBaseController.cs" />
-    <Compile Include="Controllers\LogUserLoginController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="Controllers\ProductBaseController.cs" />
-    <Compile Include="Controllers\ProductEpcController.cs" />
-    <Compile Include="Controllers\ProductTypeController.cs" />
-    <Compile Include="Controllers\ProvinceController.cs" />
-    <Compile Include="Controllers\QSCardController.cs" />
-    <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\TIDController.cs" />
-    <Compile Include="Controllers\UserBaseController.cs" />
-    <Compile Include="Controllers\UserDetailController.cs" />
+    <Compile Include="Controllers\SytemManage\CityController.cs" />
+    <Compile Include="Controllers\SytemManage\CodeMaxController.cs" />
+    <Compile Include="Controllers\SytemManage\CodeObjectController.cs" />
+    <Compile Include="Controllers\SytemManage\CodeOrderController.cs" />
+    <Compile Include="Controllers\SytemManage\CompanyController.cs" />
+    <Compile Include="Controllers\SytemManage\CompanyQSCardController.cs" />
+    <Compile Include="Controllers\SytemManage\CountryController.cs" />
+    <Compile Include="Controllers\SytemManage\DemoController.cs" />
+    <Compile Include="Controllers\SytemManage\DeptController.cs" />
+    <Compile Include="Controllers\SytemManage\DicController.cs" />
+    <Compile Include="Controllers\SytemManage\DicRootController.cs" />
+    <Compile Include="Controllers\SytemManage\HomeController.cs" />
+    <Compile Include="Controllers\SytemManage\LandBaseController.cs" />
+    <Compile Include="Controllers\SytemManage\LogUserLoginController.cs" />
+    <Compile Include="Controllers\SytemManage\ManageController.cs" />
+    <Compile Include="Controllers\SytemManage\MenuController.cs" />
+    <Compile Include="Controllers\SytemManage\ProductBaseController.cs" />
+    <Compile Include="Controllers\SytemManage\ProductEpcController.cs" />
+    <Compile Include="Controllers\SytemManage\ProductTypeController.cs" />
+    <Compile Include="Controllers\SytemManage\ProvinceController.cs" />
+    <Compile Include="Controllers\SytemManage\QSCardController.cs" />
+    <Compile Include="Controllers\SytemManage\RoleController.cs" />
+    <Compile Include="Controllers\SytemManage\TIDController.cs" />
+    <Compile Include="Controllers\SytemManage\UserBaseController.cs" />
+    <Compile Include="Controllers\SytemManage\UserDetailController.cs" />
     <Compile Include="Filters\AuthorizeFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Heplers\CPRODUCTEPC96.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -774,6 +780,7 @@
     </Content>
     <Content Include="AccessMapping.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\jquery-easyui-1.4.5\themes\material\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\FoodTrace.Publish.pubxml" />
@@ -933,10 +940,15 @@
     <Content Include="Scripts\ztree\css\awesomeStyle\fa.less" />
     <Content Include="Views\LandBase\Index.cshtml" />
     <Content Include="Views\CompanyQSCard\Index.cshtml" />
+    <Content Include="Views\LandBlock\Index.cshtml" />
+    <Content Include="Views\PlantSeed\Index.cshtml" />
+    <Content Include="Views\PlantPlan\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
+    <Folder Include="Views\PlantDrug\" />
+    <Folder Include="Views\PlantFert\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -54,6 +54,12 @@ namespace FoodTrace.WebSite
             container.RegisterType<ICodeObjectService, CodeObjectService>();
             container.RegisterType<ICodeOrderService, CodeOrderService>();
             container.RegisterType<IDicService,DicService>();
+
+            container.RegisterType<ILandBlockService, LandBlockService>();
+            container.RegisterType<ISeedBaseService, SeedBaseService>();
+            container.RegisterType<IPlansDrugService, PlansDrugService>();
+            container.RegisterType<IPlansBatchService, PlansBatchService>();
+            container.RegisterType<IPlansFertService, PlansFertService>();
             return container;
         }
 

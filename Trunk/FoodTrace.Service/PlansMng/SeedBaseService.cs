@@ -4,6 +4,8 @@ using FoodTrace.IDBAccess;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using System.Collections.Generic;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -92,5 +94,38 @@ namespace FoodTrace.Service
             return seedBaseAccess.DeleteSingleEntity(id);
         }
 
+
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<SeedDto> GetSeedPagingList(string name, int pIndex, int pSize)
+        {
+            return seedBaseAccess.GetSeedPagingList(name, pIndex, pSize);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return seedBaseAccess.DeleteByIds(ids);
+        }
+
+
+        /// <summary>
+        /// 获取种植信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public SeedDto GetSeedDtoById(int id)
+        {
+            return seedBaseAccess.GetSeedDtoById(id);
+        }
     }
 }
