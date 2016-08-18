@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -87,8 +89,8 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSinglePlansFert(PlansFertModel model)
         {
-            var data = plansFertAccess.GetOriEntity(model.FertID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
+            //var data = plansFertAccess.GetOriEntity(model.FertID, model.ModifyTime);
+            //if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
             return plansFertAccess.UpdateSingleEntity(model);
         }
 
@@ -107,5 +109,37 @@ namespace FoodTrace.Service
         //    if (model.BatchID.HasValue)
         //        model.PlansBatch = plansBatchAccess.GetEntityById(model.BatchID.Value);
         //}
+
+        /// <summary>
+        /// 数据分页
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<PlansFertDto> GetPlansFertPagingList(string name, int pIndex, int pSize)
+        {
+            return plansFertAccess.GetPlansFertPagingList(string.Empty, pIndex, pSize);
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlansFertDto GetFerDtoById(int id)
+        {
+            return plansFertAccess.GetFerDtoById(id);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return plansFertAccess.DeleteByIds(ids);
+        }
     }
 }

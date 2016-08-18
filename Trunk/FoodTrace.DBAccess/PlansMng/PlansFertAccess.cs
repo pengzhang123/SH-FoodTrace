@@ -1,10 +1,13 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using FoodTrace.Common.Libraries;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -63,7 +66,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.PlansFert.FirstOrDefault(m => m.FertID == model.FertID && m.ModifyTime == model.ModifyTime);
+                var data = context.PlansFert.FirstOrDefault(m => m.FertID == model.FertID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.BatchID = model.BatchID;
@@ -109,5 +112,97 @@ namespace FoodTrace.DBAccess
                                                 && (string.IsNullOrEmpty(code) || m.PlansCode.Contains(code)))
                     .OrderBy(m => m.FertID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
         }
+
+        /// <summary>
+        /// 数据分页
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<PlansFertDto> GetPlansFertPagingList(string name, int pIndex, int pSize)
+        {
+            var query = (from s in Context.PlansFert
+                join p in Context.PlansBatch on s.BatchID equals p.BatchID into pl
+                from pleft in pl.DefaultIfEmpty()
+                select new PlansFertDto()
+                {
+                    FertID=s.FertID,
+                    BatchID = s.BatchID,
+                    FertCode = s.FertCode,
+                    FertName = s.FertName,
+                    FertPeople = s.FertPeople,
+                    FertTime = s.FertTime,
+                    FertType = s.FertType,
+                    FertMethod = s.FertMethod,
+                    UANum = s.UANum,
+                    Weather = s.Weather,
+                    Pic = s.Pic,
+                    PlansCode = s.PlansCode,
+                    IsShow = s.IsShow,
+                    IsLocked = s.IsLocked,
+                    Remark = s.Remark,
+                    BatchName = pleft.BatchNO
+
+                }).AsQueryable();
+
+            var list = query.ToList();
+            
+            return new GridList<PlansFertDto>(){rows = list,total = query.Count()};
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlansFertDto GetFerDtoById(int id)
+        {
+            var query = (from s in Context.PlansFert
+                         where s.FertID==id
+                         select new PlansFertDto()
+                         {
+                             FertID = s.FertID,
+                             BatchID = s.BatchID,
+                             FertCode = s.FertCode,
+                             FertName = s.FertName,
+                             FertPeople = s.FertPeople,
+                             FertTime = s.FertTime,
+                             FertType = s.FertType,
+                             FertMethod = s.FertMethod,
+                             UANum = s.UANum,
+                             Weather = s.Weather,
+                             Pic = s.Pic,
+                             PlansCode = s.PlansCode,
+                             IsShow = s.IsShow,
+                             IsLocked = s.IsLocked,
+                             Remark = s.Remark
+                         }).FirstOrDefault();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var idsArray = ids.Split(',');
+                var list = context.PlansFert.Where(s => idsArray.Contains(s.FertID.ToString())).ToList();
+                if (list.Any())
+                {
+                    context.BatchDelete(list);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
+        }
     }
+
+
 }

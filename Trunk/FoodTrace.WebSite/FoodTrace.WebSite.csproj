@@ -217,6 +217,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\KillManage\KillBatchController.cs" />
     <Compile Include="Controllers\PlantManage\LandBlockController.cs" />
     <Compile Include="Controllers\PlantManage\PlantDrugController.cs" />
     <Compile Include="Controllers\PlantManage\PlantFertController.cs" />
@@ -943,12 +944,13 @@
     <Content Include="Views\LandBlock\Index.cshtml" />
     <Content Include="Views\PlantSeed\Index.cshtml" />
     <Content Include="Views\PlantPlan\Index.cshtml" />
+    <Content Include="Views\PlantFert\Index.cshtml" />
+    <Content Include="Views\PlantDrug\Index.cshtml" />
+    <Content Include="Views\KillBatch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
-    <Folder Include="Views\PlantDrug\" />
-    <Folder Include="Views\PlantFert\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -5,6 +5,8 @@ using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -62,7 +64,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.PlansDrug.FirstOrDefault(m => m.DrugID == model.DrugID && m.ModifyTime == model.ModifyTime);
+                var data = context.PlansDrug.FirstOrDefault(m => m.DrugID == model.DrugID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.BatchID = model.BatchID;
@@ -108,6 +110,98 @@ namespace FoodTrace.DBAccess
             return base.Context.PlansDrug.Where(m => m.PlansBatch.LandBlock.LandBase.CompanyID == companyID
                                                 && (string.IsNullOrEmpty(code) || m.PlansCode.Contains(code)))
                     .OrderBy(m=>m.DrugID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<PlantDrugDto> GetPlanDrugList(int comId, int pIndex, int pSize)
+        {
+            var query = (from s in Context.PlansDrug
+                join pb in Context.PlansBatch on s.BatchID equals pb.BatchID
+                join lb in Context.LandBlock on pb.BlockID equals lb.BlockID
+                join land in Context.LandBase on lb.LandID equals land.LandID
+                where land.CompanyID == comId
+                select new PlantDrugDto
+                {
+                     DrugID = s.DrugID,
+                     BatchID = s.BatchID,
+                     BatchNO = pb.BatchNO,
+                     People = s.People,
+                     Object = s.Object,
+                     DrugName = s.DrugName,
+                     DrugTime = s.DrugTime,
+                     Problem = s.Problem,
+                     Method = s.Method,
+                     UANum = s.UANum,
+                     Dilution = s.Dilution,
+                     Weather = s.Weather,
+                     PlansCode = s.PlansCode,
+                     IsLocked = s.IsLocked,
+                     IsShow = s.IsShow,
+                     Remark = s.Remark
+                }).AsQueryable();
+
+
+            var list = query.OrderBy(s => s.DrugID).Skip((pIndex-1)*pSize).Take(pSize).ToList();
+
+            return new GridList<PlantDrugDto>() { rows = list, total = query.Count() };
+        }
+
+        /// <summary>
+        /// 根据Id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlantDrugDto GetPlantDrugDtoById(int id)
+        {
+            var query = (from s in Context.PlansDrug
+                         where s.DrugID==id
+                         select new PlantDrugDto
+                         {
+                             DrugID = s.DrugID,
+                             BatchID = s.BatchID,
+                             People = s.People,
+                             Object = s.Object,
+                             DrugName = s.DrugName,
+                             DrugTime = s.DrugTime,
+                             Problem = s.Problem,
+                             Method = s.Method,
+                             UANum = s.UANum,
+                             Dilution = s.Dilution,
+                             Weather = s.Weather,
+                             PlansCode = s.PlansCode,
+                             IsLocked = s.IsLocked,
+                             IsShow = s.IsShow,
+                             Remark = s.Remark
+                         }).FirstOrDefault();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var idsArray = ids.Split(',');
+                var list = context.PlansDrug.Where(s => idsArray.Contains(s.DrugID.ToString())).ToList();
+                if (list.Any())
+                {
+                    context.BatchDelete(list);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using FoodTrace.IService;
 using FoodTrace.Model;
 using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.WebSite.Controllers.PlantManage
 {
@@ -14,15 +15,24 @@ namespace FoodTrace.WebSite.Controllers.PlantManage
 
         private readonly IPlansBatchService _plansBatchService;
         private readonly ICodeMaxService _codeMaxService;
-
-        public PlantPlanController(ICodeMaxService codeMaxService,IPlansBatchService plansBatchService)
+        private readonly ILandBlockService _landBlockService;
+        private readonly ISeedBaseService _seedBaseService;
+        public PlantPlanController(ICodeMaxService codeMaxService,IPlansBatchService plansBatchService,
+            ILandBlockService landBlockService,ISeedBaseService seedBaseService)
         {
             _codeMaxService = codeMaxService;
             _plansBatchService = plansBatchService;
+            _landBlockService = landBlockService;
+            _seedBaseService = seedBaseService;
         }
         // GET: /PlantPlan/
         public ActionResult Index()
         {
+            var landBlock = _landBlockService.GetLandBlockPaging(string.Empty, 1, 1000);
+            var seed = _seedBaseService.GetSeedPagingList(string.Empty, 1, 1000);
+
+            ViewBag.LandBlock = new SelectList(landBlock.rows, "BlockID", "BlockName");
+            ViewBag.SeedList = new SelectList(seed.rows, "SeedID", "SeedName");
             return View();
         }
 
@@ -34,10 +44,10 @@ namespace FoodTrace.WebSite.Controllers.PlantManage
         /// <returns></returns>
         public JsonResult GetList(int page, int rows)
         {
-            var list = new GridList<PlansBatchModel>();
+            var list = new GridList<PlatPlanDto>();
             try
             {
-                list.rows = _plansBatchService.GetPagerPlansBatch("", page, rows);
+                list = _plansBatchService.GetPlatPlanList(page, rows);
             }
             catch (Exception)
             {
@@ -54,21 +64,46 @@ namespace FoodTrace.WebSite.Controllers.PlantManage
         /// <returns></returns>
         public JsonResult SavePlanData(PlansBatchModel model)
         {
-            CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
-            //种植场号
-            pro96.BusinessCode = "3";
-            //批次号
-            pro96.BatchNo = "";
-            //生成日期
-            pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
-            var maxId = _codeMaxService.GetMaxCode("PlansBatch");
-            //序号
-            pro96.SeqNo = maxId;
-            //标签类型
-            pro96.EpcType = "3";
-            model.BatchCode = pro96.PackEpc();
+            var result = new ResultJson();
+            try
+            {
+                CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
+                //种植场号
+                pro96.BusinessCode = "3";
+                //批次号
+                pro96.BatchNo =model.BatchNO;
+                //生成日期
+                pro96.TagDate = DateTime.Now.ToString("yyyy年MM月dd日");
+                var maxId = _codeMaxService.GetMaxCode("PlansBatch");
+                //序号
+                pro96.SeqNo = maxId;
+                //标签类型
+                pro96.EpcType = "3";
+                model.BatchCode = pro96.PackEpc();
 
-            return Json(true);
+                var msg = new MessageModel();
+                if (model.BatchID == 0)
+                {
+                    msg = _plansBatchService.InsertSinglePlansBatch(model);
+                }
+                else
+                {
+                    msg = _plansBatchService.UpdateSinglePlansBatch(model);
+                }
+
+                if (msg.Status == MessageStatus.Success)
+                {
+                    result.IsSuccess = true;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+
+            return Json(result);
         }
 
         /// <summary>
@@ -81,7 +116,8 @@ namespace FoodTrace.WebSite.Controllers.PlantManage
             var result = new ResultJson();
             try
             {
-
+                result.Data = _plansBatchService.GetPlatPlanDtoById(id);
+                result.IsSuccess = true;
             }
             catch (Exception)
             {
@@ -101,7 +137,11 @@ namespace FoodTrace.WebSite.Controllers.PlantManage
             var result = new ResultJson();
             try
             {
-                
+                var msg = _plansBatchService.DleteByIds(ids);
+                if (msg.Status == MessageStatus.Success)
+                {
+                    result.IsSuccess = true;
+                }
             }
             catch (Exception)
             {

@@ -15,8 +15,9 @@ namespace FoodTrace.Model.DtoModel
 
         public int? BlockID { get; set; }
 
+        public string BlockName { get; set; }
         public int? SeedID { get; set; }
-
+        public string SeedName { get; set; }
         public string BatchNO { get; set; }
         public string BatchCode { get; set; }
         public DateTime? PlansTime { get; set; }

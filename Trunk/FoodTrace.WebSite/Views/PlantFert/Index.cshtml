@@ -1,61 +1,67 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Index";
 }
 
+
 <div style="height: 100%">
-    <div class="table_title">
-        种子名称：<input type="text" class="input" id="uName" value="">
-        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
-        <div class="clearbox"></div>
-    </div>
     <table id="DataGrid" style="height: 80%;"></table>
 </div>
-<div id="landseedDialog" style="display: none;">
+<div id="fertDialog" style="display: none;">
     <form id="mainForm">
-        <input type="hidden" name="SeedID" value="" />
+        <input type="hidden" name="FertID" value="" />
         <table>
             <tr>
-                <td>种子名称</td>
+                <td>种植计划</td>
                 <td>
-                    <input type="text" name="SeedName" value="" class="easyui-validatebox" data-options="required:true" />
+                    @Html.DropDownList("BatchID", ViewBag.BatchList as SelectList)
+                </td>
+                <td>肥料代号</td>
+                <td>
+                    <input type="text" name="FertCode" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
 
-                </td>
-                <td>批次</td>
-                <td>
-                    <input type="text" name="BatchNO" value="" class="easyui-validatebox" data-options="required:true" />
-                </td>
-              
             </tr>
             <tr>
-                <td>供应商</td>
+                <td>肥料名称</td>
                 <td>
-                    <input type="text" name="Supplier" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="FertName" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
-                <td>产地</td>
+                <td>施肥日期</td>
                 <td>
-                    <input type="text" name="Place" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="FertTime" value="" class="Wdate" onclick="WdatePicker()" />
                 </td>
             </tr>
             <tr>
-                <td>采购人员</td>
+                <td>施肥人</td>
                 <td>
-                    <input type="text" name="PurchPerson" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="FertPeople" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
-                <td>采购时间</td>
+                <td>施肥类型</td>
                 <td>
-                    <input type="text" name="BuyTime" value="" class="Wdate easyui-validatebox" data-options="required:true" onclick="WdatePicker()" />
+                    <input type="text" name="FertType" value="" />
                 </td>
             </tr>
             <tr>
-                <td>数量</td>
+                <td>施肥方法</td>
                 <td>
-                    <input type="text" name="BuyCount" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="FertMethod" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
-                <td>单位</td>
+                <td>用量（千克）</td>
                 <td>
-                    <input name="Units" type="text" />
+                    <input name="UANum" type="text" />
                 </td>
             </tr>
+            <tr>
+                <td>天气</td>
+                <td>
+                    <input type="text" name="Weather" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+                <td>种植溯源码</td>
+                <td>
+                    <input name="PlansCode" type="text" />
+                </td>
+         
             <tr>
                 <td>是否锁定</td>
                 <td>
@@ -81,14 +87,14 @@
 @section scripts{
 
     <script type="text/javascript">
-        var landseedGrid = null,landseedDialog=null;
+        var fertGrid = null,fertDialog=null;
         $(function() {
             initGrid();
         });
 
         function initGrid() {
-            landseedGrid = $('#DataGrid').datagrid({
-                url: '@Url.Action("GetList", "PlantSeed")',
+            fertGrid = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetList", "PlantFert")',
                 rownumbers: true,
                 striped: true,
                 fitColumns: true,
@@ -98,16 +104,17 @@
                 columns: [
                    [
                         { field: 'ck', checkbox: true },
-                       { title: '种子溯源码', align: 'center', field: 'SeedCode', width: 35 },
-                       { title: '种子名称', align: 'center', field: 'SeedName', width: 35 },
-                       { title: '批次', align: 'center', field: 'BatchNO', width: 35 },
-                       { title: '产地', align: 'center', field: 'Place', width: 35 },
-                       { title: '供应商', align: 'center', field: 'Supplier', width: 35 },
-                       { title: '采购人员', align: 'center', field: 'PurchPerson', width: 35 },
-                       { title: '采购时间', align: 'center', field: 'BuyTime', width: 35 },
-                       { title: '数量', align: 'center', field: 'BuyCount', width: 35 },
-                       { title: '单位', align: 'center', field: 'Units', width: 35 },
-                       { title: '备注', align: 'center', field: 'Remark', width: 35 }
+                       { title: '肥料代号', align: 'center', field: 'FertCode', width: 35 },
+                       { title: '肥料名称', align: 'center', field: 'FertName', width: 35 },
+                       { title: '计划名称', align: 'center', field: 'BatchName', width: 35 },
+                       { title: '种植批次溯源码', align: 'center', field: 'BatchCode', width: 35 },
+                       { title: '施肥人', align: 'center', field: 'FertPeople', width: 35 },
+                       { title: '施肥日期', align: 'center', field: 'FertTime', width: 35 },
+                       { title: '施肥类型', align: 'center', field: 'FertType', width: 35 },
+                       { title: '施肥方法', align: 'center', field: 'FertMethod', width: 35 },
+                       { title: '用量(千克)', align: 'center', field: 'UANum', width: 35 },
+                       { title: '天气', align: 'center', field: 'Weather', width: 35 },
+                      { title: '备注', align: 'center', field: 'Remark', width: 35 }
                    ]
                 ],
                 toolbar: [
@@ -126,7 +133,7 @@
                             var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
                                 if (row.length == 1) {
-                                    edit(row[0].SeedID);
+                                    edit(row[0].FertID);
                                 } else {
                                     $.messager.alert('提示', '请选择需要编辑的一条数据行');
                                 }
@@ -147,7 +154,7 @@
                             $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                                 if (r) {
                                     $.each(row, function (index, item) {
-                                        ids.push(item.SeedID);
+                                        ids.push(item.FertID);
                                     });
                                     deleteByIds(ids);
                                 }
@@ -161,7 +168,7 @@
             });
 
 
-             landseedDialog = $('#landseedDialog').dialog({
+            fertDialog = $('#fertDialog').dialog({
                 title: '新增',
                 width: 600,
                 height:400,
@@ -173,13 +180,13 @@
                         {
                             text: '保存',
                             iconCls: 'icon-ok',
-                            handler: saveSeedData
+                            handler: savePlantPlanData
                         }, {
                             text: '取消',
                             iconCls: 'icon-cancel',
                             handler: function () {
 
-                                landseedDialog.dialog("close");
+                                fertDialog.dialog("close");
                             }
                         }
                 ],
@@ -190,13 +197,13 @@
 
         function create() {
             Utils.resetForm($('#mainForm'));
-            landseedDialog.dialog('open');
+            fertDialog.dialog('open');
         }
         function edit(id) {
             Utils.resetForm($('#mainForm'));
-            landseedDialog.dialog({ title: "修改" }).dialog('open');
+            fertDialog.dialog({ title: "修改" }).dialog('open');
 
-            Utils.ajaxPost('/PlantSeed/GetSeedById', { id: id }, 'json', function (ret) {
+            Utils.ajaxPost('/PlantFert/GetFertById', { id: id }, 'json', function (ret) {
                 if (ret.IsSuccess) {
                     Utils.loadFormData($('#mainForm'), ret.Data);
                 } else {
@@ -205,7 +212,7 @@
             });
         }
 
-        function saveSeedData()
+        function savePlantPlanData()
         {
             var flag = $('#mainForm').form('validate');
             if (!flag) {
@@ -214,10 +221,10 @@
             }
 
 
-            Utils.ajaxPost('/PlantSeed/SaveSeedData', $('#mainForm').serialize(), 'json', function (ret) {
+            Utils.ajaxPost('/PlantFert/SavePlantFert', $('#mainForm').serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-                    landseedDialog.dialog("close");
-                    landseedGrid.datagrid('reload');
+                    fertDialog.dialog("close");
+                    fertGrid.datagrid('reload');
                     $.messager.alert('提示', "保存成功");
                 } else {
                     $.messager.alert('提示', "保存失败");
@@ -225,12 +232,12 @@
             });
         }
         function deleteByIds(ids) {
-            Utils.ajaxPost('/PlantSeed/DeleteSeedByIds', { ids: ids.join() }, 'json', function (ret) {
+            Utils.ajaxPost('/PlantFert/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
 
                 if (ret.IsSuccess) {
                     $.messager.alert('提示', '删除成功');
 
-                    landseedGrid.datagrid('reload');
+                    fertGrid.datagrid('reload');
                 } else {
                     $.messager.alert('提示', '删除失败');
                 }
@@ -239,3 +246,13 @@
         }
     </script>
 }
+
+
+
+
+
+
+
+
+
+

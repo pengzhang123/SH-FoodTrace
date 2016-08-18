@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -123,5 +125,35 @@ namespace FoodTrace.Service
         //    if (model.SeedID.HasValue)
         //        model.SeedBase = seedBaseAccess.GetEntityById(model.SeedID.Value);
         //}
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DleteByIds(string ids)
+        {
+           return plansBatchAccess.DleteByIds(ids);
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlatPlanDto GetPlatPlanDtoById(int id)
+        {
+            return plansBatchAccess.GetPlatPlanDtoById(id);
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<PlatPlanDto> GetPlatPlanList(int pIndex, int pSize)
+        {
+            return plansBatchAccess.GetPlatPlanList(pIndex, pSize);
+        }
     }
 }

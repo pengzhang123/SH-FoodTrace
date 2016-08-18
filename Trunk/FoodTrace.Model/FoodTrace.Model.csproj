@@ -62,6 +62,8 @@
     <Compile Include="DtoModel\DeptDto.cs" />
     <Compile Include="DtoModel\DicGridDto.cs" />
     <Compile Include="DtoModel\LandBlockDto.cs" />
+    <Compile Include="DtoModel\PlansFertDto.cs" />
+    <Compile Include="DtoModel\PlantDrugDto.cs" />
     <Compile Include="DtoModel\PlatPlanDto.cs" />
     <Compile Include="DtoModel\ProviceDto.cs" />
     <Compile Include="DtoModel\QsCardDto.cs" />

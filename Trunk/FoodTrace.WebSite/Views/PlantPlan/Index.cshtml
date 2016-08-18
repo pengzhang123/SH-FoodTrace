@@ -8,68 +8,63 @@
 </div>
 <div id="landBatchDialog" style="display: none;">
     <form id="mainForm">
-        <input type="hidden" name="SeedID" value="" />
+        <input type="hidden" name="BatchID" value="" />
         <table>
             <tr>
                 <td>种植地块</td>
                 <td>
-                    <input type="text" name="SeedName" value="" class="easyui-validatebox" data-options="required:true" />
-
+                  @Html.DropDownList("BlockID",ViewBag.LandBlock as SelectList)
                 </td>
                 <td>种植种子</td>
                 <td>
-                    <input type="text" name="BatchNO" value="" class="easyui-validatebox" data-options="required:true" />
+                    @Html.DropDownList("SeedID", ViewBag.SeedList as SelectList)
                 </td>
 
             </tr>
             <tr>
                 <td>计划编号</td>
                 <td>
-                    <input type="text" name="Supplier" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="BatchNO" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>种植日期</td>
                 <td>
-                    <input type="text" name="Place" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="PlansTime" value="" class="Wdate" onclick="WdatePicker()"/>
                 </td>
             </tr>
             <tr>
                 <td>种植茨龄</td>
                 <td>
-                    <input type="text" name="PurchPerson" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="PlansYear" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>收获时间</td>
                 <td>
-                    <input type="text" name="BuyTime" value="" class="Wdate easyui-validatebox" data-options="required:true" onclick="WdatePicker()" />
+                    <input type="text" name="HarvestTime" value="" class="Wdate" onclick="WdatePicker()" />
                 </td>
             </tr>
             <tr>
                 <td>种植面积</td>
                 <td>
-                    <input type="text" name="BuyCount" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="PlansArea" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>栽培负责人</td>
                 <td>
-                    <input name="Units" type="text" />
+                    <input name="ChargePerson" type="text" />
                 </td>
             </tr>
             <tr>
                 <td>预计收获量</td>
                 <td>
-                    <input type="text" name="BuyCount" value="" class="easyui-validatebox" data-options="required:true" />
+                    <input type="text" name="HarvestCount" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
                 <td>实际收获量</td>
                 <td>
-                    <input name="Units" type="text" />
+                    <input name="RealCount" type="text" />
                 </td>
             </tr>
             <tr>
                 <td>植保员</td>
                 <td>
-                    <input type="text" name="BuyCount" value="" class="easyui-validatebox" data-options="required:true" />
-                </td>
-                <td>备注</td>
-                <td>
-                    <input name="Remark" type="text" />
+                    <input type="text" name="People" value="" class="easyui-validatebox" data-options="required:true" />
                 </td>
             </tr>
             <tr>
@@ -97,14 +92,14 @@
 @section scripts{
 
     <script type="text/javascript">
-        var landseedGrid = null,landseedDialog=null;
+        var plantPlanGrid = null,plantPlanDialog=null;
         $(function() {
             initGrid();
         });
 
         function initGrid() {
-            landseedGrid = $('#DataGrid').datagrid({
-                url: '@Url.Action("GetList", "PlantSeed")',
+            plantPlanGrid = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetList", "PlantPlan")',
                 rownumbers: true,
                 striped: true,
                 fitColumns: true,
@@ -114,16 +109,17 @@
                 columns: [
                    [
                         { field: 'ck', checkbox: true },
-                       { title: '种子溯源码', align: 'center', field: 'SeedCode', width: 35 },
+                       { title: '地块名称', align: 'center', field: 'BlockName', width: 35 },
                        { title: '种子名称', align: 'center', field: 'SeedName', width: 35 },
-                       { title: '批次', align: 'center', field: 'BatchNO', width: 35 },
-                       { title: '产地', align: 'center', field: 'Place', width: 35 },
-                       { title: '供应商', align: 'center', field: 'Supplier', width: 35 },
-                       { title: '采购人员', align: 'center', field: 'PurchPerson', width: 35 },
-                       { title: '采购时间', align: 'center', field: 'BuyTime', width: 35 },
-                       { title: '数量', align: 'center', field: 'BuyCount', width: 35 },
-                       { title: '单位', align: 'center', field: 'Units', width: 35 },
-                       { title: '备注', align: 'center', field: 'Remark', width: 35 }
+                       { title: '计划编号', align: 'center', field: 'BatchNO', width: 35 },
+                       { title: '种植批次溯源码', align: 'center', field: 'BatchCode', width: 35 },
+                       { title: '种植日期', align: 'center', field: 'PlansTime', width: 35 },
+                       { title: '种植茨龄', align: 'center', field: 'PlansYear', width: 35 },
+                       { title: '收获日期', align: 'center', field: 'HarvestTime', width: 35 },
+                       { title: '种植面积', align: 'center', field: 'PlansArea', width: 35 },
+                       { title: '负责人', align: 'center', field: 'ChargePerson', width: 35 },
+                       { title: '预计收获量', align: 'center', field: 'HarvestCount', width: 35 },
+                      { title: '实际收获量', align: 'center', field: 'RealCount', width: 35 }
                    ]
                 ],
                 toolbar: [
@@ -142,7 +138,7 @@
                             var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
                                 if (row.length == 1) {
-                                    edit(row[0].SeedID);
+                                    edit(row[0].BatchID);
                                 } else {
                                     $.messager.alert('提示', '请选择需要编辑的一条数据行');
                                 }
@@ -163,7 +159,7 @@
                             $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
                                 if (r) {
                                     $.each(row, function (index, item) {
-                                        ids.push(item.SeedID);
+                                        ids.push(item.BatchID);
                                     });
                                     deleteByIds(ids);
                                 }
@@ -177,7 +173,7 @@
             });
 
 
-             landseedDialog = $('#landseedDialog').dialog({
+            plantPlanDialog = $('#landBatchDialog').dialog({
                 title: '新增',
                 width: 600,
                 height:400,
@@ -189,13 +185,13 @@
                         {
                             text: '保存',
                             iconCls: 'icon-ok',
-                            handler: saveSeedData
+                            handler: savePlantPlanData
                         }, {
                             text: '取消',
                             iconCls: 'icon-cancel',
                             handler: function () {
 
-                                landseedDialog.dialog("close");
+                                plantPlanDialog.dialog("close");
                             }
                         }
                 ],
@@ -206,13 +202,13 @@
 
         function create() {
             Utils.resetForm($('#mainForm'));
-            landseedDialog.dialog('open');
+            plantPlanDialog.dialog('open');
         }
         function edit(id) {
             Utils.resetForm($('#mainForm'));
-            landseedDialog.dialog({ title: "修改" }).dialog('open');
+            plantPlanDialog.dialog({ title: "修改" }).dialog('open');
 
-            Utils.ajaxPost('/PlantSeed/GetSeedById', { id: id }, 'json', function (ret) {
+            Utils.ajaxPost('/PlantPlan/GetPlatPlan', { id: id }, 'json', function (ret) {
                 if (ret.IsSuccess) {
                     Utils.loadFormData($('#mainForm'), ret.Data);
                 } else {
@@ -221,7 +217,7 @@
             });
         }
 
-        function saveSeedData()
+        function savePlantPlanData()
         {
             var flag = $('#mainForm').form('validate');
             if (!flag) {
@@ -230,10 +226,10 @@
             }
 
 
-            Utils.ajaxPost('/PlantSeed/SaveSeedData', $('#mainForm').serialize(), 'json', function (ret) {
+            Utils.ajaxPost('/PlantPlan/SavePlanData', $('#mainForm').serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-                    landseedDialog.dialog("close");
-                    landseedGrid.datagrid('reload');
+                    plantPlanDialog.dialog("close");
+                    plantPlanGrid.datagrid('reload');
                     $.messager.alert('提示', "保存成功");
                 } else {
                     $.messager.alert('提示', "保存失败");
@@ -241,14 +237,14 @@
             });
         }
         function deleteByIds(ids) {
-            Utils.ajaxPost('/PlantSeed/DeleteSeedByIds', { ids: ids.join() }, 'json', function (ret) {
+            Utils.ajaxPost('/PlantPlan/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
 
                 if (ret.IsSuccess) {
-                    $.messgager.alert('提示', '删除成功');
+                    $.messager.alert('提示', '删除成功');
 
-                    landseedGrid.datgrid('reload');
+                    plantPlanGrid.datagrid('reload');
                 } else {
-                    $.messgager.alert('提示', '删除失败');
+                    $.messager.alert('提示', '删除失败');
                 }
 
             });

@@ -121,10 +121,16 @@ namespace FoodTrace.DBAccess
         public GridList<PlatPlanDto> GetPlatPlanList(int pIndex, int pSize)
         {
             var query = (from s in Context.PlansBatch
+                         join lb in Context.LandBlock on s.BlockID equals lb.BlockID into lbl
+                         from lbleft in lbl.DefaultIfEmpty()
+                         join ls in Context.SeedBase on s.SeedID equals ls.SeedID into lsl
+                         from lsleft in lsl.DefaultIfEmpty()
                 select new PlatPlanDto()
                 {
                     BatchID = s.BatchID,
                     BlockID = s.BlockID,
+                    BlockName = lbleft.BlockName,
+                    SeedName = lsleft.SeedName,
                     SeedID = s.SeedID,
                     BatchNO = s.BatchNO,
                     BatchCode = s.BatchCode,
@@ -141,7 +147,7 @@ namespace FoodTrace.DBAccess
                     IsShow = s.IsShow
                 }).AsQueryable();
 
-            var list = query.Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+            var list = query.OrderBy(s=>s.BatchID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
 
             return new GridList<PlatPlanDto>(){rows = list,total = query.Count()};
         }

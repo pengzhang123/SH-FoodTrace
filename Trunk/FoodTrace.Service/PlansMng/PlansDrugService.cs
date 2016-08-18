@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -87,8 +89,8 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSinglePlansDrug(PlansDrugModel model)
         {
-            var data = plansDrugAccess.GetOriEntity(model.DrugID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
+            //var data = plansDrugAccess.GetOriEntity(model.DrugID, model.ModifyTime);
+            //if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
             return plansDrugAccess.UpdateSingleEntity(model);
         }
 
@@ -107,5 +109,37 @@ namespace FoodTrace.Service
         //    if (model.BatchID.HasValue)
         //        model.PlansBatch = plansBatchAccess.GetEntityById(model.BatchID.Value);
         //}
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<PlantDrugDto> GetPlanDrugList(int pIndex, int pSize)
+        {
+            int comId = UserManagement.CurrentUser.CompanyId;
+            return plansDrugAccess.GetPlanDrugList(comId, pIndex, pSize);
+        }
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return plansDrugAccess.DeleteByIds(ids);
+        }
+
+        /// <summary>
+        /// 根据Id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public PlantDrugDto GetPlantDrugDtoById(int id)
+        {
+            return plansDrugAccess.GetPlantDrugDtoById(id);
+        }
     }
 }
