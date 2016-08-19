@@ -6,20 +6,44 @@
 <div style="height: 100%">
     <table id="DataGrid" style="height: 80%;"></table>
 </div>
-<div id="killBatchDialog" style="display: none;">
+<div id="batchDetailDialog" style="display: none;">
     <form id="mainForm">
-        <input type="hidden" name="KillBatchID" value="" />
+        <input type="hidden" name="DetailID" value="" />
         <table>
             <tr>
                 <td>批次编号</td>
                 <td>
-                    <input type="text" name="BatchNO" value="" />
+                    @Html.DropDownList("KillBatchID", ViewBag.KillBatch as SelectList)
                 </td>
-                <td>接收人</td>
+                <td>养殖生物</td>
                 <td>
-                    <input type="text" name="RecvicePeople" value="" class="easyui-validatebox" data-options="required:true" />
+                    @Html.DropDownList("CultivationID", ViewBag.Cultivation as SelectList)
+                 
                 </td>
 
+            </tr>
+            <tr>
+                <td>养殖场</td>
+                <td>
+                    <input type="hidden" name="BreedID" id="BreedID" value="" />
+                    <input type="text" name="BreedName" id="BreedName" value="" />
+                </td>
+                <td>养殖区域</td>
+                <td>
+                    <input type="hidden" name="AreaID" id="AreaID" value="" />
+                    <input type="text" name="AreaName" id="AreaName" value="" />
+                </td>
+            </tr>
+            <tr>
+                <td>圈舍</td>
+                <td>
+                    <input type="hidden" name="HomeID" id="HomeID" value="">
+                    <input type="text" name="HomeName" id="HomeName" value="" />
+                </td>
+                <td>溯源码</td>
+                <td>
+                    <input type="text" name="CultivationEPC" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
             </tr>
             <tr>
                 <td>是否锁定</td>
@@ -46,13 +70,17 @@
 @section scripts{
 
     <script type="text/javascript">
-        var killBatchGrid = null, killBatchDialog = null;
+        var batchDetailGrid = null, batchDetailDialog = null;
         $(function() {
             initGrid();
+
+            $('#CultivationID').on('change', function() {
+                loadBreedData();
+            });
         });
 
         function initGrid() {
-            killBatchGrid = $('#DataGrid').datagrid({
+            batchDetailGrid = $('#DataGrid').datagrid({
                 url: '@Url.Action("GetList", "KillBatch")',
                 rownumbers: true,
                 striped: true,
@@ -61,27 +89,29 @@
                 singleSelect: false,
                 pageList: [10, 15, 20, 25],
                 columns: [
-                   [
+                    [
                         { field: 'ck', checkbox: true },
-                       { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
-                       { title: '批次编号', align: 'center', field: 'BatchNO', width: 35 },
-                       { title: '接收人', align: 'center', field: 'RecvicePeople', width: 35 },
-                       { title: '备注', align: 'center', field: 'Remark', width: 35 }
-                   ]
+                        { title: '批次编号', align: 'center', field: 'BatchNO', width: 35 },
+                        { title: '生物溯源码', align: 'center', field: 'CultivationEPC', width: 35 },
+                        { title: '养殖场', align: 'center', field: 'BreedName', width: 35 },
+                        { title: '养殖区域', align: 'center', field: 'AreaName', width: 35 },
+                        { title: '圈舍', align: 'center', field: 'HomeName', width: 35 },
+                        { title: '备注', align: 'center', field: 'Remark', width: 35 }
+                    ]
                 ],
                 toolbar: [
                     {
                         id: 'btnAdd',
                         text: ' 新建',
                         iconCls: 'icon-add',
-                        handler: function () {
+                        handler: function() {
                             create();
                         }
                     }, {
                         id: 'btnEdit',
                         text: ' 编辑',
                         iconCls: 'icon-edit',
-                        handler: function () {
+                        handler: function() {
                             var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
                                 if (row.length == 1) {
@@ -95,7 +125,7 @@
                         id: 'btnDelete',
                         text: ' 删除',
                         iconCls: 'icon-remove',
-                        handler: function () {
+                        handler: function() {
                             var row = $('#DataGrid').datagrid('getSelections');
                             var ids = [];
                             if (row.length == 0) {
@@ -103,9 +133,9 @@
                                 return;
                             }
 
-                            $.messager.confirm('确认', '您确认想要删除记录吗？', function (r) {
+                            $.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
                                 if (r) {
-                                    $.each(row, function (index, item) {
+                                    $.each(row, function(index, item) {
                                         ids.push(item.KillBatchID);
                                     });
                                     deleteByIds(ids);
@@ -120,42 +150,60 @@
             });
 
 
-            killBatchDialog = $('#killBatchDialog').dialog({
+            batchDetailDialog = $('#batchDetailDialog').dialog({
                 title: '新增',
                 width: 600,
-                height:400,
+                height: 400,
                 closed: true,
                 cache: false,
                 modal: true,
                 resizable: true,
                 buttons: [
-                        {
-                            text: '保存',
-                            iconCls: 'icon-ok',
-                            handler: saveData
-                        }, {
-                            text: '取消',
-                            iconCls: 'icon-cancel',
-                            handler: function () {
+                    {
+                        text: '保存',
+                        iconCls: 'icon-ok',
+                        handler: saveData
+                    }, {
+                        text: '取消',
+                        iconCls: 'icon-cancel',
+                        handler: function() {
 
-                                killBatchDialog.dialog("close");
-                            }
+                            batchDetailDialog.dialog("close");
                         }
+                    }
                 ],
-                onClose: function () { }
+                onClose: function() {}
             });
         }
 
+        function loadBreedData() {
+            var id = $('#CultivationID').val();
+            Utils.ajaxGet('/KillBatchDetail/GetBreedInfoByCultivationId', { id: id }, 'json', function(ret) {
+
+                if (ret.IsSuccess) {
+                    var data = ret.Items;
+                    $('#BreedID').val(data.breedbase.id);
+                    $('#BreedName').val(data.breedbase.name);
+
+                    $('#AreaID').val(data.area.id);
+                    $('#areaName').val(data.area.name);
+
+                    $('#HomeID').val(data.home.id);
+                    $('#HomeName').val(data.home.name);
+                }
+            });
+        }
 
         function create() {
             Utils.resetForm($('#mainForm'));
-            killBatchDialog.dialog('open');
+            batchDetailDialog.dialog('open');
         }
+
         function edit(id) {
             Utils.resetForm($('#mainForm'));
-            killBatchDialog.dialog({ title: "修改" }).dialog('open');
+            batchDetailDialog.dialog({ title: "修改" }).dialog('open');
 
-            Utils.ajaxPost('/KillBatch/GetKillBatchById', { id: id }, 'json', function (ret) {
+            Utils.ajaxPost('/KillBatchDetail/GetBatchDetailById', { id: id }, 'json', function(ret) {
                 if (ret.IsSuccess) {
                     Utils.loadFormData($('#mainForm'), ret.Data);
                 } else {
@@ -164,8 +212,7 @@
             });
         }
 
-        function saveData()
-        {
+        function saveData() {
             var flag = $('#mainForm').form('validate');
             if (!flag) {
                 $.messager.alert('提示', '必须填写完整的信息', 'error');
@@ -173,23 +220,24 @@
             }
 
 
-            Utils.ajaxPost('/KillBatch/SaveData', $('#mainForm').serialize(), 'json', function (ret) {
+            Utils.ajaxPost('/KillBatchDetail/SaveData', $('#mainForm').serialize(), 'json', function(ret) {
                 if (ret.IsSuccess) {
-                    killBatchDialog.dialog("close");
-                    killBatchGrid.datagrid('reload');
+                    batchDetailDialog.dialog("close");
+                    batchDetailGrid.datagrid('reload');
                     $.messager.alert('提示', "保存成功");
                 } else {
                     $.messager.alert('提示', "保存失败");
                 }
             });
         }
+
         function deleteByIds(ids) {
-            Utils.ajaxPost('/KillBatch/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
+            Utils.ajaxPost('/KillBatchDetail/DeleteByIds', { ids: ids.join() }, 'json', function(ret) {
 
                 if (ret.IsSuccess) {
                     $.messager.alert('提示', '删除成功');
 
-                    killBatchGrid.datagrid('reload');
+                    batchDetailGrid.datagrid('reload');
                 } else {
                     $.messager.alert('提示', '删除失败');
                 }
@@ -198,6 +246,10 @@
         }
     </script>
 }
+
+
+
+
 
 
 

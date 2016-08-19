@@ -60,6 +60,13 @@ namespace FoodTrace.WebSite
             container.RegisterType<IPlansDrugService, PlansDrugService>();
             container.RegisterType<IPlansBatchService, PlansBatchService>();
             container.RegisterType<IPlansFertService, PlansFertService>();
+
+            container.RegisterType<IKillBatchService, KillBatchService>();
+            container.RegisterType<IKillBatchDetailService, KillBatchDetailService>();
+            container.RegisterType<ICultivationBaseService, CultivationBaseService>();
+            container.RegisterType<IBreedAreaService, BreedAreaService>();
+            container.RegisterType<IBreedHomeService, BreedHomeService>();
+            container.RegisterType<IBreedBaseService, BreedBaseService>();
             return container;
         }
 

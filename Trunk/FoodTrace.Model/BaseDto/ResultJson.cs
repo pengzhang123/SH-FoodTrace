@@ -11,6 +11,7 @@ namespace FoodTrace.Model
         public ResultJson()
         {
             this.IsSuccess = false;
+            Items=new Dictionary<string, object>();
         }
 
         public bool IsSuccess { get; set; }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -103,6 +105,90 @@ namespace FoodTrace.DBAccess
             return base.Context.KillBatchDetail.Where(m => m.KillBatch.CompanyID == companyID
                                                 && (string.IsNullOrEmpty(code) || m.CultivationEpc.Contains(code)))
                      .OrderBy(m => m.DetailID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        /// <summary>
+        /// 获取数据分页
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<KillBatchDetailDto> GetKillBatchDetailListPaging(string epc,int comId, int pIndex, int pSize)
+        {
+            var query = (from s in Context.KillBatchDetail
+                join b in Context.KillBatch on s.KillBatchID equals b.KillBatchID
+                where b.CompanyID == comId
+                select new KillBatchDetailDto()
+                {
+                    DetailID = s.DetailID,
+                    KillBatchID = s.KillBatchID,
+                    CultivationID = s.CultivationID,
+                    BreedID = s.BreedID,
+                    AreaID = s.AreaID,
+                    HomeID = s.HomeID,
+                    CultivationEpc = s.CultivationEpc,
+                    Remark = s.Remark,
+                    IsLocked = s.IsLocked,
+                    IsShow = s.IsShow
+                }).AsQueryable();
+
+            if (!string.IsNullOrEmpty(epc))
+            {
+                query = query.Where(s => s.CultivationEpc == epc);
+            }
+            var list = query.OrderBy(s => s.DetailID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<KillBatchDetailDto>(){rows = list,total = query.Count()};
+        }
+
+        /// <summary>
+        /// 根据id获取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public KillBatchDetailDto GetKillBatchDetalDtoById(int id)
+        {
+            var query = (from s in Context.KillBatchDetail
+                         
+                         where s.DetailID == id
+                         select new KillBatchDetailDto()
+                         {
+                             DetailID = s.DetailID,
+                             KillBatchID = s.KillBatchID,
+                             CultivationID = s.CultivationID,
+                             BreedID = s.BreedID,
+                             AreaID = s.AreaID,
+                             HomeID = s.HomeID,
+                             CultivationEpc = s.CultivationEpc,
+                             Remark = s.Remark,
+                             IsLocked = s.IsLocked,
+                             IsShow = s.IsShow
+                         }).FirstOrDefault();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var idsArray = ids.Split(',');
+                var list = context.KillBatchDetail.Where(s => idsArray.Contains(s.DetailID.ToString())).ToList();
+                if (list.Any())
+                {
+                    context.BatchDelete(list);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
         }
     }
 }

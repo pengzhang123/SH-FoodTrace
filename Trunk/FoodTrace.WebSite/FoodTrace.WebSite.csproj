@@ -218,11 +218,17 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\KillManage\KillBatchController.cs" />
+    <Compile Include="Controllers\KillManage\KillBatchDetailController.cs" />
     <Compile Include="Controllers\PlantManage\LandBlockController.cs" />
     <Compile Include="Controllers\PlantManage\PlantDrugController.cs" />
     <Compile Include="Controllers\PlantManage\PlantFertController.cs" />
     <Compile Include="Controllers\PlantManage\PlantPlanController.cs" />
     <Compile Include="Controllers\PlantManage\PlantSeedController.cs" />
+    <Compile Include="Controllers\SaleReportManage\InStorageController.cs" />
+    <Compile Include="Controllers\SaleReportManage\OutStorageController.cs" />
+    <Compile Include="Controllers\SaleReportManage\SaleReportController.cs" />
+    <Compile Include="Controllers\SaleReportManage\StockReportController.cs" />
+    <Compile Include="Controllers\TraceManage\AntiFakeController.cs" />
     <Compile Include="Controllers\SytemManage\AccountController.cs" />
     <Compile Include="Controllers\SytemManage\AreaController.cs" />
     <Compile Include="Controllers\SytemManage\AreaPlatController.cs" />
@@ -947,10 +953,17 @@
     <Content Include="Views\PlantFert\Index.cshtml" />
     <Content Include="Views\PlantDrug\Index.cshtml" />
     <Content Include="Views\KillBatch\Index.cshtml" />
+    <Content Include="Views\AntiFake\Index.cshtml" />
+    <Content Include="Views\InStorage\Index.cshtml" />
+    <Content Include="Views\KillBatchDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
+    <Folder Include="Controllers\QueryManage\" />
+    <Folder Include="Views\OutStorage\" />
+    <Folder Include="Views\SaleReport\" />
+    <Folder Include="Views\StockReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

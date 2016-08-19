@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -114,6 +116,39 @@ namespace FoodTrace.Service
             return killBatchDetailAccess.DeleteSingleEntity(id);
         }
 
+        /// <summary>
+        /// 获取数据分页
+        /// </summary>
+        /// <param name="epc"></param>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<KillBatchDetailDto> GetKillBatchDetailListPaging(string epc, int pIndex, int pSize)
+        {
+            int comId = UserManagement.CurrentUser.CompanyId;
+            return killBatchDetailAccess.GetKillBatchDetailListPaging(epc, comId, pIndex, pSize);
+        }
+
+        /// <summary>
+        /// 根据id获取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public KillBatchDetailDto GetKillBatchDetalDtoById(int id)
+        {
+            return killBatchDetailAccess.GetKillBatchDetalDtoById(id);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return killBatchDetailAccess.DeleteByIds(ids);
+        }
         //private void SetKillBatch(KillBatchDetailModel model)
         //{
         //    if (model.KillBatchID.HasValue)
