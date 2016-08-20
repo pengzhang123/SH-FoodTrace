@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -58,7 +60,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.KillCull.FirstOrDefault(m => m.KillCullID == model.KillCullID && m.ModifyTime == model.ModifyTime);
+                var data = context.KillCull.FirstOrDefault(m => m.KillCullID == model.KillCullID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.CompanyID = model.CompanyID;
                 data.KillBatchID = model.KillBatchID;
@@ -111,6 +113,91 @@ namespace FoodTrace.DBAccess
         public KillCullModel GetKillCullByEPCOrORCode(string Epc, string OrCode)
         {
             return Context.KillCull.FirstOrDefault(m => string.IsNullOrEmpty(Epc) || m.KillEpc == Epc);
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<KillCullDto> GetKillCullListPaging(int comId, int pIndex, int pSize)
+        {
+            var query = (from s in Context.KillCull
+                         join com in Context.Company on s.CompanyID equals com.CompanyID
+                         join kill in Context.KillBatch on s.KillBatchID equals kill.KillBatchID
+                select new KillCullDto()
+                {
+                    KillCullID =s.KillCullID,
+                    CompanyName = com.CompanyName,
+                    KillBatchNO =kill.BatchNO,
+                    KillBatchID = s.KillBatchID,
+                    CultivationID = s.CultivationID,
+                    CultivationEpc = s.CultivationEpc,
+                    KillEpc = s.KillEpc,
+                    ProductName = s.ProductName,
+                    Weight = s.Weight,
+                    Flow = s.Flow,
+                    KillTime = s.KillTime,
+                    Remark = s.Remark
+                }).AsQueryable();
+
+
+            var list = query.OrderBy(s => s.KillCullID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<KillCullDto>(){rows = list,total = query.Count()};
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = delegate(IEntityContext context)
+            {
+                var idsArray = ids.Split(',');
+
+                var list = context.KillCull.Where(s => idsArray.Contains(s.KillCullID.ToString())).ToList();
+                if (list.Any())
+                {
+                    context.BatchDelete(list);
+                }
+                return string.Empty;
+            };
+
+            return base.DbOperation(operation);
+        }
+
+        /// <summary>
+        /// 获取个人信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public KillCullDto GetKillCullDtoById(int id)
+        {
+            var query = (from s in Context.KillCull
+                         join com in Context.Company on s.CompanyID equals com.CompanyID
+                         join kill in Context.KillBatch on s.KillBatchID equals kill.KillBatchID
+                         select new KillCullDto()
+                         {
+                             KillCullID = s.KillCullID,
+                             CompanyName = com.CompanyName,
+                             KillBatchNO = kill.BatchNO,
+                             KillBatchID = s.KillBatchID,
+                             CultivationID = s.CultivationID,
+                             CultivationEpc = s.CultivationEpc,
+                             KillEpc = s.KillEpc,
+                             ProductName = s.ProductName,
+                             Weight = s.Weight,
+                             Flow = s.Flow,
+                             KillTime = s.KillTime,
+                             Remark = s.Remark
+                         }).FirstOrDefault();
+
+            return query;
         }
     }
 }

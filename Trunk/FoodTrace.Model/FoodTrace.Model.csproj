@@ -57,12 +57,15 @@
     <Compile Include="BreedMng\BreedMaterialModel.cs" />
     <Compile Include="BreedMng\CultivationBaseModel.cs" />
     <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="DtoModel\BreedBaseDto.cs" />
     <Compile Include="DtoModel\CountryDto.cs" />
     <Compile Include="DtoModel\CultivationDto.cs" />
     <Compile Include="DtoModel\DeptDto.cs" />
     <Compile Include="DtoModel\DicGridDto.cs" />
     <Compile Include="DtoModel\KillBatchDetailDto.cs" />
     <Compile Include="DtoModel\KillBatchDto.cs" />
+    <Compile Include="DtoModel\KillCullDto.cs" />
+    <Compile Include="DtoModel\KillDrugDto.cs" />
     <Compile Include="DtoModel\LandBlockDto.cs" />
     <Compile Include="DtoModel\PlansFertDto.cs" />
     <Compile Include="DtoModel\PlantDrugDto.cs" />

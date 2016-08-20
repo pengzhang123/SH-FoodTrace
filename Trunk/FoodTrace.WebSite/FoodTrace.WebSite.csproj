@@ -217,8 +217,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\BreedManage\BreedBaseController.cs" />
     <Compile Include="Controllers\KillManage\KillBatchController.cs" />
     <Compile Include="Controllers\KillManage\KillBatchDetailController.cs" />
+    <Compile Include="Controllers\KillManage\KillController.cs" />
+    <Compile Include="Controllers\KillManage\KillDrugController.cs" />
     <Compile Include="Controllers\PlantManage\LandBlockController.cs" />
     <Compile Include="Controllers\PlantManage\PlantDrugController.cs" />
     <Compile Include="Controllers\PlantManage\PlantFertController.cs" />
@@ -956,6 +959,9 @@
     <Content Include="Views\AntiFake\Index.cshtml" />
     <Content Include="Views\InStorage\Index.cshtml" />
     <Content Include="Views\KillBatchDetail\Index.cshtml" />
+    <Content Include="Views\Kill\Index.cshtml" />
+    <Content Include="Views\KillDrug\Index.cshtml" />
+    <Content Include="Views\BreedBase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,6 +5,8 @@ using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -80,6 +82,39 @@ namespace FoodTrace.Service
             var data = breedBaseAccess.GetOriEntity(model.BreedID, model.ModifyTime);
             if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
             return breedBaseAccess.UpdateSingleEntity(model);
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comid"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<BreedBaseDto> GetBreedBaseListPaging(int pIndex, int pSize)
+        {
+            int comid = UserManagement.CurrentUser.CompanyId;
+            return breedBaseAccess.GetBreedBaseListPaging(comid, pIndex, pSize);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return breedBaseAccess.DeleteByIds(ids);
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BreedBaseDto GetBreedBaseDtoById(int id)
+        {
+            return breedBaseAccess.GetBreedBaseDtoById(id);
         }
     }
 }

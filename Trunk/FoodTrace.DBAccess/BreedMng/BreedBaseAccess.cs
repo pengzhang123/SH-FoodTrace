@@ -1,10 +1,13 @@
-﻿using FoodTrace.Common.Libraries;
+﻿using System.Data.SqlClient;
+using FoodTrace.Common.Libraries;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -69,7 +72,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = (context =>
             {
-                var data = context.BreedBase.FirstOrDefault(m => m.BreedID == model.BreedID && m.ModifyTime == model.ModifyTime);
+                var data = context.BreedBase.FirstOrDefault(m => m.BreedID == model.BreedID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.BreedID = model.BreedID;
@@ -91,6 +94,83 @@ namespace FoodTrace.DBAccess
                 return string.Empty;
             });
             return base.DbOperation(operation);
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comid"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<BreedBaseDto> GetBreedBaseListPaging(int comid, int pIndex, int pSize)
+        {
+            var query = (from s in Context.BreedBase
+                join land in Context.LandBase on s.LandID equals land.LandID
+                where land.CompanyID==comid
+                select new BreedBaseDto()
+                {
+                    BreedID =s.BreedID,
+                    LandID = s.LandID,
+                    LandName = land.LandName,
+                    BreedArea = s.BreedArea,
+                    BreedType = s.BreedType,
+                    Lon = s.Lon,
+                    Lat = s.Lat,
+                    Remark = s.Remark,
+                    IsLocked = s.IsLocked,
+                    IsShow = s.IsShow
+                }).AsQueryable();
+
+            var list = query.OrderBy(s => s.BreedID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<BreedBaseDto>(){rows = list,total = query.Count()};
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = (context =>
+            {
+                var idsArray = ids.Split(',');
+                var data = context.BreedBase.Where(s => idsArray.Contains(s.BreedID.ToString())).ToList();
+                if (data.Any())
+                {
+                    context.BatchDelete(data);
+                }
+                return string.Empty;
+            });
+            return base.DbOperation(operation);
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BreedBaseDto GetBreedBaseDtoById(int id)
+        {
+            var query = (from s in Context.BreedBase
+                         where s.BreedID==id
+                         select new BreedBaseDto()
+                         {
+                             BreedID = s.BreedID,
+                             LandID = s.LandID,
+                            
+                             BreedArea = s.BreedArea,
+                             BreedType = s.BreedType,
+                             Lon = s.Lon,
+                             Lat = s.Lat,
+                             Remark = s.Remark,
+                             IsLocked = s.IsLocked,
+                             IsShow = s.IsShow
+                         }).FirstOrDefault();
+
+            return query;
         }
     }
 }

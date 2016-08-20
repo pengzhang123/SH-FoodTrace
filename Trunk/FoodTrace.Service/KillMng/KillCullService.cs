@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -112,5 +114,38 @@ namespace FoodTrace.Service
         //    if (model.CompanyID.HasValue)
         //        model.Company = companyAccess.GetEntityById(model.CompanyID.Value);
         //}
+
+        /// <summary>
+        /// 获取个人信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public KillCullDto GetKillCullDtoById(int id)
+        {
+            return killCullAccess.GetKillCullDtoById(id);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return killCullAccess.DeleteByIds(ids);
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<KillCullDto> GetKillCullListPaging(int pIndex, int pSize)
+        {
+            int comid = UserManagement.CurrentUser.CompanyId;
+            return killCullAccess.GetKillCullListPaging(comid,pIndex, pSize);
+        }
     }
 }

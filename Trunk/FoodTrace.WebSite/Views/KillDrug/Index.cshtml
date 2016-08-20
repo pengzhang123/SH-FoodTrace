@@ -6,43 +6,38 @@
 <div style="height: 100%">
     <table id="DataGrid" style="height: 80%;"></table>
 </div>
-<div id="batchDetailDialog" style="display: none;">
+<div id="drugDialog" style="display: none;">
     <form id="mainForm">
-        <input type="hidden" name="DetailID" value="" />
+        <input type="hidden" name="DrugID" value="" />
         <table>
             <tr>
-                <td>批次编号</td>
+                <td>屠宰编号</td>
                 <td>
-                    @Html.DropDownList("KillBatchID", ViewBag.KillBatch as SelectList)
+                    @Html.DropDownList("KillCullID", ViewBag.KillCull as SelectList)
                 </td>
-                <td>养殖生物</td>
+                <td>屠宰溯源码</td>
                 <td>
-                    @Html.DropDownList("CultivationID", ViewBag.Cultivation as SelectList)
-                 
-                </td>
-
-            </tr>
-            <tr>
-                <td>养殖场</td>
-                <td>
-                    <input type="hidden" name="BreedID" id="BreedID" value="" />
-                    <input type="text" name="BreedName" id="BreedName" value="" readonly="readonly"/>
-                </td>
-                <td>养殖区域</td>
-                <td>
-                    <input type="hidden" name="AreaID" id="AreaID" value="" />
-                    <input type="text" name="AreaName" id="AreaName" value="" readonly="readonly" />
+                    <input type="text" name="KillEpc" id="KillEpc" value="" readonly="readonly" />
                 </td>
             </tr>
             <tr>
-                <td>圈舍</td>
+                <td>是否正常</td>
                 <td>
-                    <input type="hidden" name="HomeID" id="HomeID" value="">
-                    <input type="text" name="HomeName" id="HomeName" value="" readonly="readonly" />
+                    <input type="checkbox" name="IsNormal" id="IsNormal" value="true" />
                 </td>
-                <td>溯源码</td>
+                <td>防疫日期</td>
                 <td>
-                    <input type="text" name="CultivationEpc" id="CultivationEpc" value="" readonly="readonly" />
+                    <input name="DrugTime" type="text" value="" class="Wdate" onclick="WdatePicker()" />
+                </td>
+            </tr>
+            <tr>
+                <td>防疫人员</td>
+                <td>
+                    <input name="People" type="text" value="" class="" />
+                </td>
+                <td>备注</td>
+                <td>
+                    <input name="Remark" type="text" value="" />
                 </td>
             </tr>
             <tr>
@@ -55,14 +50,6 @@
                     <input type="checkbox" name="IsShow" value="true" />
                 </td>
             </tr>
-            <tr>
-
-                <td>备注</td>
-                <td colspan="3">
-                    <input name="Remark" type="text" />
-                </td>
-
-            </tr>
         </table>
     </form>
 </div>
@@ -70,18 +57,18 @@
 @section scripts{
 
     <script type="text/javascript">
-        var batchDetailGrid = null, batchDetailDialog = null;
+        var drugGrid = null, drugDialog = null;
         $(function() {
             initGrid();
 
-            $('#CultivationID').on('change', function() {
+            $('#KillCullID').on('change', function () {
                 loadBreedData();
             });
         });
 
         function initGrid() {
-            batchDetailGrid = $('#DataGrid').datagrid({
-                url: '@Url.Action("GetList", "KillBatchDetail")',
+            drugGrid = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetList", "KillDrug")',
                 rownumbers: true,
                 striped: true,
                 fitColumns: true,
@@ -91,11 +78,10 @@
                 columns: [
                     [
                         { field: 'ck', checkbox: true },
-                        { title: '批次编号', align: 'center', field: 'KillBatchNO', width: 35 },
-                        { title: '生物溯源码', align: 'center', field: 'CultivationEpc', width: 35 },
-                        { title: '养殖场', align: 'center', field: 'BreedName', width: 35 },
-                        { title: '养殖区域', align: 'center', field: 'AreaName', width: 35 },
-                        { title: '圈舍', align: 'center', field: 'HomeName', width: 35 },
+                        { title: '屠宰溯源码', align: 'center', field: 'KillEpc', width: 35 },
+                        { title: '防疫人员', align: 'center', field: 'People', width: 35 },
+                        { title: '防疫日期', align: 'center', field: 'DrugTime', width: 35 },
+                        { title: '检疫状况', align: 'center', field: 'DrugStatus', width: 35 },
                         { title: '备注', align: 'center', field: 'Remark', width: 35 }
                     ]
                 ],
@@ -115,7 +101,7 @@
                             var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
                                 if (row.length == 1) {
-                                    edit(row[0].DetailID);
+                                    edit(row[0].DrugID);
                                 } else {
                                     $.messager.alert('提示', '请选择需要编辑的一条数据行');
                                 }
@@ -136,7 +122,7 @@
                             $.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
                                 if (r) {
                                     $.each(row, function(index, item) {
-                                        ids.push(item.DetailID);
+                                        ids.push(item.DrugID);
                                     });
                                     deleteByIds(ids);
                                 }
@@ -150,7 +136,7 @@
             });
 
 
-            batchDetailDialog = $('#batchDetailDialog').dialog({
+            drugDialog = $('#drugDialog').dialog({
                 title: '新增',
                 width: 600,
                 height: 400,
@@ -167,8 +153,7 @@
                         text: '取消',
                         iconCls: 'icon-cancel',
                         handler: function() {
-
-                            batchDetailDialog.dialog("close");
+                            drugDialog.dialog("close");
                         }
                     }
                 ],
@@ -177,37 +162,24 @@
         }
 
         function loadBreedData() {
-            var $cultivation = $('#CultivationID');
+            var $cultivation = $('#KillCullID');
             var seltext= $cultivation.find("option:selected").text();
-            $('#CultivationEpc').val(seltext);
-            var id = $cultivation.val();
-            Utils.ajaxGet('/KillBatchDetail/GetBreedInfoByCultivationId', { id: id }, 'json', function(ret) {
+            $('#KillEpc').val(seltext);
+            //var id = $cultivation.val();
 
-                if (ret.IsSuccess) {
-                    var data = ret.Items;
-                    $('#BreedID').val(data.breedbase.id);
-                    $('#BreedName').val(data.breedbase.name);
-
-                    $('#AreaID').val(data.area.id);
-                    $('#areaName').val(data.area.name);
-
-                    $('#HomeID').val(data.home.id);
-                    $('#HomeName').val(data.home.name);
-                }
-            });
         }
 
         function create() {
             Utils.resetForm($('#mainForm'));
-            batchDetailDialog.dialog('open');
+            drugDialog.dialog('open');
             loadBreedData();
         }
 
         function edit(id) {
             Utils.resetForm($('#mainForm'));
-            batchDetailDialog.dialog({ title: "修改" }).dialog('open');
+            drugDialog.dialog({ title: "修改" }).dialog('open');
 
-            Utils.ajaxPost('/KillBatchDetail/GetBatchDetailById', { id: id }, 'json', function(ret) {
+            Utils.ajaxPost('/KillDrug/GetKillDrugById', { id: id }, 'json', function (ret) {
                 if (ret.IsSuccess) {
                     Utils.loadFormData($('#mainForm'), ret.Data);
                     loadBreedData();
@@ -225,10 +197,10 @@
             }
 
 
-            Utils.ajaxPost('/KillBatchDetail/SaveData', $('#mainForm').serialize(), 'json', function(ret) {
+            Utils.ajaxPost('/KillDrug/SaveKillDrugData', $('#mainForm').serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-                    batchDetailDialog.dialog("close");
-                    batchDetailGrid.datagrid('reload');
+                    drugDialog.dialog("close");
+                    drugGrid.datagrid('reload');
                     $.messager.alert('提示', "保存成功");
                 } else {
                     $.messager.alert('提示', "保存失败");
@@ -237,12 +209,12 @@
         }
 
         function deleteByIds(ids) {
-            Utils.ajaxPost('/KillBatchDetail/DeleteByIds', { ids: ids.join() }, 'json', function(ret) {
+            Utils.ajaxPost('/KillDrug/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
 
                 if (ret.IsSuccess) {
                     $.messager.alert('提示', '删除成功');
 
-                    batchDetailGrid.datagrid('reload');
+                    drugGrid.datagrid('reload');
                 } else {
                     $.messager.alert('提示', '删除失败');
                 }
@@ -251,6 +223,12 @@
         }
     </script>
 }
+
+
+
+
+
+
 
 
 

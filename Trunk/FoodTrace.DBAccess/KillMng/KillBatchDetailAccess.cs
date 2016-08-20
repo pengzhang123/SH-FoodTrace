@@ -119,15 +119,27 @@ namespace FoodTrace.DBAccess
         {
             var query = (from s in Context.KillBatchDetail
                 join b in Context.KillBatch on s.KillBatchID equals b.KillBatchID
+                join cu in Context.CultivationBase on s.CultivationID equals cu.CultivationID into cul
+                from culeft in cul.DefaultIfEmpty()
+                join bb in Context.BreedBase on s.BreedID equals bb.BreedID into bbl
+                from bbleft in bbl.DefaultIfEmpty()
+                join area in Context.Area on s.AreaID equals area.AreaID into areal
+                from arealeft in areal.DefaultIfEmpty()
+                join home in Context.BreedHome on s.HomeID equals home.HomeID into homel
+                from homeleft in homel.DefaultIfEmpty()
                 where b.CompanyID == comId
                 select new KillBatchDetailDto()
                 {
                     DetailID = s.DetailID,
                     KillBatchID = s.KillBatchID,
+                    KillBatchNO=b.BatchNO,
                     CultivationID = s.CultivationID,
                     BreedID = s.BreedID,
+                    BreedName = bbleft.BreedName,
                     AreaID = s.AreaID,
+                    AreaName = arealeft.AreaName,
                     HomeID = s.HomeID,
+                    HomeName = homeleft.HomeName,
                     CultivationEpc = s.CultivationEpc,
                     Remark = s.Remark,
                     IsLocked = s.IsLocked,

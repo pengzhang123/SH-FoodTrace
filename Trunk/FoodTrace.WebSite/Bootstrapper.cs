@@ -67,6 +67,8 @@ namespace FoodTrace.WebSite
             container.RegisterType<IBreedAreaService, BreedAreaService>();
             container.RegisterType<IBreedHomeService, BreedHomeService>();
             container.RegisterType<IBreedBaseService, BreedBaseService>();
+            container.RegisterType<IKillCullService, KillCullService>();
+            container.RegisterType<IKillDrugService, KillDrugService>();
             return container;
         }
 
