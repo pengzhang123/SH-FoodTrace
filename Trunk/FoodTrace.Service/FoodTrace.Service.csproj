@@ -57,6 +57,7 @@
     <Compile Include="BreedMng\BreedMaterialPicService.cs" />
     <Compile Include="BreedMng\BreedMaterialService.cs" />
     <Compile Include="BreedMng\BreedMaterialVideoService.cs" />
+    <Compile Include="BreedMng\BreedVarietyService.cs" />
     <Compile Include="BreedMng\VarietyBaseService.cs" />
     <Compile Include="BreedMng\CultivationBaseService.cs" />
     <Compile Include="KillMng\KillBatchDetailService.cs" />

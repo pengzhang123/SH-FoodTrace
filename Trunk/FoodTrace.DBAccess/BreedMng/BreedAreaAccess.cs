@@ -5,6 +5,9 @@ using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.BreedMng;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -69,7 +72,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = (context=>
             {
-                var data = context.BreedArea.FirstOrDefault(m => m.AreaID == model.AreaID && m.ModifyTime == model.ModifyTime);
+                var data = context.BreedArea.FirstOrDefault(m => m.AreaID == model.AreaID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.AreaID = model.AreaID;
@@ -91,6 +94,93 @@ namespace FoodTrace.DBAccess
                 return string.Empty;
             });
             return base.DbOperation(operation);
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<BreedAreaDto> GetAreaGridList(int comId, int pIndex, int pSize)
+        {
+            var query = (from s in Context.BreedArea
+                         join va in Context.BreedVariety on s.Variety equals va.VarietyId into val
+                         join breed in Context.BreedBase on s.BreedID equals breed.BreedID
+                        join land in Context.LandBase on breed.LandID equals land.LandID
+                        from valeft in val.DefaultIfEmpty()
+                        where land.CompanyID == comId
+                select new BreedAreaDto
+                {
+                    AreaID = s.AreaID,
+                    BreedID = s.BreedID,
+                    AreaName = s.AreaName,
+                    BreedName = breed.BreedName,
+                    Area = s.Area,
+                    Who = s.Who,
+                    Variety =valeft.VarietyName,
+                    People = s.People,
+                    CreateTime = s.CreateTime,
+                    Responsibility = s.Responsibility,
+                    Remark = s.Remark,
+                    IsLocked = s.IsLocked,
+                    IsShow = s.IsShow
+                }).AsQueryable();
+
+            var list = query.OrderBy(s => s.AreaID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+            return new GridList<BreedAreaDto>(){rows = list,total=list.Count()};
+        }
+
+        /// <summary>
+        /// 根据Id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BreedAreaDto GetAreaDtoById(int id)
+        {
+            var query = (from s in Context.BreedArea
+                        where s.BreedID==id
+                         select new BreedAreaDto
+                         {
+                             AreaID = s.AreaID,
+                             BreedID = s.BreedID,
+                             AreaName = s.AreaName,
+                             Area = s.Area,
+                             Who = s.Who,
+                             VarietyId = s.Variety,
+                             People = s.People,
+                             CreateTime = s.CreateTime,
+                             Responsibility = s.Responsibility,
+                             Remark = s.Remark,
+                             IsLocked = s.IsLocked,
+                             IsShow = s.IsShow
+                         }).FirstOrDefault();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            Func<IEntityContext, string> operation = (context =>
+            {
+                var idsArray = ids.Split(',');
+                var list = context.BreedArea.Where(s => idsArray.Contains(s.AreaID.ToString())).ToList();
+
+                if (list.Any())
+                {
+                    context.BatchDelete(list);
+                }
+                return string.Empty;
+            });
+
+            return base.DbOperation(operation); 
         }
     }
 }

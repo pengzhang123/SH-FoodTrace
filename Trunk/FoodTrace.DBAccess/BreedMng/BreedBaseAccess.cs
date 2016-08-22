@@ -113,6 +113,7 @@ namespace FoodTrace.DBAccess
                     BreedID =s.BreedID,
                     LandID = s.LandID,
                     LandName = land.LandName,
+                    BreedName = s.BreedName,
                     BreedArea = s.BreedArea,
                     BreedType = s.BreedType,
                     Lon = s.Lon,
@@ -160,7 +161,7 @@ namespace FoodTrace.DBAccess
                          {
                              BreedID = s.BreedID,
                              LandID = s.LandID,
-                            
+                             BreedName = s.BreedName,
                              BreedArea = s.BreedArea,
                              BreedType = s.BreedType,
                              Lon = s.Lon,

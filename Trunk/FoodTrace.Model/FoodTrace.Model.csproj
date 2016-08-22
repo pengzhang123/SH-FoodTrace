@@ -55,9 +55,12 @@
     <Compile Include="BreedMng\BreedHomeModel.cs" />
     <Compile Include="BreedMng\BreedLogModel.cs" />
     <Compile Include="BreedMng\BreedMaterialModel.cs" />
+    <Compile Include="BreedMng\BreedVarietyModel.cs" />
     <Compile Include="BreedMng\CultivationBaseModel.cs" />
     <Compile Include="BreedMng\VarietyBaseModel.cs" />
+    <Compile Include="DtoModel\BreedAreaDto.cs" />
     <Compile Include="DtoModel\BreedBaseDto.cs" />
+    <Compile Include="DtoModel\BreedVarietyDto.cs" />
     <Compile Include="DtoModel\CountryDto.cs" />
     <Compile Include="DtoModel\CultivationDto.cs" />
     <Compile Include="DtoModel\DeptDto.cs" />

@@ -6,39 +6,20 @@
 <div style="height: 100%">
     <table id="DataGrid" style="height: 80%;"></table>
 </div>
-<div id="breedDialog" style="display: none;">
+<div id="areaDialog" style="display: none;">
     <form id="mainForm">
-        <input type="hidden" name="BreedID" value="" />
+        <input type="hidden" name="VarietyId" value="" />
         <table>
             <tr>
-                <td>所属基地</td>
+                <td>养殖品种</td>
                 <td>
-                    @Html.DropDownList("LandID", ViewBag.LandBase as SelectList)
+                    <input type="text" name="VarietyName" value=""/>
                 </td>
-                <td>养殖场名称</td>
+                <td>备注</td>
                 <td>
-                    <input type="text" name="BreedName" id="BreedName" value=""/>
+                    <input type="text" name="Remark" value="" />
                 </td>
-            </tr>
-            <tr>
-                <td>养殖场面积</td>
-                <td>
-                    <input type="text" name="BreedArea" id="BreedArea" value="true" />
-                </td>
-                <td>养殖场类型</td>
-                <td>
-                    <input name="BreedType" type="text" value="" />
-                </td>
-            </tr>
-            <tr>
-                <td>经度</td>
-                <td>
-                    <input name="Lon" type="text" value="" class="" />
-                </td>
-                <td>纬度</td>
-                <td>
-                    <input name="Lat" type="text" value="" />
-                </td>
+
             </tr>
             <tr>
                 <td>是否锁定</td>
@@ -50,13 +31,6 @@
                     <input type="checkbox" name="IsShow" value="true" />
                 </td>
             </tr>
-            <tr>
-                <td>备注</td>
-                <td colspan="3">
-                    <input type="text" name="Remark" value="" />
-                </td>
-               
-            </tr>
         </table>
     </form>
 </div>
@@ -64,7 +38,7 @@
 @section scripts{
 
     <script type="text/javascript">
-        var breedGrid = null, breedDialog = null;
+        var breedGrid = null, areaDialog = null;
         $(function() {
             initGrid();
 
@@ -72,7 +46,7 @@
 
         function initGrid() {
             breedGrid = $('#DataGrid').datagrid({
-                url: '@Url.Action("GetList", "BreedBase")',
+                url: '@Url.Action("GetList", "BreedVariety")',
                 rownumbers: true,
                 striped: true,
                 fitColumns: true,
@@ -82,12 +56,8 @@
                 columns: [
                     [
                         { field: 'ck', checkbox: true },
-                        { title: '所属基地', align: 'center', field: 'LandName', width: 35 },
-                        { title: '养殖场名称', align: 'center', field: 'BreedName', width: 35 },
-                        { title: '面积', align: 'center', field: 'BreedArea', width: 35 },
-                        { title: '类型', align: 'center', field: 'BreedType', width: 35 },
-                        { title: '经度', align: 'center', field: 'Lon', width: 35 },
-                        { title: '纬度', align: 'center', field: 'Lat', width: 35 },
+                        { title: '品种名称', align: 'center', field: 'VarietyName', width: 35 },
+                        { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
                         { title: '备注', align: 'center', field: 'Remark', width: 35 }
                     ]
                 ],
@@ -107,7 +77,7 @@
                             var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
                                 if (row.length == 1) {
-                                    edit(row[0].BreedID);
+                                    edit(row[0].VarietyId);
                                 } else {
                                     $.messager.alert('提示', '请选择需要编辑的一条数据行');
                                 }
@@ -128,7 +98,7 @@
                             $.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
                                 if (r) {
                                     $.each(row, function(index, item) {
-                                        ids.push(item.BreedID);
+                                        ids.push(item.VarietyId);
                                     });
                                     deleteByIds(ids);
                                 }
@@ -142,7 +112,7 @@
             });
 
 
-            breedDialog = $('#breedDialog').dialog({
+            areaDialog = $('#areaDialog').dialog({
                 title: '新增',
                 width: 600,
                 height: 400,
@@ -159,7 +129,7 @@
                         text: '取消',
                         iconCls: 'icon-cancel',
                         handler: function() {
-                            breedDialog.dialog("close");
+                            areaDialog.dialog("close");
                         }
                     }
                 ],
@@ -167,21 +137,21 @@
             });
         }
 
-    
+
         function create() {
             Utils.resetForm($('#mainForm'));
-            breedDialog.dialog('open');
-           
+            areaDialog.dialog('open');
+
         }
 
         function edit(id) {
             Utils.resetForm($('#mainForm'));
-            breedDialog.dialog({ title: "修改" }).dialog('open');
+            areaDialog.dialog({ title: "修改" }).dialog('open');
 
-            Utils.ajaxPost('/BreedBase/GetBreedBaseById', { id: id }, 'json', function (ret) {
+            Utils.ajaxPost('/BreedVariety/GetVarietyDtoById', { id: id }, 'json', function (ret) {
                 if (ret.IsSuccess) {
                     Utils.loadFormData($('#mainForm'), ret.Data);
-               
+
                 } else {
                     $.messager.alert('提示', '数据加载失败', 'error');
                 }
@@ -196,9 +166,9 @@
             }
 
 
-            Utils.ajaxPost('/BreedBase/SaveBreedBaseData', $('#mainForm').serialize(), 'json', function (ret) {
+            Utils.ajaxPost('/BreedVariety/SaveData', $('#mainForm').serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-                    breedDialog.dialog("close");
+                    areaDialog.dialog("close");
                     breedGrid.datagrid('reload');
                     $.messager.alert('提示', "保存成功");
                 } else {
@@ -208,7 +178,7 @@
         }
 
         function deleteByIds(ids) {
-            Utils.ajaxPost('/BreedBase/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
+            Utils.ajaxPost('/BreedVariety/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
 
                 if (ret.IsSuccess) {
                     $.messager.alert('提示', '删除成功');
@@ -222,6 +192,10 @@
         }
     </script>
 }
+
+
+
+
 
 
 

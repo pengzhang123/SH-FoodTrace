@@ -1,8 +1,10 @@
 ﻿using FoodTrace.DBManage.Contexts;
 using FoodTrace.DBManage.IContexts;
 using FoodTrace.IService;
+using FoodTrace.IService.BreedMng;
 using FoodTrace.IService.SystemBase;
 using FoodTrace.Service;
+using FoodTrace.Service.BreedMng;
 using FoodTrace.Service.SystemBase;
 using Microsoft.Practices.Unity;
 using System;
@@ -69,6 +71,7 @@ namespace FoodTrace.WebSite
             container.RegisterType<IBreedBaseService, BreedBaseService>();
             container.RegisterType<IKillCullService, KillCullService>();
             container.RegisterType<IKillDrugService, KillDrugService>();
+            container.RegisterType<IBreedVarietyService, BreedVarietyService>();
             return container;
         }
 

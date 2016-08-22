@@ -1,6 +1,7 @@
 ﻿using FoodTrace.Model;
 using System;
 using System.Data.Entity;
+using FoodTrace.Model.BreedMng;
 
 namespace FoodTrace.DBManage.IContexts
 {
@@ -188,6 +189,7 @@ namespace FoodTrace.DBManage.IContexts
         /// </summary>
         IDbSet<BreedBaseModel> BreedBase { get; set; }
         IDbSet<BreedAreaModel> BreedArea { get; set; }
+        IDbSet<BreedVarietyModel> BreedVariety { get; set; }
         IDbSet<BreedBatchDetailModel> BreedBatchDetail { get; set; }
         IDbSet<BreedBatchModel> BreedBatch { get; set; }
         IDbSet<BreedHomeModel> BreedHome { get; set; }

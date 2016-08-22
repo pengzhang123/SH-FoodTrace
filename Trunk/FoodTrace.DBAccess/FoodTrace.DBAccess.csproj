@@ -67,6 +67,7 @@
     <Compile Include="BreedMng\BreedMaterialAccess.cs" />
     <Compile Include="BreedMng\BreedMaterialPicAccess.cs" />
     <Compile Include="BreedMng\BreedMaterialVideoAccess.cs" />
+    <Compile Include="BreedMng\BreedVarietyAccess.cs" />
     <Compile Include="BreedMng\CultivationBaseAccess.cs" />
     <Compile Include="BreedMng\VarietyBaseAccess.cs" />
     <Compile Include="KillMng\KillBatchAccess.cs" />

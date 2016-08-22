@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using FoodTrace.Model.BreedMng;
 
 namespace FoodTrace.DBManage.Contexts
 {
@@ -223,6 +224,7 @@ namespace FoodTrace.DBManage.Contexts
         /// </summary>
         public IDbSet<BreedBaseModel> BreedBase { get; set; }
         public IDbSet<BreedAreaModel> BreedArea { get; set; }
+        public IDbSet<BreedVarietyModel> BreedVariety { get; set; }
         public IDbSet<BreedBatchDetailModel> BreedBatchDetail { get; set; }
         public IDbSet<BreedBatchModel> BreedBatch { get; set; }
         public IDbSet<BreedHomeModel> BreedHome { get; set; }

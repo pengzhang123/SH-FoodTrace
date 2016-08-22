@@ -5,6 +5,8 @@ using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.Service
 {
@@ -79,9 +81,42 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSingleBreedArea(BreedAreaModel model)
         {
-            var data = breedAreaAccess.GetOriEntity(model.AreaID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
+            //var data = breedAreaAccess.GetOriEntity(model.AreaID, model.ModifyTime);
+            //if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
             return breedAreaAccess.UpdateSingleEntity(model);
+        }
+
+        /// <summary>
+        /// 根据Id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BreedAreaDto GetAreaDtoById(int id)
+        {
+            return breedAreaAccess.GetAreaDtoById(id);
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<BreedAreaDto> GetAreaGridList(int pIndex, int pSize)
+        {
+            int comId = UserManagement.CurrentUser.CompanyId;
+            return breedAreaAccess.GetAreaGridList(comId, pIndex, pSize);
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return breedAreaAccess.DeleteByIds(ids);
         }
     }
 }

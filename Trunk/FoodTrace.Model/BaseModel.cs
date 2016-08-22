@@ -71,6 +71,7 @@ namespace FoodTrace.Model
         CultivationBaseAccess,
         BreedBaseAccess,
         BreedAreaAccess,
+        BreedVarietyAccess,
         BreedHomeAccess,
         BreedBatchDetailAccess,
         BreedBatchAccess,
