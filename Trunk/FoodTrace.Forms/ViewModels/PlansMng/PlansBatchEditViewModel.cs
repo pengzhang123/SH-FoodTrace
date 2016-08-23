@@ -55,6 +55,11 @@ namespace FoodTrace.Forms.ViewModels
             view.lbSeed.SelectedValuePath = "SeedID";
             view.lbSeed.DisplayMemberPath = "SeedName";
             view.lbSeed.ItemsSource = seeds;
+
+            if (Mode == EditMode.CREATE)
+            {
+                EpcGotFocus();
+            }
         }
 
        

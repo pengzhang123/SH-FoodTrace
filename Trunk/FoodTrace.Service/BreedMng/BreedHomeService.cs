@@ -5,6 +5,8 @@ using FoodTrace.IService;
 using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 
 namespace FoodTrace.Service
@@ -80,9 +82,42 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSingleBreedHome(BreedHomeModel model)
         {
-            var data = breedHomeAccess.GetOriEntity(model.HomeID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
+            //var data = breedHomeAccess.GetOriEntity(model.HomeID, model.ModifyTime);
+            //if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
             return breedHomeAccess.UpdateSingleEntity(model);
+        }
+
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<BreedHomeDto> GetBreedHomeGridList(int pIndex, int pSize)
+        {
+            int comid = UserManagement.CurrentUser.CompanyId;
+            return breedHomeAccess.GetBreedHomeGridList(comid, pIndex, pSize);
+        }
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+            return breedHomeAccess.DeleteByIds(ids);
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BreedHomeDto GetBreedHomeDtoById(int id)
+        {
+            return breedHomeAccess.GetBreedHomeDtoById(id);
         }
     }
 }

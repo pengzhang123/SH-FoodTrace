@@ -4,55 +4,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoodTrace.IService;
-using FoodTrace.IService.BreedMng;
 using FoodTrace.Model;
 using FoodTrace.Model.BaseDto;
 using FoodTrace.Model.DtoModel;
 
+
 namespace FoodTrace.WebSite.Controllers.BreedManage
 {
-    public class BreedHomeController : BaseController
+    public class CultivationController : BaseController
     {
-        private readonly IBreedHomeService _homeService;
-        private readonly IBreedAreaService _areaService;
-        private readonly IBreedVarietyService _varietyService;
+        private readonly ICultivationBaseService _cultivationBaseService;
 
-        public BreedHomeController(IBreedHomeService homeService,IBreedAreaService areaService,
-            IBreedVarietyService varietyService)
+        public CultivationController(ICultivationBaseService cultivationBaseService)
         {
-            _homeService = homeService;
-            _areaService = areaService;
-            _varietyService = varietyService;
+            _cultivationBaseService = cultivationBaseService;
         }
         public ActionResult Index()
         {
-            var breedarea = _areaService.GetAreaGridList(1, 1000);
-            var varietyList = _varietyService.GetVarietyList();
-
-            ViewBag.BreedArea = new SelectList(breedarea.rows, "AreaID", "AreaName");
-            ViewBag.VarietyList = new SelectList(varietyList, "VarietyName", "VarietyName");
             return View();
         }
-
         /// <summary>
-        /// 获取数据列表
+        /// 获取列表
         /// </summary>
         /// <param name="page"></param>
-        /// <param name="pSize"></param>
+        /// <param name="rows"></param>
         /// <returns></returns>
         public JsonResult GetList(int page, int rows)
         {
-            var data = new GridList<BreedHomeDto>();
+            var data = new GridList<CultivationDto>();
             try
             {
-                data=_homeService.GetBreedHomeGridList(page, rows);
+              
             }
             catch (Exception)
             {
-               
+                
+                throw;
             }
 
-            return Json(data);
+            return JsonEx(data);
         }
 
         /// <summary>
@@ -60,19 +50,19 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public JsonResult SaveData(BreedHomeModel model)
+        public JsonResult SaveData(CultivationBaseModel model)
         {
             var result = new ResultJson();
             try
             {
                 var msg = new MessageModel();
-                if (model.HomeID == 0)
+                if (model.CultivationID == 0)
                 {
-                    msg = _homeService.InsertSingleBreedHome(model);
+                    msg = _cultivationBaseService.InsertSingleCultivationBase(model);
                 }
                 else
                 {
-                    msg = _homeService.UpdateSingleBreedHome(model);
+                    msg = _cultivationBaseService.UpdateSingleCultivationBase(model);
                 }
 
                 if (msg.Status == MessageStatus.Success)
@@ -88,27 +78,25 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
             return Json(result);
         }
 
-
         /// <summary>
-        /// 根据Id获取数据
+        /// 根据id获取
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public JsonResult GetBreedHomeById(int id)
+        public JsonResult GetCultivationById(int id)
         {
             var result = new ResultJson();
             try
             {
-                result.Data =_homeService.GetBreedHomeDtoById(id);
-                result.IsSuccess = true;
 
             }
             catch (Exception)
             {
                 
+                throw;
             }
 
-            return Json(result);
+            return JsonEx(result);
         }
 
         /// <summary>
@@ -121,15 +109,12 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
             var result = new ResultJson();
             try
             {
-                var msg = _homeService.DeleteByIds(ids);
-                if (msg.Status == MessageStatus.Success)
-                {
-                    result.IsSuccess = true;
-                }
+
             }
             catch (Exception)
             {
-              
+                
+                throw;
             }
 
             return Json(result);

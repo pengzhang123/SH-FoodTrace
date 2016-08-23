@@ -54,8 +54,9 @@ namespace FoodTrace.DBAccess
         public List<BreedBaseModel> GetPagerBreedBaseByConditions(int companyID, string name, int pageIndex, int pageSize)
         {
             return base.Context.BreedBase.Where(m => m.LandBase.CompanyID == companyID
-                                                    &&(string.IsNullOrEmpty(name)||m.BreedName==name))
+                                                    && (string.IsNullOrEmpty(name) || m.BreedName == name))
                                                     .OrderBy(m => m.BreedID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+
         }
 
         public MessageModel InsertSingleEntity(BreedBaseModel model)

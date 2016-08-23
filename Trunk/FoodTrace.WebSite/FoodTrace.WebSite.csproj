@@ -219,8 +219,14 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BreedManage\BreedAreaController.cs" />
     <Compile Include="Controllers\BreedManage\BreedBaseController.cs" />
+    <Compile Include="Controllers\BreedManage\BreedBatchController.cs" />
+    <Compile Include="Controllers\BreedManage\BreedBatchDetailController.cs" />
+    <Compile Include="Controllers\BreedManage\BreedDrugController.cs" />
+    <Compile Include="Controllers\BreedManage\BreedHealthController.cs" />
     <Compile Include="Controllers\BreedManage\BreedHomeController.cs" />
+    <Compile Include="Controllers\BreedManage\BreedMaterialController.cs" />
     <Compile Include="Controllers\BreedManage\BreedVarietyController.cs" />
+    <Compile Include="Controllers\BreedManage\CultivationController.cs" />
     <Compile Include="Controllers\KillManage\KillBatchController.cs" />
     <Compile Include="Controllers\KillManage\KillBatchDetailController.cs" />
     <Compile Include="Controllers\KillManage\KillController.cs" />
@@ -967,12 +973,18 @@
     <Content Include="Views\BreedBase\Index.cshtml" />
     <Content Include="Views\BreedArea\Index.cshtml" />
     <Content Include="Views\BreedVariety\Index.cshtml" />
+    <Content Include="Views\BreedHome\Index.cshtml" />
+    <Content Include="Views\Cultivation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\" />
     <Folder Include="Controllers\QueryManage\" />
-    <Folder Include="Views\BreedHome\" />
+    <Folder Include="Views\BreedBatchDetail\" />
+    <Folder Include="Views\BreedBatch\" />
+    <Folder Include="Views\BreedDrug\" />
+    <Folder Include="Views\BreedHealth\" />
+    <Folder Include="Views\BreedMaterial\" />
     <Folder Include="Views\OutStorage\" />
     <Folder Include="Views\SaleReport\" />
     <Folder Include="Views\StockReport\" />

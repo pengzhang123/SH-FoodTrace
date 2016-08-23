@@ -11,7 +11,7 @@ using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.WebSite.Controllers.BreedManage
 {
-    public class BreedVarietyController : Controller
+    public class BreedVarietyController : BaseController
     {
         private readonly IBreedVarietyService _breedVarietyService;
 

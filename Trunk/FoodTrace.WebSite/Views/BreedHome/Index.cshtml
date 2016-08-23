@@ -6,18 +6,18 @@
 <div style="height: 100%">
     <table id="DataGrid" style="height: 80%;"></table>
 </div>
-<div id="areaDialog" style="display: none;">
+<div id="homeDialog" style="display: none;">
     <form id="mainForm">
-        <input type="hidden" name="AreaID" value="" />
+        <input type="hidden" name="HomeID" value="" />
         <table>
             <tr>
-                <td>养殖场</td>
+                <td>所属区域</td>
                 <td>
-                    @Html.DropDownList("BreedID", ViewBag.BreedBase as SelectList)
+                    @Html.DropDownList("AreaID",ViewBag.BreedArea as SelectList)
                 </td>
-                <td>区域名称</td>
+                <td>名称</td>
                 <td>
-                    <input type="text" name="AreaName" id="AreaName" value="" />
+                    <input type="text" name="HomeName" id="HomeName" value="" />
                 </td>
             </tr>
             <tr>
@@ -34,24 +34,23 @@
                 <td>养殖品种</td>
                 <td>
                     @Html.DropDownList("Variety", ViewBag.VarietyList as SelectList)
-                   
+
                 </td>
                 <td>殖保员</td>
                 <td>
                     <input name="People" type="text" value="" />
                 </td>
             </tr>
-           
+
             <tr>
                 <td>性质与责任</td>
                 <td>
                     <input type="text" name="Responsibility" value="" />
                 </td>
-                <td>备注</td>
-                <td >
-                    <input type="text" name="Remark" value="" />
+                <td>卫生状况</td>
+                <td>
+                    <input type="text" name="HealthStatus" value="" />
                 </td>
-
             </tr>
             <tr>
                 <td>是否锁定</td>
@@ -63,6 +62,12 @@
                     <input type="checkbox" name="IsShow" value="true" />
                 </td>
             </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="3">
+                    <input type="text" name="Remark" value="" />
+                </td>
+            </tr>
         </table>
     </form>
 </div>
@@ -70,15 +75,15 @@
 @section scripts{
 
     <script type="text/javascript">
-        var breedGrid = null, areaDialog = null;
+        var homeGrid = null, homeDialog = null;
         $(function() {
             initGrid();
 
         });
 
         function initGrid() {
-            breedGrid = $('#DataGrid').datagrid({
-                url: '@Url.Action("GetList", "BreedArea")',
+            homeGrid = $('#DataGrid').datagrid({
+                url: '@Url.Action("GetList", "BreedHome")',
                 rownumbers: true,
                 striped: true,
                 fitColumns: true,
@@ -88,11 +93,12 @@
                 columns: [
                     [
                         { field: 'ck', checkbox: true },
-                        { title: '养殖场名称', align: 'center', field: 'BreedName', width: 35 },
                         { title: '区域名称', align: 'center', field: 'AreaName', width: 35 },
+                        { title: '圈舍名称', align: 'center', field: 'AreaName', width: 35 },
                         { title: '面积', align: 'center', field: 'Area', width: 35 },
                         { title: '负责人', align: 'center', field: 'Who', width: 35 },
-                        { title: '养殖品种', align: 'center', field: 'Variety', width: 35 },
+                        { title: '养殖品种', align: 'center', field: 'VarietyName', width: 35 },
+                        { title: '卫生状况', align: 'center', field: 'HealthStatus', width: 35 },
                         { title: '性质与责任', align: 'center', field: 'Responsibility', width: 35 },
                         { title: '殖保员', align: 'center', field: 'People', width: 35 },
                         { title: '备注', align: 'center', field: 'Remark', width: 35 }
@@ -114,7 +120,7 @@
                             var row = $('#DataGrid').datagrid('getSelections');
                             if (row) {
                                 if (row.length == 1) {
-                                    edit(row[0].AreaID);
+                                    edit(row[0].HomeID);
                                 } else {
                                     $.messager.alert('提示', '请选择需要编辑的一条数据行');
                                 }
@@ -135,7 +141,7 @@
                             $.messager.confirm('确认', '您确认想要删除记录吗？', function(r) {
                                 if (r) {
                                     $.each(row, function(index, item) {
-                                        ids.push(item.AreaID);
+                                        ids.push(item.HomeID);
                                     });
                                     deleteByIds(ids);
                                 }
@@ -149,7 +155,7 @@
             });
 
 
-            areaDialog = $('#areaDialog').dialog({
+            homeDialog = $('#homeDialog').dialog({
                 title: '新增',
                 width: 600,
                 height: 400,
@@ -166,7 +172,7 @@
                         text: '取消',
                         iconCls: 'icon-cancel',
                         handler: function() {
-                            areaDialog.dialog("close");
+                            homeDialog.dialog("close");
                         }
                     }
                 ],
@@ -177,15 +183,15 @@
 
         function create() {
             Utils.resetForm($('#mainForm'));
-            areaDialog.dialog('open');
+            homeDialog.dialog('open');
 
         }
 
         function edit(id) {
             Utils.resetForm($('#mainForm'));
-            areaDialog.dialog({ title: "修改" }).dialog('open');
+            homeDialog.dialog({ title: "修改" }).dialog('open');
 
-            Utils.ajaxPost('/BreedArea/GetBreedAreaById', { id: id }, 'json', function (ret) {
+            Utils.ajaxPost('/BreedHome/GetBreedHomeById', { id: id }, 'json', function (ret) {
                 if (ret.IsSuccess) {
                     Utils.loadFormData($('#mainForm'), ret.Data);
 
@@ -203,10 +209,10 @@
             }
 
 
-            Utils.ajaxPost('/BreedArea/SaveBreedAreaData', $('#mainForm').serialize(), 'json', function (ret) {
+            Utils.ajaxPost('/BreedHome/SaveData', $('#mainForm').serialize(), 'json', function (ret) {
                 if (ret.IsSuccess) {
-                    areaDialog.dialog("close");
-                    breedGrid.datagrid('reload');
+                    homeDialog.dialog("close");
+                    homeGrid.datagrid('reload');
                     $.messager.alert('提示', "保存成功");
                 } else {
                     $.messager.alert('提示', "保存失败");
@@ -215,12 +221,12 @@
         }
 
         function deleteByIds(ids) {
-            Utils.ajaxPost('/BreedArea/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
+            Utils.ajaxPost('/BreedHome/DeleteByIds', { ids: ids.join() }, 'json', function (ret) {
 
                 if (ret.IsSuccess) {
                     $.messager.alert('提示', '删除成功');
 
-                    breedGrid.datagrid('reload');
+                    homeGrid.datagrid('reload');
                 } else {
                     $.messager.alert('提示', '删除失败');
                 }
@@ -229,6 +235,8 @@
         }
     </script>
 }
+
+
 
 
 

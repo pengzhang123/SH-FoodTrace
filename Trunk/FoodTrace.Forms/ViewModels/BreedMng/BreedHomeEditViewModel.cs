@@ -2,6 +2,7 @@
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
+using FoodTrace.IService.BreedMng;
 using FoodTrace.Model;
 using FoodTrace.Service;
 using System;
@@ -10,6 +11,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Service.BreedMng;
 
 namespace FoodTrace.Forms.ViewModels
 {
@@ -18,7 +20,7 @@ namespace FoodTrace.Forms.ViewModels
     {
         private IBreedHomeService iBreedHomeService = new BreedHomeService();
         private IBreedAreaService iBreedAreaService = new BreedAreaService();
-
+        private readonly IBreedVarietyService _varietyService = new BreedVarietyService();
         public BreedHomeModel Model { get; set; }
         public EditMode Mode { get; set; }
 
@@ -28,6 +30,11 @@ namespace FoodTrace.Forms.ViewModels
             view.cbBreedArea.ItemsSource = list;
             view.cbBreedArea.DisplayMemberPath = "AreaName";
             view.cbBreedArea.SelectedValuePath = "AreaID";
+
+            var list2 = _varietyService.GetVarietyList();
+            view.cbVarietyType.ItemsSource = list2;
+            view.cbVarietyType.DisplayMemberPath = "VarietyName";
+            view.cbVarietyType.SelectedValuePath = "VarietyName";
         }
 
         public void Save()

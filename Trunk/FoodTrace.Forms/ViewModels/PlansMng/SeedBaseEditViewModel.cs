@@ -45,11 +45,17 @@ namespace FoodTrace.Forms.ViewModels
         public void LoadUserControl(SeedBaseEditView view)
         {
 
-            ILandBaseService iLandBaseService = new LandBaseService();
-            var landBases = iLandBaseService.GetPagerLandBase(string.Empty, 1, 10);
+            //ILandBaseService iLandBaseService = new LandBaseService();
+           // var landBases = iLandBaseService.GetPagerLandBase(string.Empty, 1, 10);
             //view.lbLand.ItemsSource = landBases;
             //view.lbLand.SelectedValuePath = "LandID";
             //view.lbLand.DisplayMemberPath = "LandName";
+            if (Mode == EditMode.CREATE)
+            {
+                EpcGotFocus();
+            }
+           
+
         }
 
         public void Save()

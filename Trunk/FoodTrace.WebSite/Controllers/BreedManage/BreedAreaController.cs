@@ -29,7 +29,7 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
             var varietyList = _breedVarietyService.GetVarietyList();
 
             ViewBag.BreedBase = new SelectList(breedbase.rows, "BreedID", "BreedName");
-            ViewBag.VarietyList = new SelectList(varietyList, "VarietyId", "VarietyName");
+            ViewBag.VarietyList = new SelectList(varietyList, "VarietyName", "VarietyName");
             return View();
         }
 

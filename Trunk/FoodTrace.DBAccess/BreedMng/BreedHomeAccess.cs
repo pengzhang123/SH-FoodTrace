@@ -5,6 +5,8 @@ using FoodTrace.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FoodTrace.Model.BaseDto;
+using FoodTrace.Model.DtoModel;
 
 namespace FoodTrace.DBAccess
 {
@@ -69,7 +71,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = (context =>
             {
-                var data = context.BreedHome.FirstOrDefault(m => m.HomeID == model.HomeID && m.ModifyTime == model.ModifyTime);
+                var data = context.BreedHome.FirstOrDefault(m => m.HomeID == model.HomeID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
                 data.HomeID = model.HomeID;
@@ -89,6 +91,91 @@ namespace FoodTrace.DBAccess
                 data.ModifyName = UserManagement.CurrentUser.UserName;
                 data.ModifyTime = DateTime.Now;
                 context.SaveChanges();
+                return string.Empty;
+            });
+            return base.DbOperation(operation);
+        }
+
+        /// <summary>
+        /// 分页数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <param name="pIndex"></param>
+        /// <param name="pSize"></param>
+        /// <returns></returns>
+        public GridList<BreedHomeDto> GetBreedHomeGridList(int comId, int pIndex, int pSize)
+        {
+            var query = (from s in Context.BreedHome
+                join area in Context.BreedArea on s.AreaID equals area.AreaID
+                join breed in Context.BreedBase on area.BreedID equals breed.BreedID
+                join land in Context.LandBase on breed.LandID equals land.LandID
+              
+                where land.CompanyID == comId
+                select new BreedHomeDto()
+                {
+                    HomeID = s.HomeID,
+                    AreaName = area.AreaName,
+                    HomeName = s.HomeName,
+                    Who = s.Who,
+                    People = s.People,
+                    HealthStatus = s.HealthStatus,
+                    Responsibility = s.Responsibility,
+                    VarietyName= s.Variety,
+                    Remark = s.Remark,
+                    Area=s.Area
+                }).AsQueryable();
+
+            var list = query.OrderBy(s => s.HomeID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
+
+
+            return new GridList<BreedHomeDto>() { rows = list, total = query.Count() };
+
+        }
+
+        /// <summary>
+        /// 根据id获取数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BreedHomeDto GetBreedHomeDtoById(int id)
+        {
+            var query=(from s in Context.BreedHome
+                       where s.HomeID==id
+                        select new BreedHomeDto(){
+                    HomeID = s.HomeID,
+                    AreaID = s.AreaID,
+                    HomeName = s.HomeName,
+                    Who = s.Who,
+                    People = s.People,
+                    HealthStatus = s.HealthStatus,
+                    Responsibility = s.Responsibility,
+                    Variety=s.Variety,
+                    Remark = s.Remark,
+                    Area=s.Area,
+                    IsShow = s.IsShow,
+                    IsLocked = s.IsLocked
+                }).FirstOrDefault();
+
+            return query;
+        }
+
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public MessageModel DeleteByIds(string ids)
+        {
+
+            Func<IEntityContext, string> operation = (context =>
+            {
+                var idarrary = ids.Split(',');
+
+                var list = context.BreedHome.Where(s => idarrary.Contains(s.HomeID.ToString())).ToList();
+                if (list.Any())
+                {
+                    context.BatchDelete(list);
+                }
                 return string.Empty;
             });
             return base.DbOperation(operation);

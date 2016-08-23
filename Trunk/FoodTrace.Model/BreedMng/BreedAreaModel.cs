@@ -15,7 +15,7 @@ namespace FoodTrace.Model
         public string AreaName { get; set; }
         public string Area { get; set; }
         public string Who { get; set; }
-        public int? Variety { get; set; }
+        public string Variety { get; set; }
         public string People { get; set; }
         public DateTime? CreateTime { get; set; }
         public string Responsibility { get; set; }

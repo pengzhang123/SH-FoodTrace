@@ -41,7 +41,6 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" Text="种植批次溯源码" />
                     <TextBox Grid.Column="1"
-                             cal:Message.Attach="[GotFocus]=[EpcGotFocus]"
                              IsReadOnly="True"
                              Text="{Binding Model.BatchCode}" />
                 </Grid>

@@ -2,6 +2,7 @@
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
+using FoodTrace.IService.BreedMng;
 using FoodTrace.Model;
 using FoodTrace.Service;
 using System;
@@ -10,6 +11,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodTrace.Service.BreedMng;
 
 namespace FoodTrace.Forms.ViewModels
 {
@@ -20,6 +22,7 @@ namespace FoodTrace.Forms.ViewModels
         private IBreedAreaService iBreedAreaService = new BreedAreaService();
         private ILandBaseService iLandBaseService = new LandBaseService();
         private IVarietyBaseService iVarietyBaseService = new VarietyBaseService();
+       private readonly IBreedVarietyService _varietyService=new BreedVarietyService();
 
         public BreedAreaModel Model { get; set; }
         public EditMode Mode { get; set; }
@@ -31,7 +34,8 @@ namespace FoodTrace.Forms.ViewModels
             view.cbBreedBase.DisplayMemberPath = "BreedName";
             view.cbBreedBase.SelectedValuePath = "BreedID";
 
-            var list2 = iVarietyBaseService.GetPagerVarietyBase("", 1, 100);
+            //var list2 = iVarietyBaseService.GetPagerVarietyBase("", 1, 100);
+            var list2 = _varietyService.GetVarietyList();
             view.cbVarietyType.ItemsSource = list2;
             view.cbVarietyType.DisplayMemberPath = "VarietyName";
             view.cbVarietyType.SelectedValuePath = "VarietyName";

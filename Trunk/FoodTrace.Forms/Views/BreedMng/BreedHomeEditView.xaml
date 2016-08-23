@@ -78,7 +78,9 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="品种" />
-                <TextBox Grid.Column="1" Text="{Binding Variety}" />
+                <ComboBox x:Name="cbVarietyType"
+                          Grid.Column="1"
+                          SelectedValue="{Binding Variety}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>

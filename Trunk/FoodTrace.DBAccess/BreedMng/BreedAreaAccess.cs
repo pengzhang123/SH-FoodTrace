@@ -106,10 +106,9 @@ namespace FoodTrace.DBAccess
         public GridList<BreedAreaDto> GetAreaGridList(int comId, int pIndex, int pSize)
         {
             var query = (from s in Context.BreedArea
-                         join va in Context.BreedVariety on s.Variety equals va.VarietyId into val
+                         
                          join breed in Context.BreedBase on s.BreedID equals breed.BreedID
                         join land in Context.LandBase on breed.LandID equals land.LandID
-                        from valeft in val.DefaultIfEmpty()
                         where land.CompanyID == comId
                 select new BreedAreaDto
                 {
@@ -119,7 +118,7 @@ namespace FoodTrace.DBAccess
                     BreedName = breed.BreedName,
                     Area = s.Area,
                     Who = s.Who,
-                    Variety =valeft.VarietyName,
+                    Variety =s.Variety,
                     People = s.People,
                     CreateTime = s.CreateTime,
                     Responsibility = s.Responsibility,
@@ -149,7 +148,7 @@ namespace FoodTrace.DBAccess
                              AreaName = s.AreaName,
                              Area = s.Area,
                              Who = s.Who,
-                             VarietyId = s.Variety,
+                             Variety= s.Variety,
                              People = s.People,
                              CreateTime = s.CreateTime,
                              Responsibility = s.Responsibility,
