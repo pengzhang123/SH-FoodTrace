@@ -44,6 +44,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.ProcessProduct.Add(model);
                 context.SaveChanges();
                 return string.Empty;

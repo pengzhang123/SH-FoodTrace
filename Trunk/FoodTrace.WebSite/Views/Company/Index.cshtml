@@ -13,8 +13,56 @@
     
 </div>
 <div id="EditDialog" ></div>
+<div id="QsDialog" style="display: none;" title="企业资质设置">
+    <form id="mainForm">
+        <input type="hidden" name="QSID" value=""/>
+        <input type="hidden" name="CompanyID" id="CompanyID" value="" />
+        <table>
+            <tr>
+                <td>资质列表</td>
+                <td>
+                    <select name="QSList" id="QSList"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>资质名称</td>
+                <td>
+                    <input type="text" name="QSName" id="QSName" value="" />
+                </td>
+                <td>资质编号</td>
+                <td>
+                    <input type="text" name="QSCard" value="" class="easyui-validatebox" data-options="required:true" />
+                </td>
+            </tr>
+            <tr>
+
+                <td>发证日期</td>
+                <td>
+                    <input class="Wdate" name="IssuingTime" type="text" onclick="WdatePicker()">
+                </td>
+                <td>发证单位</td>
+                <td>
+                    <input type="text" name="IssuingUnit" value="" class="easyui-validatebox" data-options="validType:'number'" />
+
+                </td>
+            </tr>
+            <tr>
+
+                <td>有效期</td>
+                <td>
+                    <input type="text" name="Validity" value="" />
+                </td>
+                <td>备注</td>
+                <td>
+                    <input type="text" name="Remark" value="" class="easyui-validatebox" data-options="validType:'number'" />
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 <script type="text/javascript">
-    var comGrid = null;
+    var comGrid = null,qsDialog=null;
     function Edit(id) {
         $('#EditDialog').dialog('open').dialog('refresh', '@Url.Action("Edit", "Company")' + '?id=' + id);
     }
@@ -87,7 +135,25 @@
                        Delete(ids);
                     
                 }
-            }],
+            }, {
+                id: 'btnQsSet',
+                text: '企业资质管理',
+                iconCls: 'icon-remove',
+                handler: function () {
+                    var row = $('#DataGrid').datagrid('getSelections');
+                    if (row) {
+
+                        if (row.length == 0) {
+                            $.messager.alert('提示', '请选择需要修改的数据');
+                            return;
+                        }
+                       
+                        EditQs(row[0].CompanyID);
+                    }
+
+                }
+            }
+            ],
             columns: [[
                    { field: 'ck', checkbox: true },
                     { title: '公司名称', align: 'center', field: 'CompanyName', width: 35 },
@@ -206,6 +272,38 @@
             }]
         });
 
+
+        qsDialog = $('#QsDialog').dialog({
+            title: '新建',
+            width: 600,
+            height:400,
+            closed: true,
+            cache: false,
+            modal: true,
+            buttons: [{
+                text: '保存',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    var $form = $('#QsDialog').find('form');
+
+                    var flag = $form.form('validate');
+
+                    if (!flag) {
+                        $.messager.alert('Title', '必须填写完整的信息', 'error');
+                        return false;
+                    }
+                    saveQsCard();
+
+                }
+            }, {
+                text: '关闭',
+                iconCls: 'icon-cancel',
+                handler: function () {
+                    $('#QsDialog').dialog('close');
+                }
+            }]
+        });
+
         $('#btnQuery').on('click', function() {
             var comName = $('#comName').val();
 
@@ -214,5 +312,88 @@
             });
         });
     });
+
+    function EditQs(id) {
+        Utils.resetForm($('#QsDialog #mainForm'));
+        qsDialog.dialog('open');
+        $('#QsDialog #CompanyID').val(id);
+        Utils.ajaxGet('/CompanyQSCard/GetQsListByComId', { comid: id }, 'json', function (ret) {
+            var $selObj = $('#QsDialog #QSList');
+
+            $selObj.empty();
+            var option = "<option value=" +0+ ">" + '新增资质' + "</option>";
+
+            $.each(ret, function (i, n) {
+                option += "<option value=" + n.QSID + ">" + n.QSName + "</option>";
+            });
+            $selObj.append(option);
+
+            $('#QsDialog').data("qsata", ret);
+
+            var qsid = $selObj.val();
+            loadqsList(qsid);
+            qsChange();
+        });
+    }
+
+    function qsChange() {
+        $('#QsDialog #QSList').on('change', function () {
+            var id = $(this).val();
+            
+            loadqsList(id);
+        });
+    }
+
+    function loadqsList(qsid) {
+        if (qsid == 0) {
+            Utils.resetForm($('#QsDialog #mainForm'));
+
+        }
+        var row = $('#DataGrid').datagrid('getSelected');
+        $('#QsDialog #CompanyID').val(row.CompanyID);
+
+         var list=  $('#QsDialog').data("qsata");
+
+         if (!$.isArray(list)) {
+             return;
+         }
+
+        var data = null;
+         for (var i = 0; i < list.length; i++) {
+            
+             if (list[i].QSID == qsid) {
+                 data = list[i];
+                 break;
+
+             }
+
+         }
+
+         if (data != null) {
+             Utils.loadFormData($('#QsDialog #mainForm'), data);
+         }
+
+        //Utils.ajaxGet('/CompanyQSCard/GetQSCardByid', { id: qsid }, 'json', function (ret) {
+        //    if (ret.IsSuccess) {
+        //        Utils.loadFormData($('#QsDialog #mainForm'), ret.Data);
+        //    } else {
+        //        $.messager.alert('提示', "数据加载失败");
+        //    }
+
+        //});
+    }
+
+    function saveQsCard() {
+
+        Utils.ajaxPost('/CompanyQSCard/SaveCardData', $('#QsDialog #mainForm').serialize(), 'json', function (ret) {
+            if (ret.IsSuccess) {
+                qsDialog.dialog('close');
+                $.messager.alert('提示', "保存成功");
+              
+            } else {
+                $.messager.alert('提示', "保存失败");
+            }
+        });
+    }
 </script>
 

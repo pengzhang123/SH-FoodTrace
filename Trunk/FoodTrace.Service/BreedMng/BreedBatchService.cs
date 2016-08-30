@@ -79,8 +79,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSingleBreedBatch(BreedBatchModel model)
         {
-            var data = breedBatchAccess.GetOriEntity(model.BreedBatchID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
+           
             return breedBatchAccess.UpdateSingleEntity(model);
         }
     }

@@ -58,6 +58,9 @@ namespace FoodTrace.DBAccess
         public MessageModel InsertSingleEntity(WareHouseDetailModel model)
         {
             Func<IEntityContext, string> operation = (context => {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.WareHouseDetail.Add(model);
                 context.SaveChanges();
                 return string.Empty;

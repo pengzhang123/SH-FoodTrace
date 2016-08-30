@@ -46,6 +46,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> opera = delegate(IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.DicRoot.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -121,7 +124,8 @@ namespace FoodTrace.DBAccess
                              Description = s.Description,
                              Name = s.Name,
                              ParentName = dicleft.Name,
-                             RootID = s.RootID
+                             RootID = s.RootID,
+                             SortID = s.SortID
                          }).AsQueryable();
             if (dicId > 0)
             {

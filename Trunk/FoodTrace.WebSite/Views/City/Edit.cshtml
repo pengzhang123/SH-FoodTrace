@@ -6,7 +6,7 @@
     var provinceList = ViewBag.ProvinceList as List<SelectListItem>;
 }
 
-<h2>平台编辑</h2>
+<h2>城市编辑</h2>
 @using (Html.BeginForm("Edit", "City", FormMethod.Post))
 {
     @Html.HiddenFor(m => Model.CityID)

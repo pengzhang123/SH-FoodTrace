@@ -85,5 +85,7 @@ namespace FoodTrace.IService
         /// <param name="type"></param>
         /// <returns></returns>
         List<LandBaseDto> GetLandBaseListByType(int type);
+
+        LandBaseModel GetLandBaseByCode(string code);
     }
 }

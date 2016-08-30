@@ -19,7 +19,7 @@ namespace FoodTrace.IService.BreedMng
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        GridList<BreedVarietyDto> GetVarietyGridList(int pIndex, int pSize);
+        GridList<BreedVarietyDto> GetVarietyGridList(string name, int pIndex, int pSize);
 
         /// <summary>
         /// 获取品种列表

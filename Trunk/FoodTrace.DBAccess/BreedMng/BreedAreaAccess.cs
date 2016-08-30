@@ -61,6 +61,9 @@ namespace FoodTrace.DBAccess
         public MessageModel InsertSingleEntity(BreedAreaModel model)
         {
             Func<IEntityContext, string> operation = (context => {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.BreedArea.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -75,7 +78,7 @@ namespace FoodTrace.DBAccess
                 var data = context.BreedArea.FirstOrDefault(m => m.AreaID == model.AreaID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
-                data.AreaID = model.AreaID;
+                //data.AreaID = model.AreaID;
                 data.Area = model.Area;
                 data.AreaName = model.AreaName;
                 data.BreedID = model.BreedID;
@@ -90,7 +93,7 @@ namespace FoodTrace.DBAccess
                 data.ModifyID = UserManagement.CurrentUser.UserID;
                 data.ModifyName = UserManagement.CurrentUser.UserName;
                 data.ModifyTime = DateTime.Now;
-                context.SaveChanges();
+                context.UpdateAndSave(data);
                 return string.Empty;
             });
             return base.DbOperation(operation);
@@ -140,7 +143,7 @@ namespace FoodTrace.DBAccess
         public BreedAreaDto GetAreaDtoById(int id)
         {
             var query = (from s in Context.BreedArea
-                        where s.BreedID==id
+                        where s.AreaID==id
                          select new BreedAreaDto
                          {
                              AreaID = s.AreaID,

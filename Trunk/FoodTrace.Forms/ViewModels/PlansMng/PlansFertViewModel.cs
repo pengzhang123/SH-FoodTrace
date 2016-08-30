@@ -60,7 +60,7 @@ namespace FoodTrace.Forms.ViewModels
             TabItemIndex = 0;
         }
 
-        private void LoadData(string key, int pageIndex = 1, int pageSize = 2)
+        private void LoadData(string key, int pageIndex = 1, int pageSize = 10)
         {
             pbLoading.Visibility = Visibility.Visible;
             Task.Factory.StartNew(() =>
@@ -110,10 +110,9 @@ namespace FoodTrace.Forms.ViewModels
                 {"Title", "添加" },{"ResizeMode", System.Windows.ResizeMode.NoResize},
                         {"Width", 450},
                         {"Height", 600} });
-            if (result ?? false)
-            {
+           
                 LoadData(string.Empty);
-            }
+            
         }
 
         public void GridMouseDoubleClick(DataGrid dg, MouseButtonEventArgs args)
@@ -125,10 +124,9 @@ namespace FoodTrace.Forms.ViewModels
                 {"Title", "编辑" },{"ResizeMode", System.Windows.ResizeMode.NoResize},
                         {"Width", 450},
                         {"Height", 600} });
-            if (result ?? false)
-            {
+           
                 LoadData(string.Empty);
-            }
+            
 
         }
 
@@ -141,10 +139,9 @@ namespace FoodTrace.Forms.ViewModels
                 {"Title", "编辑" },{"ResizeMode", System.Windows.ResizeMode.NoResize},
                         {"Width", 450},
                         {"Height", 600} });
-            if (result ?? false)
-            {
+           
                 LoadData(string.Empty);
-            }
+            
         }
 
         public void DeleteRow(PlansFertModel model)

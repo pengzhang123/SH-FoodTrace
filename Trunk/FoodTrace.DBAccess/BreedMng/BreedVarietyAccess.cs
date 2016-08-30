@@ -23,7 +23,7 @@ namespace FoodTrace.DBAccess
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        public GridList<BreedVarietyDto> GetVarietyGridList(int comid, int pIndex, int pSize)
+        public GridList<BreedVarietyDto> GetVarietyGridList(string name,int comid, int pIndex, int pSize)
         {
             var query = (from s in Context.BreedVariety
                 join com in Context.Company on s.CompanyId equals com.CompanyID
@@ -36,9 +36,15 @@ namespace FoodTrace.DBAccess
                     CompanyName = com.CompanyName,
                     Remark = s.Remark,
                     IsLocked = s.IsLocked,
-                    IsShow = s.IsShow
+                    IsShow = s.IsShow,
+                    ModifyName = s.ModifyName,
+                    ModifyTime = s.ModifyTime
                 }).AsQueryable();
 
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.VarietyName.Contains(name));
+            }
             var list = query.OrderBy(s => s.VarietyId).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
 
             return new GridList<BreedVarietyDto>(){rows = list,total=query.Count()};
@@ -62,6 +68,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = (context =>
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 model.CompanyId = UserManagement.CurrentUser.CompanyId;
                 context.BreedVariety.Add(model);
                 context.SaveChanges();

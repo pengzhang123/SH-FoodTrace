@@ -19,7 +19,7 @@ namespace FoodTrace.IDBAccess.BreedMng
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        GridList<BreedVarietyDto> GetVarietyGridList(int comid, int pIndex, int pSize);
+        GridList<BreedVarietyDto> GetVarietyGridList(string name, int comid, int pIndex, int pSize);
 
         /// <summary>
         /// 获取品种列表

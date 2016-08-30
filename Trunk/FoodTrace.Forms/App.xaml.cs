@@ -37,7 +37,7 @@ namespace FoodTrace.Forms
                       Menus=new List<string> { "屠宰批次管理", "屠宰明细管理", "屠宰管理", "检疫管理" }
                 },new NaviModel {
                      Name="养殖管理子系统",IsExpanded=false,NaviIndex=3,
-                      Menus=new List<string> { "养殖场管理", "养殖区域管理", "圈舍管理", "养殖生物管理", "养殖用料管理", "养殖健康管理", "养殖防疫管理", "养殖计划管理", "养殖详细计划管理" }
+                      Menus=new List<string> { "养殖场管理", "养殖区域管理", "圈舍管理", "养殖生物管理", "养殖品种","养殖用料管理", "养殖健康管理", "养殖防疫管理", "养殖计划管理", "养殖详细计划管理" }
                 },new NaviModel {
                      Name="加工管理子系统",IsExpanded=false,NaviIndex=4,
                       Menus=new List<string> { "加工接收订单管理", "加工接收订单明细管理", "产品加工管理", "农产品管理", "农产品加工管理", "农产品工序管理" }

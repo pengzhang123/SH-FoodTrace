@@ -46,7 +46,7 @@ namespace FoodTrace.Forms.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                var list = SaleBaseService.GetPagerSaleBase(key, 1, 5);
+                var list = SaleBaseService.GetPagerSaleBase(key, 1, 10);
                 ModelCollection = new BindableCollection<SaleBaseModel>(list);
             });
         }

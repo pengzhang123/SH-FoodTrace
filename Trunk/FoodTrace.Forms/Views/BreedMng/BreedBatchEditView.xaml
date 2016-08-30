@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="批次编号" />
-                <TextBox Grid.Column="1" Text="{Binding BatchNO}" />
+                <TextBox Name="txtBatch" Grid.Column="1" Text="{Binding BatchNO}" />
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>

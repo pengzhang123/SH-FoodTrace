@@ -172,10 +172,10 @@
                                             Binding="{Binding Remark}"
                                             Header="备注" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Remark}"
+                                            Binding="{Binding ModifyName}"
                                             Header="编辑人名称" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Remark}"
+                                            Binding="{Binding ModifyTime}"
                                             Header="编辑时间" />
                         <DataGridCheckBoxColumn MinWidth="80"
                                                 Binding="{Binding IsLocked}"

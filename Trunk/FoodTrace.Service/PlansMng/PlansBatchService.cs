@@ -94,8 +94,6 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSinglePlansBatch(PlansBatchModel model)
         {
-            var data = plansBatchAccess.GetOriEntity(model.BatchID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
             return plansBatchAccess.UpdateSingleEntity(model);
         }
 

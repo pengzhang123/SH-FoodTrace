@@ -58,6 +58,20 @@ namespace FoodTrace.WebSite.Controllers
             return JsonEx(data,"yyyy-MM-dd");
         }
 
+        public JsonResult GetQsListByComId(int comid)
+        {
+            var data = new List<QsCardDto>();
+            try
+            {
+                data = _qsCardService.GetQsCardListByComId(comid);
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            return JsonEx(data, "yyyy-MM-dd");
+        }
         /// <summary>
         /// 保存数据
         /// </summary>

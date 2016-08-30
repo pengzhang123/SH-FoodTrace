@@ -66,7 +66,11 @@ namespace FoodTrace.DBAccess
 
         public MessageModel InsertSingleEntity(CultivationBaseModel model)
         {
-            Func<IEntityContext, string> operation = (context => {
+            Func<IEntityContext, string> operation = (context =>
+            {
+                model.CreatedID = UserManagement.CurrentUser.UserID;
+                model.CreateName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.CultivationBase.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -81,7 +85,7 @@ namespace FoodTrace.DBAccess
                 var data = context.CultivationBase.FirstOrDefault(m => m.BreedID == model.BreedID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
-                data.CultivationID = model.CultivationID;
+               // data.CultivationID = model.CultivationID;
                 data.BreedID = model.BreedID;
                 data.AreaID = model.AreaID;
                 data.HomeID = model.HomeID;
@@ -102,7 +106,8 @@ namespace FoodTrace.DBAccess
                 data.ModifyID = UserManagement.CurrentUser.UserID;
                 data.ModifyName = UserManagement.CurrentUser.UserName;
                 data.ModifyTime = DateTime.Now;
-                context.SaveChanges();
+                context.UpdateAndSave(data);
+               // context.SaveChanges();
                 return string.Empty;
             });
             return base.DbOperation(operation);

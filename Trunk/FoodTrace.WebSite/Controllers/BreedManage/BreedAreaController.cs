@@ -25,7 +25,7 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
         }
         public ActionResult Index()
         {
-            var breedbase = _breedBaseService.GetBreedBaseListPaging(1, 1000);
+            var breedbase = _breedBaseService.GetBreedBaseListPaging(string.Empty,1, 1000);
             var varietyList = _breedVarietyService.GetVarietyList();
 
             ViewBag.BreedBase = new SelectList(breedbase.rows, "BreedID", "BreedName");

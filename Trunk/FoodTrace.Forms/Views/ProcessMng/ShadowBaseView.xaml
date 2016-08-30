@@ -35,6 +35,7 @@
             </Grid>
             <Grid>
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                   
                     <TextBlock Margin="10, 0"
                                cal:Message.Attach="[MouseDown]=[Add]"
                                Padding="10,5"
@@ -63,6 +64,8 @@
                 <StackPanel Margin="10, 0"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Center" Text="串口" Padding="10,5"/>
+                    <ComboBox x:Name="cbPort" Grid.Column="1" Width="200"/>
                     <TextBlock Padding="10,5" Text="查看二维码">
                         <TextBlock.Background>
                             <ImageBrush ImageSource="pack://application:,,,/FoodTrace.Forms;component/Images/Add.png" />
@@ -225,10 +228,10 @@
                                             Binding="{Binding Remark}"
                                             Header="备注" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Remark}"
+                                            Binding="{Binding ModifyName}"
                                             Header="编辑人名称" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Remark}"
+                                            Binding="{Binding ModifyTime}"
                                             Header="编辑时间" />
                         <DataGridCheckBoxColumn MinWidth="80"
                                                 Binding="{Binding IsLocked}"

@@ -49,6 +49,8 @@ namespace FoodTrace.Forms.ViewModels
             view.cbBreedBase.ItemsSource = list;
             view.cbBreedBase.DisplayMemberPath = "BreedName";
             view.cbBreedBase.SelectedValuePath = "BreedID";
+
+           
         }
 
         public void Save()

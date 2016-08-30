@@ -20,10 +20,7 @@
             <td>@Html.TextBoxFor(m => Model.SortID,new {@class="easyui-validatebox easyui-textbox",data_options="required:true"})</td>
             <td>是否锁定</td>
             <td>
-                <select name="IsLocked">
-                    <option value="true">是</option>
-                    <option value="false">否</option>
-                </select>
+              @Html.CheckBoxFor(m => Model.IsLocked)
             </td>
         </tr>
        

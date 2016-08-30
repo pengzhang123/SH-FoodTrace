@@ -10,6 +10,7 @@ using FoodTrace.Common.Libraries;
 using FoodTrace.Forms.Commands;
 using System.Windows.Controls;
 using FoodTrace.Forms.Helpers;
+using FoodTrace.Forms.ViewModels.BreedMng;
 using FoodTrace.Forms.Views;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
@@ -144,6 +145,13 @@ namespace FoodTrace.Forms.ViewModels
                         break;
                     case "养殖生物管理":
                         ActivateItem(new CultivationBaseViewModel
+                        {
+                            TabItemIndex = index,
+                            DisplayName = displayName
+                        });
+                        break;
+                    case "养殖品种":
+                        ActivateItem(new BreedVarietyViewModel
                         {
                             TabItemIndex = index,
                             DisplayName = displayName

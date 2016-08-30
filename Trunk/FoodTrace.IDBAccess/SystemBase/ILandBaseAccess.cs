@@ -34,5 +34,8 @@ namespace FoodTrace.IDBAccess
         /// <param name="type"></param>
         /// <returns></returns>
         List<LandBaseDto> GetLandBaseListByType(int comId, int type);
+
+
+        LandBaseModel GetLandBaseByCode(int comId, string code);
     }
 }

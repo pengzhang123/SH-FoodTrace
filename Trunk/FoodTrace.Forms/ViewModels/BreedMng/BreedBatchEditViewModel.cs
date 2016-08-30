@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
@@ -20,17 +21,26 @@ namespace FoodTrace.Forms.ViewModels
         private IBreedBatchService iBreedBatchService = new BreedBatchService();
         private IBreedBaseService iBreedBaseService = new BreedBaseService();
         private ICultivationBaseService iCultivationBaseService = new CultivationBaseService();
-
+       private readonly ICodeObjectService _icodeObjService = new CodeObjectService();
         public BreedBatchModel Model { get; set; }
         public EditMode Mode { get; set; }
 
         public void LoadUserControl(BreedBatchEditView view)
         {
+
             ViewSelf = view;
             view.cbBreedBase.ItemsSource = iBreedBaseService.GetPagerBreedBase("", 1, 100);//.Select(_=>_.BreedBase);
             view.cbBreedBase.DisplayMemberPath = "BreedName";// "BreedBase.BreedName";
             view.cbBreedBase.SelectedValuePath = "BreedID";
+            if (Mode == EditMode.CREATE)
+            {
+                var seqNum = _icodeObjService.GetCodeObjNum("BatchCode");
+                Model.BatchNO = seqNum;
+                view.txtBatch.Text = seqNum;
+            }
+            NotifyOfPropertyChange(() => Model);
         }
+
 
         public void CultivationBaseSelectionChanged()
         {

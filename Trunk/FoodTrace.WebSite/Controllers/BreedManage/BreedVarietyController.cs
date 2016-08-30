@@ -35,7 +35,7 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
             var data = new GridList<BreedVarietyDto>();
             try
             {
-                data = _breedVarietyService.GetVarietyGridList(page, rows);
+                data = _breedVarietyService.GetVarietyGridList(string.Empty,page, rows);
             }
             catch (Exception)
             {

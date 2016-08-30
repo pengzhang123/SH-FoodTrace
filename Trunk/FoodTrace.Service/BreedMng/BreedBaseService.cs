@@ -91,10 +91,10 @@ namespace FoodTrace.Service
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        public GridList<BreedBaseDto> GetBreedBaseListPaging(int pIndex, int pSize)
+        public GridList<BreedBaseDto> GetBreedBaseListPaging(string name, int pIndex, int pSize)
         {
             int comid = UserManagement.CurrentUser.CompanyId;
-            return breedBaseAccess.GetBreedBaseListPaging(comid, pIndex, pSize);
+            return breedBaseAccess.GetBreedBaseListPaging(comid,name, pIndex, pSize);
         }
 
         /// <summary>

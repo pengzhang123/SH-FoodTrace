@@ -59,6 +59,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.BreedBatch.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -70,10 +73,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.BreedBatch.FirstOrDefault(m => m.BreedBatchID == model.BreedBatchID && m.ModifyTime == model.ModifyTime);
+                var data = context.BreedBatch.FirstOrDefault(m => m.BreedBatchID == model.BreedBatchID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
 
-                data.BreedBatchID = model.BreedBatchID;
                 data.BreedID = model.BreedID;
                 data.BatchNO = model.BatchNO;
                 data.RecvicePeople = model.RecvicePeople;

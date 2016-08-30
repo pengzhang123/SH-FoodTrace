@@ -39,7 +39,7 @@ namespace FoodTrace.WebSite.Controllers.BreedManage
             var data = new GridList<BreedBaseDto>();
             try
             {
-                data = _breedBaseService.GetBreedBaseListPaging(page, rows);
+                data = _breedBaseService.GetBreedBaseListPaging(string.Empty,page, rows);
 
             }
             catch (Exception)

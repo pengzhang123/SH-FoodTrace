@@ -62,6 +62,9 @@ namespace FoodTrace.DBAccess
         public MessageModel InsertSingleEntity(BreedBaseModel model)
         {
             Func<IEntityContext, string> operation = (context => {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.BreedBase.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -104,7 +107,7 @@ namespace FoodTrace.DBAccess
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        public GridList<BreedBaseDto> GetBreedBaseListPaging(int comid, int pIndex, int pSize)
+        public GridList<BreedBaseDto> GetBreedBaseListPaging(int comid,string name, int pIndex, int pSize)
         {
             var query = (from s in Context.BreedBase
                 join land in Context.LandBase on s.LandID equals land.LandID
@@ -123,6 +126,11 @@ namespace FoodTrace.DBAccess
                     IsLocked = s.IsLocked,
                     IsShow = s.IsShow
                 }).AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(s => s.BreedName.Contains(name));
+            }
 
             var list = query.OrderBy(s => s.BreedID).Skip((pIndex - 1)*pSize).Take(pSize).ToList();
 

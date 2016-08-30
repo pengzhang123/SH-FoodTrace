@@ -49,6 +49,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+
                 context.Role.Add(roleModel);
                 context.SaveChanges();
                 int id = roleModel.RoleID;

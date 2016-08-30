@@ -4,12 +4,15 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="table_title">
-        城市名称：<input type="text" class="input" id="cityName" value="">
-        <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
-        <div class="clearbox"></div>
-      </div>
-    <table id="DataGrid" style="height:100%;"></table>
+               <div style="height:100%;">
+                   <div class="table_title">
+                       城市名称：<input type="text" class="input" id="cityName" value="">
+                       <a id="btnQuery" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></a>
+                       <div class="clearbox"></div>
+                   </div>
+                   <table id="DataGrid" style="height:80%;"></table>
+               </div>
+
 <div id="CreateDialog"></div>
 <div id="EditDialog"></div>
 

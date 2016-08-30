@@ -28,7 +28,7 @@ namespace FoodTrace.Forms.ViewModels
         private ProgressBar pbLoading;
 
         private PagerModel _pagerModel;
-
+        private ComboBox portComboBox;
         public PagerModel PagerModel
         {
             get
@@ -63,7 +63,7 @@ namespace FoodTrace.Forms.ViewModels
             TabItemIndex = 0;
         }
 
-        private void LoadData(string key, int pageIndex = 1, int pageSize = 2)
+        private void LoadData(string key, int pageIndex = 1, int pageSize = 10)
         {
             pbLoading.Visibility = Visibility.Visible;
             Task.Factory.StartNew(() =>
@@ -95,6 +95,17 @@ namespace FoodTrace.Forms.ViewModels
 
         public void LoadUserControl(ShadowBaseView view)
         {
+          
+            
+                ReaderHelper reader = new ReaderHelper();
+                var list = reader.GetPortList();
+                view.cbPort.ItemsSource = list;
+                view.cbPort.DisplayMemberPath = "PortId";
+                view.cbPort.SelectedValuePath = "PortName";
+         
+
+            portComboBox = view.cbPort;
+
             pbLoading = view.LoadingProgressBar;
             LoadData(string.Empty);
         }
@@ -185,7 +196,8 @@ namespace FoodTrace.Forms.ViewModels
             if (result == MessageBoxResult.Yes)
             {
                 ReaderHelper reader = new ReaderHelper();
-                var code = reader.Read();
+                var portName = portComboBox.Text;
+                var code = reader.Read(portName);
                 var chip = iTidService.GetTidByChipCode(code);
 
                 if (chip.IsUse)

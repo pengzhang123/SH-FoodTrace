@@ -19,7 +19,10 @@
                     <ColumnDefinition Width="7*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="屠宰批次ID" />
-                <TextBox Grid.Column="1" Text="{Binding KillBatchID}" />
+                <ComboBox x:Name="cbKillBatch"
+                          Grid.Column="1"
+                          SelectedValue="{Binding KillBatchID}" />
+              
             </Grid>
             <Grid Margin="0,5">
                 <Grid.ColumnDefinitions>

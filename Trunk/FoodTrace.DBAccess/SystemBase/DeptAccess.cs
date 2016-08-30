@@ -38,6 +38,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.Dept.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -54,7 +57,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
-                var data = context.Dept.FirstOrDefault(m => m.DeptID == model.DeptID && m.ModifyTime == model.ModifyTime);
+                var data = context.Dept.FirstOrDefault(m => m.DeptID == model.DeptID);
                 if (data == null) return "当前数据不存在或被更新，请刷新后再次操作！";
                 data.CompanyID = model.CompanyID;
                 data.DeptName = model.DeptName;
@@ -64,7 +67,7 @@ namespace FoodTrace.DBAccess
                 data.ModifyID = UserManagement.CurrentUser.UserID;
                 data.ModifyName = UserManagement.CurrentUser.UserName;
                 data.ModifyTime = DateTime.Now;
-                context.SaveChanges();
+                context.UpdateAndSave(data);
                 return string.Empty;
             };
             return base.DbOperation(operation);
@@ -161,6 +164,50 @@ namespace FoodTrace.DBAccess
             var list= query.OrderBy(m => m.DeptID).Skip((pIndex - 1) * pSize).Take(pSize).ToList();
 
             return new GridList<DeptDto>(){rows = list,total = query.Count()}; 
+        }
+
+        /// <summary>
+        /// 获取部门树
+        /// </summary>
+        /// <param name="comid"></param>
+        /// <returns></returns>
+        public ComboxTreeDto GetDeptComTree(int comid)
+        {
+            var qeury = (from s in Context.Dept
+                where s.CompanyID == comid
+                select s).ToList();
+            var treeNode = new ComboxTreeDto(){id="0",text = "全部"};
+            InitDeptTree(qeury, treeNode, null);
+
+            return treeNode;
+        }
+
+        /// <summary>
+        /// 构造树形数据
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="node"></param>
+        /// <param name="pId"></param>
+        private void InitDeptTree(List<DeptModel> list, ComboxTreeDto node, int? pId)
+        {
+            var temp=new List<DeptModel>();
+
+            if (pId != null)
+            {
+                temp = list.Where(a => a.UpperDeptID == pId).ToList();
+            }
+            else
+            {
+                temp = list;
+            }
+
+            foreach (var item in temp)
+            {
+                var nodeItem = new ComboxTreeDto(item.DeptID.ToString(),item.DeptName);
+               
+                node.children.Add(nodeItem);
+                InitDeptTree(list, nodeItem, item.DeptID);
+            }
         }
     }
 }

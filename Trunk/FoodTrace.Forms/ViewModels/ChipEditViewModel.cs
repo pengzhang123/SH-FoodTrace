@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.Threading;
+using Caliburn.Micro;
 using FoodTrace.Forms.Helpers;
 using FoodTrace.Forms.Models;
 using FoodTrace.Forms.Views;
@@ -26,7 +27,7 @@ namespace FoodTrace.Forms.ViewModels
         private ICompanyService iCompanyService = new CompanyService();
         public TIDModel Model { get; set; }
         public EditMode Mode { get; set; }
-
+        SynchronizationContext m_SyncContext = null;
         public void Save()
         {
             if (Model.ChipCode.Length != 8)
@@ -69,6 +70,8 @@ namespace FoodTrace.Forms.ViewModels
 
         public void LoadUserControl(ChipEditView view)
         {
+            m_SyncContext = SynchronizationContext.Current;
+
             ChipEditViewSelf = view;
 
             var companys = iCompanyService.GetPagerCompany("", 1, 100);
@@ -76,8 +79,9 @@ namespace FoodTrace.Forms.ViewModels
             NotifyOfPropertyChange(() => Companys);
             if (Mode == EditMode.CREATE)
             {
-                ReaderHelper reader = new ReaderHelper();
-                Model.ChipCode = reader.Read();
+                ReaderHelper reader1 = new ReaderHelper();
+                var portName = view.cbPort.Text;
+                Model.ChipCode = reader1.Read(portName);
                 var maxId = MaxId;
                 CPRODUCTEPC96 pro96 = new CPRODUCTEPC96();
                 //商品类别
@@ -97,9 +101,28 @@ namespace FoodTrace.Forms.ViewModels
                 Model.Epc = pro96.PackEpc();
                 NotifyOfPropertyChange(() => Model);
             }
+
+
+            Task.Factory.StartNew(() =>
+            {
+                m_SyncContext.Post(AsyncGetPortList, view);
+            }); 
+             
+         
+
         }
 
 
+        private void AsyncGetPortList(object data)
+        {
+            ReaderHelper reader = new ReaderHelper();
+
+            ChipEditView view = (ChipEditView) data;
+            var list = reader.GetPortList();
+            view.cbPort.ItemsSource = list;
+            view.cbPort.DisplayMemberPath = "PortId";
+            view.cbPort.SelectedValuePath = "PortName";
+        }
         public string MaxId
         {
             get

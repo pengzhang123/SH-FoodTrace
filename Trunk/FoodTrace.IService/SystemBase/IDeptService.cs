@@ -75,5 +75,7 @@ namespace FoodTrace.IService
         /// <param name="ids"></param>
         /// <returns></returns>
         MessageModel DeleteDepts(string ids);
+
+        ComboxTreeDto GetDeptComTree(int comid);
     }
 }

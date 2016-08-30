@@ -31,11 +31,11 @@ namespace FoodTrace.Service.BreedMng
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        public GridList<BreedVarietyDto> GetVarietyGridList(int pIndex, int pSize)
+        public GridList<BreedVarietyDto> GetVarietyGridList(string name,int pIndex, int pSize)
         {
             int comId = UserManagement.CurrentUser.CompanyId;
 
-            return _breedVarietyAccess.GetVarietyGridList(comId, pIndex, pSize);
+            return _breedVarietyAccess.GetVarietyGridList(name,comId, pIndex, pSize);
         }
 
         /// <summary>

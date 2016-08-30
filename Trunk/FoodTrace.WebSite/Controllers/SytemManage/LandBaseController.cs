@@ -111,20 +111,32 @@ namespace FoodTrace.WebSite.Controllers
             var result = new ResultJson();
             try
             {
-                var msg = new MessageModel();
-                if (model.LandID == 0)
+                var landBase = _landBaseService.GetLandBaseByCode(model.LandCode);
+                if (landBase != null)
                 {
-                   msg= _landBaseService.InsertSingleLandBase(model);
+                    result.Msg = "基地编码重复";
                 }
                 else
                 {
-                    msg=_landBaseService.UpdateSingleLandBase(model);
+                    var msg = new MessageModel();
+                    if (model.LandID == 0)
+                    {
+                        msg = _landBaseService.InsertSingleLandBase(model);
+                    }
+                    else
+                    {
+                        msg = _landBaseService.UpdateSingleLandBase(model);
+                    }
+                    if (msg.Status == MessageStatus.Success)
+                    {
+                        result.IsSuccess = true;
+                    }
+                    else
+                    {
+                        result.Msg = "保存失败";
+                    }
                 }
-                if (msg.Status == MessageStatus.Success)
-                {
-                    result.IsSuccess = true;
 
-                }
             }
             catch (Exception)
             {

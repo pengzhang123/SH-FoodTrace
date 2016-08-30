@@ -134,6 +134,10 @@ namespace FoodTrace.Service
         {
             return deptAccess.DeleteDepts(ids);
         }
-        
+
+        public ComboxTreeDto GetDeptComTree(int comid)
+        {
+            return deptAccess.GetDeptComTree(comid);
+        }
     }
 }

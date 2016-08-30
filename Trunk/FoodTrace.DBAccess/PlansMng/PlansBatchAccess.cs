@@ -40,6 +40,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.PlansBatch.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -77,7 +80,7 @@ namespace FoodTrace.DBAccess
                 data.ModifyID = UserManagement.CurrentUser.UserID;
                 data.ModifyName = UserManagement.CurrentUser.UserName;
                 data.ModifyTime = DateTime.Now;
-                context.SaveChanges();
+                context.UpdateAndSave(data);
                 return string.Empty;
             };
             return base.DbOperation(operation);

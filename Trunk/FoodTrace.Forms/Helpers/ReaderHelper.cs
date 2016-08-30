@@ -10,6 +10,7 @@ namespace FoodTrace.Forms.Helpers
 {
     public class ReaderHelper
     {
+       
         /// <summary>
         /// 串口名称
         /// </summary>
@@ -30,12 +31,39 @@ namespace FoodTrace.Forms.Helpers
         /// </summary>
         public WLNTAG203Reader _wlNTAG203Reader = WLNTAG203Reader.Instance();
 
+        public List<SerilaPortDto> GetPortList()
+        {
+            var list = new List<SerilaPortDto>();
+
+            try
+            {
+                var portArry = System.IO.Ports.SerialPort.GetPortNames();
+
+                if (portArry.Length > 0)
+                {
+                    for (int i =1; i <= portArry.Length; i++)
+                    {
+                        var model = new SerilaPortDto();
+                        model.PortId = i;
+                        model.PortName = portArry[i];
+                    }
+                }
+            }
+            catch (Exception)
+            {
+               
+            }
+
+            return list;
+
+        }
         public ReaderHelper()
         {
-            PortName = System.IO.Ports.SerialPort.GetPortNames()[0];
+            //PortName = System.IO.Ports.SerialPort.GetPortNames()[0];
         }
-        public string Read()
+        public string Read(string portName)
         {
+            PortName = portName;
             Connect();
             byte mode = 0x52;
             byte cmd = 0x00;
@@ -129,5 +157,12 @@ namespace FoodTrace.Forms.Helpers
                 Console.WriteLine("krybtn_disconnect_Click.Error:" + ex.Message);
             }
         }
+    }
+
+    public class SerilaPortDto
+    {
+       public int PortId { get; set; }
+
+        public string PortName { get; set; }
     }
 }

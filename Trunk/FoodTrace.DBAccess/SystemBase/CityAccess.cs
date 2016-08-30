@@ -38,6 +38,7 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+
                 context.City.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -59,6 +60,7 @@ namespace FoodTrace.DBAccess
                 data.CityCode = model.CityCode;
                 data.CityName = model.CityName;
                 data.CityAreaCode = model.CityAreaCode;
+                data.ProvinceID = model.ProvinceID;
                 context.SaveChanges();
                 return string.Empty;
             };

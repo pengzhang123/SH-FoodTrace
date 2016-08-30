@@ -1,4 +1,5 @@
-﻿using FoodTrace.DBManage.IContexts;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
 using System;
@@ -75,6 +76,9 @@ namespace FoodTrace.DBAccess
         public MessageModel InsertSingleEntity(ProductTypeModel model)
         {
             Func<IEntityContext, string> operation = (context => {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.ProductType.Add(model);
                 context.SaveChanges();
                 return string.Empty;

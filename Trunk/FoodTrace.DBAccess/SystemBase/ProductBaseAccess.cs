@@ -1,4 +1,5 @@
-﻿using FoodTrace.DBManage.IContexts;
+﻿using FoodTrace.Common.Libraries;
+using FoodTrace.DBManage.IContexts;
 using FoodTrace.IDBAccess;
 using FoodTrace.Model;
 using System;
@@ -33,6 +34,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.ProductBase.Add(model);
                 context.SaveChanges();
                 return string.Empty;

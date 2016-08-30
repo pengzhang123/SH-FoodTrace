@@ -52,16 +52,11 @@
     </div>
     <div>
         <label for="name">是否锁定:</label>
-        <select name="IsLocked">
-            <option value="true">是</option>
-            <option value="false">否</option>
-        </select>
+       
+        @Html.CheckBoxFor(m=>Model.IsLocked)
     </div>
     <div>
         <label for="name">是否显示:</label>
-        <select name="IsShow">
-            <option value="true">是</option>
-            <option value="false">否</option>
-        </select>
+        @Html.CheckBoxFor(m => Model.IsShow)
     </div>
 }

@@ -46,7 +46,7 @@ namespace FoodTrace.Forms.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                var list = TrunVehicleService.GetPagerTrunVehicle(key, 1, 5);
+                var list = TrunVehicleService.GetPagerTrunVehicle(key, 1, 10);
                 ModelCollection = new BindableCollection<TrunVehicleModel>(list);
             });
         }

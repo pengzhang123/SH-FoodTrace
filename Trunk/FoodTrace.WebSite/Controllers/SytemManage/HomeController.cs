@@ -38,6 +38,7 @@ namespace FoodTrace.WebSite.Controllers
             }
 
             ViewBag.RoleMenu = roleMenu;
+            ViewBag.UserName = user!=null?user.UserName:"";
             return View();
         }
 

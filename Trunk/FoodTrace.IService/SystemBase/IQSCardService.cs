@@ -20,7 +20,7 @@ namespace FoodTrace.IService.SystemBase
         /// <returns></returns>
         GridList<QsCardDto> GetQsCardPagingList(string name, int pIndex, int pSize);
 
-
+        List<QsCardDto> GetQsCardListByComId(int comid);
         /// <summary>
         /// 新增数据
         /// </summary>

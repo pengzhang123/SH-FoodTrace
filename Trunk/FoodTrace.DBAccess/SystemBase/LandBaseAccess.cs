@@ -25,6 +25,10 @@ namespace FoodTrace.DBAccess
                                                     && (string.IsNullOrEmpty(name) || m.LandName.Contains(name))).Count();
         }
 
+        public LandBaseModel GetLandBaseByCode(int comId, string code)
+        {
+            return base.Context.LandBase.Where(s => s.CompanyID == comId && s.LandCode == code).FirstOrDefault();
+        }
         public List<LandBaseModel> GetAllEntities()
         {
             return base.Context.LandBase.ToList();
@@ -40,6 +44,9 @@ namespace FoodTrace.DBAccess
         {
             Func<IEntityContext, string> operation = delegate (IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.LandBase.Add(model);
                 context.SaveChanges();
                 return string.Empty;
@@ -120,9 +127,7 @@ namespace FoodTrace.DBAccess
                 if (ids.Length > 0)
                 {
                     var idsArra = ids.Split(',');
-                    var landBase =(from s in context.LandBase
-                                    join id in idsArra on s.LandID.ToString() equals id  
-                                    select s).ToList();
+                    var landBase = context.LandBase.Where(s => idsArra.Contains(s.LandID.ToString())).ToList();
                     if (landBase.Any())
                     {
                         context.BatchDelete(landBase);

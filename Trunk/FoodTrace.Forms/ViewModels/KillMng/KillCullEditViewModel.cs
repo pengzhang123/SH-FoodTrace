@@ -91,7 +91,7 @@ namespace FoodTrace.Forms.ViewModels
         public void KillBatchDetailSelectionChanged(ComboBox cb)
         {
             var model = (BreedBaseModel)cb.SelectedItem;
-            ViewSelf.YZSUYM.Text = model.BreedCode.Value.ToString();
+            ViewSelf.YZSUYM.Text = model.BreedCode==null?"":model.BreedCode.Value.ToString();
         }
 
         public void Save()

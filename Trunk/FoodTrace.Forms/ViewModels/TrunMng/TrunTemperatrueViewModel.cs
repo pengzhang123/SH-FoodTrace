@@ -46,7 +46,7 @@ namespace FoodTrace.Forms.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                var list = TrunTemperatrueService.GetPagerTrunTemperatrue( 1, 5);
+                var list = TrunTemperatrueService.GetPagerTrunTemperatrue( 1,10);
                 ModelCollection = new BindableCollection<TrunTemperatrueModel>(list);
             });
         }

@@ -46,6 +46,7 @@ namespace FoodTrace.DBAccess
                              IssuingUnit = s.IssuingUnit,
                              Validity = s.Validity,
                              Remark = s.Remark,
+                             CompanyID = s.CompanyID,
                              CompanyName = comleft.CompanyName
                          }).AsQueryable();
 
@@ -59,6 +60,32 @@ namespace FoodTrace.DBAccess
             return new GridList<QsCardDto>() { rows = list, total = count };
         }
 
+
+        public List<QsCardDto> GetQsCardListByComId(int comid)
+        {
+            var query = (from s in Context.QSCard
+                         join com in Context.Company on s.CompanyID equals com.CompanyID into coml
+                         from comleft in coml.DefaultIfEmpty()
+                         where s.CompanyID==comid
+                         select new QsCardDto()
+                         {
+                             QSID = s.QSID,
+                             QSName = s.QSName,
+                             QSCard = s.QSCard,
+                             IssuingTime = s.IssuingTime,
+                             IssuingUnit = s.IssuingUnit,
+                             Validity = s.Validity,
+                             Remark = s.Remark,
+                             CompanyID = s.CompanyID,
+                             CompanyName = comleft.CompanyName
+                         }).AsQueryable();
+
+           
+            var list = query.ToList();
+            //int count = query.Count();
+
+            return list;
+        }
         /// <summary>
         /// 新增数据
         /// </summary>
@@ -68,6 +95,9 @@ namespace FoodTrace.DBAccess
            
             Func<IEntityContext, string> operation = delegate(IEntityContext context)
             {
+                model.ModifyID = UserManagement.CurrentUser.UserID;
+                model.ModifyName = UserManagement.CurrentUser.UserName;
+                model.ModifyTime = DateTime.Now;
                 context.QSCard.Add(model);
                 context.SaveChanges();
                 return string.Empty;

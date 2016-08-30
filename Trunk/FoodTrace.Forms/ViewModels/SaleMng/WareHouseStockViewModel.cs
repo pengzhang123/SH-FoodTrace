@@ -46,7 +46,7 @@ namespace FoodTrace.Forms.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                var list = WareHouseStockService.GetPagerWareHouseStock(key, 1, 5);
+                var list = WareHouseStockService.GetPagerWareHouseStock(key, 1, 10);
                 ModelCollection = new BindableCollection<WareHouseStockModel>(list);
             });
         }

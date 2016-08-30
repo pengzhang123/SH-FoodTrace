@@ -13,7 +13,15 @@
 <div id="landseedDialog" style="display: none;">
     <form id="mainForm">
         <input type="hidden" name="SeedID" value="" />
+
         <table>
+            <tr>
+                <td>种子溯源码</td>
+                <td colspan="3">
+                    <input type="text" name="SeedCode" id="SeedCode" value="" readonly="readonly" placeholder="根据批次号自动生成"/>
+                </td>
+
+            </tr>
             <tr>
                 <td>种子名称</td>
                 <td>
@@ -237,5 +245,6 @@
 
             });
         }
+
     </script>
 }

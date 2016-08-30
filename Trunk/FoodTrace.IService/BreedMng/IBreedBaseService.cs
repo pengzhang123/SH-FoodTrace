@@ -70,7 +70,7 @@ namespace FoodTrace.IService
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        GridList<BreedBaseDto> GetBreedBaseListPaging(int pIndex, int pSize);
+        GridList<BreedBaseDto> GetBreedBaseListPaging(string name, int pIndex, int pSize);
 
         /// <summary>
         /// 批量删除

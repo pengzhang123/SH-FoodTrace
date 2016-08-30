@@ -50,6 +50,15 @@ namespace FoodTrace.Forms.ViewModels
             view.cbProductType.SelectedIndex = -1;
 
             ViewSelf = view;
+
+        
+                ReaderHelper reader = new ReaderHelper();
+             
+                var list = reader.GetPortList();
+                view.cbPort.ItemsSource = list;
+                view.cbPort.DisplayMemberPath = "PortId";
+                view.cbPort.SelectedValuePath = "PortName";
+           
         }
 
         ReaderHelper reader = null;
@@ -71,8 +80,8 @@ namespace FoodTrace.Forms.ViewModels
             {
                 reader = new ReaderHelper();
             }
-
-            var chipCode = reader.Read();
+            string portName = ViewSelf.cbPort.Text;
+            var chipCode = reader.Read(portName);
 
             var shadow = iShadowBaseService.GetShawInfoByChipCode(chipCode);
 

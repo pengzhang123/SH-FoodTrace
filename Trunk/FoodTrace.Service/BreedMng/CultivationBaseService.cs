@@ -79,8 +79,7 @@ namespace FoodTrace.Service
         /// <returns></returns>
         public MessageModel UpdateSingleCultivationBase(CultivationBaseModel model)
         {
-            var data = cultivationBaseAccess.GetOriEntity(model.CultivationID, model.ModifyTime);
-            if (data == null) return new MessageModel() { Message = "当前数据不存在或被更新，请刷新后再次操作！", Status = MessageStatus.Error };
+           
             return cultivationBaseAccess.UpdateSingleEntity(model);
         }
 

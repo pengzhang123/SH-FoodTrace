@@ -45,7 +45,7 @@ namespace FoodTrace.Forms.ViewModels.PlansMng
         {
             Task.Factory.StartNew(() =>
             {
-                var list = landBlockService.GetPagerLandBlock(key, 1, 5);
+                var list = landBlockService.GetPagerLandBlock(key, 1, 10);
                 ModelCollection = new BindableCollection<LandBlockModel>(list);
             });
         }

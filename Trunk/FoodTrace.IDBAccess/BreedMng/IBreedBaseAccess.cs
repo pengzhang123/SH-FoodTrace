@@ -18,7 +18,7 @@ namespace FoodTrace.IDBAccess
         /// <param name="pIndex"></param>
         /// <param name="pSize"></param>
         /// <returns></returns>
-        GridList<BreedBaseDto> GetBreedBaseListPaging(int comid, int pIndex, int pSize);
+        GridList<BreedBaseDto> GetBreedBaseListPaging(int comid, string name, int pIndex, int pSize);
 
         /// <summary>
         /// 批量删除

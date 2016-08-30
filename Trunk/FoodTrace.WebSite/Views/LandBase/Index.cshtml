@@ -232,6 +232,8 @@
                     Utils.ajaxPost('/LandBase/DelLandBase', { ids: id.join() }, 'json', function(ret) {
                         if (ret.IsSuccess) {
                             landGrid.datagrid('reload');
+                        } else {
+                            $.messager.alert('提示', '删除失败');
                         }
                     });
                 }
@@ -245,6 +247,7 @@
                 return false;
             }
 
+
             Utils.ajaxPost('/LandBase/SaveLandBase', $('#mainForm').serialize(), 'json', function(ret) {
                 
                 if (ret.IsSuccess) {
@@ -253,7 +256,7 @@
                     landDialog.dialog('close');
                     landGrid.datagrid('reload');
                 } else {
-                    $.messager.alert('提示', '保存失败');
+                    $.messager.alert('提示', ret.Msg);
                 }
                
             });

@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.Background>
-                <ImageBrush ImageSource="pack://application:,,,/FoodTrace.Forms;component/Images/LoginBG.png" />
+                <ImageBrush ImageSource="pack://application:,,,/FoodTrace.Forms;component/Images/LoginBG_Red.png"/>
             </Grid.Background>
             <TextBlock  HorizontalAlignment="Center" Margin="0,62,0,0" Text="环县农特产品溯源管理系统" Foreground="White" FontSize="30" />
         </Grid>

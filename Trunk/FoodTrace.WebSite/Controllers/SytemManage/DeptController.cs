@@ -183,5 +183,25 @@ namespace FoodTrace.WebSite.Controllers
             }
             return Json(deptList,JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 获取部门数据
+        /// </summary>
+        /// <param name="comId"></param>
+        /// <returns></returns>
+        public JsonResult GetDeptByComId(int comId)
+        {
+            var list = new List<ComboxTreeDto>();
+            try
+            {
+                var data = deptService.GetDeptComTree(comId); 
+                 list.Add(data);
+            }
+            catch (Exception)
+            {
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

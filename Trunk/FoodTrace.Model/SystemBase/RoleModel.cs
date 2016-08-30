@@ -16,7 +16,7 @@ namespace FoodTrace.Model
         public string RoleName { get; set; }
         public string Remark { get; set; }
         public int? SortID { get; set; }
-        public bool? IsLocked { get; set; }
+        public bool IsLocked { get; set; }
         public int? CreateID { get; set; }
         public string CreateName { get; set; }
         public DateTime? CreateTime { get; set; }

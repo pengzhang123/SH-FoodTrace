@@ -4,6 +4,7 @@ using FoodTrace.Forms.UserControls;
 using FoodTrace.Forms.Views;
 using FoodTrace.IService;
 using FoodTrace.Model;
+using FoodTrace.Model.DtoModel;
 using FoodTrace.Service;
 using System;
 using System.Collections.Generic;
@@ -60,16 +61,19 @@ namespace FoodTrace.Forms.ViewModels
             TabItemIndex = 0;
         }
 
-        private void LoadData(string key, int pageIndex = 1, int pageSize = 2)
+        private void LoadData(string key, int pageIndex = 1, int pageSize = 10)
         {
             pbLoading.Visibility = Visibility.Visible;
             Task.Factory.StartNew(() =>
             {
                 var list = iBreedBaseService.GetPagerBreedBase(key, pageIndex, pageSize);
                 var total = iBreedBaseService.GetBreedBaseCount(key);
+                //var data = iBreedBaseService.GetBreedBaseListPaging(key, pageIndex, pageSize);
+
                 var pageCount = total / pageSize == 0 ? 1 : (total / pageSize) + (total % pageSize == 0 ? 0 : 1);
                 ModelCollection = new BindableCollection<BreedBaseModel>(list);
-                PagerModel = new PagerModel { TotalCount = total, PageCount = pageCount, DetailMsg = string.Format("[共{0}页/共{1}条]", pageCount, total) };
+                //ModelCollection = new BindableCollection<BreedBaseDto>(data.rows);
+                PagerModel = new PagerModel { TotalCount = total, PageCount = pageCount, DetailMsg = string.Format("[共{0}页/共{1}条]", pageCount,total) };
             }).ContinueWith((task) => {
                 System.Windows.Application.Current.Dispatcher.Invoke(new System.Action(() =>
                 {

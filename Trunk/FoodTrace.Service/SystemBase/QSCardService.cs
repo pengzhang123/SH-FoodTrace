@@ -22,6 +22,10 @@ namespace FoodTrace.Service.SystemBase
             _qsCardAccess = BaseAccess.CreateAccess<IQSCardAccess>(AccessMappingKey.QSCardAccess.ToString());
         }
 
+        public List<QsCardDto> GetQsCardListByComId(int comid)
+        {
+            return _qsCardAccess.GetQsCardListByComId(comid);
+        }
         /// <summary>
         /// 保存数据
         /// </summary>

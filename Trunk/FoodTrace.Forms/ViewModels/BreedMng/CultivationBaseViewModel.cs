@@ -60,7 +60,7 @@ namespace FoodTrace.Forms.ViewModels
             TabItemIndex = 0;
         }
 
-        private void LoadData(string key, int pageIndex = 1, int pageSize = 2)
+        private void LoadData(string key, int pageIndex = 1, int pageSize = 10)
         {
             pbLoading.Visibility = Visibility.Visible;
             Task.Factory.StartNew(() =>

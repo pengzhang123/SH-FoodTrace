@@ -33,6 +33,9 @@ namespace FoodTrace.Model
         public DateTime? OutTime { get; set; }
         public string OutNotes { get; set; }
 
+        public int? CreatedID { get; set; }
+
+        public string CreateName { get; set; }
         public string Remark { get; set; }
         public bool? IsLocked { get; set; }
         public bool? IsShow { get; set; }

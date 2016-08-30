@@ -144,6 +144,8 @@
     <Compile Include="ViewModels\BreedMng\BreedBaseViewModel.cs" />
     <Compile Include="ViewModels\BreedMng\BreedHomeEditViewModel.cs" />
     <Compile Include="ViewModels\BreedMng\BreedHomeViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedVarietyEditViewModel.cs" />
+    <Compile Include="ViewModels\BreedMng\BreedVarietyViewModel.cs" />
     <Compile Include="ViewModels\BreedMng\CultivationBaseEditViewModel.cs" />
     <Compile Include="ViewModels\BreedMng\CultivationBaseViewModel.cs" />
     <Compile Include="ViewModels\ChipEditViewModel.cs" />
@@ -251,6 +253,12 @@
     </Compile>
     <Compile Include="Views\BreedMng\BreedHomeView.xaml.cs">
       <DependentUpon>BreedHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedVarietyEditView.xaml.cs">
+      <DependentUpon>BreedVarietyEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BreedMng\BreedVarietyView.xaml.cs">
+      <DependentUpon>BreedVarietyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BreedMng\CultivationBaseEditView.xaml.cs">
       <DependentUpon>CultivationBaseEditView.xaml</DependentUpon>
@@ -535,6 +543,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BreedMng\BreedHomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedVarietyEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BreedMng\BreedVarietyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -826,7 +842,9 @@
       <Name>FoodTrace.Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\LoginBG_Red.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Add.png" />
     <Resource Include="Images\Back.png" />
@@ -850,6 +868,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoginBG_Red.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

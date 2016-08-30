@@ -99,5 +99,15 @@ namespace FoodTrace.Service
         {
             return codeObjectAccess.DeleteCodeObjectByIds(ids);
         }
+
+        /// <summary>
+        /// 生成5位流水号长度的批次号
+        /// </summary>
+        /// <param name="objCode"></param>
+        /// <returns></returns>
+        public string GetCodeObjNum(string objCode)
+        {
+            return codeObjectAccess.GetCodeObjNum(objCode);
+        }
     }
 }

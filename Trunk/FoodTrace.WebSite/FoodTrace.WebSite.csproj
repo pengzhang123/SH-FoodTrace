@@ -778,6 +778,7 @@
     <Content Include="Images\last.png" />
     <Content Include="Images\LoginBG.png" />
     <Content Include="Images\LoginBG_hx.png" />
+    <Content Include="Images\LoginBG_Red.jpg" />
     <Content Include="Images\LoginBTN.png" />
     <Content Include="Images\menu_bg.png" />
     <Content Include="Images\navi_bg.png" />

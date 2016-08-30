@@ -148,7 +148,7 @@
                         </DataGridTemplateColumn>
 
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding CultivationEPC}"
+                                            Binding="{Binding CultivationEpc}"
                                             Header="溯源码" />
                         <DataGridTextColumn MinWidth="80"
                                             Binding="{Binding BatchCode}"
@@ -163,22 +163,19 @@
                                             Binding="{Binding MontherID}"
                                             Header="母亲编号" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding VarietyName}"
+                                            Binding="{Binding VarietyType}"
                                             Header="种类" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding CreateTime}"
-                                            Header="创建日期" />
-                        <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Responsibility}"
+                                            Binding="{Binding VarietyName}"
                                             Header="品种名称" />
                         <DataGridTextColumn MinWidth="80"
                                             Binding="{Binding Remark}"
                                             Header="备注" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Remark}"
+                                            Binding="{Binding CreateName}"
                                             Header="编辑人名称" />
                         <DataGridTextColumn MinWidth="80"
-                                            Binding="{Binding Remark}"
+                                            Binding="{Binding ModifyTime}"
                                             Header="编辑时间" />
                         <DataGridCheckBoxColumn MinWidth="80"
                                                 Binding="{Binding IsLocked}"

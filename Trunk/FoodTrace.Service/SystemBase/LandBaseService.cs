@@ -132,5 +132,11 @@ namespace FoodTrace.Service
             int comId = UserManagement.CurrentUser.CompanyId;
             return landBaseAccess.GetLandBaseListByType(comId, type);
         }
+
+        public LandBaseModel GetLandBaseByCode(string code)
+        {
+            int comid = UserManagement.CurrentUser.CompanyId;
+            return landBaseAccess.GetLandBaseByCode(comid, code);
+        }
     }
 }

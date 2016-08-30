@@ -50,18 +50,13 @@
         @Html.TextBoxFor(m => Model.Remark, new { @class = "easyui-validatebox easyui-textbox", data_options = "required:true" })
     </div>
     <div>
-        <label for="IsLocked">是否锁定:</label>
-        <select name="IsLocked">
-            <option value="true">是</option>
-            <option value="false">否</option>
-        </select>
+        <label for="name">是否锁定:</label>
+       
+        @Html.CheckBoxFor(m=>Model.IsLocked)
     </div>
     <div>
-        <label for="IsShow">是否显示:</label>
-        <select name="IsShow">
-            <option value="true">是</option>
-            <option value="false">否</option>
-        </select>
+        <label for="name">是否显示:</label>
+        @Html.CheckBoxFor(m => Model.IsShow)
     </div>
 }
 

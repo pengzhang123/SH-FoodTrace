@@ -18,7 +18,7 @@ namespace FoodTrace.Forms.ViewModels
     public class KillBatchDetailEditViewModel : ViewAware
     {
         private IKillBatchDetailService iKillBatchDetailService = new KillBatchDetailService();
-
+        private IKillBatchService _killBatchService = new KillBatchService();
         public KillBatchDetailModel Model { get; set; }
         public EditMode Mode { get; set; }
 
@@ -35,6 +35,12 @@ namespace FoodTrace.Forms.ViewModels
 
             //    NotifyOfPropertyChange(() => Model);
             //}
+
+            var list = _killBatchService.GetKillBatchListPaging(1, 1000);
+            view.cbKillBatch.ItemsSource = list.rows;
+            view.cbKillBatch.DisplayMemberPath = "BatchNO";
+            view.cbKillBatch.SelectedValuePath = "KillBatchID";
+            view.cbKillBatch.SelectedValue = Model.KillBatchID;
         }
 
         public void Save()

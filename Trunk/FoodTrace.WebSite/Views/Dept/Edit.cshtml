@@ -6,7 +6,7 @@
 
 @using FoodTrace.Model
 @model FoodTrace.Model.DeptModel
-<h2>区域编辑</h2>
+<h2>部门编辑</h2>
 <form>
     @Html.HiddenFor(m => Model.DeptID)
     <table>
@@ -22,8 +22,13 @@
         </tr>
         <tr>
             <td>上级部门</td>
-            <td>
+            @*<td>
                @Html.DropDownListFor(m => Model.UpperDeptID, ViewBag.DeptsList as IEnumerable<SelectListItem>)
+            </td>*@
+            
+            <td>
+          
+                <input name="UpperDeptID" id="UpperDeptID" value="" />
             </td>
         </tr>
         <tr>
@@ -45,25 +50,41 @@
 @section scripts{
 <script type="text/javascript">
     $(function () {
+        initComTree();
         $("#CompanyID").change(function () {
-            setDeptByCompany();
+
+            var selectId = $("#CompanyID").val();
+            var url = '/Dept/GetDeptByComId?comId=' + selectId;
+            $('#UpperDeptID').combotree('reload', url);
         });
 
     });
 
+    function initComTree() {
+        var selectId = $("#CompanyID").val();
+        $('#UpperDeptID').combotree({
+            url: '/Dept/GetDeptByComId?comId=' + selectId,
+            valueField: 'id',
+            textField: 'text'
+        });
+
+        $('#UpperDeptID').combotree('setValue', '@Model.UpperDeptID');
+    }
     function setDeptByCompany() {
         var selectId = $("#CompanyID").val();
 
-        Utils.ajaxGet('/Dept/GetDeptByCompany', { companyId: selectId }, 'json', function (ret) {
-            $("#UpperDeptID").empty();
-            var option = "<option value='0'>--请选择--</option>";;
-            if (ret.length > 0) {
-                //遍历json数据，拼接option，最后添加到select中
-                $.each(ret, function (i, n) {
-                    option += "<option value=" + n.Value + ">" + n.Text + "</option>";
-                });
-            }
-            $("#UpperDeptID").append(option); //等同于 $(option).appendTo($("#catagery"));
+        Utils.ajaxGet('/Dept/GetDeptByComId', { companyId: selectId }, 'json', function (ret) {
+
+            $('#UpperDeptID').combotree('loadData', ret.Data);
+            //$("#UpperDeptID").empty();
+            //var option = "<option value='0'>--请选择--</option>";;
+            //if (ret.length > 0) {
+            //    //遍历json数据，拼接option，最后添加到select中
+            //    $.each(ret, function (i, n) {
+            //        option += "<option value=" + n.Value + ">" + n.Text + "</option>";
+            //    });
+            //}
+            //$("#UpperDeptID").append(option); //等同于 $(option).appendTo($("#catagery"));
         });
     }
 
